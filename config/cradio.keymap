@@ -19,7 +19,7 @@ combo_##name {                        \
   combos {
     compatible = "zmk,combos";
     COMBO(ch_the, &ch_the, 13 17 26) // t+e+h -> the
-    COMBO(ch_the_quick_, &ch_the_quick_, 9 13 20) // '+t+q -> the quick brown fox jumps over the lazy dog
+    COMBO(ch_the_quick_, &ch_the_quick_, 4 9 20 25) // b+'+q+x -> the quick brown fox jumps over the lazy dog
     COMBO(ch_shawn, &ch_shawn, 0 12 16 19 26) // w+s+n+a+h -> shawn
     COMBO(ch_probably, &ch_probably, 1 2 3 4) // l+y+p+b -> probably
   };
@@ -38,7 +38,7 @@ name: name##_macro {                  \
 / {
   macros {
     MACRO(ch_the, &kp T &kp H &kp E &kp SPC) // t+e+h -> the
-    MACRO(ch_the_quick_, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G &kp SPC) // '+t+q -> the quick brown fox jumps over the lazy dog
+    MACRO(ch_the_quick_, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G &kp SPC) // b+'+q+x -> the quick brown fox jumps over the lazy dog
     MACRO(ch_shawn, &kp S &kp H &kp A &kp W &kp N &kp SPC) // w+s+n+a+h -> shawn
     MACRO(ch_probably, &kp P &kp R &kp O &kp B &kp A &kp B &kp L &kp Y &kp SPC) // l+y+p+b -> probably
   };
