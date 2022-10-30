@@ -10,6 +10,33 @@
 
 #include "chords.keymap"
 
+// chord spc + bkspc to delete a word
+/ {
+  combos {
+    compatible = "zmk,combos";
+    combo_del_word {
+      timeout-ms = <60>;
+      bindings = <&del_word>;
+      key-positions = <31 32>;
+    };
+  };
+};
+
+/ {
+  macros {
+        del_word: del_word {
+            label = "del_word";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp BSPC>
+                , <&macro_release &kp LALT>
+                ;
+        };
+  };
+};
+
 / {
   keymap {
     compatible = "zmk,keymap";
