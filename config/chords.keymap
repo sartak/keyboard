@@ -8,11 +8,11 @@ combo_##name {                        \
 / {
   combos {
     compatible = "zmk,combos";
+    COMBO(ch_excl, &kp EXCL, 17 27) // e+. -> !
+    COMBO(ch_qmark, &kp QMARK, 18 28) // i+, -> ?
+    COMBO(ch_colon, &kp COLON, 19 29) // a+ret -> :
+    COMBO(ch_semi, &kp SEMI, 19 9) // a+' -> ;
     COMBO(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
-    COMBO(ch_excl, &ch_excl, 17 27) // e+. -> !
-    COMBO(ch_qmark, &ch_qmark, 18 28) // i+, -> ?
-    COMBO(ch_colon, &ch_colon, 19 29) // a+ret -> :
-    COMBO(ch_semi, &ch_semi, 19 9) // a+' -> ;
     COMBO(ch_the, &ch_the, 13 26 17) // t+h+e -> the
     COMBO(ch_and, &ch_and, 19 16 23) // a+n+d -> and
     COMBO(ch_for, &ch_for, 6 7 11) // f+o+r -> for
@@ -238,10 +238,6 @@ name: name##_macro {                  \
 / {
   macros {
     MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
-    MACRO(ch_excl, &kp EXCL) // e+. -> !
-    MACRO(ch_qmark, &kp QMARK) // i+, -> ?
-    MACRO(ch_colon, &kp COLON) // a+ret -> :
-    MACRO(ch_semi, &kp SEMI) // a+' -> ;
     MACRO(ch_the, &kp T &kp H &kp E &kp SPC) // t+h+e -> the
     MACRO(ch_and, &kp A &kp N &kp D &kp SPC) // a+n+d -> and
     MACRO(ch_for, &kp F &kp O &kp R &kp SPC) // f+o+r -> for
