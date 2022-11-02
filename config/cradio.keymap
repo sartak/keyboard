@@ -38,17 +38,17 @@
 // Like autoshift but for gui instead
 #define AG(keycode) HPT(LG(keycode), keycode)
 
-// Sticky shift on apostrophe
-#define SK(mod, keycode) &ss mod keycode
+// Sticky mod on hold
+#define SM(mod, keycode) &sm mod keycode
 &sk {
     release-after-ms = <2000>;
     quick-release;
 };
 / {
     behaviors {
-        ss: sticky_shift {
+        sm: sticky_mod {
             compatible = "zmk,behavior-hold-tap";
-            label = "STICKY_SHIFT";
+            label = "STICKY_MOD";
             #binding-cells = <2>;
             tapping_term_ms = <200>;
             quick_tap_ms = <0>;
@@ -94,7 +94,7 @@
         AG(W)  AG(L)  AG(Y)  AG(P)  AG(B)    AG(Z)  AG(F)  AG(O)    AG(U)      &kp APOS
         AG(C)  AG(R)  AG(S)  AG(T)  AG(G)    AG(M)  AG(N)  AG(E)    AG(I)      AG(A)
         AG(Q)  AG(J)  AG(V)  AG(D)  AG(K)    AG(X)  AG(H)  &kp DOT  &kp COMMA  &none
-                   &none  SK(LSHFT, BSPC)    SK(LCTRL, SPC)  &none
+                   &none  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  &none
       >;
     };
   };
