@@ -10,13 +10,12 @@
 
 #include "chords.keymap"
 
-// Like autoshift but for gui instead
-#define AG(keycode) &ag LG(keycode) keycode
+#define HPT(key1, key2) &hold_prefer_tap key1 key2
 / {
     behaviors {
-        ag: auto_gui {
+        hold_prefer_tap: hold_prefer_tap {
             compatible = "zmk,behavior-hold-tap";
-            label = "AUTO_GUI";
+            label = "HOLD_PREFER_TAP";
             #binding-cells = <2>;
             tapping_term_ms = <200>;
             quick_tap_ms = <0>;
@@ -25,6 +24,9 @@
         };
     };
 };
+
+// Like autoshift but for gui instead
+#define AG(keycode) PHT(LG(keycode), keycode)
 
 // Sticky shift on apostrophe
 #define SK(mod, keycode) &ss mod keycode
