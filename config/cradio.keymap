@@ -49,32 +49,5 @@
                       &kp QMARK  &kp BSPC    &kp SPC  &kp QMARK
       >;
     };
-
-    left_layer {
-      bindings = <
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-                                         &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK
-      >;
-    };
-
-    right_layer {
-      bindings = <
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-                                         &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK
-      >;
-    };
-
-    tri_layer {
-      bindings = <
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-        &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK  &kp QMARK
-                                         &kp QMARK  &kp QMARK    &kp QMARK  &kp QMARK
-      >;
-    };
   };
 };
