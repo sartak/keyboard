@@ -91,9 +91,9 @@
 
     default_layer {
       bindings = <
-        AG(W)  AG(L)  AG(Y)  AG(P)  AG(B)    AG(Z)  AG(F)  AG(O)    AG(U)      HPT(ESC, APOS)
-        AG(C)  AG(R)  AG(S)  AG(T)  AG(G)    AG(M)  AG(N)  AG(E)    AG(I)      AG(A)
-        AG(Q)  AG(J)  AG(V)  AG(D)  AG(K)    AG(X)  AG(H)  &kp DOT  &kp COMMA  AG(RET)
+        AG(W)  AG(L)  AG(Y)  AG(P)  AG(B)    AG(Z)  AG(F)  AG(O)          AG(U)      HPT(ESC, APOS)
+        AG(C)  AG(R)  AG(S)  AG(T)  AG(G)    AG(M)  AG(N)  AG(E)          AG(I)      AG(A)
+        AG(Q)  AG(J)  AG(V)  AG(D)  AG(K)    AG(X)  AG(H)  HPT(TAB, DOT)  &kp COMMA  AG(RET)
                    &none  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  &none
       >;
     };
