@@ -12,6 +12,10 @@ combo_##name {                        \
     COMBO(ch_the_qui, &ch_the_qui, 4 9 20 25) // b+'+q+x -> the quick brown fox jumps over the lazy dog
     COMBO(ch_shawn, &ch_shawn, 0 12 16 19 26) // w+s+n+a+h -> shawn
     COMBO(ch_probabl, &ch_probabl, 1 2 3 4) // l+y+p+b -> probably
+    COMBO(ch_excl, &ch_excl, 17 27) // e+. -> !
+    COMBO(ch_qmark, &ch_qmark, 18 28) // i+, -> ?
+    COMBO(ch_colon, &ch_colon, 19 29) // a+ret -> :
+    COMBO(ch_semi, &ch_semi, 9 19) // '+a -> ;
   };
 };
 
@@ -28,8 +32,12 @@ name: name##_macro {                  \
 / {
   macros {
     MACRO(ch_the, &kp T &kp H &kp E &kp SPC) // t+e+h -> the 
-    MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G &kp SPC) // b+'+q+x -> the quick brown fox jumps over the lazy dog 
+    MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+'+q+x -> the quick brown fox jumps over the lazy dog
     MACRO(ch_shawn, &kp S &kp H &kp A &kp W &kp N &kp SPC) // w+s+n+a+h -> shawn 
     MACRO(ch_probabl, &kp P &kp R &kp O &kp B &kp A &kp B &kp L &kp Y &kp SPC) // l+y+p+b -> probably 
+    MACRO(ch_excl, &kp EXCL) // e+. -> !
+    MACRO(ch_qmark, &kp QMARK) // i+, -> ?
+    MACRO(ch_colon, &kp COLON) // a+ret -> :
+    MACRO(ch_semi, &kp SEMI) // '+a -> ;
   };
 };
