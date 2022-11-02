@@ -1,0 +1,50 @@
+layout:
+  split: true
+  rows: 3
+  columns: 5
+  thumbs: 2
+layers:
+  Alpha:
+    left:
+      - [W, L, Y, P, B]
+      - [C, R, S, T, G]
+      - [Q, J, V, D, K]
+    right:
+      - [Z, F, O, U, "'"]
+      - [M, N, E, I, A]
+      - [X, H, ".", ",", ↵]
+    left_thumbs:
+      - "(todo)"
+      - ⌫
+    right_thumbs:
+      - Space
+      - "(todo)"
+    combos:
+      - positions: [17, 27]
+        key: "!"
+      - positions: [18, 28]
+        key: "?"
+      - positions: [19, 29]
+        key: ":"
+      - positions: [9, 19]
+        key: ";"
+      - positions: [31, 32]
+        key: ⌫Word
+  "Alpha (hold)":
+    left:
+      - ["⌘W", "⌘L", "⌘Y", "⌘P", "⌘B"]
+      - ["⌘C", "⌘R", "⌘S", "⌘T", "⌘G"]
+      - ["⌘Q", "⌘J", "⌘V", "⌘D", "⌘K"]
+    right:
+      - ["⌘Z", "⌘F", "⌘O", "⌘U", Esc]
+      - ["⌘M", "⌘N", "⌘E", "⌘I", "⌘A"]
+      - ["⌘X", "⌘H", Tab, Launch, "⌘↵"]
+    left_thumbs:
+      - "(todo)"
+      - Shift
+    right_thumbs:
+      - Ctrl
+      - "(todo)"
+    combos:
+      - positions: [31, 32]
+        key: Hyper
