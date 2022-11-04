@@ -14,11 +14,11 @@ layers:
       - [M, N, E, I, A]
       - [X, H, ".", ",", ↵]
     left_thumbs:
-      - "(todo)"
+      - Symbol
       - ⌫
     right_thumbs:
       - Space
-      - "(todo)"
+      - Number
     combos:
       - positions: [17, 27]
         key: "!"
@@ -40,11 +40,47 @@ layers:
       - ["⌘M", "⌘N", "⌘E", "⌘I", "⌘A"]
       - ["⌘X", "⌘H", Tab, Launch, "⌘↵"]
     left_thumbs:
-      - "(todo)"
+      - Symbol
       - Shift
     right_thumbs:
       - Ctrl
-      - "(todo)"
+      - Number
     combos:
       - positions: [31, 32]
         key: Hyper
+  Symbol:
+    left:
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+    right:
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+    left_thumbs:
+      - Alpha
+      - ⌫
+    right_thumbs:
+      - Space
+      - Number
+    combos:
+      - positions: [31, 32]
+        key: ⌫Word
+  Number:
+    left:
+      - [" ", "7", "8", "9", " "]
+      - [" ", "4", "5", "6", "0"]
+      - [" ", "1", "2", "3", " "]
+    right:
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+    left_thumbs:
+      - Alpha
+      - ⌫
+    right_thumbs:
+      - Space
+      - Symbol
+    combos:
+      - positions: [31, 32]
+        key: ⌫Word
