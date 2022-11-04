@@ -61,12 +61,13 @@
 };
 
 // chord spc + bkspc to delete a word, or hold for a hyper sticky modifier
+#define HYPER LG(LA(LCTRL))
 / {
   combos {
     compatible = "zmk,combos";
     combo_del_word {
       timeout-ms = <60>;
-      bindings = <SM(LG(LA(LCTRL)), LA(BSPC))>;
+      bindings = <SM(HYPER, LA(BSPC))>;
       key-positions = <31 32>;
     };
   };
