@@ -84,3 +84,18 @@ layers:
     combos:
       - positions: [31, 32]
         key: ⌫Word
+  Function:
+    left:
+      - ["Bootl", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+    right:
+      - [" ", " ", " ", " ", "Bootl"]
+      - [" ", " ", " ", " ", " "]
+      - [" ", " ", " ", " ", " "]
+    left_thumbs:
+      - Alpha
+      - " "
+    right_thumbs:
+      - " "
+      - " "
