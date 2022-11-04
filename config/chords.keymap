@@ -3,6 +3,7 @@ combo_##name {                        \
   timeout-ms = <60>;                  \
   bindings = <keypress>;              \
   key-positions = <keypos>;           \
+  layers = <ALPHA>;                   \
 };
 
 / {
