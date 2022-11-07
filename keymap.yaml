@@ -64,6 +64,14 @@ layers:
       - Space
       - Number
     combos:
+      - positions: [17, 27]
+        key: "!"
+      - positions: [18, 28]
+        key: "?"
+      - positions: [19, 29]
+        key: ":"
+      - positions: [9, 19]
+        key: ";"
       - positions: [31, 32]
         key: ⌫Word
   Number:
@@ -82,6 +90,14 @@ layers:
       - Space
       - Symbol
     combos:
+      - positions: [17, 27]
+        key: "!"
+      - positions: [18, 28]
+        key: "?"
+      - positions: [19, 29]
+        key: ":"
+      - positions: [9, 19]
+        key: ";"
       - positions: [31, 32]
         key: ⌫Word
   Function:
