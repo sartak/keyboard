@@ -15,7 +15,12 @@
 
 #include "chords.keymap"
 
+#define LANGUAGE LS(F1)
+#define SCREENSHOT LG(LS(N4))
+#define LOCKSCR LG(LC(Q))
 #define ALFRED LG(SPC)
+#define MDASH LA(LS(MINUS))
+#define ELLIPSIS LA(SEMICOLON)
 
 #define PHT(key1, key2) &prefer_hold_tap key1 key2
 #define HPT(key1, key2) &hold_prefer_tap key1 key2
@@ -118,19 +123,19 @@
 
     SYMBOL_layer {
       bindings = <
-        &none  &none  &none  &none  &none    &none  &none  &none  &none  &none
-        &none  &none  &none  &none  &none    &none  &none  &none  &none  &none
-        &none  &none  &none  &none  &none    &none  &none  &none  &none  &none
-               &to ALPHA  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(NUMBER)
+        &kp GRAVE      &kp TILDE     &kp BACKSLASH   &kp LEFT_BRACE  &kp DOLLAR      &kp PERCENT  &kp RIGHT_BRACE  &kp SLASH      &kp POUND           HPT(ESC, APOS)
+        &kp AMPERSAND  &kp ASTERISK  &kp EQUAL       &kp LPAR        &kp LT          &kp GT       &kp RPAR         &kp MINUS      &kp PLUS            &kp PIPE
+        &kp MDASH      &kp AT        &kp UNDERSCORE  &kp LBKT        &kp ELLIPSIS    &kp CARET    &kp RBKT         HPT(TAB, DOT)  HPT(ALFRED, COMMA)  AG(RET)
+                                                       &to ALPHA  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(NUMBER)
       >;
     };
 
     NUMBER_layer {
       bindings = <
-        &none  &kp N7  &kp N8  &kp N9  &none     &none  &none  &none  &none  &none
-        &none  &kp N4  &kp N5  &kp N6  &kp N0    &none  &none  &none  &none  &none
-        &none  &kp N1  &kp N2  &kp N3  &none     &none  &none  &none  &none  &none
-                   &to ALPHA  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(SYMBOL)
+        &kp C_BRI_UP  &kp N7  &kp N8  &kp N9  &kp SCREENSHOT    &kp C_MUTE    &kp C_PREV  &kp C_PP       &kp C_NEXT          HPT(ESC, APOS)
+        &kp LANGUAGE  &kp N4  &kp N5  &kp N6  &kp N0            &kp C_VOL_UP  &kp LEFT    &kp DOWN       &kp UP              &kp RIGHT
+        &kp C_BRI_DN  &kp N1  &kp N2  &kp N3  &kp LOCKSCR       &kp C_VOL_DN  &none       HPT(TAB, DOT)  HPT(ALFRED, COMMA)  AG(RET)
+                                  &to ALPHA  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(SYMBOL)
       >;
     };
 
