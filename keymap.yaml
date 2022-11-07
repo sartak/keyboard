@@ -82,7 +82,7 @@ layers:
     right:
       - ["Mute", "Prev", "PlPaus", "Next", "'"]
       - ["VolUp", "←", "↓", "↑", "→"]
-      - ["VolDwn", "(todo)", ".", ",", ↵]
+      - ["VolDwn", null, ".", ",", ↵]
     left_thumbs:
       - Alpha
       - ⌫
@@ -102,16 +102,16 @@ layers:
         key: ⌫Word
   Function:
     left:
-      - ["Bootl", " ", " ", " ", " "]
-      - [" ", " ", " ", " ", " "]
-      - [" ", " ", " ", " ", " "]
+      - ["Bootl", null, null, null, null]
+      - [null, null, null, null, null]
+      - [null, null, null, null, null]
     right:
-      - [" ", " ", " ", " ", "Bootl"]
-      - [" ", " ", " ", " ", " "]
-      - [" ", " ", " ", " ", " "]
+      - [null, null, null, null, "Bootl"]
+      - [null, null, null, null, null]
+      - [null, null, null, null, null]
     left_thumbs:
       - Alpha
-      - " "
+      - null
     right_thumbs:
-      - " "
-      - " "
+      - null
+      - null
