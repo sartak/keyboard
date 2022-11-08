@@ -54,7 +54,7 @@ chord_##name {                        \
     CHORD(ch_have, &ch_have, 26 19 22) // h+a+v -> have
     CHORD(ch_that, &ch_that, 13 26 19) // t+h+a -> that
     CHORD(ch_they, &ch_they, 13 26 2) // t+h+y -> they
-    CHORD(ch_with, &ch_with, 0 26 18) // w+h+i -> with
+    CHORD(ch_with, &ch_with, 0 18 26) // w+i+h -> with
     CHORD(ch_this, &ch_this, 13 26 12) // t+h+s -> this
     CHORD(ch_from, &ch_from, 11 7 15) // r+o+m -> from
     CHORD(ch_will, &ch_will, 0 18 1) // w+i+l -> will
@@ -99,7 +99,7 @@ chord_##name {                        \
     CHORD(ch_hand, &ch_hand, 26 16 23) // h+n+d -> hand
     CHORD(ch_life, &ch_life, 1 18 6) // l+i+f -> life
     CHORD(ch_tell, &ch_tell, 13 17 1) // t+e+l -> tell
-    CHORD(ch_here, &ch_here, 21 17 26) // j+e+h -> here
+    CHORD(ch_here, &ch_here, 21 26 17) // j+h+e -> here
     CHORD(ch_show, &ch_show, 12 26 0) // s+h+w -> show
     CHORD(ch_both, &ch_both, 4 7 26) // b+o+h -> both
     CHORD(ch_need, &ch_need, 13 16 23) // t+n+d -> need
@@ -283,7 +283,7 @@ name: name##_macro {                  \
     MACRO(ch_have, &kp H &kp A &kp V &kp E &kp SPC) // h+a+v -> have
     MACRO(ch_that, &kp T &kp H &kp A &kp T &kp SPC) // t+h+a -> that
     MACRO(ch_they, &kp T &kp H &kp E &kp Y &kp SPC) // t+h+y -> they
-    MACRO(ch_with, &kp W &kp I &kp T &kp H &kp SPC) // w+h+i -> with
+    MACRO(ch_with, &kp W &kp I &kp T &kp H &kp SPC) // w+i+h -> with
     MACRO(ch_this, &kp T &kp H &kp I &kp S &kp SPC) // t+h+s -> this
     MACRO(ch_from, &kp F &kp R &kp O &kp M &kp SPC) // r+o+m -> from
     MACRO(ch_will, &kp W &kp I &kp L &kp L &kp SPC) // w+i+l -> will
@@ -328,7 +328,7 @@ name: name##_macro {                  \
     MACRO(ch_hand, &kp H &kp A &kp N &kp D &kp SPC) // h+n+d -> hand
     MACRO(ch_life, &kp L &kp I &kp F &kp E &kp SPC) // l+i+f -> life
     MACRO(ch_tell, &kp T &kp E &kp L &kp L &kp SPC) // t+e+l -> tell
-    MACRO(ch_here, &kp H &kp E &kp R &kp E &kp SPC) // j+e+h -> here
+    MACRO(ch_here, &kp H &kp E &kp R &kp E &kp SPC) // j+h+e -> here
     MACRO(ch_show, &kp S &kp H &kp O &kp W &kp SPC) // s+h+w -> show
     MACRO(ch_both, &kp B &kp O &kp T &kp H &kp SPC) // b+o+h -> both
     MACRO(ch_need, &kp N &kp E &kp E &kp D &kp SPC) // t+n+d -> need

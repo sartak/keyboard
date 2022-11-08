@@ -2,7 +2,7 @@
 
 ![keyboard layout](keymap.svg)
 
-## 207 chords
+## 210 chords
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `t` + `h` + `e` → the
@@ -42,7 +42,7 @@
 - `h` + `a` + `v` → have
 - `t` + `h` + `a` → that
 - `t` + `h` + `y` → they
-- `w` + `h` + `i` → with
+- `w` + `i` + `h` → with
 - `t` + `h` + `s` → this
 - `r` + `o` + `m` → from
 - `w` + `i` + `l` → will
@@ -87,7 +87,7 @@
 - `h` + `n` + `d` → hand
 - `l` + `i` + `f` → life
 - `t` + `e` + `l` → tell
-- `j` + `e` + `h` → here
+- `j` + `h` + `e` → here
 - `s` + `h` + `w` → show
 - `b` + `o` + `h` → both
 - `t` + `n` + `d` → need
