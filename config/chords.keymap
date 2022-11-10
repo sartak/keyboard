@@ -16,12 +16,35 @@ chord_##name {                        \
 / {
   combos {
     compatible = "zmk,combos";
-    CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
-    CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
+    COMBO(ch_excl, &kp EXCL, 17 27) // e+. -> !
+    COMBO(ch_qmark, &kp QMARK, 18 28) // i+, -> ?
+    COMBO(ch_colon, &kp COLON, 19 29) // a+ret -> :
+    COMBO(ch_semi, &kp SEMI, 19 9) // a+' -> ;
     CHORD(ch_bs_ing, &ch_bs_ing, 18 16 14) // i+n+g -> <BS>ing
     CHORD(ch_bs_n_t, &ch_bs_n_t, 16 9 13) // n+'+t -> <BS>n't
     CHORD(ch_bs_ve, &ch_bs_ve, 9 22 17) // '+v+e -> <BS>'ve
     CHORD(ch_bs_re, &ch_bs_re, 9 11 17) // '+r+e -> <BS>'re
+    CHORD(ch_a, &kp A, 19 32) // a+space -> a
+    CHORD(ch_a1, &kp LS(A), 19 31) // a+bksp -> A
+    CHORD(ch_i, &kp LS(I), 18 32) // i+space -> I
+    CHORD(ch_be, &ch_be, 4 17 32) // b+e+space -> be
+    CHORD(ch_of, &ch_of, 7 6 32) // o+f+space -> of
+    CHORD(ch_to, &ch_to, 13 7 32) // t+o+space -> to
+    CHORD(ch_in, &ch_in, 18 16 32) // i+n+space -> in
+    CHORD(ch_he, &ch_he, 26 17 32) // h+e+space -> he
+    CHORD(ch_it, &ch_it, 18 13 32) // i+t+space -> it
+    CHORD(ch_as, &ch_as, 19 12 32) // a+s+space -> as
+    CHORD(ch_on, &ch_on, 7 16 32) // o+n+space -> on
+    CHORD(ch_at, &ch_at, 19 13 32) // a+t+space -> at
+    CHORD(ch_by, &ch_by, 4 2 32) // b+y+space -> by
+    CHORD(ch_we, &ch_we, 0 17 32) // w+e+space -> we
+    CHORD(ch_do, &ch_do, 23 7 32) // d+o+space -> do
+    CHORD(ch_or, &ch_or, 7 11 32) // o+r+space -> or
+    CHORD(ch_if, &ch_if, 18 6 32) // i+f+space -> if
+    CHORD(ch_no, &ch_no, 16 17 32) // n+e+space -> no
+    CHORD(ch_so, &ch_so, 12 7 32) // s+o+space -> so
+    CHORD(ch_up, &ch_up, 8 3 32) // u+p+space -> up
+    CHORD(ch_go, &ch_go, 14 7 32) // g+o+space -> go
     CHORD(ch_the, &ch_the, 13 26 17) // t+h+e -> the
     CHORD(ch_and, &ch_and, 19 16 23) // a+n+d -> and
     CHORD(ch_for, &ch_for, 6 7 11) // f+o+r -> for
@@ -204,37 +227,14 @@ chord_##name {                        \
     CHORD(ch_increas, &ch_increas, 18 16 10) // i+n+c -> increase
     CHORD(ch_her, &ch_her, 26 17 11) // h+e+r -> her
     CHORD(ch_had, &ch_had, 26 19 23) // h+a+d -> had
-    CHORD(ch_hey, &ch_hey, 26 17 2) // h+e+y -> hey
-    CHORD(ch_lie, &ch_lie, 1 18 17) // l+i+e -> lie
     CHORD(ch_sea, &ch_sea, 12 17 19) // s+e+a -> sea
     CHORD(ch_true, &ch_true, 13 11 8) // t+r+u -> true
+    CHORD(ch_lie, &ch_lie, 1 18 17) // l+i+e -> lie
+    CHORD(ch_hey, &ch_hey, 26 17 2) // h+e+y -> hey
     CHORD(ch_return, &ch_return, 11 17 13) // r+e+t -> return
     CHORD(ch_probabl, &ch_probabl, 3 4 1 2) // p+b+l+y -> probably
-    CHORD(ch_a, &ch_a, 19 32) // a+space -> a
-    CHORD(ch_a1, &ch_a1, 19 31) // a+bksp -> A
-    CHORD(ch_i, &ch_i, 18 32) // i+space -> I
-    CHORD(ch_be, &ch_be, 4 17 32) // b+e+space -> be
-    CHORD(ch_of, &ch_of, 7 6 32) // o+f+space -> of
-    CHORD(ch_to, &ch_to, 13 7 32) // t+o+space -> to
-    CHORD(ch_in, &ch_in, 18 16 32) // i+n+space -> in
-    CHORD(ch_he, &ch_he, 26 17 32) // h+e+space -> he
-    CHORD(ch_it, &ch_it, 18 13 32) // i+t+space -> it
-    CHORD(ch_as, &ch_as, 19 12 32) // a+s+space -> as
-    CHORD(ch_on, &ch_on, 7 16 32) // o+n+space -> on
-    CHORD(ch_at, &ch_at, 19 13 32) // a+t+space -> at
-    CHORD(ch_by, &ch_by, 4 2 32) // b+y+space -> by
-    CHORD(ch_we, &ch_we, 0 17 32) // w+e+space -> we
-    CHORD(ch_do, &ch_do, 23 7 32) // d+o+space -> do
-    CHORD(ch_or, &ch_or, 7 11 32) // o+r+space -> or
-    CHORD(ch_if, &ch_if, 18 6 32) // i+f+space -> if
-    CHORD(ch_no, &ch_no, 16 17 32) // n+e+space -> no
-    CHORD(ch_so, &ch_so, 12 7 32) // s+o+space -> so
-    CHORD(ch_up, &ch_up, 8 3 32) // u+p+space -> up
-    CHORD(ch_go, &ch_go, 14 7 32) // g+o+space -> go
-    COMBO(ch_excl, &kp EXCL, 17 27) // e+. -> !
-    COMBO(ch_qmark, &kp QMARK, 18 28) // i+, -> ?
-    COMBO(ch_colon, &kp COLON, 19 29) // a+ret -> :
-    COMBO(ch_semi, &kp SEMI, 19 9) // a+' -> ;
+    CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
+    CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
   };
 };
 
@@ -250,12 +250,31 @@ name: name##_macro {                  \
 
 / {
   macros {
-    MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
-    MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
     MACRO(ch_bs_ing, &kp BSPC &kp I &kp N &kp G &kp SPC) // i+n+g -> <BS>ing
     MACRO(ch_bs_n_t, &kp BSPC &kp N &kp APOS &kp T &kp SPC) // n+'+t -> <BS>n't
     MACRO(ch_bs_ve, &kp BSPC &kp APOS &kp V &kp E &kp SPC) // '+v+e -> <BS>'ve
     MACRO(ch_bs_re, &kp BSPC &kp APOS &kp R &kp E &kp SPC) // '+r+e -> <BS>'re
+    MACRO(ch_a, &kp A &kp SPC) // a+space -> a
+    MACRO(ch_a1, &kp LS(A) &kp SPC) // a+bksp -> A
+    MACRO(ch_i, &kp LS(I) &kp SPC) // i+space -> I
+    MACRO(ch_be, &kp B &kp E &kp SPC) // b+e+space -> be
+    MACRO(ch_of, &kp O &kp F &kp SPC) // o+f+space -> of
+    MACRO(ch_to, &kp T &kp O &kp SPC) // t+o+space -> to
+    MACRO(ch_in, &kp I &kp N &kp SPC) // i+n+space -> in
+    MACRO(ch_he, &kp H &kp E &kp SPC) // h+e+space -> he
+    MACRO(ch_it, &kp I &kp T &kp SPC) // i+t+space -> it
+    MACRO(ch_as, &kp A &kp S &kp SPC) // a+s+space -> as
+    MACRO(ch_on, &kp O &kp N &kp SPC) // o+n+space -> on
+    MACRO(ch_at, &kp A &kp T &kp SPC) // a+t+space -> at
+    MACRO(ch_by, &kp B &kp Y &kp SPC) // b+y+space -> by
+    MACRO(ch_we, &kp W &kp E &kp SPC) // w+e+space -> we
+    MACRO(ch_do, &kp D &kp O &kp SPC) // d+o+space -> do
+    MACRO(ch_or, &kp O &kp R &kp SPC) // o+r+space -> or
+    MACRO(ch_if, &kp I &kp F &kp SPC) // i+f+space -> if
+    MACRO(ch_no, &kp N &kp O &kp SPC) // n+e+space -> no
+    MACRO(ch_so, &kp S &kp O &kp SPC) // s+o+space -> so
+    MACRO(ch_up, &kp U &kp P &kp SPC) // u+p+space -> up
+    MACRO(ch_go, &kp G &kp O &kp SPC) // g+o+space -> go
     MACRO(ch_the, &kp T &kp H &kp E &kp SPC) // t+h+e -> the
     MACRO(ch_and, &kp A &kp N &kp D &kp SPC) // a+n+d -> and
     MACRO(ch_for, &kp F &kp O &kp R &kp SPC) // f+o+r -> for
@@ -438,32 +457,13 @@ name: name##_macro {                  \
     MACRO(ch_increas, &kp I &kp N &kp C &kp R &kp E &kp A &kp S &kp E &kp SPC) // i+n+c -> increase
     MACRO(ch_her, &kp H &kp E &kp R &kp SPC) // h+e+r -> her
     MACRO(ch_had, &kp H &kp A &kp D &kp SPC) // h+a+d -> had
-    MACRO(ch_hey, &kp H &kp E &kp Y &kp SPC) // h+e+y -> hey
-    MACRO(ch_lie, &kp L &kp I &kp E &kp SPC) // l+i+e -> lie
     MACRO(ch_sea, &kp S &kp E &kp A &kp SPC) // s+e+a -> sea
     MACRO(ch_true, &kp T &kp R &kp U &kp E &kp SPC) // t+r+u -> true
+    MACRO(ch_lie, &kp L &kp I &kp E &kp SPC) // l+i+e -> lie
+    MACRO(ch_hey, &kp H &kp E &kp Y &kp SPC) // h+e+y -> hey
     MACRO(ch_return, &kp R &kp E &kp T &kp U &kp R &kp N &kp SPC) // r+e+t -> return
     MACRO(ch_probabl, &kp P &kp R &kp O &kp B &kp A &kp B &kp L &kp Y &kp SPC) // p+b+l+y -> probably
-    MACRO(ch_a, &kp A &kp SPC) // a+space -> a
-    MACRO(ch_a1, &kp LS(A) &kp SPC) // a+bksp -> A
-    MACRO(ch_i, &kp LS(I) &kp SPC) // i+space -> I
-    MACRO(ch_be, &kp B &kp E &kp SPC) // b+e+space -> be
-    MACRO(ch_of, &kp O &kp F &kp SPC) // o+f+space -> of
-    MACRO(ch_to, &kp T &kp O &kp SPC) // t+o+space -> to
-    MACRO(ch_in, &kp I &kp N &kp SPC) // i+n+space -> in
-    MACRO(ch_he, &kp H &kp E &kp SPC) // h+e+space -> he
-    MACRO(ch_it, &kp I &kp T &kp SPC) // i+t+space -> it
-    MACRO(ch_as, &kp A &kp S &kp SPC) // a+s+space -> as
-    MACRO(ch_on, &kp O &kp N &kp SPC) // o+n+space -> on
-    MACRO(ch_at, &kp A &kp T &kp SPC) // a+t+space -> at
-    MACRO(ch_by, &kp B &kp Y &kp SPC) // b+y+space -> by
-    MACRO(ch_we, &kp W &kp E &kp SPC) // w+e+space -> we
-    MACRO(ch_do, &kp D &kp O &kp SPC) // d+o+space -> do
-    MACRO(ch_or, &kp O &kp R &kp SPC) // o+r+space -> or
-    MACRO(ch_if, &kp I &kp F &kp SPC) // i+f+space -> if
-    MACRO(ch_no, &kp N &kp O &kp SPC) // n+e+space -> no
-    MACRO(ch_so, &kp S &kp O &kp SPC) // s+o+space -> so
-    MACRO(ch_up, &kp U &kp P &kp SPC) // u+p+space -> up
-    MACRO(ch_go, &kp G &kp O &kp SPC) // g+o+space -> go
+    MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
+    MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
   };
 };

@@ -2,14 +2,40 @@
 
 ![keyboard layout](keymap.svg)
 
-## 215 chords
+## 219 chords
 
-- `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
-- `e` + `l` + `b` + `h` → Elbereth
-- `i` + `n` + `g` → <BS>ing
-- `n` + `'` + `t` → <BS>n't
-- `'` + `v` + `e` → <BS>'ve
-- `'` + `r` + `e` → <BS>'re
+### Symbols
+- `e` + `.` → !
+- `i` + `,` → ?
+- `a` + `ret` → :
+- `a` + `'` → ;
+### Suffixes
+- `i` + `n` + `g` → ⌫ing
+- `n` + `'` + `t` → ⌫n't
+- `'` + `v` + `e` → ⌫'ve
+- `'` + `r` + `e` → ⌫'re
+### Top 200 words
+- `a` + `␣` → a
+- `a` + `⌫` → A
+- `i` + `␣` → I
+- `b` + `e` + `␣` → be
+- `o` + `f` + `␣` → of
+- `t` + `o` + `␣` → to
+- `i` + `n` + `␣` → in
+- `h` + `e` + `␣` → he
+- `i` + `t` + `␣` → it
+- `a` + `s` + `␣` → as
+- `o` + `n` + `␣` → on
+- `a` + `t` + `␣` → at
+- `b` + `y` + `␣` → by
+- `w` + `e` + `␣` → we
+- `d` + `o` + `␣` → do
+- `o` + `r` + `␣` → or
+- `i` + `f` + `␣` → if
+- `n` + `e` + `␣` → no
+- `s` + `o` + `␣` → so
+- `u` + `p` + `␣` → up
+- `g` + `o` + `␣` → go
 - `t` + `h` + `e` → the
 - `a` + `n` + `d` → and
 - `f` + `o` + `r` → for
@@ -190,32 +216,16 @@
 - `p` + `s` + `e` → possible
 - `c` + `n` + `d` → consider
 - `i` + `n` + `c` → increase
+### Top 1000 words (todo)
 - `h` + `e` + `r` → her
 - `h` + `a` + `d` → had
-- `h` + `e` + `y` → hey
-- `l` + `i` + `e` → lie
 - `s` + `e` + `a` → sea
 - `t` + `r` + `u` → true
+- `l` + `i` + `e` → lie
+### Other common words
+- `h` + `e` + `y` → hey
 - `r` + `e` + `t` → return
 - `p` + `b` + `l` + `y` → probably
-- `a` + `space` → a
-- `a` + `bksp` → A
-- `i` + `space` → I
-- `b` + `e` + `space` → be
-- `o` + `f` + `space` → of
-- `t` + `o` + `space` → to
-- `i` + `n` + `space` → in
-- `h` + `e` + `space` → he
-- `i` + `t` + `space` → it
-- `a` + `s` + `space` → as
-- `o` + `n` + `space` → on
-- `a` + `t` + `space` → at
-- `b` + `y` + `space` → by
-- `w` + `e` + `space` → we
-- `d` + `o` + `space` → do
-- `o` + `r` + `space` → or
-- `i` + `f` + `space` → if
-- `n` + `e` + `space` → no
-- `s` + `o` + `space` → so
-- `u` + `p` + `space` → up
-- `g` + `o` + `space` → go
+### Misc phrases
+- `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
+- `e` + `l` + `b` + `h` → Elbereth
