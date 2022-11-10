@@ -2,9 +2,10 @@
 
 ![keyboard layout](keymap.svg)
 
-## 210 chords
+## 211 chords
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
+- `e` + `l` + `b` + `h` → Elbereth
 - `t` + `h` + `e` → the
 - `a` + `n` + `d` → and
 - `f` + `o` + `r` → for

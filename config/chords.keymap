@@ -17,6 +17,7 @@ chord_##name {                        \
   combos {
     compatible = "zmk,combos";
     CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
+    CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
     CHORD(ch_the, &ch_the, 13 26 17) // t+h+e -> the
     CHORD(ch_and, &ch_and, 19 16 23) // a+n+d -> and
     CHORD(ch_for, &ch_for, 6 7 11) // f+o+r -> for
@@ -246,6 +247,7 @@ name: name##_macro {                  \
 / {
   macros {
     MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
+    MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
     MACRO(ch_the, &kp T &kp H &kp E &kp SPC) // t+h+e -> the
     MACRO(ch_and, &kp A &kp N &kp D &kp SPC) // a+n+d -> and
     MACRO(ch_for, &kp F &kp O &kp R &kp SPC) // f+o+r -> for
