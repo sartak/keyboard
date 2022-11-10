@@ -2,10 +2,14 @@
 
 ![keyboard layout](keymap.svg)
 
-## 211 chords
+## 215 chords
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `e` + `l` + `b` + `h` → Elbereth
+- `i` + `n` + `g` → <BS>ing
+- `n` + `'` + `t` → <BS>n't
+- `'` + `v` + `e` → <BS>'ve
+- `'` + `r` + `e` → <BS>'re
 - `t` + `h` + `e` → the
 - `a` + `n` + `d` → and
 - `f` + `o` + `r` → for
@@ -137,7 +141,7 @@
 - `h` + `o` + `s` → house
 - `u` + `n` + `d` → under
 - `r` + `i` + `t` → right
-- `i` + `n` + `g` → thing
+- `t` + `i` + `n` → thing
 - `n` + `v` + `r` → never
 - `e` + `g` + `i` → begin
 - `h` + `i` + `e` → while

@@ -18,6 +18,10 @@ chord_##name {                        \
     compatible = "zmk,combos";
     CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
+    CHORD(ch_bs_ing, &ch_bs_ing, 18 16 14) // i+n+g -> <BS>ing
+    CHORD(ch_bs_n_t, &ch_bs_n_t, 16 9 13) // n+'+t -> <BS>n't
+    CHORD(ch_bs_ve, &ch_bs_ve, 9 22 17) // '+v+e -> <BS>'ve
+    CHORD(ch_bs_re, &ch_bs_re, 9 11 17) // '+r+e -> <BS>'re
     CHORD(ch_the, &ch_the, 13 26 17) // t+h+e -> the
     CHORD(ch_and, &ch_and, 19 16 23) // a+n+d -> and
     CHORD(ch_for, &ch_for, 6 7 11) // f+o+r -> for
@@ -149,7 +153,7 @@ chord_##name {                        \
     CHORD(ch_house, &ch_house, 26 7 12) // h+o+s -> house
     CHORD(ch_under, &ch_under, 8 16 23) // u+n+d -> under
     CHORD(ch_right, &ch_right, 11 18 13) // r+i+t -> right
-    CHORD(ch_thing, &ch_thing, 18 16 14) // i+n+g -> thing
+    CHORD(ch_thing, &ch_thing, 13 18 16) // t+i+n -> thing
     CHORD(ch_never, &ch_never, 16 22 11) // n+v+r -> never
     CHORD(ch_begin, &ch_begin, 17 14 18) // e+g+i -> begin
     CHORD(ch_while, &ch_while, 26 18 17) // h+i+e -> while
@@ -248,6 +252,10 @@ name: name##_macro {                  \
   macros {
     MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
+    MACRO(ch_bs_ing, &kp BSPC &kp I &kp N &kp G &kp SPC) // i+n+g -> <BS>ing
+    MACRO(ch_bs_n_t, &kp BSPC &kp N &kp APOS &kp T &kp SPC) // n+'+t -> <BS>n't
+    MACRO(ch_bs_ve, &kp BSPC &kp APOS &kp V &kp E &kp SPC) // '+v+e -> <BS>'ve
+    MACRO(ch_bs_re, &kp BSPC &kp APOS &kp R &kp E &kp SPC) // '+r+e -> <BS>'re
     MACRO(ch_the, &kp T &kp H &kp E &kp SPC) // t+h+e -> the
     MACRO(ch_and, &kp A &kp N &kp D &kp SPC) // a+n+d -> and
     MACRO(ch_for, &kp F &kp O &kp R &kp SPC) // f+o+r -> for
@@ -379,7 +387,7 @@ name: name##_macro {                  \
     MACRO(ch_house, &kp H &kp O &kp U &kp S &kp E &kp SPC) // h+o+s -> house
     MACRO(ch_under, &kp U &kp N &kp D &kp E &kp R &kp SPC) // u+n+d -> under
     MACRO(ch_right, &kp R &kp I &kp G &kp H &kp T &kp SPC) // r+i+t -> right
-    MACRO(ch_thing, &kp T &kp H &kp I &kp N &kp G &kp SPC) // i+n+g -> thing
+    MACRO(ch_thing, &kp T &kp H &kp I &kp N &kp G &kp SPC) // t+i+n -> thing
     MACRO(ch_never, &kp N &kp E &kp V &kp E &kp R &kp SPC) // n+v+r -> never
     MACRO(ch_begin, &kp B &kp E &kp G &kp I &kp N &kp SPC) // e+g+i -> begin
     MACRO(ch_while, &kp W &kp H &kp I &kp L &kp E &kp SPC) // h+i+e -> while
