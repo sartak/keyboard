@@ -2,7 +2,7 @@
 
 ![keyboard layout](keymap.svg)
 
-## 219 chords
+## 222 chords
 
 ### Symbols
 - `e` + `.` → !
@@ -222,10 +222,13 @@
 - `s` + `e` + `a` → sea
 - `t` + `r` + `u` → true
 - `l` + `i` + `e` → lie
+- `h` + `a` + `k` → thank
 ### Other common words
 - `h` + `e` + `y` → hey
 - `r` + `e` + `t` → return
 - `p` + `b` + `l` + `y` → probably
+- `t` + `a` + `y` → thank you
+- `t` + `n` + `s` → thanks
 ### Misc phrases
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `e` + `l` + `b` + `h` → Elbereth

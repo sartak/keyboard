@@ -230,9 +230,12 @@ chord_##name {                        \
     CHORD(ch_sea, &ch_sea, 12 17 19) // s+e+a -> sea
     CHORD(ch_true, &ch_true, 13 11 8) // t+r+u -> true
     CHORD(ch_lie, &ch_lie, 1 18 17) // l+i+e -> lie
+    CHORD(ch_thank, &ch_thank, 26 19 24) // h+a+k -> thank
     CHORD(ch_hey, &ch_hey, 26 17 2) // h+e+y -> hey
     CHORD(ch_return, &ch_return, 11 17 13) // r+e+t -> return
     CHORD(ch_probabl, &ch_probabl, 3 4 1 2) // p+b+l+y -> probably
+    CHORD(ch_thank_y, &ch_thank_y, 13 19 2) // t+a+y -> thank you
+    CHORD(ch_thanks, &ch_thanks, 13 16 12) // t+n+s -> thanks
     CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
   };
@@ -460,9 +463,12 @@ name: name##_macro {                  \
     MACRO(ch_sea, &kp S &kp E &kp A &kp SPC) // s+e+a -> sea
     MACRO(ch_true, &kp T &kp R &kp U &kp E &kp SPC) // t+r+u -> true
     MACRO(ch_lie, &kp L &kp I &kp E &kp SPC) // l+i+e -> lie
+    MACRO(ch_thank, &kp T &kp H &kp A &kp N &kp K &kp SPC) // h+a+k -> thank
     MACRO(ch_hey, &kp H &kp E &kp Y &kp SPC) // h+e+y -> hey
     MACRO(ch_return, &kp R &kp E &kp T &kp U &kp R &kp N &kp SPC) // r+e+t -> return
     MACRO(ch_probabl, &kp P &kp R &kp O &kp B &kp A &kp B &kp L &kp Y &kp SPC) // p+b+l+y -> probably
+    MACRO(ch_thank_y, &kp T &kp H &kp A &kp N &kp K &kp SPC &kp Y &kp O &kp U &kp SPC) // t+a+y -> thank you
+    MACRO(ch_thanks, &kp T &kp H &kp A &kp N &kp K &kp S &kp SPC) // t+n+s -> thanks
     MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
   };
