@@ -94,6 +94,25 @@
   };
 };
 
+// Chord left thumb keys as left click, right thumb keys as right click
+// Hold for command versions
+// TODO https://github.com/zmkfirmware/zmk/pull/1430
+/ {
+  combos {
+    compatible = "zmk,combos";
+    combo_left_click {
+      timeout-ms = <60>;
+      bindings = <HPT(&none, &none)>;
+      key-positions = <30 31>;
+    };
+    combo_right_click {
+      timeout-ms = <60>;
+      bindings = <HPT(&none, &none)>;
+      key-positions = <32 33>;
+    };
+  };
+};
+
 // TODO: Tap to momentary switch to layer, hold to switch layer, chord to momentary switch
 #define LYR(layer) &to layer
 

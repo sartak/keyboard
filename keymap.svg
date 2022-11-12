@@ -122,6 +122,10 @@
 <text x="615.5" y="104.0" class="small">;</text>
 <rect rx="6" ry="6" x="322.5" y="226.5" width="27.5" height="25.0" class="combo"/>
 <text x="336.25" y="239.0" class="small">⌫Word</text>
+<rect rx="6" ry="6" x="249.75" y="226.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="239.0" class="small">LClk</text>
+<rect rx="6" ry="6" x="395.25" y="226.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="239.0" class="small">RClk</text>
 <text x="27.5" y="291.0" class="label">
 <tspan x="27.5" dy="-0.6em">Alpha</tspan><tspan x="27.5" dy="1.2em">(hold):</tspan>
 </text>
@@ -195,6 +199,10 @@
 <text x="438.5" y="505.0">Number</text>
 <rect rx="6" ry="6" x="322.5" y="492.5" width="27.5" height="25.0" class="combo"/>
 <text x="336.25" y="505.0" class="small">Hyper</text>
+<rect rx="6" ry="6" x="249.75" y="492.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="505.0" class="small">⌘LC</text>
+<rect rx="6" ry="6" x="395.25" y="492.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="505.0" class="small">⌘RC</text>
 <text x="27.5" y="557.0" class="label">Symbol:</text>
 <rect rx="6" ry="6" x="29.5" y="584" width="55" height="50"/>
 <text x="57.0" y="609.0">`</text>
@@ -274,6 +282,10 @@
 <text x="615.5" y="636.0" class="small">;</text>
 <rect rx="6" ry="6" x="322.5" y="758.5" width="27.5" height="25.0" class="combo"/>
 <text x="336.25" y="771.0" class="small">⌫Word</text>
+<rect rx="6" ry="6" x="249.75" y="758.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="771.0" class="small">LClk</text>
+<rect rx="6" ry="6" x="395.25" y="758.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="771.0" class="small">RClk</text>
 <text x="27.5" y="823.0" class="label">
 <tspan x="27.5" dy="-0.6em">Symbol</tspan><tspan x="27.5" dy="1.2em">(hold):</tspan>
 </text>
@@ -347,6 +359,10 @@
 <text x="438.5" y="1037.0">Number</text>
 <rect rx="6" ry="6" x="322.5" y="1024.5" width="27.5" height="25.0" class="combo"/>
 <text x="336.25" y="1037.0" class="small">Hyper</text>
+<rect rx="6" ry="6" x="249.75" y="1024.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="1037.0" class="small">⌘LC</text>
+<rect rx="6" ry="6" x="395.25" y="1024.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="1037.0" class="small">⌘RC</text>
 <text x="27.5" y="1089.0" class="label">Number:</text>
 <rect rx="6" ry="6" x="29.5" y="1116" width="55" height="50"/>
 <text x="57.0" y="1141.0">BrUp</text>
@@ -425,6 +441,10 @@
 <text x="615.5" y="1168.0" class="small">;</text>
 <rect rx="6" ry="6" x="322.5" y="1290.5" width="27.5" height="25.0" class="combo"/>
 <text x="336.25" y="1303.0" class="small">⌫Word</text>
+<rect rx="6" ry="6" x="249.75" y="1290.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="1303.0" class="small">LClk</text>
+<rect rx="6" ry="6" x="395.25" y="1290.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="1303.0" class="small">RClk</text>
 <text x="27.5" y="1355.0" class="label">
 <tspan x="27.5" dy="-0.6em">Number</tspan><tspan x="27.5" dy="1.2em">(hold):</tspan>
 </text>
@@ -486,6 +506,10 @@
 <text x="438.5" y="1569.0">Number</text>
 <rect rx="6" ry="6" x="322.5" y="1556.5" width="27.5" height="25.0" class="combo"/>
 <text x="336.25" y="1569.0" class="small">Hyper</text>
+<rect rx="6" ry="6" x="249.75" y="1556.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="1569.0" class="small">⌘LC</text>
+<rect rx="6" ry="6" x="395.25" y="1556.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="1569.0" class="small">⌘RC</text>
 <text x="27.5" y="1621.0" class="label">Function:</text>
 <rect rx="6" ry="6" x="29.5" y="1648" width="55" height="50"/>
 <text x="57.0" y="1673.0">Bootl</text>

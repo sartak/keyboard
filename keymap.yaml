@@ -30,6 +30,10 @@ layers:
         key: ";"
       - positions: [31, 32]
         key: ⌫Word
+      - positions: [30, 31]
+        key: LClk
+      - positions: [32, 33]
+        key: RClk
   "Alpha (hold)":
     left:
       - ["⌘W", "⌘L", "⌘Y", "⌘P", "⌘B"]
@@ -48,6 +52,10 @@ layers:
     combos:
       - positions: [31, 32]
         key: Hyper
+      - positions: [30, 31]
+        key: "⌘LC"
+      - positions: [32, 33]
+        key: "⌘RC"
   Symbol:
     left:
       - ["`", "~", "\\", "{", "$"]
@@ -74,6 +82,10 @@ layers:
         key: ";"
       - positions: [31, 32]
         key: ⌫Word
+      - positions: [30, 31]
+        key: LClk
+      - positions: [32, 33]
+        key: RClk
   "Symbol (hold)":
     left:
       - ["⌘`", "⌘~", "⌘\\", "⌘{", "⌘$"]
@@ -92,6 +104,10 @@ layers:
     combos:
       - positions: [31, 32]
         key: Hyper
+      - positions: [30, 31]
+        key: "⌘LC"
+      - positions: [32, 33]
+        key: "⌘RC"
   Number:
     left:
       - ["BrUp", "7", "8", "9", "ScrSh"]
@@ -118,6 +134,10 @@ layers:
         key: ";"
       - positions: [31, 32]
         key: ⌫Word
+      - positions: [30, 31]
+        key: LClk
+      - positions: [32, 33]
+        key: RClk
   "Number (hold)":
     left:
       - [null, "⌘7", "⌘8", "⌘9", null]
@@ -136,6 +156,10 @@ layers:
     combos:
       - positions: [31, 32]
         key: Hyper
+      - positions: [30, 31]
+        key: "⌘LC"
+      - positions: [32, 33]
+        key: "⌘RC"
   Function:
     left:
       - ["Bootl", null, null, null, null]
