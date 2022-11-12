@@ -74,6 +74,24 @@ layers:
         key: ";"
       - positions: [31, 32]
         key: ⌫Word
+  "Symbol (hold)":
+    left:
+      - ["⌘`", "⌘~", "⌘\\", "⌘{", "⌘$"]
+      - ["⌘&", "⌘*", "⌘=", "⌘(", "⌘<"]
+      - ["⌘—", "⌘@", "⌘_", "⌘[", "⌘…"]
+    right:
+      - ["⌘%", "⌘}", "⌘/", "⌘#", Esc]
+      - ["⌘>", "⌘)", "⌘-", "⌘+", "⌘|"]
+      - ["⌘^", "⌘]", Tab, Launch, "⌘↵"]
+    left_thumbs:
+      - Symbol
+      - Shift
+    right_thumbs:
+      - Ctrl
+      - Number
+    combos:
+      - positions: [31, 32]
+        key: Hyper
   Number:
     left:
       - ["BrUp", "7", "8", "9", "ScrSh"]
@@ -100,6 +118,24 @@ layers:
         key: ";"
       - positions: [31, 32]
         key: ⌫Word
+  "Number (hold)":
+    left:
+      - [null, "⌘7", "⌘8", "⌘9", null]
+      - [null, "⌘4", "⌘5", "⌘6", "⌘0"]
+      - [null, "⌘1", "⌘2", "⌘3", null]
+    right:
+      - [null, null, null, null, Esc]
+      - [null, "⌘←", "⌘↓", "⌘↑", "⌘→"]
+      - [null, null, Tab, Launch, "⌘↵"]
+    left_thumbs:
+      - Symbol
+      - Shift
+    right_thumbs:
+      - Ctrl
+      - Number
+    combos:
+      - positions: [31, 32]
+        key: Hyper
   Function:
     left:
       - ["Bootl", null, null, null, null]
