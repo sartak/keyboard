@@ -7,6 +7,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 
 #define ALPHA 0
 #define SYMBOL 1
@@ -141,10 +142,10 @@
 
     FUNCTION_layer {
       bindings = <
-        &bootloader  &none  &none  &none  &none    &none  &none  &none  &none  &bootloader
-        &none        &none  &none  &none  &none    &none  &none  &none  &none  &none
-        &none        &none  &none  &none  &none    &none  &none  &none  &none  &none
-                               &to ALPHA  &none    &none  &none
+        &bootloader  &none         &none         &none         &none           &none  &none  &none  &none  &bootloader
+        &none        &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 5  &bt BT_CLR      &none  &none  &none  &none  &none
+        &none        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &out OUT_TOG    &none  &none  &none  &none  &none
+                                                         &to ALPHA  &none      &none  &none
       >;
     };
   };

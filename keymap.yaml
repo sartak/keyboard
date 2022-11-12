@@ -139,8 +139,8 @@ layers:
   Function:
     left:
       - ["Bootl", null, null, null, null]
-      - [null, null, null, null, null]
-      - [null, null, null, null, null]
+      - [null, "BT4", "BT5", "BT6", "BTCLR"]
+      - [null, "BT1", "BT2", "BT3", "BTTOG"]
     right:
       - [null, null, null, null, "Bootl"]
       - [null, null, null, null, null]
