@@ -280,6 +280,14 @@
 <text x="615.5" y="690.0" class="small">:</text>
 <rect rx="6" ry="6" x="601.75" y="623.5" width="27.5" height="25.0" class="combo"/>
 <text x="615.5" y="636.0" class="small">;</text>
+<rect rx="6" ry="6" x="43.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="57.0" y="690.0" class="small">¢</text>
+<rect rx="6" ry="6" x="102.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="116.0" y="690.0" class="small">£</text>
+<rect rx="6" ry="6" x="161.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="175.0" y="690.0" class="small">¥</text>
+<rect rx="6" ry="6" x="220.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="234.0" y="690.0" class="small">€</text>
 <rect rx="6" ry="6" x="322.5" y="758.5" width="27.5" height="25.0" class="combo"/>
 <text x="336.25" y="771.0" class="small">⌫Word</text>
 <rect rx="6" ry="6" x="249.75" y="758.5" width="27.5" height="25.0" class="combo"/>

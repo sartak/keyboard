@@ -80,6 +80,14 @@ layers:
         key: ":"
       - positions: [9, 19]
         key: ";"
+      - positions: [10, 20]
+        key: "¢"
+      - positions: [11, 21]
+        key: "£"
+      - positions: [12, 22]
+        key: "¥"
+      - positions: [13, 23]
+        key: "€"
       - positions: [31, 32]
         key: ⌫Word
       - positions: [30, 31]

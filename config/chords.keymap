@@ -5,13 +5,16 @@ combo_##name {                        \
   key-positions = <keypos>;           \
 };
 
-#define CHORD(name, keypress, keypos) \
-chord_##name {                        \
-  timeout-ms = <60>;                  \
-  bindings = <keypress>;              \
-  key-positions = <keypos>;           \
-  layers = <ALPHA>;                   \
+#define LAYER_CHORD(name, keypress, keypos, lays) \
+chord_##name {                                    \
+  timeout-ms = <60>;                              \
+  bindings = <keypress>;                          \
+  key-positions = <keypos>;                       \
+  layers = <lays>;                                \
 };
+
+#define CHORD(name, keypress, keypos) \
+  LAYER_CHORD(name, keypress, keypos, ALPHA)
 
 / {
   combos {
@@ -20,6 +23,10 @@ chord_##name {                        \
     COMBO(ch_qmark, &kp QMARK, 18 28) // i+, -> ?
     COMBO(ch_colon, &kp COLON, 19 29) // a+ret -> :
     COMBO(ch_semi, &kp SEMI, 19 9) // a+' -> ;
+    LAYER_CHORD(ch_cent, &kp LA(N4), 10 20, SYMBOL) // c+q -> ¢
+    LAYER_CHORD(ch_pound, &kp LA(N3), 11 21, SYMBOL) // r+j -> £
+    LAYER_CHORD(ch_yen, &kp INT_YEN, 12 22, SYMBOL) // s+v -> ¥
+    LAYER_CHORD(ch_euro, &kp LA(LS(N2)), 13 23, SYMBOL) // t+d -> €
     CHORD(ch_bs_ing, &ch_bs_ing, 18 16 14) // i+n+g -> <BS>ing
     CHORD(ch_bs_n_t, &ch_bs_n_t, 16 9 13) // n+'+t -> <BS>n't
     CHORD(ch_bs_ve, &ch_bs_ve, 9 22 17) // '+v+e -> <BS>'ve

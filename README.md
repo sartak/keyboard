@@ -2,13 +2,17 @@
 
 ![keyboard layout](keymap.svg)
 
-## 222 chords
+## 226 chords
 
 ### Symbols
 - `e` + `.` → !
 - `i` + `,` → ?
 - `a` + `ret` → :
 - `a` + `'` → ;
+- `&` + `—` → ¢
+- `*` + `@` → £
+- `=` + `_` → ¥
+- `(` + `[` → €
 ### Suffixes
 - `i` + `n` + `g` → ⌫ing
 - `n` + `'` + `t` → ⌫n't
