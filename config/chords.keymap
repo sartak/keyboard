@@ -37,9 +37,9 @@ chord_##name {                                    \
     CHORD(ch_bs_n_t, &ch_bs_n_t, 16 9 13) // n+'+t -> <BS>n't
     CHORD(ch_bs_ve, &ch_bs_ve, 9 22 17) // '+v+e -> <BS>'ve
     CHORD(ch_bs_re, &ch_bs_re, 9 11 17) // '+r+e -> <BS>'re
-    CHORD(ch_a, &kp A, 19 32) // a+space -> a
-    CHORD(ch_a1, &kp LS(A), 19 31) // a+bksp -> A
-    CHORD(ch_i, &kp LS(I), 18 32) // i+space -> I
+    CHORD(ch_a, &ch_a, 19 32) // a+space -> a
+    CHORD(ch_a1, &ch_a1, 19 31) // a+bksp -> A
+    CHORD(ch_i, &ch_i, 18 32) // i+space -> I
     CHORD(ch_be, &ch_be, 4 17 32) // b+e+space -> be
     CHORD(ch_of, &ch_of, 7 6 32) // o+f+space -> of
     CHORD(ch_to, &ch_to, 13 7 32) // t+o+space -> to
