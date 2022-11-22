@@ -13,6 +13,7 @@
 #define SYMBOL 1
 #define NUMBER 2
 #define FUNCTION 3
+#define SENTENCE 4
 
 #include "chords.keymap"
 
@@ -58,9 +59,6 @@
     };
 };
 
-// Like autoshift but for gui instead
-#define AG(keycode) HPT(LG(keycode), keycode)
-
 // Sticky mod on hold
 #define SM(mod, keycode) &sm mod keycode
 &sk {
@@ -79,6 +77,96 @@
             bindings = <&sk>, <&kp>;
         };
     };
+};
+
+// Like autoshift but for gui instead
+#define AG(keycode) HPT(LG(keycode), keycode)
+
+// Same but dismisses sentence mode
+#define str(s) #s
+#define DISMISS_MACRO(key)             \
+sentence_##key: sentence_##key {       \
+  label = str(sentence_##key);         \
+  compatible = "zmk,behavior-macro";   \
+  #binding-cells = <0>;                \
+  tap-ms = <1>;                        \
+  wait-ms = <1>;                       \
+  bindings = <&to ALPHA &kp key>;      \
+};                                     \
+lg_sentence_##key: lg_sentence_##key { \
+  label = str(lg_sentence_##key);      \
+  compatible = "zmk,behavior-macro";   \
+  #binding-cells = <0>;                \
+  tap-ms = <1>;                        \
+  wait-ms = <1>;                       \
+  bindings = <&to ALPHA &kp LG(key)>;  \
+};
+/ {
+  macros {
+    DISMISS_MACRO(A)
+    DISMISS_MACRO(B)
+    DISMISS_MACRO(C)
+    DISMISS_MACRO(D)
+    DISMISS_MACRO(E)
+    DISMISS_MACRO(F)
+    DISMISS_MACRO(G)
+    DISMISS_MACRO(H)
+    DISMISS_MACRO(I)
+    DISMISS_MACRO(J)
+    DISMISS_MACRO(K)
+    DISMISS_MACRO(L)
+    DISMISS_MACRO(M)
+    DISMISS_MACRO(N)
+    DISMISS_MACRO(O)
+    DISMISS_MACRO(P)
+    DISMISS_MACRO(Q)
+    DISMISS_MACRO(R)
+    DISMISS_MACRO(S)
+    DISMISS_MACRO(T)
+    DISMISS_MACRO(U)
+    DISMISS_MACRO(V)
+    DISMISS_MACRO(W)
+    DISMISS_MACRO(X)
+    DISMISS_MACRO(Y)
+    DISMISS_MACRO(Z)
+    DISMISS_MACRO(RET)
+  };
+};
+
+// TODO there's a weird zmk glitch when using HPT with a macro or something
+// #define SAG(keycode) HPT(&lg_sentence_##keycode, &sentence_##keycode)
+#define SAG(keycode) &sentence_##keycode
+#define XHPT(ignore, keycode) keycode
+
+
+/ {
+  macros {
+    sentence_dot: sentence_dot {
+      label = "sentence_dot";
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <1>;
+      wait-ms = <1>;
+      bindings = <&kp BSPC &kp DOT &kp SPC &sk LSHFT>;
+    };
+
+    sentence_comma: sentence_comma {
+      label = "sentence_comma";
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <1>;
+      wait-ms = <1>;
+      bindings = <&kp BSPC &kp COMMA &kp SPC>;
+    };
+    sentence_apos: sentence_apos {
+      label = "sentence_apos";
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <1>;
+      wait-ms = <1>;
+      bindings = <&kp BSPC &kp APOS>;
+    };
+  };
 };
 
 // chord spc + bkspc to delete a word, or hold for a hyper sticky modifier
@@ -165,6 +253,15 @@
         &none        &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 5  &bt BT_CLR      &none  &none  &none  &none  &none
         &none        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &out OUT_TOG    &none  &none  &none  &none  &none
                                                          &to ALPHA  &none      &none  &none
+      >;
+    };
+
+    SENTENCE_layer {
+      bindings = <
+        SAG(W)  SAG(L)  SAG(Y)  SAG(P)  SAG(B)    SAG(Z)  SAG(F)  SAG(O)                   SAG(U)                        XHPT(ESC, &sentence_apos)
+        SAG(C)  SAG(R)  SAG(S)  SAG(T)  SAG(G)    SAG(M)  SAG(N)  SAG(E)                   SAG(I)                        SAG(A)
+        SAG(Q)  SAG(J)  SAG(V)  SAG(D)  SAG(K)    SAG(X)  SAG(H)  XHPT(TAB, &sentence_dot)  XHPT(ALFRED, &sentence_comma)  SAG(RET)
+                  LYR(SYMBOL)  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(NUMBER)
       >;
     };
   };

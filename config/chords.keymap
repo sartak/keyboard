@@ -14,15 +14,19 @@ chord_##name {                                    \
 };
 
 #define CHORD(name, keypress, keypos) \
-  LAYER_CHORD(name, keypress, keypos, ALPHA)
+  LAYER_CHORD(name, keypress, keypos, ALPHA SENTENCE)
 
 / {
   combos {
     compatible = "zmk,combos";
-    COMBO(ch_excl, &kp EXCL, 17 27) // e+. -> !
-    COMBO(ch_qmark, &kp QMARK, 18 28) // i+, -> ?
-    COMBO(ch_colon, &kp COLON, 19 29) // a+ret -> :
-    COMBO(ch_semi, &kp SEMI, 19 9) // a+' -> ;
+    LAYER_CHORD(ch_excl, &ch_excl, 17 27, SENTENCE) // e+. -> <BS>! <SKLS>
+    LAYER_CHORD(ch_excl1, &kp EXCL, 17 27, ALPHA SYMBOL NUMBER) // e+. -> !
+    LAYER_CHORD(ch_qmark, &ch_qmark, 18 28, SENTENCE) // i+, -> <BS>? <SKLS>
+    LAYER_CHORD(ch_qmark1, &kp QMARK, 18 28, ALPHA SYMBOL NUMBER) // i+, -> ?
+    LAYER_CHORD(ch_colon, &ch_colon, 19 29, SENTENCE) // a+ret -> <BS>:
+    LAYER_CHORD(ch_colon1, &kp COLON, 19 29, ALPHA SYMBOL NUMBER) // a+ret -> :
+    LAYER_CHORD(ch_semi, &ch_semi, 19 9, SENTENCE) // a+' -> <BS>;
+    LAYER_CHORD(ch_semi1, &kp SEMI, 19 9, ALPHA SYMBOL NUMBER) // a+' -> ;
     LAYER_CHORD(ch_cent, &kp LA(N4), 10 20, SYMBOL) // c+q -> ¢
     LAYER_CHORD(ch_pound, &kp LA(N3), 11 21, SYMBOL) // r+j -> £
     LAYER_CHORD(ch_yen, &kp INT_YEN, 12 22, SYMBOL) // s+v -> ¥
@@ -261,11 +265,15 @@ name: name##_macro {                  \
   #binding-cells = <0>;               \
   tap-ms = <1>;                       \
   wait-ms = <1>;                      \
-  bindings = <keys>;                  \
+  bindings = <keys>, <&to SENTENCE>;  \
 };
 
 / {
   macros {
+    MACRO(ch_excl, &kp BSPC &kp EXCL &kp SPC &sk LSHFT) // e+. -> <BS>! <SKLS>
+    MACRO(ch_qmark, &kp BSPC &kp QMARK &kp SPC &sk LSHFT) // i+, -> <BS>? <SKLS>
+    MACRO(ch_colon, &kp BSPC &kp COLON &kp SPC) // a+ret -> <BS>:
+    MACRO(ch_semi, &kp BSPC &kp SEMI &kp SPC) // a+' -> <BS>;
     MACRO(ch_bs_ing, &kp BSPC &kp I &kp N &kp G &kp SPC) // i+n+g -> <BS>ing
     MACRO(ch_bs_n_t, &kp BSPC &kp N &kp APOS &kp T &kp SPC) // n+'+t -> <BS>n't
     MACRO(ch_bs_ve, &kp BSPC &kp APOS &kp V &kp E &kp SPC) // '+v+e -> <BS>'ve
