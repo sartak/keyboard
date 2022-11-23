@@ -2,7 +2,7 @@
 
 ![keyboard layout](keymap.svg)
 
-## 218 chords
+## 287 chords
 
 ### Suffixes
 - `i` + `n` + `g` → ⌫ing
@@ -212,12 +212,81 @@
 - `c` + `n` + `d` → consider
 - `i` + `n` + `c` → increase
 ### Top 1000 words (todo)
+- `h` + `i` + `s` → his
 - `h` + `e` + `r` → her
+- `a` + `n` + `␣` → an
+- `m` + `y` + `␣` → my
+- `h` + `i` + `r` → their
+- `m` + `e` + `␣` → me
+- `b` + `i` + `m` → him
+- `y` + `o` + `r` → your
+- `i` + `t` + `s` → its
+- `t` + `w` + `o` → two
+- `o` + `u` + `r` → our
+- `u` + `s` + `␣` → us
+- `i` + `s` + `␣` → is
+- `w` + `a` + `s` → was
+- `a` + `r` + `e` → are
 - `h` + `a` + `d` → had
+- `h` + `a` + `s` → has
+- `l` + `o` + `w` → low
+- `b` + `o` + `y` → boy
+- `a` + `i` + `r` → air
+- `a` + `c` + `t` → act
+- `w` + `h` + `y` → why
+- `t` + `r` + `y` → try
+- `s` + `u` + `n` → sun
+- `f` + `a` + `r` → far
 - `s` + `e` + `a` → sea
+- `c` + `a` + `r` → car
+- `e` + `a` + `t` → eat
+- `c` + `u` + `t` → cut
+- `r` + `e` + `d` → red
 - `t` + `r` + `u` → true
+- `s` + `i` + `x` → six
+- `w` + `a` + `r` → war
+- `l` + `a` + `y` → lay
+- `m` + `a` + `p` → map
+- `f` + `l` + `y` → fly
+- `c` + `r` + `y` → cry
+- `b` + `o` + `x` → box
+- `o` + `h` + `␣` → oh
+- `d` + `r` + `y` → dry
+- `a` + `g` + `o` → ago
+- `r` + `a` + `n` → ran
+- `h` + `o` + `t` → hot
+- `y` + `e` + `t` → yet
+- `a` + `m` + `␣` → am
+- `a` + `r` + `m` → arm
+- `i` + `c` + `e` → ice
+- `a` + `r` + `t` → art
+- `l` + `e` + `g` → leg
+- `j` + `o` + `y` → joy
+- `j` + `o` + `b` → job
+- `g` + `a` + `s` → gas
+- `b` + `u` + `y` → buy
+- `l` + `a` + `w` → law
 - `l` + `i` + `e` → lie
+- `s` + `o` + `n` → son
+- `p` + `a` + `y` → pay
+- `a` + `g` + `e` → age
+- `l` + `o` + `t` → lot
+- `k` + `e` + `y` → key
+- `r` + `o` + `w` → row
+- `d` + `i` + `e` → die
+- `o` + `i` + `l` → oil
+- `f` + `i` + `t` → fit
+- `h` + `i` + `t` → hit
+- `r` + `u` + `b` → rub
+- `t` + `i` + `e` → tie
+- `g` + `u` + `n` → gun
 - `h` + `a` + `k` → thank
+- `l` + `e` + `d` → led
+- `w` + `i` + `n` → win
+- `n` + `o` + `r` → nor
+- `f` + `a` + `t` → fat
+- `b` + `a` + `r` → bar
+- `l` + `o` + `g` → log
 ### Other common words
 - `h` + `e` + `y` → hey
 - `r` + `e` + `t` → return

@@ -242,12 +242,81 @@ chord_##name {                                    \
     CHORD(ch_possibl, &ch_possibl, 3 12 17) // p+s+e -> possible
     CHORD(ch_conside, &ch_conside, 10 16 23) // c+n+d -> consider
     CHORD(ch_increas, &ch_increas, 18 16 10) // i+n+c -> increase
+    CHORD(ch_his, &ch_his, 26 18 12) // h+i+s -> his
     CHORD(ch_her, &ch_her, 26 17 11) // h+e+r -> her
+    CHORD(ch_an, &ch_an, 19 16 32) // a+n+space -> an
+    CHORD(ch_my, &ch_my, 15 2 32) // m+y+space -> my
+    CHORD(ch_their, &ch_their, 26 18 11) // h+i+r -> their
+    CHORD(ch_me, &ch_me, 15 17 32) // m+e+space -> me
+    CHORD(ch_him, &ch_him, 4 18 15) // b+i+m -> him
+    CHORD(ch_your, &ch_your, 2 7 11) // y+o+r -> your
+    CHORD(ch_its, &ch_its, 18 13 12) // i+t+s -> its
+    CHORD(ch_two, &ch_two, 13 0 7) // t+w+o -> two
+    CHORD(ch_our, &ch_our, 7 8 11) // o+u+r -> our
+    CHORD(ch_us, &ch_us, 8 12 32) // u+s+space -> us
+    CHORD(ch_is, &ch_is, 18 12 32) // i+s+space -> is
+    CHORD(ch_was, &ch_was, 0 19 12) // w+a+s -> was
+    CHORD(ch_are, &ch_are, 19 11 17) // a+r+e -> are
     CHORD(ch_had, &ch_had, 26 19 23) // h+a+d -> had
+    CHORD(ch_has, &ch_has, 26 19 12) // h+a+s -> has
+    CHORD(ch_low, &ch_low, 1 7 0) // l+o+w -> low
+    CHORD(ch_boy, &ch_boy, 4 7 2) // b+o+y -> boy
+    CHORD(ch_air, &ch_air, 19 18 11) // a+i+r -> air
+    CHORD(ch_act, &ch_act, 19 10 13) // a+c+t -> act
+    CHORD(ch_why, &ch_why, 0 26 2) // w+h+y -> why
+    CHORD(ch_try, &ch_try, 13 11 2) // t+r+y -> try
+    CHORD(ch_sun, &ch_sun, 12 8 16) // s+u+n -> sun
+    CHORD(ch_far, &ch_far, 6 19 11) // f+a+r -> far
     CHORD(ch_sea, &ch_sea, 12 17 19) // s+e+a -> sea
+    CHORD(ch_car, &ch_car, 10 19 11) // c+a+r -> car
+    CHORD(ch_eat, &ch_eat, 17 19 13) // e+a+t -> eat
+    CHORD(ch_cut, &ch_cut, 10 8 13) // c+u+t -> cut
+    CHORD(ch_red, &ch_red, 11 17 23) // r+e+d -> red
     CHORD(ch_true, &ch_true, 13 11 8) // t+r+u -> true
+    CHORD(ch_six, &ch_six, 12 18 25) // s+i+x -> six
+    CHORD(ch_war, &ch_war, 0 19 11) // w+a+r -> war
+    CHORD(ch_lay, &ch_lay, 1 19 2) // l+a+y -> lay
+    CHORD(ch_map, &ch_map, 15 19 3) // m+a+p -> map
+    CHORD(ch_fly, &ch_fly, 6 1 2) // f+l+y -> fly
+    CHORD(ch_cry, &ch_cry, 10 11 2) // c+r+y -> cry
+    CHORD(ch_box, &ch_box, 4 7 25) // b+o+x -> box
+    CHORD(ch_oh, &ch_oh, 7 26 32) // o+h+space -> oh
+    CHORD(ch_dry, &ch_dry, 23 11 2) // d+r+y -> dry
+    CHORD(ch_ago, &ch_ago, 19 14 7) // a+g+o -> ago
+    CHORD(ch_ran, &ch_ran, 11 19 16) // r+a+n -> ran
+    CHORD(ch_hot, &ch_hot, 26 7 13) // h+o+t -> hot
+    CHORD(ch_yet, &ch_yet, 2 17 13) // y+e+t -> yet
+    CHORD(ch_am, &ch_am, 19 15 32) // a+m+space -> am
+    CHORD(ch_arm, &ch_arm, 19 11 15) // a+r+m -> arm
+    CHORD(ch_ice, &ch_ice, 18 10 17) // i+c+e -> ice
+    CHORD(ch_art, &ch_art, 19 11 13) // a+r+t -> art
+    CHORD(ch_leg, &ch_leg, 1 17 14) // l+e+g -> leg
+    CHORD(ch_joy, &ch_joy, 21 7 2) // j+o+y -> joy
+    CHORD(ch_job, &ch_job, 21 7 4) // j+o+b -> job
+    CHORD(ch_gas, &ch_gas, 14 19 12) // g+a+s -> gas
+    CHORD(ch_buy, &ch_buy, 4 8 2) // b+u+y -> buy
+    CHORD(ch_law, &ch_law, 1 19 0) // l+a+w -> law
     CHORD(ch_lie, &ch_lie, 1 18 17) // l+i+e -> lie
+    CHORD(ch_son, &ch_son, 12 7 16) // s+o+n -> son
+    CHORD(ch_pay, &ch_pay, 3 19 2) // p+a+y -> pay
+    CHORD(ch_age, &ch_age, 19 14 17) // a+g+e -> age
+    CHORD(ch_lot, &ch_lot, 1 7 13) // l+o+t -> lot
+    CHORD(ch_key, &ch_key, 24 17 2) // k+e+y -> key
+    CHORD(ch_row, &ch_row, 11 7 0) // r+o+w -> row
+    CHORD(ch_die, &ch_die, 23 18 17) // d+i+e -> die
+    CHORD(ch_oil, &ch_oil, 7 18 1) // o+i+l -> oil
+    CHORD(ch_fit, &ch_fit, 6 18 13) // f+i+t -> fit
+    CHORD(ch_hit, &ch_hit, 26 18 13) // h+i+t -> hit
+    CHORD(ch_rub, &ch_rub, 11 8 4) // r+u+b -> rub
+    CHORD(ch_tie, &ch_tie, 13 18 17) // t+i+e -> tie
+    CHORD(ch_gun, &ch_gun, 14 8 16) // g+u+n -> gun
     CHORD(ch_thank, &ch_thank, 26 19 24) // h+a+k -> thank
+    CHORD(ch_led, &ch_led, 1 17 23) // l+e+d -> led
+    CHORD(ch_win, &ch_win, 0 18 16) // w+i+n -> win
+    CHORD(ch_nor, &ch_nor, 16 7 11) // n+o+r -> nor
+    CHORD(ch_fat, &ch_fat, 6 19 13) // f+a+t -> fat
+    CHORD(ch_bar, &ch_bar, 4 19 11) // b+a+r -> bar
+    CHORD(ch_log, &ch_log, 1 7 14) // l+o+g -> log
     CHORD(ch_hey, &ch_hey, 26 17 2) // h+e+y -> hey
     CHORD(ch_return, &ch_return, 11 17 13) // r+e+t -> return
     CHORD(ch_probabl, &ch_probabl, 3 4 1 2) // p+b+l+y -> probably
@@ -488,12 +557,81 @@ name: name##_macro {                  \
     CHMAC(ch_possibl, &kp P &kp O &kp S &kp S &kp I &kp B &kp L &kp E &kp SPC) // p+s+e -> possible
     CHMAC(ch_conside, &kp C &kp O &kp N &kp S &kp I &kp D &kp E &kp R &kp SPC) // c+n+d -> consider
     CHMAC(ch_increas, &kp I &kp N &kp C &kp R &kp E &kp A &kp S &kp E &kp SPC) // i+n+c -> increase
+    CHMAC(ch_his, &kp H &kp I &kp S &kp SPC) // h+i+s -> his
     CHMAC(ch_her, &kp H &kp E &kp R &kp SPC) // h+e+r -> her
+    CHMAC(ch_an, &kp A &kp N &kp SPC) // a+n+space -> an
+    CHMAC(ch_my, &kp M &kp Y &kp SPC) // m+y+space -> my
+    CHMAC(ch_their, &kp T &kp H &kp E &kp I &kp R &kp SPC) // h+i+r -> their
+    CHMAC(ch_me, &kp M &kp E &kp SPC) // m+e+space -> me
+    CHMAC(ch_him, &kp H &kp I &kp M &kp SPC) // b+i+m -> him
+    CHMAC(ch_your, &kp Y &kp O &kp U &kp R &kp SPC) // y+o+r -> your
+    CHMAC(ch_its, &kp I &kp T &kp S &kp SPC) // i+t+s -> its
+    CHMAC(ch_two, &kp T &kp W &kp O &kp SPC) // t+w+o -> two
+    CHMAC(ch_our, &kp O &kp U &kp R &kp SPC) // o+u+r -> our
+    CHMAC(ch_us, &kp U &kp S &kp SPC) // u+s+space -> us
+    CHMAC(ch_is, &kp I &kp S &kp SPC) // i+s+space -> is
+    CHMAC(ch_was, &kp W &kp A &kp S &kp SPC) // w+a+s -> was
+    CHMAC(ch_are, &kp A &kp R &kp E &kp SPC) // a+r+e -> are
     CHMAC(ch_had, &kp H &kp A &kp D &kp SPC) // h+a+d -> had
+    CHMAC(ch_has, &kp H &kp A &kp S &kp SPC) // h+a+s -> has
+    CHMAC(ch_low, &kp L &kp O &kp W &kp SPC) // l+o+w -> low
+    CHMAC(ch_boy, &kp B &kp O &kp Y &kp SPC) // b+o+y -> boy
+    CHMAC(ch_air, &kp A &kp I &kp R &kp SPC) // a+i+r -> air
+    CHMAC(ch_act, &kp A &kp C &kp T &kp SPC) // a+c+t -> act
+    CHMAC(ch_why, &kp W &kp H &kp Y &kp SPC) // w+h+y -> why
+    CHMAC(ch_try, &kp T &kp R &kp Y &kp SPC) // t+r+y -> try
+    CHMAC(ch_sun, &kp S &kp U &kp N &kp SPC) // s+u+n -> sun
+    CHMAC(ch_far, &kp F &kp A &kp R &kp SPC) // f+a+r -> far
     CHMAC(ch_sea, &kp S &kp E &kp A &kp SPC) // s+e+a -> sea
+    CHMAC(ch_car, &kp C &kp A &kp R &kp SPC) // c+a+r -> car
+    CHMAC(ch_eat, &kp E &kp A &kp T &kp SPC) // e+a+t -> eat
+    CHMAC(ch_cut, &kp C &kp U &kp T &kp SPC) // c+u+t -> cut
+    CHMAC(ch_red, &kp R &kp E &kp D &kp SPC) // r+e+d -> red
     CHMAC(ch_true, &kp T &kp R &kp U &kp E &kp SPC) // t+r+u -> true
+    CHMAC(ch_six, &kp S &kp I &kp X &kp SPC) // s+i+x -> six
+    CHMAC(ch_war, &kp W &kp A &kp R &kp SPC) // w+a+r -> war
+    CHMAC(ch_lay, &kp L &kp A &kp Y &kp SPC) // l+a+y -> lay
+    CHMAC(ch_map, &kp M &kp A &kp P &kp SPC) // m+a+p -> map
+    CHMAC(ch_fly, &kp F &kp L &kp Y &kp SPC) // f+l+y -> fly
+    CHMAC(ch_cry, &kp C &kp R &kp Y &kp SPC) // c+r+y -> cry
+    CHMAC(ch_box, &kp B &kp O &kp X &kp SPC) // b+o+x -> box
+    CHMAC(ch_oh, &kp O &kp H &kp SPC) // o+h+space -> oh
+    CHMAC(ch_dry, &kp D &kp R &kp Y &kp SPC) // d+r+y -> dry
+    CHMAC(ch_ago, &kp A &kp G &kp O &kp SPC) // a+g+o -> ago
+    CHMAC(ch_ran, &kp R &kp A &kp N &kp SPC) // r+a+n -> ran
+    CHMAC(ch_hot, &kp H &kp O &kp T &kp SPC) // h+o+t -> hot
+    CHMAC(ch_yet, &kp Y &kp E &kp T &kp SPC) // y+e+t -> yet
+    CHMAC(ch_am, &kp A &kp M &kp SPC) // a+m+space -> am
+    CHMAC(ch_arm, &kp A &kp R &kp M &kp SPC) // a+r+m -> arm
+    CHMAC(ch_ice, &kp I &kp C &kp E &kp SPC) // i+c+e -> ice
+    CHMAC(ch_art, &kp A &kp R &kp T &kp SPC) // a+r+t -> art
+    CHMAC(ch_leg, &kp L &kp E &kp G &kp SPC) // l+e+g -> leg
+    CHMAC(ch_joy, &kp J &kp O &kp Y &kp SPC) // j+o+y -> joy
+    CHMAC(ch_job, &kp J &kp O &kp B &kp SPC) // j+o+b -> job
+    CHMAC(ch_gas, &kp G &kp A &kp S &kp SPC) // g+a+s -> gas
+    CHMAC(ch_buy, &kp B &kp U &kp Y &kp SPC) // b+u+y -> buy
+    CHMAC(ch_law, &kp L &kp A &kp W &kp SPC) // l+a+w -> law
     CHMAC(ch_lie, &kp L &kp I &kp E &kp SPC) // l+i+e -> lie
+    CHMAC(ch_son, &kp S &kp O &kp N &kp SPC) // s+o+n -> son
+    CHMAC(ch_pay, &kp P &kp A &kp Y &kp SPC) // p+a+y -> pay
+    CHMAC(ch_age, &kp A &kp G &kp E &kp SPC) // a+g+e -> age
+    CHMAC(ch_lot, &kp L &kp O &kp T &kp SPC) // l+o+t -> lot
+    CHMAC(ch_key, &kp K &kp E &kp Y &kp SPC) // k+e+y -> key
+    CHMAC(ch_row, &kp R &kp O &kp W &kp SPC) // r+o+w -> row
+    CHMAC(ch_die, &kp D &kp I &kp E &kp SPC) // d+i+e -> die
+    CHMAC(ch_oil, &kp O &kp I &kp L &kp SPC) // o+i+l -> oil
+    CHMAC(ch_fit, &kp F &kp I &kp T &kp SPC) // f+i+t -> fit
+    CHMAC(ch_hit, &kp H &kp I &kp T &kp SPC) // h+i+t -> hit
+    CHMAC(ch_rub, &kp R &kp U &kp B &kp SPC) // r+u+b -> rub
+    CHMAC(ch_tie, &kp T &kp I &kp E &kp SPC) // t+i+e -> tie
+    CHMAC(ch_gun, &kp G &kp U &kp N &kp SPC) // g+u+n -> gun
     CHMAC(ch_thank, &kp T &kp H &kp A &kp N &kp K &kp SPC) // h+a+k -> thank
+    CHMAC(ch_led, &kp L &kp E &kp D &kp SPC) // l+e+d -> led
+    CHMAC(ch_win, &kp W &kp I &kp N &kp SPC) // w+i+n -> win
+    CHMAC(ch_nor, &kp N &kp O &kp R &kp SPC) // n+o+r -> nor
+    CHMAC(ch_fat, &kp F &kp A &kp T &kp SPC) // f+a+t -> fat
+    CHMAC(ch_bar, &kp B &kp A &kp R &kp SPC) // b+a+r -> bar
+    CHMAC(ch_log, &kp L &kp O &kp G &kp SPC) // l+o+g -> log
     CHMAC(ch_hey, &kp H &kp E &kp Y &kp SPC) // h+e+y -> hey
     CHMAC(ch_return, &kp R &kp E &kp T &kp U &kp R &kp N &kp SPC) // r+e+t -> return
     CHMAC(ch_probabl, &kp P &kp R &kp O &kp B &kp A &kp B &kp L &kp Y &kp SPC) // p+b+l+y -> probably
