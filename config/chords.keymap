@@ -265,232 +265,241 @@ name: name##_macro {                  \
   #binding-cells = <0>;               \
   tap-ms = <1>;                       \
   wait-ms = <1>;                      \
-  bindings = <keys>, <&to SENTENCE>;  \
+  bindings = <keys>;                  \
 };
 
+#define CHMAC(name, keys)             \
+name: name##_macro {                  \
+  label = #name;                      \
+  compatible = "zmk,behavior-macro";  \
+  #binding-cells = <0>;               \
+  tap-ms = <1>;                       \
+  wait-ms = <1>;                      \
+  bindings = <keys>, <&to SENTENCE>;  \
+};
 / {
   macros {
-    MACRO(ch_excl, &kp BSPC &kp EXCL &kp SPC &sk LSHFT) // e+. -> <BS>! <SKLS>
-    MACRO(ch_qmark, &kp BSPC &kp QMARK &kp SPC &sk LSHFT) // i+, -> <BS>? <SKLS>
-    MACRO(ch_colon, &kp BSPC &kp COLON &kp SPC) // a+ret -> <BS>:
-    MACRO(ch_semi, &kp BSPC &kp SEMI &kp SPC) // a+' -> <BS>;
-    MACRO(ch_bs_ing, &kp BSPC &kp I &kp N &kp G &kp SPC) // i+n+g -> <BS>ing
-    MACRO(ch_bs_n_t, &kp BSPC &kp N &kp APOS &kp T &kp SPC) // n+'+t -> <BS>n't
-    MACRO(ch_bs_ve, &kp BSPC &kp APOS &kp V &kp E &kp SPC) // '+v+e -> <BS>'ve
-    MACRO(ch_bs_re, &kp BSPC &kp APOS &kp R &kp E &kp SPC) // '+r+e -> <BS>'re
-    MACRO(ch_a, &kp A &kp SPC) // a+space -> a
-    MACRO(ch_a1, &kp LS(A) &kp SPC) // a+bksp -> A
-    MACRO(ch_i, &kp LS(I) &kp SPC) // i+space -> I
-    MACRO(ch_be, &kp B &kp E &kp SPC) // b+e+space -> be
-    MACRO(ch_of, &kp O &kp F &kp SPC) // o+f+space -> of
-    MACRO(ch_to, &kp T &kp O &kp SPC) // t+o+space -> to
-    MACRO(ch_in, &kp I &kp N &kp SPC) // i+n+space -> in
-    MACRO(ch_he, &kp H &kp E &kp SPC) // h+e+space -> he
-    MACRO(ch_it, &kp I &kp T &kp SPC) // i+t+space -> it
-    MACRO(ch_as, &kp A &kp S &kp SPC) // a+s+space -> as
-    MACRO(ch_on, &kp O &kp N &kp SPC) // o+n+space -> on
-    MACRO(ch_at, &kp A &kp T &kp SPC) // a+t+space -> at
-    MACRO(ch_by, &kp B &kp Y &kp SPC) // b+y+space -> by
-    MACRO(ch_we, &kp W &kp E &kp SPC) // w+e+space -> we
-    MACRO(ch_do, &kp D &kp O &kp SPC) // d+o+space -> do
-    MACRO(ch_or, &kp O &kp R &kp SPC) // o+r+space -> or
-    MACRO(ch_if, &kp I &kp F &kp SPC) // i+f+space -> if
-    MACRO(ch_no, &kp N &kp O &kp SPC) // n+e+space -> no
-    MACRO(ch_so, &kp S &kp O &kp SPC) // s+o+space -> so
-    MACRO(ch_up, &kp U &kp P &kp SPC) // u+p+space -> up
-    MACRO(ch_go, &kp G &kp O &kp SPC) // g+o+space -> go
-    MACRO(ch_the, &kp T &kp H &kp E &kp SPC) // t+h+e -> the
-    MACRO(ch_and, &kp A &kp N &kp D &kp SPC) // a+n+d -> and
-    MACRO(ch_for, &kp F &kp O &kp R &kp SPC) // f+o+r -> for
-    MACRO(ch_not, &kp N &kp O &kp T &kp SPC) // n+o+t -> not
-    MACRO(ch_she, &kp S &kp H &kp E &kp SPC) // s+h+e -> she
-    MACRO(ch_you, &kp Y &kp O &kp U &kp SPC) // y+o+u -> you
-    MACRO(ch_but, &kp B &kp U &kp T &kp SPC) // z+u+t -> but
-    MACRO(ch_one, &kp O &kp N &kp E &kp SPC) // o+n+e -> one
-    MACRO(ch_all, &kp A &kp L &kp L &kp SPC) // a+l+x -> all
-    MACRO(ch_say, &kp S &kp A &kp Y &kp SPC) // s+a+y -> say
-    MACRO(ch_who, &kp W &kp H &kp O &kp SPC) // w+h+o -> who
-    MACRO(ch_can, &kp C &kp A &kp N &kp SPC) // c+a+n -> can
-    MACRO(ch_man, &kp M &kp A &kp N &kp SPC) // k+a+n -> man
-    MACRO(ch_out, &kp O &kp U &kp T &kp SPC) // o+u+t -> out
-    MACRO(ch_new, &kp N &kp E &kp W &kp SPC) // n+e+w -> new
-    MACRO(ch_see, &kp S &kp E &kp E &kp SPC) // s+e+k -> see
-    MACRO(ch_use, &kp U &kp S &kp E &kp SPC) // u+s+e -> use
-    MACRO(ch_get, &kp G &kp E &kp T &kp SPC) // g+e+t -> get
-    MACRO(ch_any, &kp A &kp N &kp Y &kp SPC) // a+n+y -> any
-    MACRO(ch_now, &kp N &kp O &kp W &kp SPC) // n+o+w -> now
-    MACRO(ch_may, &kp M &kp A &kp Y &kp SPC) // m+a+y -> may
-    MACRO(ch_day, &kp D &kp A &kp Y &kp SPC) // d+a+y -> day
-    MACRO(ch_way, &kp W &kp A &kp Y &kp SPC) // w+a+y -> way
-    MACRO(ch_own, &kp O &kp W &kp N &kp SPC) // o+w+f -> own
-    MACRO(ch_how, &kp H &kp O &kp W &kp SPC) // h+o+u -> how
-    MACRO(ch_too, &kp T &kp O &kp O &kp SPC) // t+o+f -> too
-    MACRO(ch_old, &kp O &kp L &kp D &kp SPC) // o+l+d -> old
-    MACRO(ch_off, &kp O &kp F &kp F &kp SPC) // o+f+k -> off
-    MACRO(ch_few, &kp F &kp E &kp W &kp SPC) // f+e+w -> few
-    MACRO(ch_ask, &kp A &kp S &kp K &kp SPC) // a+s+k -> ask
-    MACRO(ch_end, &kp E &kp N &kp D &kp SPC) // e+n+d -> end
-    MACRO(ch_set, &kp S &kp E &kp T &kp SPC) // s+e+t -> set
-    MACRO(ch_eye, &kp E &kp Y &kp E &kp SPC) // e+y+x -> eye
-    MACRO(ch_run, &kp R &kp U &kp N &kp SPC) // r+u+n -> run
-    MACRO(ch_have, &kp H &kp A &kp V &kp E &kp SPC) // h+a+v -> have
-    MACRO(ch_that, &kp T &kp H &kp A &kp T &kp SPC) // t+h+a -> that
-    MACRO(ch_they, &kp T &kp H &kp E &kp Y &kp SPC) // t+h+y -> they
-    MACRO(ch_with, &kp W &kp I &kp T &kp H &kp SPC) // w+i+h -> with
-    MACRO(ch_this, &kp T &kp H &kp I &kp S &kp SPC) // t+h+s -> this
-    MACRO(ch_from, &kp F &kp R &kp O &kp M &kp SPC) // r+o+m -> from
-    MACRO(ch_will, &kp W &kp I &kp L &kp L &kp SPC) // w+i+l -> will
-    MACRO(ch_make, &kp M &kp A &kp K &kp E &kp SPC) // m+a+k -> make
-    MACRO(ch_when, &kp W &kp H &kp E &kp N &kp SPC) // w+h+e -> when
-    MACRO(ch_more, &kp M &kp O &kp R &kp E &kp SPC) // m+r+e -> more
-    MACRO(ch_what, &kp W &kp H &kp A &kp T &kp SPC) // w+h+t -> what
-    MACRO(ch_time, &kp T &kp I &kp M &kp E &kp SPC) // t+m+e -> time
-    MACRO(ch_than, &kp T &kp H &kp A &kp N &kp SPC) // t+a+n -> than
-    MACRO(ch_into, &kp I &kp N &kp T &kp O &kp SPC) // i+n+o -> into
-    MACRO(ch_only, &kp O &kp N &kp L &kp Y &kp SPC) // o+l+y -> only
-    MACRO(ch_year, &kp Y &kp E &kp A &kp R &kp SPC) // y+e+a -> year
-    MACRO(ch_some, &kp S &kp O &kp M &kp E &kp SPC) // s+o+m -> some
-    MACRO(ch_take, &kp T &kp A &kp K &kp E &kp SPC) // a+k+e -> take
-    MACRO(ch_come, &kp C &kp O &kp M &kp E &kp SPC) // c+o+m -> come
-    MACRO(ch_know, &kp K &kp N &kp O &kp W &kp SPC) // k+n+o -> know
-    MACRO(ch_like, &kp L &kp I &kp K &kp E &kp SPC) // l+i+k -> like
-    MACRO(ch_then, &kp T &kp H &kp E &kp N &kp SPC) // t+e+n -> then
-    MACRO(ch_work, &kp W &kp O &kp R &kp K &kp SPC) // o+r+k -> work
-    MACRO(ch_such, &kp S &kp U &kp C &kp H &kp SPC) // s+c+h -> such
-    MACRO(ch_give, &kp G &kp I &kp V &kp E &kp SPC) // g+i+v -> give
-    MACRO(ch_over, &kp O &kp V &kp E &kp R &kp SPC) // o+v+r -> over
-    MACRO(ch_most, &kp M &kp O &kp S &kp T &kp SPC) // m+o+t -> most
-    MACRO(ch_even, &kp E &kp V &kp E &kp N &kp SPC) // e+v+n -> even
-    MACRO(ch_find, &kp F &kp I &kp N &kp D &kp SPC) // f+i+d -> find
-    MACRO(ch_also, &kp A &kp L &kp S &kp O &kp SPC) // a+l+o -> also
-    MACRO(ch_many, &kp M &kp A &kp N &kp Y &kp SPC) // m+n+y -> many
-    MACRO(ch_must, &kp M &kp U &kp S &kp T &kp SPC) // m+u+t -> must
-    MACRO(ch_look, &kp L &kp O &kp O &kp K &kp SPC) // l+o+k -> look
-    MACRO(ch_back, &kp B &kp A &kp C &kp K &kp SPC) // b+a+c -> back
-    MACRO(ch_long, &kp L &kp O &kp N &kp G &kp SPC) // l+o+n -> long
-    MACRO(ch_much, &kp M &kp U &kp C &kp H &kp SPC) // m+u+c -> much
-    MACRO(ch_well, &kp W &kp E &kp L &kp L &kp SPC) // w+e+l -> well
-    MACRO(ch_down, &kp D &kp O &kp W &kp N &kp SPC) // d+w+n -> down
-    MACRO(ch_just, &kp J &kp U &kp S &kp T &kp SPC) // u+s+t -> just
-    MACRO(ch_good, &kp G &kp O &kp O &kp D &kp SPC) // v+o+d -> good
-    MACRO(ch_each, &kp E &kp A &kp C &kp H &kp SPC) // a+c+h -> each
-    MACRO(ch_feel, &kp F &kp E &kp E &kp L &kp SPC) // f+e+l -> feel
-    MACRO(ch_seem, &kp S &kp E &kp E &kp M &kp SPC) // s+e+m -> seem
-    MACRO(ch_high, &kp H &kp I &kp G &kp H &kp SPC) // h+i+g -> high
-    MACRO(ch_very, &kp V &kp E &kp R &kp Y &kp SPC) // v+e+r -> very
-    MACRO(ch_hand, &kp H &kp A &kp N &kp D &kp SPC) // h+n+d -> hand
-    MACRO(ch_life, &kp L &kp I &kp F &kp E &kp SPC) // l+i+f -> life
-    MACRO(ch_tell, &kp T &kp E &kp L &kp L &kp SPC) // t+e+l -> tell
-    MACRO(ch_here, &kp H &kp E &kp R &kp E &kp SPC) // j+h+e -> here
-    MACRO(ch_show, &kp S &kp H &kp O &kp W &kp SPC) // s+h+w -> show
-    MACRO(ch_both, &kp B &kp O &kp T &kp H &kp SPC) // b+o+h -> both
-    MACRO(ch_need, &kp N &kp E &kp E &kp D &kp SPC) // t+n+d -> need
-    MACRO(ch_mean, &kp M &kp E &kp A &kp N &kp SPC) // m+e+a -> mean
-    MACRO(ch_call, &kp C &kp A &kp L &kp L &kp SPC) // c+a+l -> call
-    MACRO(ch_last, &kp L &kp A &kp S &kp T &kp SPC) // l+a+s -> last
-    MACRO(ch_move, &kp M &kp O &kp V &kp E &kp SPC) // m+v+e -> move
-    MACRO(ch_same, &kp S &kp A &kp M &kp E &kp SPC) // s+a+m -> same
-    MACRO(ch_part, &kp P &kp A &kp R &kp T &kp SPC) // p+a+r -> part
-    MACRO(ch_turn, &kp T &kp U &kp R &kp N &kp SPC) // t+u+n -> turn
-    MACRO(ch_real, &kp R &kp E &kp A &kp L &kp SPC) // e+a+l -> real
-    MACRO(ch_want, &kp W &kp A &kp N &kp T &kp SPC) // w+a+t -> want
-    MACRO(ch_form, &kp F &kp O &kp R &kp M &kp SPC) // z+o+r -> form
-    MACRO(ch_late, &kp L &kp A &kp T &kp E &kp SPC) // l+a+t -> late
-    MACRO(ch_home, &kp H &kp O &kp M &kp E &kp SPC) // g+m+e -> home
-    MACRO(ch_open, &kp O &kp P &kp E &kp N &kp SPC) // o+p+n -> open
-    MACRO(ch_hold, &kp H &kp O &kp L &kp D &kp SPC) // h+o+d -> hold
-    MACRO(ch_head, &kp H &kp E &kp A &kp D &kp SPC) // h+e+d -> head
-    MACRO(ch_word, &kp W &kp O &kp R &kp D &kp SPC) // w+r+d -> word
-    MACRO(ch_lead, &kp L &kp E &kp A &kp D &kp SPC) // e+a+d -> lead
-    MACRO(ch_plan, &kp P &kp L &kp A &kp N &kp SPC) // p+l+n -> plan
-    MACRO(ch_keep, &kp K &kp E &kp E &kp P &kp SPC) // k+e+x -> keep
-    MACRO(ch_face, &kp F &kp A &kp C &kp E &kp SPC) // f+a+c -> face
-    MACRO(ch_fact, &kp F &kp A &kp C &kp T &kp SPC) // f+c+t -> fact
-    MACRO(ch_play, &kp P &kp L &kp A &kp Y &kp SPC) // p+l+y -> play
-    MACRO(ch_help, &kp H &kp E &kp L &kp P &kp SPC) // h+l+p -> help
-    MACRO(ch_line, &kp L &kp I &kp N &kp E &kp SPC) // l+n+e -> line
-    MACRO(ch_which, &kp W &kp H &kp I &kp C &kp H &kp SPC) // h+i+c -> which
-    MACRO(ch_would, &kp W &kp O &kp U &kp L &kp D &kp SPC) // w+o+u -> would
-    MACRO(ch_there, &kp T &kp H &kp E &kp R &kp E &kp SPC) // t+h+r -> there
-    MACRO(ch_other, &kp O &kp T &kp H &kp E &kp R &kp SPC) // o+t+r -> other
-    MACRO(ch_about, &kp A &kp B &kp O &kp U &kp T &kp SPC) // b+o+u -> about
-    MACRO(ch_could, &kp C &kp O &kp U &kp L &kp D &kp SPC) // c+o+u -> could
-    MACRO(ch_state, &kp S &kp T &kp A &kp T &kp E &kp SPC) // s+t+a -> state
-    MACRO(ch_these, &kp T &kp H &kp E &kp S &kp E &kp SPC) // n+h+s -> these
-    MACRO(ch_first, &kp F &kp I &kp R &kp S &kp T &kp SPC) // f+r+s -> first
-    MACRO(ch_think, &kp T &kp H &kp I &kp N &kp K &kp SPC) // h+i+k -> think
-    MACRO(ch_after, &kp A &kp F &kp T &kp E &kp R &kp SPC) // f+t+r -> after
-    MACRO(ch_great, &kp G &kp R &kp E &kp A &kp T &kp SPC) // g+r+e -> great
-    MACRO(ch_where, &kp W &kp H &kp E &kp R &kp E &kp SPC) // w+h+r -> where
-    MACRO(ch_those, &kp T &kp H &kp O &kp S &kp E &kp SPC) // t+o+s -> those
-    MACRO(ch_place, &kp P &kp L &kp A &kp C &kp E &kp SPC) // p+c+e -> place
-    MACRO(ch_world, &kp W &kp O &kp R &kp L &kp D &kp SPC) // w+l+d -> world
-    MACRO(ch_still, &kp S &kp T &kp I &kp L &kp L &kp SPC) // s+t+l -> still
-    MACRO(ch_write, &kp W &kp R &kp I &kp T &kp E &kp SPC) // r+i+e -> write
-    MACRO(ch_house, &kp H &kp O &kp U &kp S &kp E &kp SPC) // h+o+s -> house
-    MACRO(ch_under, &kp U &kp N &kp D &kp E &kp R &kp SPC) // u+n+d -> under
-    MACRO(ch_right, &kp R &kp I &kp G &kp H &kp T &kp SPC) // r+i+t -> right
-    MACRO(ch_thing, &kp T &kp H &kp I &kp N &kp G &kp SPC) // t+i+n -> thing
-    MACRO(ch_never, &kp N &kp E &kp V &kp E &kp R &kp SPC) // n+v+r -> never
-    MACRO(ch_begin, &kp B &kp E &kp G &kp I &kp N &kp SPC) // e+g+i -> begin
-    MACRO(ch_while, &kp W &kp H &kp I &kp L &kp E &kp SPC) // h+i+e -> while
-    MACRO(ch_leave, &kp L &kp E &kp A &kp V &kp E &kp SPC) // e+a+v -> leave
-    MACRO(ch_might, &kp M &kp I &kp G &kp H &kp T &kp SPC) // m+i+t -> might
-    MACRO(ch_point, &kp P &kp O &kp I &kp N &kp T &kp SPC) // p+o+i -> point
-    MACRO(ch_child, &kp C &kp H &kp I &kp L &kp D &kp SPC) // c+i+d -> child
-    MACRO(ch_small, &kp S &kp M &kp A &kp L &kp L &kp SPC) // m+a+l -> small
-    MACRO(ch_since, &kp S &kp I &kp N &kp C &kp E &kp SPC) // s+i+e -> since
-    MACRO(ch_large, &kp L &kp A &kp R &kp G &kp E &kp SPC) // a+r+g -> large
-    MACRO(ch_again, &kp A &kp G &kp A &kp I &kp N &kp SPC) // a+g+i -> again
-    MACRO(ch_order, &kp O &kp R &kp D &kp E &kp R &kp SPC) // o+r+d -> order
-    MACRO(ch_group, &kp G &kp R &kp O &kp U &kp P &kp SPC) // g+o+u -> group
-    MACRO(ch_stand, &kp S &kp T &kp A &kp N &kp D &kp SPC) // s+n+d -> stand
-    MACRO(ch_early, &kp E &kp A &kp R &kp L &kp Y &kp SPC) // e+l+y -> early
-    MACRO(ch_before, &kp B &kp E &kp F &kp O &kp R &kp E &kp SPC) // b+f+o -> before
-    MACRO(ch_should, &kp S &kp H &kp O &kp U &kp L &kp D &kp SPC) // s+o+u -> should
-    MACRO(ch_people, &kp P &kp E &kp O &kp P &kp L &kp E &kp SPC) // p+e+l -> people
-    MACRO(ch_little, &kp L &kp I &kp T &kp T &kp L &kp E &kp SPC) // l+i+t -> little
-    MACRO(ch_nation, &kp N &kp A &kp T &kp I &kp O &kp N &kp SPC) // n+a+i -> nation
-    MACRO(ch_become, &kp B &kp E &kp C &kp O &kp M &kp E &kp SPC) // c+m+e -> become
-    MACRO(ch_school, &kp S &kp C &kp H &kp O &kp O &kp L &kp SPC) // s+h+l -> school
-    MACRO(ch_number, &kp N &kp U &kp M &kp B &kp E &kp R &kp SPC) // n+e+r -> number
-    MACRO(ch_person, &kp P &kp E &kp R &kp S &kp O &kp N &kp SPC) // p+s+n -> person
-    MACRO(ch_public, &kp P &kp U &kp B &kp L &kp I &kp C &kp SPC) // p+l+i -> public
-    MACRO(ch_follow, &kp F &kp O &kp L &kp L &kp O &kp W &kp SPC) // f+o+l -> follow
-    MACRO(ch_during, &kp D &kp U &kp R &kp I &kp N &kp G &kp SPC) // d+r+n -> during
-    MACRO(ch_govern, &kp G &kp O &kp V &kp E &kp R &kp N &kp SPC) // g+r+n -> govern
-    MACRO(ch_around, &kp A &kp R &kp O &kp U &kp N &kp D &kp SPC) // a+r+d -> around
-    MACRO(ch_system, &kp S &kp Y &kp S &kp T &kp E &kp M &kp SPC) // s+t+m -> system
-    MACRO(ch_course, &kp C &kp O &kp U &kp R &kp S &kp E &kp SPC) // o+r+s -> course
-    MACRO(ch_change, &kp C &kp H &kp A &kp N &kp G &kp E &kp SPC) // c+h+e -> change
-    MACRO(ch_through, &kp T &kp H &kp R &kp O &kp U &kp G &kp H &kp SPC) // h+r+g -> through
-    MACRO(ch_because, &kp B &kp E &kp C &kp A &kp U &kp S &kp E &kp SPC) // b+e+a -> because
-    MACRO(ch_between, &kp B &kp E &kp T &kp W &kp E &kp E &kp N &kp SPC) // b+e+n -> between
-    MACRO(ch_develop, &kp D &kp E &kp V &kp E &kp L &kp O &kp P &kp SPC) // d+e+v -> develop
-    MACRO(ch_general, &kp G &kp E &kp N &kp E &kp R &kp A &kp L &kp SPC) // g+e+n -> general
-    MACRO(ch_another, &kp A &kp N &kp O &kp T &kp H &kp E &kp R &kp SPC) // a+h+r -> another
-    MACRO(ch_against, &kp A &kp G &kp A &kp I &kp N &kp S &kp T &kp SPC) // a+g+n -> against
-    MACRO(ch_present, &kp P &kp R &kp E &kp S &kp E &kp N &kp T &kp SPC) // r+n+t -> present
-    MACRO(ch_without, &kp W &kp I &kp T &kp H &kp O &kp U &kp T &kp SPC) // i+t+o -> without
-    MACRO(ch_program, &kp P &kp R &kp O &kp G &kp R &kp A &kp M &kp SPC) // r+g+m -> program
-    MACRO(ch_problem, &kp P &kp R &kp O &kp B &kp L &kp E &kp M &kp SPC) // l+e+m -> problem
-    MACRO(ch_however, &kp H &kp O &kp W &kp E &kp V &kp E &kp R &kp SPC) // h+e+v -> however
-    MACRO(ch_interes, &kp I &kp N &kp T &kp E &kp R &kp E &kp S &kp T &kp SPC) // i+n+r -> interest
-    MACRO(ch_possibl, &kp P &kp O &kp S &kp S &kp I &kp B &kp L &kp E &kp SPC) // p+s+e -> possible
-    MACRO(ch_conside, &kp C &kp O &kp N &kp S &kp I &kp D &kp E &kp R &kp SPC) // c+n+d -> consider
-    MACRO(ch_increas, &kp I &kp N &kp C &kp R &kp E &kp A &kp S &kp E &kp SPC) // i+n+c -> increase
-    MACRO(ch_her, &kp H &kp E &kp R &kp SPC) // h+e+r -> her
-    MACRO(ch_had, &kp H &kp A &kp D &kp SPC) // h+a+d -> had
-    MACRO(ch_sea, &kp S &kp E &kp A &kp SPC) // s+e+a -> sea
-    MACRO(ch_true, &kp T &kp R &kp U &kp E &kp SPC) // t+r+u -> true
-    MACRO(ch_lie, &kp L &kp I &kp E &kp SPC) // l+i+e -> lie
-    MACRO(ch_thank, &kp T &kp H &kp A &kp N &kp K &kp SPC) // h+a+k -> thank
-    MACRO(ch_hey, &kp H &kp E &kp Y &kp SPC) // h+e+y -> hey
-    MACRO(ch_return, &kp R &kp E &kp T &kp U &kp R &kp N &kp SPC) // r+e+t -> return
-    MACRO(ch_probabl, &kp P &kp R &kp O &kp B &kp A &kp B &kp L &kp Y &kp SPC) // p+b+l+y -> probably
-    MACRO(ch_thank_y, &kp T &kp H &kp A &kp N &kp K &kp SPC &kp Y &kp O &kp U &kp SPC) // t+a+y -> thank you
-    MACRO(ch_thanks, &kp T &kp H &kp A &kp N &kp K &kp S &kp SPC) // t+n+s -> thanks
-    MACRO(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
+    CHMAC(ch_excl, &kp BSPC &kp EXCL &kp SPC &sk LSHFT) // e+. -> <BS>! <SKLS>
+    CHMAC(ch_qmark, &kp BSPC &kp QMARK &kp SPC &sk LSHFT) // i+, -> <BS>? <SKLS>
+    CHMAC(ch_colon, &kp BSPC &kp COLON &kp SPC) // a+ret -> <BS>:
+    CHMAC(ch_semi, &kp BSPC &kp SEMI &kp SPC) // a+' -> <BS>;
+    CHMAC(ch_bs_ing, &kp BSPC &kp I &kp N &kp G &kp SPC) // i+n+g -> <BS>ing
+    CHMAC(ch_bs_n_t, &kp BSPC &kp N &kp APOS &kp T &kp SPC) // n+'+t -> <BS>n't
+    CHMAC(ch_bs_ve, &kp BSPC &kp APOS &kp V &kp E &kp SPC) // '+v+e -> <BS>'ve
+    CHMAC(ch_bs_re, &kp BSPC &kp APOS &kp R &kp E &kp SPC) // '+r+e -> <BS>'re
+    CHMAC(ch_a, &kp A &kp SPC) // a+space -> a
+    CHMAC(ch_a1, &kp LS(A) &kp SPC) // a+bksp -> A
+    CHMAC(ch_i, &kp LS(I) &kp SPC) // i+space -> I
+    CHMAC(ch_be, &kp B &kp E &kp SPC) // b+e+space -> be
+    CHMAC(ch_of, &kp O &kp F &kp SPC) // o+f+space -> of
+    CHMAC(ch_to, &kp T &kp O &kp SPC) // t+o+space -> to
+    CHMAC(ch_in, &kp I &kp N &kp SPC) // i+n+space -> in
+    CHMAC(ch_he, &kp H &kp E &kp SPC) // h+e+space -> he
+    CHMAC(ch_it, &kp I &kp T &kp SPC) // i+t+space -> it
+    CHMAC(ch_as, &kp A &kp S &kp SPC) // a+s+space -> as
+    CHMAC(ch_on, &kp O &kp N &kp SPC) // o+n+space -> on
+    CHMAC(ch_at, &kp A &kp T &kp SPC) // a+t+space -> at
+    CHMAC(ch_by, &kp B &kp Y &kp SPC) // b+y+space -> by
+    CHMAC(ch_we, &kp W &kp E &kp SPC) // w+e+space -> we
+    CHMAC(ch_do, &kp D &kp O &kp SPC) // d+o+space -> do
+    CHMAC(ch_or, &kp O &kp R &kp SPC) // o+r+space -> or
+    CHMAC(ch_if, &kp I &kp F &kp SPC) // i+f+space -> if
+    CHMAC(ch_no, &kp N &kp O &kp SPC) // n+e+space -> no
+    CHMAC(ch_so, &kp S &kp O &kp SPC) // s+o+space -> so
+    CHMAC(ch_up, &kp U &kp P &kp SPC) // u+p+space -> up
+    CHMAC(ch_go, &kp G &kp O &kp SPC) // g+o+space -> go
+    CHMAC(ch_the, &kp T &kp H &kp E &kp SPC) // t+h+e -> the
+    CHMAC(ch_and, &kp A &kp N &kp D &kp SPC) // a+n+d -> and
+    CHMAC(ch_for, &kp F &kp O &kp R &kp SPC) // f+o+r -> for
+    CHMAC(ch_not, &kp N &kp O &kp T &kp SPC) // n+o+t -> not
+    CHMAC(ch_she, &kp S &kp H &kp E &kp SPC) // s+h+e -> she
+    CHMAC(ch_you, &kp Y &kp O &kp U &kp SPC) // y+o+u -> you
+    CHMAC(ch_but, &kp B &kp U &kp T &kp SPC) // z+u+t -> but
+    CHMAC(ch_one, &kp O &kp N &kp E &kp SPC) // o+n+e -> one
+    CHMAC(ch_all, &kp A &kp L &kp L &kp SPC) // a+l+x -> all
+    CHMAC(ch_say, &kp S &kp A &kp Y &kp SPC) // s+a+y -> say
+    CHMAC(ch_who, &kp W &kp H &kp O &kp SPC) // w+h+o -> who
+    CHMAC(ch_can, &kp C &kp A &kp N &kp SPC) // c+a+n -> can
+    CHMAC(ch_man, &kp M &kp A &kp N &kp SPC) // k+a+n -> man
+    CHMAC(ch_out, &kp O &kp U &kp T &kp SPC) // o+u+t -> out
+    CHMAC(ch_new, &kp N &kp E &kp W &kp SPC) // n+e+w -> new
+    CHMAC(ch_see, &kp S &kp E &kp E &kp SPC) // s+e+k -> see
+    CHMAC(ch_use, &kp U &kp S &kp E &kp SPC) // u+s+e -> use
+    CHMAC(ch_get, &kp G &kp E &kp T &kp SPC) // g+e+t -> get
+    CHMAC(ch_any, &kp A &kp N &kp Y &kp SPC) // a+n+y -> any
+    CHMAC(ch_now, &kp N &kp O &kp W &kp SPC) // n+o+w -> now
+    CHMAC(ch_may, &kp M &kp A &kp Y &kp SPC) // m+a+y -> may
+    CHMAC(ch_day, &kp D &kp A &kp Y &kp SPC) // d+a+y -> day
+    CHMAC(ch_way, &kp W &kp A &kp Y &kp SPC) // w+a+y -> way
+    CHMAC(ch_own, &kp O &kp W &kp N &kp SPC) // o+w+f -> own
+    CHMAC(ch_how, &kp H &kp O &kp W &kp SPC) // h+o+u -> how
+    CHMAC(ch_too, &kp T &kp O &kp O &kp SPC) // t+o+f -> too
+    CHMAC(ch_old, &kp O &kp L &kp D &kp SPC) // o+l+d -> old
+    CHMAC(ch_off, &kp O &kp F &kp F &kp SPC) // o+f+k -> off
+    CHMAC(ch_few, &kp F &kp E &kp W &kp SPC) // f+e+w -> few
+    CHMAC(ch_ask, &kp A &kp S &kp K &kp SPC) // a+s+k -> ask
+    CHMAC(ch_end, &kp E &kp N &kp D &kp SPC) // e+n+d -> end
+    CHMAC(ch_set, &kp S &kp E &kp T &kp SPC) // s+e+t -> set
+    CHMAC(ch_eye, &kp E &kp Y &kp E &kp SPC) // e+y+x -> eye
+    CHMAC(ch_run, &kp R &kp U &kp N &kp SPC) // r+u+n -> run
+    CHMAC(ch_have, &kp H &kp A &kp V &kp E &kp SPC) // h+a+v -> have
+    CHMAC(ch_that, &kp T &kp H &kp A &kp T &kp SPC) // t+h+a -> that
+    CHMAC(ch_they, &kp T &kp H &kp E &kp Y &kp SPC) // t+h+y -> they
+    CHMAC(ch_with, &kp W &kp I &kp T &kp H &kp SPC) // w+i+h -> with
+    CHMAC(ch_this, &kp T &kp H &kp I &kp S &kp SPC) // t+h+s -> this
+    CHMAC(ch_from, &kp F &kp R &kp O &kp M &kp SPC) // r+o+m -> from
+    CHMAC(ch_will, &kp W &kp I &kp L &kp L &kp SPC) // w+i+l -> will
+    CHMAC(ch_make, &kp M &kp A &kp K &kp E &kp SPC) // m+a+k -> make
+    CHMAC(ch_when, &kp W &kp H &kp E &kp N &kp SPC) // w+h+e -> when
+    CHMAC(ch_more, &kp M &kp O &kp R &kp E &kp SPC) // m+r+e -> more
+    CHMAC(ch_what, &kp W &kp H &kp A &kp T &kp SPC) // w+h+t -> what
+    CHMAC(ch_time, &kp T &kp I &kp M &kp E &kp SPC) // t+m+e -> time
+    CHMAC(ch_than, &kp T &kp H &kp A &kp N &kp SPC) // t+a+n -> than
+    CHMAC(ch_into, &kp I &kp N &kp T &kp O &kp SPC) // i+n+o -> into
+    CHMAC(ch_only, &kp O &kp N &kp L &kp Y &kp SPC) // o+l+y -> only
+    CHMAC(ch_year, &kp Y &kp E &kp A &kp R &kp SPC) // y+e+a -> year
+    CHMAC(ch_some, &kp S &kp O &kp M &kp E &kp SPC) // s+o+m -> some
+    CHMAC(ch_take, &kp T &kp A &kp K &kp E &kp SPC) // a+k+e -> take
+    CHMAC(ch_come, &kp C &kp O &kp M &kp E &kp SPC) // c+o+m -> come
+    CHMAC(ch_know, &kp K &kp N &kp O &kp W &kp SPC) // k+n+o -> know
+    CHMAC(ch_like, &kp L &kp I &kp K &kp E &kp SPC) // l+i+k -> like
+    CHMAC(ch_then, &kp T &kp H &kp E &kp N &kp SPC) // t+e+n -> then
+    CHMAC(ch_work, &kp W &kp O &kp R &kp K &kp SPC) // o+r+k -> work
+    CHMAC(ch_such, &kp S &kp U &kp C &kp H &kp SPC) // s+c+h -> such
+    CHMAC(ch_give, &kp G &kp I &kp V &kp E &kp SPC) // g+i+v -> give
+    CHMAC(ch_over, &kp O &kp V &kp E &kp R &kp SPC) // o+v+r -> over
+    CHMAC(ch_most, &kp M &kp O &kp S &kp T &kp SPC) // m+o+t -> most
+    CHMAC(ch_even, &kp E &kp V &kp E &kp N &kp SPC) // e+v+n -> even
+    CHMAC(ch_find, &kp F &kp I &kp N &kp D &kp SPC) // f+i+d -> find
+    CHMAC(ch_also, &kp A &kp L &kp S &kp O &kp SPC) // a+l+o -> also
+    CHMAC(ch_many, &kp M &kp A &kp N &kp Y &kp SPC) // m+n+y -> many
+    CHMAC(ch_must, &kp M &kp U &kp S &kp T &kp SPC) // m+u+t -> must
+    CHMAC(ch_look, &kp L &kp O &kp O &kp K &kp SPC) // l+o+k -> look
+    CHMAC(ch_back, &kp B &kp A &kp C &kp K &kp SPC) // b+a+c -> back
+    CHMAC(ch_long, &kp L &kp O &kp N &kp G &kp SPC) // l+o+n -> long
+    CHMAC(ch_much, &kp M &kp U &kp C &kp H &kp SPC) // m+u+c -> much
+    CHMAC(ch_well, &kp W &kp E &kp L &kp L &kp SPC) // w+e+l -> well
+    CHMAC(ch_down, &kp D &kp O &kp W &kp N &kp SPC) // d+w+n -> down
+    CHMAC(ch_just, &kp J &kp U &kp S &kp T &kp SPC) // u+s+t -> just
+    CHMAC(ch_good, &kp G &kp O &kp O &kp D &kp SPC) // v+o+d -> good
+    CHMAC(ch_each, &kp E &kp A &kp C &kp H &kp SPC) // a+c+h -> each
+    CHMAC(ch_feel, &kp F &kp E &kp E &kp L &kp SPC) // f+e+l -> feel
+    CHMAC(ch_seem, &kp S &kp E &kp E &kp M &kp SPC) // s+e+m -> seem
+    CHMAC(ch_high, &kp H &kp I &kp G &kp H &kp SPC) // h+i+g -> high
+    CHMAC(ch_very, &kp V &kp E &kp R &kp Y &kp SPC) // v+e+r -> very
+    CHMAC(ch_hand, &kp H &kp A &kp N &kp D &kp SPC) // h+n+d -> hand
+    CHMAC(ch_life, &kp L &kp I &kp F &kp E &kp SPC) // l+i+f -> life
+    CHMAC(ch_tell, &kp T &kp E &kp L &kp L &kp SPC) // t+e+l -> tell
+    CHMAC(ch_here, &kp H &kp E &kp R &kp E &kp SPC) // j+h+e -> here
+    CHMAC(ch_show, &kp S &kp H &kp O &kp W &kp SPC) // s+h+w -> show
+    CHMAC(ch_both, &kp B &kp O &kp T &kp H &kp SPC) // b+o+h -> both
+    CHMAC(ch_need, &kp N &kp E &kp E &kp D &kp SPC) // t+n+d -> need
+    CHMAC(ch_mean, &kp M &kp E &kp A &kp N &kp SPC) // m+e+a -> mean
+    CHMAC(ch_call, &kp C &kp A &kp L &kp L &kp SPC) // c+a+l -> call
+    CHMAC(ch_last, &kp L &kp A &kp S &kp T &kp SPC) // l+a+s -> last
+    CHMAC(ch_move, &kp M &kp O &kp V &kp E &kp SPC) // m+v+e -> move
+    CHMAC(ch_same, &kp S &kp A &kp M &kp E &kp SPC) // s+a+m -> same
+    CHMAC(ch_part, &kp P &kp A &kp R &kp T &kp SPC) // p+a+r -> part
+    CHMAC(ch_turn, &kp T &kp U &kp R &kp N &kp SPC) // t+u+n -> turn
+    CHMAC(ch_real, &kp R &kp E &kp A &kp L &kp SPC) // e+a+l -> real
+    CHMAC(ch_want, &kp W &kp A &kp N &kp T &kp SPC) // w+a+t -> want
+    CHMAC(ch_form, &kp F &kp O &kp R &kp M &kp SPC) // z+o+r -> form
+    CHMAC(ch_late, &kp L &kp A &kp T &kp E &kp SPC) // l+a+t -> late
+    CHMAC(ch_home, &kp H &kp O &kp M &kp E &kp SPC) // g+m+e -> home
+    CHMAC(ch_open, &kp O &kp P &kp E &kp N &kp SPC) // o+p+n -> open
+    CHMAC(ch_hold, &kp H &kp O &kp L &kp D &kp SPC) // h+o+d -> hold
+    CHMAC(ch_head, &kp H &kp E &kp A &kp D &kp SPC) // h+e+d -> head
+    CHMAC(ch_word, &kp W &kp O &kp R &kp D &kp SPC) // w+r+d -> word
+    CHMAC(ch_lead, &kp L &kp E &kp A &kp D &kp SPC) // e+a+d -> lead
+    CHMAC(ch_plan, &kp P &kp L &kp A &kp N &kp SPC) // p+l+n -> plan
+    CHMAC(ch_keep, &kp K &kp E &kp E &kp P &kp SPC) // k+e+x -> keep
+    CHMAC(ch_face, &kp F &kp A &kp C &kp E &kp SPC) // f+a+c -> face
+    CHMAC(ch_fact, &kp F &kp A &kp C &kp T &kp SPC) // f+c+t -> fact
+    CHMAC(ch_play, &kp P &kp L &kp A &kp Y &kp SPC) // p+l+y -> play
+    CHMAC(ch_help, &kp H &kp E &kp L &kp P &kp SPC) // h+l+p -> help
+    CHMAC(ch_line, &kp L &kp I &kp N &kp E &kp SPC) // l+n+e -> line
+    CHMAC(ch_which, &kp W &kp H &kp I &kp C &kp H &kp SPC) // h+i+c -> which
+    CHMAC(ch_would, &kp W &kp O &kp U &kp L &kp D &kp SPC) // w+o+u -> would
+    CHMAC(ch_there, &kp T &kp H &kp E &kp R &kp E &kp SPC) // t+h+r -> there
+    CHMAC(ch_other, &kp O &kp T &kp H &kp E &kp R &kp SPC) // o+t+r -> other
+    CHMAC(ch_about, &kp A &kp B &kp O &kp U &kp T &kp SPC) // b+o+u -> about
+    CHMAC(ch_could, &kp C &kp O &kp U &kp L &kp D &kp SPC) // c+o+u -> could
+    CHMAC(ch_state, &kp S &kp T &kp A &kp T &kp E &kp SPC) // s+t+a -> state
+    CHMAC(ch_these, &kp T &kp H &kp E &kp S &kp E &kp SPC) // n+h+s -> these
+    CHMAC(ch_first, &kp F &kp I &kp R &kp S &kp T &kp SPC) // f+r+s -> first
+    CHMAC(ch_think, &kp T &kp H &kp I &kp N &kp K &kp SPC) // h+i+k -> think
+    CHMAC(ch_after, &kp A &kp F &kp T &kp E &kp R &kp SPC) // f+t+r -> after
+    CHMAC(ch_great, &kp G &kp R &kp E &kp A &kp T &kp SPC) // g+r+e -> great
+    CHMAC(ch_where, &kp W &kp H &kp E &kp R &kp E &kp SPC) // w+h+r -> where
+    CHMAC(ch_those, &kp T &kp H &kp O &kp S &kp E &kp SPC) // t+o+s -> those
+    CHMAC(ch_place, &kp P &kp L &kp A &kp C &kp E &kp SPC) // p+c+e -> place
+    CHMAC(ch_world, &kp W &kp O &kp R &kp L &kp D &kp SPC) // w+l+d -> world
+    CHMAC(ch_still, &kp S &kp T &kp I &kp L &kp L &kp SPC) // s+t+l -> still
+    CHMAC(ch_write, &kp W &kp R &kp I &kp T &kp E &kp SPC) // r+i+e -> write
+    CHMAC(ch_house, &kp H &kp O &kp U &kp S &kp E &kp SPC) // h+o+s -> house
+    CHMAC(ch_under, &kp U &kp N &kp D &kp E &kp R &kp SPC) // u+n+d -> under
+    CHMAC(ch_right, &kp R &kp I &kp G &kp H &kp T &kp SPC) // r+i+t -> right
+    CHMAC(ch_thing, &kp T &kp H &kp I &kp N &kp G &kp SPC) // t+i+n -> thing
+    CHMAC(ch_never, &kp N &kp E &kp V &kp E &kp R &kp SPC) // n+v+r -> never
+    CHMAC(ch_begin, &kp B &kp E &kp G &kp I &kp N &kp SPC) // e+g+i -> begin
+    CHMAC(ch_while, &kp W &kp H &kp I &kp L &kp E &kp SPC) // h+i+e -> while
+    CHMAC(ch_leave, &kp L &kp E &kp A &kp V &kp E &kp SPC) // e+a+v -> leave
+    CHMAC(ch_might, &kp M &kp I &kp G &kp H &kp T &kp SPC) // m+i+t -> might
+    CHMAC(ch_point, &kp P &kp O &kp I &kp N &kp T &kp SPC) // p+o+i -> point
+    CHMAC(ch_child, &kp C &kp H &kp I &kp L &kp D &kp SPC) // c+i+d -> child
+    CHMAC(ch_small, &kp S &kp M &kp A &kp L &kp L &kp SPC) // m+a+l -> small
+    CHMAC(ch_since, &kp S &kp I &kp N &kp C &kp E &kp SPC) // s+i+e -> since
+    CHMAC(ch_large, &kp L &kp A &kp R &kp G &kp E &kp SPC) // a+r+g -> large
+    CHMAC(ch_again, &kp A &kp G &kp A &kp I &kp N &kp SPC) // a+g+i -> again
+    CHMAC(ch_order, &kp O &kp R &kp D &kp E &kp R &kp SPC) // o+r+d -> order
+    CHMAC(ch_group, &kp G &kp R &kp O &kp U &kp P &kp SPC) // g+o+u -> group
+    CHMAC(ch_stand, &kp S &kp T &kp A &kp N &kp D &kp SPC) // s+n+d -> stand
+    CHMAC(ch_early, &kp E &kp A &kp R &kp L &kp Y &kp SPC) // e+l+y -> early
+    CHMAC(ch_before, &kp B &kp E &kp F &kp O &kp R &kp E &kp SPC) // b+f+o -> before
+    CHMAC(ch_should, &kp S &kp H &kp O &kp U &kp L &kp D &kp SPC) // s+o+u -> should
+    CHMAC(ch_people, &kp P &kp E &kp O &kp P &kp L &kp E &kp SPC) // p+e+l -> people
+    CHMAC(ch_little, &kp L &kp I &kp T &kp T &kp L &kp E &kp SPC) // l+i+t -> little
+    CHMAC(ch_nation, &kp N &kp A &kp T &kp I &kp O &kp N &kp SPC) // n+a+i -> nation
+    CHMAC(ch_become, &kp B &kp E &kp C &kp O &kp M &kp E &kp SPC) // c+m+e -> become
+    CHMAC(ch_school, &kp S &kp C &kp H &kp O &kp O &kp L &kp SPC) // s+h+l -> school
+    CHMAC(ch_number, &kp N &kp U &kp M &kp B &kp E &kp R &kp SPC) // n+e+r -> number
+    CHMAC(ch_person, &kp P &kp E &kp R &kp S &kp O &kp N &kp SPC) // p+s+n -> person
+    CHMAC(ch_public, &kp P &kp U &kp B &kp L &kp I &kp C &kp SPC) // p+l+i -> public
+    CHMAC(ch_follow, &kp F &kp O &kp L &kp L &kp O &kp W &kp SPC) // f+o+l -> follow
+    CHMAC(ch_during, &kp D &kp U &kp R &kp I &kp N &kp G &kp SPC) // d+r+n -> during
+    CHMAC(ch_govern, &kp G &kp O &kp V &kp E &kp R &kp N &kp SPC) // g+r+n -> govern
+    CHMAC(ch_around, &kp A &kp R &kp O &kp U &kp N &kp D &kp SPC) // a+r+d -> around
+    CHMAC(ch_system, &kp S &kp Y &kp S &kp T &kp E &kp M &kp SPC) // s+t+m -> system
+    CHMAC(ch_course, &kp C &kp O &kp U &kp R &kp S &kp E &kp SPC) // o+r+s -> course
+    CHMAC(ch_change, &kp C &kp H &kp A &kp N &kp G &kp E &kp SPC) // c+h+e -> change
+    CHMAC(ch_through, &kp T &kp H &kp R &kp O &kp U &kp G &kp H &kp SPC) // h+r+g -> through
+    CHMAC(ch_because, &kp B &kp E &kp C &kp A &kp U &kp S &kp E &kp SPC) // b+e+a -> because
+    CHMAC(ch_between, &kp B &kp E &kp T &kp W &kp E &kp E &kp N &kp SPC) // b+e+n -> between
+    CHMAC(ch_develop, &kp D &kp E &kp V &kp E &kp L &kp O &kp P &kp SPC) // d+e+v -> develop
+    CHMAC(ch_general, &kp G &kp E &kp N &kp E &kp R &kp A &kp L &kp SPC) // g+e+n -> general
+    CHMAC(ch_another, &kp A &kp N &kp O &kp T &kp H &kp E &kp R &kp SPC) // a+h+r -> another
+    CHMAC(ch_against, &kp A &kp G &kp A &kp I &kp N &kp S &kp T &kp SPC) // a+g+n -> against
+    CHMAC(ch_present, &kp P &kp R &kp E &kp S &kp E &kp N &kp T &kp SPC) // r+n+t -> present
+    CHMAC(ch_without, &kp W &kp I &kp T &kp H &kp O &kp U &kp T &kp SPC) // i+t+o -> without
+    CHMAC(ch_program, &kp P &kp R &kp O &kp G &kp R &kp A &kp M &kp SPC) // r+g+m -> program
+    CHMAC(ch_problem, &kp P &kp R &kp O &kp B &kp L &kp E &kp M &kp SPC) // l+e+m -> problem
+    CHMAC(ch_however, &kp H &kp O &kp W &kp E &kp V &kp E &kp R &kp SPC) // h+e+v -> however
+    CHMAC(ch_interes, &kp I &kp N &kp T &kp E &kp R &kp E &kp S &kp T &kp SPC) // i+n+r -> interest
+    CHMAC(ch_possibl, &kp P &kp O &kp S &kp S &kp I &kp B &kp L &kp E &kp SPC) // p+s+e -> possible
+    CHMAC(ch_conside, &kp C &kp O &kp N &kp S &kp I &kp D &kp E &kp R &kp SPC) // c+n+d -> consider
+    CHMAC(ch_increas, &kp I &kp N &kp C &kp R &kp E &kp A &kp S &kp E &kp SPC) // i+n+c -> increase
+    CHMAC(ch_her, &kp H &kp E &kp R &kp SPC) // h+e+r -> her
+    CHMAC(ch_had, &kp H &kp A &kp D &kp SPC) // h+a+d -> had
+    CHMAC(ch_sea, &kp S &kp E &kp A &kp SPC) // s+e+a -> sea
+    CHMAC(ch_true, &kp T &kp R &kp U &kp E &kp SPC) // t+r+u -> true
+    CHMAC(ch_lie, &kp L &kp I &kp E &kp SPC) // l+i+e -> lie
+    CHMAC(ch_thank, &kp T &kp H &kp A &kp N &kp K &kp SPC) // h+a+k -> thank
+    CHMAC(ch_hey, &kp H &kp E &kp Y &kp SPC) // h+e+y -> hey
+    CHMAC(ch_return, &kp R &kp E &kp T &kp U &kp R &kp N &kp SPC) // r+e+t -> return
+    CHMAC(ch_probabl, &kp P &kp R &kp O &kp B &kp A &kp B &kp L &kp Y &kp SPC) // p+b+l+y -> probably
+    CHMAC(ch_thank_y, &kp T &kp H &kp A &kp N &kp K &kp SPC &kp Y &kp O &kp U &kp SPC) // t+a+y -> thank you
+    CHMAC(ch_thanks, &kp T &kp H &kp A &kp N &kp K &kp S &kp SPC) // t+n+s -> thanks
+    CHMAC(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
   };
 };
