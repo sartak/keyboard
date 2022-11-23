@@ -2,7 +2,7 @@
 
 ![keyboard layout](keymap.svg)
 
-## 287 chords
+## 323 chords
 
 ### Suffixes
 - `i` + `n` + `g` → ⌫ing
@@ -211,7 +211,7 @@
 - `c` + `h` + `e` → change
 - `h` + `l` + `p` → help
 - `l` + `n` + `e` → line
-### Top 1000 words (todo)
+### Top 1000 words (wip)
 - `h` + `i` + `s` → his
 - `h` + `e` + `r` → her
 - `a` + `n` + `␣` → an
@@ -228,17 +228,50 @@
 - `w` + `a` + `s` → was
 - `a` + `r` + `e` → are
 - `h` + `a` + `d` → had
+- `w` + `e` + `r` → were
+- `s` + `a` + `i` → said
 - `h` + `a` + `s` → has
+- `s` + `u` + `d` → sound
+- `w` + `t` + `r` → water
+- `s` + `i` + `d` → side
+- `m` + `d` + `e` → made
+- `l` + `i` + `v` → live
+- `o` + `u` + `d` → round
+- `c` + `a` + `m` → came
+- `e` + `r` + `y` → every
+- `n` + `a` + `e` → name
+- `s` + `e` + `n` → sentence
 - `l` + `o` + `w` → low
+- `d` + `f` + `r` → differ
+- `c` + `a` + `s` → cause
 - `b` + `o` + `y` → boy
+- `d` + `e` + `s` → does
 - `a` + `i` + `r` → air
+- `p` + `u` + `t` → put
+- `p` + `o` + `r` → port
+- `s` + `p` + `l` → spell
+- `l` + `n` + `d` → land
+- `b` + `i` + `g` → big
 - `a` + `c` + `t` → act
 - `w` + `h` + `y` → why
+- `m` + `e` + `n` → men
+- `w` + `n` + `t` → went
+- `l` + `i` + `g` → light
+- `i` + `n` + `d` → kind
+- `p` + `i` + `c` → picture
 - `t` + `r` + `y` → try
+- `a` + `n` + `l` → animal
+- `m` + `t` + `r` → mother
+- `b` + `u` + `l` → build
+- `s` + `l` + `f` → self
+- `e` + `a` + `h` → earth
+- `f` + `a` + `e` → father
+- `p` + `a` + `e` → page
 - `s` + `u` + `n` → sun
 - `f` + `a` + `r` → far
 - `s` + `e` + `a` → sea
 - `c` + `a` + `r` → car
+- `f` + `e` + `t` → feet
 - `e` + `a` + `t` → eat
 - `c` + `u` + `t` → cut
 - `r` + `e` + `d` → red
@@ -251,6 +284,7 @@
 - `c` + `r` + `y` → cry
 - `b` + `o` + `x` → box
 - `o` + `h` + `␣` → oh
+- `f` + `r` + `e` → free
 - `d` + `r` + `y` → dry
 - `a` + `g` + `o` → ago
 - `r` + `a` + `n` → ran
@@ -265,6 +299,7 @@
 - `j` + `o` + `b` → job
 - `g` + `a` + `s` → gas
 - `b` + `u` + `y` → buy
+- `h` + `i` + `l` → hill
 - `l` + `a` + `w` → law
 - `l` + `i` + `e` → lie
 - `s` + `o` + `n` → son
@@ -293,6 +328,7 @@
 - `p` + `b` + `l` + `y` → probably
 - `t` + `a` + `y` → thank you
 - `t` + `n` + `s` → thanks
+- `i` + `v` + `e` → I've
 ### Misc phrases
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `e` + `l` + `b` + `h` → Elbereth
