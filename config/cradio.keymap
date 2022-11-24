@@ -201,8 +201,20 @@ lg_sentence_##key: lg_sentence_##key { \
   };
 };
 
-// TODO: Tap to momentary switch to layer, hold to switch layer, chord to momentary switch
-#define LYR(layer) &to layer
+// Tap to toggle layer, chord to momentarily switch
+#define LYR(layer) &mo_tog layer layer
+/ {
+  behaviors {
+    mo_tog: behavior_mo_tog {
+      compatible = "zmk,behavior-hold-tap";
+      label = "mo_tog";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&tog>;
+    };
+  };
+};
 
 // Chord SYMBOL + NUMBER to get to FUNCTION layer
 / {
