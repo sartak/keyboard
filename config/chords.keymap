@@ -35,7 +35,7 @@ chord_##name {                                    \
     LAYER_CHORD(ch_bullet, &kp LA(N8), 3 13, SYMBOL) // p+t -> •
     LAYER_CHORD(ch_degrees, &kp LA(LS(N8)), 2 12, SYMBOL) // y+s -> °
     LAYER_CHORD(ch_infinit, &kp LA(N5), 0 10, SYMBOL) // w+c -> ∞
-    LAYER_CHORD(ch_checkma, &kp QMARK, 6 16, SYMBOL) // f+n -> ✔
+    LAYER_CHORD(ch_checkma, &kp QMARK, 15 25, SYMBOL) // m+x -> ✔
     LAYER_CHORD(ch_ballot_, &kp QMARK, 16 26, SYMBOL) // n+h -> ✗
     CHORD(ch_bs_ing, &ch_bs_ing, 18 16 14) // i+n+g -> <BS>ing
     CHORD(ch_bs_n_t, &ch_bs_n_t, 16 9 13) // n+'+t -> <BS>n't

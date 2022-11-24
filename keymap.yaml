@@ -96,7 +96,7 @@ layers:
         key: "∞"
       - positions: [14, 24]
         key: "⋯"
-      - positions: [6, 16]
+      - positions: [15, 25]
         key: "✔"
       - positions: [16, 26]
         key: "✗"
