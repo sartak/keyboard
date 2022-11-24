@@ -100,6 +100,14 @@ layers:
         key: "✔"
       - positions: [16, 26]
         key: "✗"
+      - positions: [5, 15]
+        key: "←"
+      - positions: [6, 16]
+        key: "↓"
+      - positions: [7, 17]
+        key: "↑"
+      - positions: [8, 18]
+        key: "→"
       - positions: [31, 32]
         key: ⌫Word
       - positions: [30, 31]
