@@ -2,7 +2,7 @@
 
 ![keyboard layout](keymap.svg)
 
-## 329 chords
+## 390 chords
 
 ### Suffixes
 - `i` + `n` + `g` → ⌫ing
@@ -267,14 +267,64 @@
 - `e` + `a` + `h` → earth
 - `f` + `a` + `e` → father
 - `p` + `a` + `e` → page
+- `c` + `u` + `y` → country
+- `f` + `u` + `d` → found
+- `a` + `n` + `s` → answer
+- `g` + `r` + `w` → grow
+- `t` + `u` + `y` → study
+- `l` + `e` + `r` → learn
+- `p` + `l` + `t` → plant
+- `c` + `o` + `v` → cover
+- `f` + `o` + `d` → food
 - `s` + `u` + `n` → sun
+- `f` + `o` + `u` → four
+- `t` + `h` + `u` → thought
+- `c` + `t` + `y` → city
+- `c` + `r` + `s` → cross
+- `h` + `r` + `d` → hard
 - `f` + `a` + `r` → far
 - `s` + `e` + `a` → sea
+- `d` + `a` + `w` → draw
+- `l` + `f` + `t` → left
+- `p` + `r` + `s` → press
+- `c` + `o` + `s` → close
+- `n` + `g` + `h` → night
+- `n` + `r` + `h` → north
+- `o` + `g` + `h` → together
+- `e` + `x` + `t` → next
+- `w` + `i` + `e` → white
+- `h` + `i` + `d` → children
+- `g` + `o` + `t` → got
+- `a` + `l` + `k` → walk
+- `m` + `p` + `l` → example
+- `l` + `w` + `y` → always
+- `m` + `s` + `c` → music
+- `m` + `r` + `k` → mark
+- `o` + `t` + `e` → often
+- `l` + `t` + `r` → letter
+- `n` + `t` + `l` → until
+- `m` + `i` + `e` → mile
+- `r` + `i` + `v` → river
 - `c` + `a` + `r` → car
 - `f` + `e` + `t` → feet
+- `c` + `r` + `e` → care
+- `s` + `e` + `c` → second
+- `c` + `a` + `y` → carry
+- `s` + `c` + `i` → science
 - `e` + `a` + `t` → eat
+- `r` + `i` + `d` → friend
+- `b` + `g` + `n` → began
+- `i` + `d` + `a` → idea
+- `f` + `i` + `s` → fish
+- `o` + `a` + `t` → mountain
+- `s` + `t` + `p` → stop
+- `n` + `c` + `e` → once
+- `b` + `a` + `s` → base
+- `h` + `r` + `s` → horse
 - `c` + `u` + `t` → cut
+- `s` + `u` + `r` → sure
 - `r` + `e` + `d` → red
+- `c` + `l` + `s` → class
 - `t` + `r` + `u` → true
 - `s` + `i` + `x` → six
 - `w` + `a` + `r` → war
@@ -283,6 +333,7 @@
 - `f` + `l` + `y` → fly
 - `c` + `r` + `y` → cry
 - `b` + `o` + `x` → box
+- `n` + `o` + `u` → noun
 - `o` + `h` + `␣` → oh
 - `f` + `r` + `e` → free
 - `d` + `r` + `y` → dry
@@ -293,7 +344,9 @@
 - `a` + `m` + `␣` → am
 - `a` + `r` + `m` → arm
 - `i` + `c` + `e` → ice
+- `m` + `a` + `t` → matter
 - `a` + `r` + `t` → art
+- `c` + `e` + `l` → cell
 - `l` + `e` + `g` → leg
 - `j` + `o` + `y` → joy
 - `j` + `o` + `b` → job
@@ -305,6 +358,7 @@
 - `s` + `o` + `n` → son
 - `p` + `a` + `y` → pay
 - `a` + `g` + `e` → age
+- `c` + `o` + `l` → cool
 - `l` + `o` + `t` → lot
 - `k` + `e` + `y` → key
 - `r` + `o` + `w` → row
@@ -315,9 +369,12 @@
 - `r` + `u` + `b` → rub
 - `t` + `i` + `e` → tie
 - `g` + `u` + `n` → gun
+- `n` + `i` + `e` → nine
 - `h` + `a` + `k` → thank
+- `e` + `x` + `p` → experience
 - `l` + `e` + `d` → led
 - `w` + `i` + `n` → win
+- `f` + `e` + `d` → feed
 - `n` + `o` + `r` → nor
 - `f` + `a` + `t` → fat
 - `b` + `a` + `r` → bar
@@ -329,6 +386,10 @@
 - `t` + `a` + `y` → thank you
 - `t` + `n` + `s` → thanks
 - `i` + `v` + `e` → I've
+- `p` + `e` + `r` → per
+- `n` + `u` + `l` → null
+- `n` + `i` + `l` → nil
+- `a` + `r` + `y` → array
 - `h` + `a` + `n` → Shawn
 - `o` + `r` + `e` → Moore
 - `s` + `a` + `r` → sartak
