@@ -362,6 +362,13 @@ chord_##name {                                    \
     CHORD(ch_thank_y, &ch_thank_y, 13 19 2) // t+a+y -> thank you
     CHORD(ch_thanks, &ch_thanks, 13 16 12) // t+n+s -> thanks
     CHORD(ch_i_ve, &ch_i_ve, 18 22 17) // i+v+e -> I've
+    CHORD(ch_shawn, &ch_shawn, 26 19 16) // h+a+n -> Shawn
+    CHORD(ch_moore, &ch_moore, 7 11 17) // o+r+e -> Moore
+    CHORD(ch_sartak, &ch_sartak, 12 19 11) // s+a+r -> sartak
+    CHORD(ch_sartak_, &ch_sartak_, 12 11 27) // s+r+. -> sartak.org
+    CHORD(ch_shawn_d, &ch_shawn_d, 26 16 27) // h+n+. -> shawn.dev
+    CHORD(ch_somervi, &ch_somervi, 12 17 22) // s+e+v -> Somerville
+    CHORD(ch_, &ch_, 0 13 1)
     CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
   };
@@ -713,6 +720,13 @@ name: name##_macro {                  \
     CHMAC(ch_thank_y, &kp T &kp H &kp A &kp N &kp K &kp SPC &kp Y &kp O &kp U &kp SPC) // t+a+y -> thank you
     CHMAC(ch_thanks, &kp T &kp H &kp A &kp N &kp K &kp S &kp SPC) // t+n+s -> thanks
     CHMAC(ch_i_ve, &kp LS(I) &kp APOS &kp V &kp E &kp SPC) // i+v+e -> I've
+    CHMAC(ch_shawn, &kp LS(S) &kp H &kp A &kp W &kp N &kp SPC) // h+a+n -> Shawn
+    CHMAC(ch_moore, &kp LS(M) &kp O &kp O &kp R &kp E &kp SPC) // o+r+e -> Moore
+    CHMAC(ch_sartak, &kp S &kp A &kp R &kp T &kp A &kp K &kp SPC) // s+a+r -> sartak
+    CHMAC(ch_sartak_, &kp S &kp A &kp R &kp T &kp A &kp K &kp DOT &kp O &kp R &kp G &kp SPC) // s+r+. -> sartak.org
+    CHMAC(ch_shawn_d, &kp S &kp H &kp A &kp W &kp N &kp DOT &kp D &kp E &kp V &kp SPC) // h+n+. -> shawn.dev
+    CHMAC(ch_somervi, &kp LS(S) &kp O &kp M &kp E &kp R &kp V &kp I &kp L &kp L &kp E &kp SPC) // s+e+v -> Somerville
+    CHMAC(ch_, &kp LS(W) &kp H &kp E &kp A &kp T &kp L &kp A &kp N &kp D &kp SPC)
     CHMAC(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
   };

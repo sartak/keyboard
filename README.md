@@ -2,7 +2,7 @@
 
 ![keyboard layout](keymap.svg)
 
-## 323 chords
+## 329 chords
 
 ### Suffixes
 - `i` + `n` + `g` → ⌫ing
@@ -329,6 +329,12 @@
 - `t` + `a` + `y` → thank you
 - `t` + `n` + `s` → thanks
 - `i` + `v` + `e` → I've
+- `h` + `a` + `n` → Shawn
+- `o` + `r` + `e` → Moore
+- `s` + `a` + `r` → sartak
+- `s` + `r` + `.` → sartak.org
+- `h` + `n` + `.` → shawn.dev
+- `s` + `e` + `v` → Somerville
 ### Misc phrases
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `e` + `l` + `b` + `h` → Elbereth
