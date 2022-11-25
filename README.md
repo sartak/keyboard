@@ -36,7 +36,7 @@
 - `w` + `e` + `␣` → we
 - `y` + `o` + `u` → you
 - `d` + `o` + `␣` → do
-- `z` + `u` + `t` → but
+- `i` + `u` + `t` → but
 - `r` + `o` + `m` → from
 - `o` + `r` + `␣` → or
 - `h` + `i` + `c` → which
