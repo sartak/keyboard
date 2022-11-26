@@ -10,10 +10,10 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define ALPHA 0
-#define SYMBOL 1
-#define NUMBER 2
-#define FUNCTION 3
-#define SENTENCE 4
+#define SENTENCE 1
+#define SYMBOL 2
+#define NUMBER 3
+#define FUNCTION 4
 
 #include "chords.keymap"
 
@@ -241,6 +241,15 @@ lg_sentence_##key: lg_sentence_##key { \
       >;
     };
 
+    SENTENCE_layer {
+      bindings = <
+        SAG(W)  SAG(L)  SAG(Y)  SAG(P)  SAG(B)    SAG(Z)  SAG(F)  SAG(O)                   SAG(U)                        XHPT(ESC, &sentence_apos)
+        SAG(C)  SAG(R)  SAG(S)  SAG(T)  SAG(G)    SAG(M)  SAG(N)  SAG(E)                   SAG(I)                        SAG(A)
+        SAG(Q)  SAG(J)  SAG(V)  SAG(D)  SAG(K)    SAG(X)  SAG(H)  XHPT(TAB, &sentence_dot)  XHPT(ALFRED, &sentence_comma)  SAG(RET)
+                  LYR(SYMBOL)  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(NUMBER)
+      >;
+    };
+
     SYMBOL_layer {
       bindings = <
         AG(GRAVE)      AG(TILDE)     AG(BACKSLASH)   AG(LEFT_BRACE)  AG(DOLLAR)      AG(PERCENT)  AG(RIGHT_BRACE)  AG(SLASH)      AG(POUND)           HPT(ESC, APOS)
@@ -265,15 +274,6 @@ lg_sentence_##key: lg_sentence_##key { \
         &none        &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 5  &bt BT_CLR      &none  &none  &none  &none  &none
         &none        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &out OUT_TOG    &none  &none  &none  &none  &none
                                                          &to ALPHA  &none      &none  &none
-      >;
-    };
-
-    SENTENCE_layer {
-      bindings = <
-        SAG(W)  SAG(L)  SAG(Y)  SAG(P)  SAG(B)    SAG(Z)  SAG(F)  SAG(O)                   SAG(U)                        XHPT(ESC, &sentence_apos)
-        SAG(C)  SAG(R)  SAG(S)  SAG(T)  SAG(G)    SAG(M)  SAG(N)  SAG(E)                   SAG(I)                        SAG(A)
-        SAG(Q)  SAG(J)  SAG(V)  SAG(D)  SAG(K)    SAG(X)  SAG(H)  XHPT(TAB, &sentence_dot)  XHPT(ALFRED, &sentence_comma)  SAG(RET)
-                  LYR(SYMBOL)  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(NUMBER)
       >;
     };
   };
