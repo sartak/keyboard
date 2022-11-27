@@ -423,6 +423,8 @@ chord_##name {                                    \
     CHORD(ch_null, &ch_null, 16 8 1) // n+u+l -> null
     CHORD(ch_nil, &ch_nil, 16 18 1) // n+i+l -> nil
     CHORD(ch_array, &ch_array, 19 11 2) // a+r+y -> array
+    CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
+    CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
     CHORD(ch_shawn, &ch_shawn, 26 19 16) // h+a+n -> Shawn
     CHORD(ch_moore, &ch_moore, 7 11 17) // o+r+e -> Moore
     CHORD(ch_sartak, &ch_sartak, 12 19 11) // s+a+r -> sartak
@@ -430,8 +432,6 @@ chord_##name {                                    \
     CHORD(ch_shawn_d, &ch_shawn_d, 26 16 27) // h+n+. -> shawn.dev
     CHORD(ch_somervi, &ch_somervi, 12 17 22) // s+e+v -> Somerville
     CHORD(ch_, &ch_, 0 13 1)
-    CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
-    CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
   };
 };
 
@@ -842,6 +842,8 @@ name: name##_macro {                  \
     CHMAC(ch_null, &kp N &kp U &kp L &kp L &kp SPC) // n+u+l -> null
     CHMAC(ch_nil, &kp N &kp I &kp L &kp SPC) // n+i+l -> nil
     CHMAC(ch_array, &kp A &kp R &kp R &kp A &kp Y &kp SPC) // a+r+y -> array
+    CHMAC(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
+    MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
     CHMAC(ch_shawn, &kp LS(S) &kp H &kp A &kp W &kp N &kp SPC) // h+a+n -> Shawn
     CHMAC(ch_moore, &kp LS(M) &kp O &kp O &kp R &kp E &kp SPC) // o+r+e -> Moore
     CHMAC(ch_sartak, &kp S &kp A &kp R &kp T &kp A &kp K &kp SPC) // s+a+r -> sartak
@@ -849,7 +851,5 @@ name: name##_macro {                  \
     CHMAC(ch_shawn_d, &kp S &kp H &kp A &kp W &kp N &kp DOT &kp D &kp E &kp V &kp SPC) // h+n+. -> shawn.dev
     CHMAC(ch_somervi, &kp LS(S) &kp O &kp M &kp E &kp R &kp V &kp I &kp L &kp L &kp E &kp SPC) // s+e+v -> Somerville
     CHMAC(ch_, &kp LS(W) &kp H &kp E &kp A &kp T &kp L &kp A &kp N &kp D &kp SPC)
-    CHMAC(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
-    MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
   };
 };

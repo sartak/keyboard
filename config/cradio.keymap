@@ -276,9 +276,9 @@ behaviors {                                \
 
     SENTENCE_layer {
       bindings = <
-        DAG(W)  DAG(L)  DAG(Y)  DAG(P)  DAG(B)    DAG(Z)  DAG(F)  DAG(O)                  DAG(U)                       &hold_prefer_apos ESC 0
-        DAG(C)  DAG(R)  DAG(S)  DAG(T)  DAG(G)    DAG(M)  DAG(N)  DAG(E)                  DAG(I)                       DAG(A)
-        DAG(Q)  DAG(J)  DAG(V)  DAG(D)  DAG(K)    DAG(X)  DAG(H)  &hold_prefer_dot TAB 0  &hold_prefer_comma ALFRED 0 DAG(RET)
+        DAG(W)  DAG(L)  DAG(Y)  DAG(P)  DAG(B)    DAG(Z)  DAG(F)  DAG(O)                  DAG(U)                        &hold_prefer_apos ESC 0
+        DAG(C)  DAG(R)  DAG(S)  DAG(T)  DAG(G)    DAG(M)  DAG(N)  DAG(E)                  DAG(I)                        DAG(A)
+        DAG(Q)  DAG(J)  DAG(V)  DAG(D)  DAG(K)    DAG(X)  DAG(H)  &hold_prefer_dot TAB 0  &hold_prefer_comma ALFRED 0   DAG(RET)
                   LYR(SYMBOL)  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(NUMBER)
       >;
     };
