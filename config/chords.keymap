@@ -431,6 +431,8 @@ chord_##name {                                    \
     CHORD(ch_sartak_, &ch_sartak_, 12 11 27) // s+r+. -> sartak.org
     CHORD(ch_shawn_d, &ch_shawn_d, 26 16 27) // h+n+. -> shawn.dev
     CHORD(ch_somervi, &ch_somervi, 12 17 22) // s+e+v -> Somerville
+    CHORD(ch_boston, &ch_boston, 4 12 16) // b+s+n -> Boston
+    CHORD(ch_massach, &ch_massach, 10 26 8) // c+h+u -> Massachusetts
     CHORD(ch_, &ch_, 0 13 1)
   };
 };
@@ -850,6 +852,8 @@ name: name##_macro {                  \
     CHMAC(ch_sartak_, &kp S &kp A &kp R &kp T &kp A &kp K &kp DOT &kp O &kp R &kp G &kp SPC) // s+r+. -> sartak.org
     CHMAC(ch_shawn_d, &kp S &kp H &kp A &kp W &kp N &kp DOT &kp D &kp E &kp V &kp SPC) // h+n+. -> shawn.dev
     CHMAC(ch_somervi, &kp LS(S) &kp O &kp M &kp E &kp R &kp V &kp I &kp L &kp L &kp E &kp SPC) // s+e+v -> Somerville
+    CHMAC(ch_boston, &kp LS(B) &kp O &kp S &kp T &kp O &kp N &kp SPC) // b+s+n -> Boston
+    CHMAC(ch_massach, &kp LS(M) &kp A &kp S &kp S &kp A &kp C &kp H &kp U &kp S &kp E &kp T &kp T &kp S &kp SPC) // c+h+u -> Massachusetts
     CHMAC(ch_, &kp LS(W) &kp H &kp E &kp A &kp T &kp L &kp A &kp N &kp D &kp SPC)
   };
 };

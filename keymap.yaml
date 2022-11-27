@@ -138,13 +138,13 @@ layers:
         key: "⌘RC"
   Number:
     left:
-      - ["BrUp", "7", "8", "9", "ScrSh"]
+      - ["Bright\nUp", "7", "8", "9", "Scrn\nShot"]
       - ["Lang", "4", "5", "6", "0"]
-      - ["BrDown", "1", "2", "3", "Lock"]
+      - ["Bright\nDown", "1", "2", "3", "Lock\nScrn"]
     right:
-      - ["Mute", "Prev", "PlPaus", "Next", "'"]
-      - ["VolUp", "←", "↓", "↑", "→"]
-      - ["VolDwn", null, ".", ",", ↵]
+      - ["Mute", "Prev", "Play\nPause", "Next", "'"]
+      - ["Vol\nUp", "←", "↓", "↑", "→"]
+      - ["Vol\nDown", null, ".", ",", ↵]
     left_thumbs:
       - Alpha
       - ⌫
@@ -190,11 +190,11 @@ layers:
         key: "⌘RC"
   Function:
     left:
-      - ["Bootl", null, null, null, null]
-      - [null, "BT4", "BT5", "BT6", "BTCLR"]
-      - [null, "BT1", "BT2", "BT3", "BTTOG"]
+      - ["Boot\nLoadr", null, null, null, null]
+      - [null, "BT\n4", "BT\n5", "BT\n6", "BT\nClear"]
+      - [null, "BT\n1", "BT\n2", "BT\n3", "BT\nToggl"]
     right:
-      - [null, null, null, null, "Bootl"]
+      - [null, null, null, null, "Boot\nLoadr"]
       - [null, null, null, null, null]
       - [null, null, null, null, null]
     left_thumbs:

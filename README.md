@@ -1,6 +1,6 @@
 I use the [Canary layout](https://github.com/Apsu/Canary) on a homemade [Ferris Sweep](https://github.com/davidphilipbarr/Sweep) with Kailh chocs. I use the lightest switches I can find, currently pinks (20±10gf). I do a lot of programming in vim. For gaming, I… use other devices. :)
 
-I use chords heavily to type entire words (see below!), inspired by steno. For example, combo'ing `c+n+d` together types the word `consider`, along with a trailing space. Chording a word also makes the following punctuation smarter. For example typing a `.` will delete the chord's trailing space, add the period and a new trailing space, and turn on sticky shift for the next letter. Typing `,` is similar but doesn't enable the sticky shift. I achieve this with a "sentence" layer that most chords enable and most other characters disable.
+I use chords heavily to type entire words (see below!), inspired by steno. For example, combo'ing `c+n+d` together types the word `consider`, along with a trailing space. Chording a word also makes the following punctuation smarter. For example typing a `.` will delete the chord's trailing space, add the period then a new trailing space, and turn on sticky shift for the next letter. Typing `,` is similar but doesn't enable the sticky shift. I achieve this with a "sentence" layer that most chords enable and most other characters disable.
 
 For modifiers, I choose to not use homerow mods since they wouldn't work well with word-chords. Instead, I hold a letter, symbol, or number key for just an extra moment (200ms) to emit the ⌘-modified character. The space and backspace keys act as shift and ctrl when held with another key. Space and backspace also join together for hyper (which I use as an application switcher). For the very few uses of alt that I need, I have dedicated keys (a combo for alt-backspace to delete a word, a handful of characters on the symbol layer, etc).
 
@@ -10,7 +10,7 @@ I'm considering adding a third thumb key to each hand because I really would ben
 
 ![keyboard layout](keymap.svg)
 
-## 390 chords
+## 392 chords
 
 ### Suffixes
 
@@ -416,3 +416,5 @@ I'm considering adding a third thumb key to each hand because I really would ben
 - `s` + `r` + `.` → sartak.org
 - `h` + `n` + `.` → shawn.dev
 - `s` + `e` + `v` → Somerville
+- `b` + `s` + `n` → Boston
+- `c` + `h` + `u` → Massachusetts

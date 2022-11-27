@@ -393,7 +393,9 @@
 <text x="409.0" y="1037.0" class="small">⌘RC</text>
 <text x="27.5" y="1089.0" class="label">Number:</text>
 <rect rx="6" ry="6" x="29.5" y="1116" width="55" height="50"/>
-<text x="57.0" y="1141.0">BrUp</text>
+<text x="57.0" y="1141.0">
+<tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Up</tspan>
+</text>
 <rect rx="6" ry="6" x="88.5" y="1116" width="55" height="50"/>
 <text x="116.0" y="1141.0">7</text>
 <rect rx="6" ry="6" x="147.5" y="1116" width="55" height="50"/>
@@ -401,7 +403,9 @@
 <rect rx="6" ry="6" x="206.5" y="1116" width="55" height="50"/>
 <text x="234.0" y="1141.0">9</text>
 <rect rx="6" ry="6" x="265.5" y="1116" width="55" height="50"/>
-<text x="293.0" y="1141.0">ScrSh</text>
+<text x="293.0" y="1141.0">
+<tspan x="293.0" dy="-0.6em">Scrn</tspan><tspan x="293.0" dy="1.2em">Shot</tspan>
+</text>
 <rect rx="6" ry="6" x="29.5" y="1170" width="55" height="50"/>
 <text x="57.0" y="1195.0">Lang</text>
 <rect rx="6" ry="6" x="88.5" y="1170" width="55" height="50"/>
@@ -413,7 +417,9 @@
 <rect rx="6" ry="6" x="265.5" y="1170" width="55" height="50"/>
 <text x="293.0" y="1195.0">0</text>
 <rect rx="6" ry="6" x="29.5" y="1224" width="55" height="50"/>
-<text x="57.0" y="1249.0">BrDown</text>
+<text x="57.0" y="1249.0">
+<tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Down</tspan>
+</text>
 <rect rx="6" ry="6" x="88.5" y="1224" width="55" height="50"/>
 <text x="116.0" y="1249.0">1</text>
 <rect rx="6" ry="6" x="147.5" y="1224" width="55" height="50"/>
@@ -421,19 +427,25 @@
 <rect rx="6" ry="6" x="206.5" y="1224" width="55" height="50"/>
 <text x="234.0" y="1249.0">3</text>
 <rect rx="6" ry="6" x="265.5" y="1224" width="55" height="50"/>
-<text x="293.0" y="1249.0">Lock</text>
+<text x="293.0" y="1249.0">
+<tspan x="293.0" dy="-0.6em">Lock</tspan><tspan x="293.0" dy="1.2em">Scrn</tspan>
+</text>
 <rect rx="6" ry="6" x="352.0" y="1116" width="55" height="50"/>
 <text x="379.5" y="1141.0">Mute</text>
 <rect rx="6" ry="6" x="411.0" y="1116" width="55" height="50"/>
 <text x="438.5" y="1141.0">Prev</text>
 <rect rx="6" ry="6" x="470.0" y="1116" width="55" height="50"/>
-<text x="497.5" y="1141.0">PlPaus</text>
+<text x="497.5" y="1141.0">
+<tspan x="497.5" dy="-0.6em">Play</tspan><tspan x="497.5" dy="1.2em">Pause</tspan>
+</text>
 <rect rx="6" ry="6" x="529.0" y="1116" width="55" height="50"/>
 <text x="556.5" y="1141.0">Next</text>
 <rect rx="6" ry="6" x="588.0" y="1116" width="55" height="50"/>
 <text x="615.5" y="1141.0">&#x27;</text>
 <rect rx="6" ry="6" x="352.0" y="1170" width="55" height="50"/>
-<text x="379.5" y="1195.0">VolUp</text>
+<text x="379.5" y="1195.0">
+<tspan x="379.5" dy="-0.6em">Vol</tspan><tspan x="379.5" dy="1.2em">Up</tspan>
+</text>
 <rect rx="6" ry="6" x="411.0" y="1170" width="55" height="50"/>
 <text x="438.5" y="1195.0">←</text>
 <rect rx="6" ry="6" x="470.0" y="1170" width="55" height="50"/>
@@ -443,7 +455,9 @@
 <rect rx="6" ry="6" x="588.0" y="1170" width="55" height="50"/>
 <text x="615.5" y="1195.0">→</text>
 <rect rx="6" ry="6" x="352.0" y="1224" width="55" height="50"/>
-<text x="379.5" y="1249.0">VolDwn</text>
+<text x="379.5" y="1249.0">
+<tspan x="379.5" dy="-0.6em">Vol</tspan><tspan x="379.5" dy="1.2em">Down</tspan>
+</text>
 <rect rx="6" ry="6" x="411.0" y="1224" width="55" height="50"/>
 <rect rx="6" ry="6" x="470.0" y="1224" width="55" height="50"/>
 <text x="497.5" y="1249.0">.</text>
@@ -540,35 +554,55 @@
 <text x="409.0" y="1569.0" class="small">⌘RC</text>
 <text x="27.5" y="1621.0" class="label">Function:</text>
 <rect rx="6" ry="6" x="29.5" y="1648" width="55" height="50"/>
-<text x="57.0" y="1673.0">Bootl</text>
+<text x="57.0" y="1673.0">
+<tspan x="57.0" dy="-0.6em">Boot</tspan><tspan x="57.0" dy="1.2em">Loadr</tspan>
+</text>
 <rect rx="6" ry="6" x="88.5" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="147.5" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="206.5" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="265.5" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="29.5" y="1702" width="55" height="50"/>
 <rect rx="6" ry="6" x="88.5" y="1702" width="55" height="50"/>
-<text x="116.0" y="1727.0">BT4</text>
+<text x="116.0" y="1727.0">
+<tspan x="116.0" dy="-0.6em">BT</tspan><tspan x="116.0" dy="1.2em">4</tspan>
+</text>
 <rect rx="6" ry="6" x="147.5" y="1702" width="55" height="50"/>
-<text x="175.0" y="1727.0">BT5</text>
+<text x="175.0" y="1727.0">
+<tspan x="175.0" dy="-0.6em">BT</tspan><tspan x="175.0" dy="1.2em">5</tspan>
+</text>
 <rect rx="6" ry="6" x="206.5" y="1702" width="55" height="50"/>
-<text x="234.0" y="1727.0">BT6</text>
+<text x="234.0" y="1727.0">
+<tspan x="234.0" dy="-0.6em">BT</tspan><tspan x="234.0" dy="1.2em">6</tspan>
+</text>
 <rect rx="6" ry="6" x="265.5" y="1702" width="55" height="50"/>
-<text x="293.0" y="1727.0">BTCLR</text>
+<text x="293.0" y="1727.0">
+<tspan x="293.0" dy="-0.6em">BT</tspan><tspan x="293.0" dy="1.2em">Clear</tspan>
+</text>
 <rect rx="6" ry="6" x="29.5" y="1756" width="55" height="50"/>
 <rect rx="6" ry="6" x="88.5" y="1756" width="55" height="50"/>
-<text x="116.0" y="1781.0">BT1</text>
+<text x="116.0" y="1781.0">
+<tspan x="116.0" dy="-0.6em">BT</tspan><tspan x="116.0" dy="1.2em">1</tspan>
+</text>
 <rect rx="6" ry="6" x="147.5" y="1756" width="55" height="50"/>
-<text x="175.0" y="1781.0">BT2</text>
+<text x="175.0" y="1781.0">
+<tspan x="175.0" dy="-0.6em">BT</tspan><tspan x="175.0" dy="1.2em">2</tspan>
+</text>
 <rect rx="6" ry="6" x="206.5" y="1756" width="55" height="50"/>
-<text x="234.0" y="1781.0">BT3</text>
+<text x="234.0" y="1781.0">
+<tspan x="234.0" dy="-0.6em">BT</tspan><tspan x="234.0" dy="1.2em">3</tspan>
+</text>
 <rect rx="6" ry="6" x="265.5" y="1756" width="55" height="50"/>
-<text x="293.0" y="1781.0">BTTOG</text>
+<text x="293.0" y="1781.0">
+<tspan x="293.0" dy="-0.6em">BT</tspan><tspan x="293.0" dy="1.2em">Toggl</tspan>
+</text>
 <rect rx="6" ry="6" x="352.0" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="411.0" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="470.0" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="529.0" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="588.0" y="1648" width="55" height="50"/>
-<text x="615.5" y="1673.0">Bootl</text>
+<text x="615.5" y="1673.0">
+<tspan x="615.5" dy="-0.6em">Boot</tspan><tspan x="615.5" dy="1.2em">Loadr</tspan>
+</text>
 <rect rx="6" ry="6" x="352.0" y="1702" width="55" height="50"/>
 <rect rx="6" ry="6" x="411.0" y="1702" width="55" height="50"/>
 <rect rx="6" ry="6" x="470.0" y="1702" width="55" height="50"/>
