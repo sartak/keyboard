@@ -1,4 +1,4 @@
-I use the [Canary layout](https://github.com/Apsu/Canary) on a homemade [Ferris Sweep](https://github.com/davidphilipbarr/Sweep) with Kailh chocs. I use the lightest switches I can find, currently pinks (20±10gf). I do a lot of programming in vim. For gaming, I… use other devices. :)
+I use the [Canary layout](https://github.com/Apsu/Canary) on a homemade [Ferris Sweep](https://github.com/davidphilipbarr/Sweep) with Kailh chocs. I use the lightest switches I can find, currently pinks (linear 20±10gf). I do a lot of programming in vim. For gaming, I… use other devices. :)
 
 I use chords heavily to type entire words (see below!), inspired by steno. For example, combo'ing `c+n+d` together types the word `consider`, along with a trailing space. Chording a word also makes the following punctuation smarter. For example typing a `.` will delete the chord's trailing space, add the period then a new trailing space, and turn on sticky shift for the next letter. Typing `,` is similar but doesn't enable the sticky shift. I achieve this with a "sentence" layer that most chords enable and most other characters disable.
 
