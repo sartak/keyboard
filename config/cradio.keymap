@@ -250,12 +250,15 @@ behaviors {                                \
 };
 
 // Chord SYMBOL + NUMBER to get to FUNCTION layer
+&sl {
+    release-after-ms = <10000>;
+};
 / {
   combos {
     compatible = "zmk,combos";
     combo_function_layer {
       timeout-ms = <60>;
-      bindings = <&to FUNCTION>;
+      bindings = <&sl FUNCTION>;
       key-positions = <30 33>;
     };
   };
