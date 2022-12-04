@@ -92,6 +92,8 @@ layers:
         key: "•"
       - positions: [2, 12]
         key: "°"
+      - positions: [1, 11]
+        key: "λ"
       - positions: [0, 10]
         key: "∞"
       - positions: [14, 24]
