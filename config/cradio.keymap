@@ -261,6 +261,19 @@ behaviors {                                \
   };
 };
 
+// Zoom in and out
+/ {
+  behaviors {
+    zoom: zoom {
+      compatible = "zmk,behavior-mod-morph";
+      label = "ZOOM";
+      #binding-cells = <0>;
+      bindings = <&kp LG(PLUS)>, <&kp LG(MINUS)>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+  };
+};
+
 / {
   keymap {
     compatible = "zmk,keymap";
@@ -296,7 +309,7 @@ behaviors {                                \
       bindings = <
         &kp C_BRI_UP  AG(N6)  AG(N5)  AG(N4)  &kp SCREENSHOT    &kp C_MUTE    &kp C_PREV  &kp C_PP       &kp C_NEXT          HPT(ESC, APOS)
         &kp LANGUAGE  AG(N3)  AG(N2)  AG(N1)  AG(N0)            &kp C_VOL_UP  AG(LEFT)    AG(DOWN)       AG(UP)              AG(RIGHT)
-        &kp C_BRI_DN  AG(N9)  AG(N8)  AG(N7)  &kp LOCKSCR       &kp C_VOL_DN  &none       HPT(TAB, DOT)  HPT(ALFRED, COMMA)  AG(RET)
+        &kp C_BRI_DN  AG(N9)  AG(N8)  AG(N7)  &kp LOCKSCR       &kp C_VOL_DN  &zoom       HPT(TAB, DOT)  HPT(ALFRED, COMMA)  AG(RET)
                                   &to ALPHA  SM(LSHFT, BSPC)    SM(LCTRL, SPC)  LYR(SYMBOL)
       >;
     };

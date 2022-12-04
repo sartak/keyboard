@@ -459,6 +459,9 @@
 <tspan x="379.5" dy="-0.6em">Vol</tspan><tspan x="379.5" dy="1.2em">Down</tspan>
 </text>
 <rect rx="6" ry="6" x="411.0" y="1224" width="55" height="50"/>
+<text x="438.5" y="1249.0">
+<tspan x="438.5" dy="-0.6em">Zoom</tspan><tspan x="438.5" dy="1.2em">InOut</tspan>
+</text>
 <rect rx="6" ry="6" x="470.0" y="1224" width="55" height="50"/>
 <text x="497.5" y="1249.0">.</text>
 <rect rx="6" ry="6" x="529.0" y="1224" width="55" height="50"/>

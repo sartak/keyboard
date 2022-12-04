@@ -144,7 +144,7 @@ layers:
     right:
       - ["Mute", "Prev", "Play\nPause", "Next", "'"]
       - ["Vol\nUp", "←", "↓", "↑", "→"]
-      - ["Vol\nDown", null, ".", ",", ↵]
+      - ["Vol\nDown", "Zoom\nInOut", ".", ",", ↵]
     left_thumbs:
       - Alpha
       - ⌫
