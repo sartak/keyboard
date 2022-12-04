@@ -88,6 +88,8 @@ layers:
         key: "¥"
       - positions: [13, 23]
         key: "€"
+      - positions: [4, 14]
+        key: "‽"
       - positions: [3, 13]
         key: "•"
       - positions: [2, 12]
