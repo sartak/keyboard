@@ -397,11 +397,11 @@
 <tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Up</tspan>
 </text>
 <rect rx="6" ry="6" x="88.5" y="1116" width="55" height="50"/>
-<text x="116.0" y="1141.0">7</text>
+<text x="116.0" y="1141.0">6</text>
 <rect rx="6" ry="6" x="147.5" y="1116" width="55" height="50"/>
-<text x="175.0" y="1141.0">8</text>
+<text x="175.0" y="1141.0">5</text>
 <rect rx="6" ry="6" x="206.5" y="1116" width="55" height="50"/>
-<text x="234.0" y="1141.0">9</text>
+<text x="234.0" y="1141.0">4</text>
 <rect rx="6" ry="6" x="265.5" y="1116" width="55" height="50"/>
 <text x="293.0" y="1141.0">
 <tspan x="293.0" dy="-0.6em">Scrn</tspan><tspan x="293.0" dy="1.2em">Shot</tspan>
@@ -409,11 +409,11 @@
 <rect rx="6" ry="6" x="29.5" y="1170" width="55" height="50"/>
 <text x="57.0" y="1195.0">Lang</text>
 <rect rx="6" ry="6" x="88.5" y="1170" width="55" height="50"/>
-<text x="116.0" y="1195.0">4</text>
+<text x="116.0" y="1195.0">3</text>
 <rect rx="6" ry="6" x="147.5" y="1170" width="55" height="50"/>
-<text x="175.0" y="1195.0">5</text>
+<text x="175.0" y="1195.0">2</text>
 <rect rx="6" ry="6" x="206.5" y="1170" width="55" height="50"/>
-<text x="234.0" y="1195.0">6</text>
+<text x="234.0" y="1195.0">1</text>
 <rect rx="6" ry="6" x="265.5" y="1170" width="55" height="50"/>
 <text x="293.0" y="1195.0">0</text>
 <rect rx="6" ry="6" x="29.5" y="1224" width="55" height="50"/>
@@ -421,11 +421,11 @@
 <tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Down</tspan>
 </text>
 <rect rx="6" ry="6" x="88.5" y="1224" width="55" height="50"/>
-<text x="116.0" y="1249.0">1</text>
+<text x="116.0" y="1249.0">9</text>
 <rect rx="6" ry="6" x="147.5" y="1224" width="55" height="50"/>
-<text x="175.0" y="1249.0">2</text>
+<text x="175.0" y="1249.0">8</text>
 <rect rx="6" ry="6" x="206.5" y="1224" width="55" height="50"/>
-<text x="234.0" y="1249.0">3</text>
+<text x="234.0" y="1249.0">7</text>
 <rect rx="6" ry="6" x="265.5" y="1224" width="55" height="50"/>
 <text x="293.0" y="1249.0">
 <tspan x="293.0" dy="-0.6em">Lock</tspan><tspan x="293.0" dy="1.2em">Scrn</tspan>
@@ -492,28 +492,28 @@
 </text>
 <rect rx="6" ry="6" x="29.5" y="1382" width="55" height="50"/>
 <rect rx="6" ry="6" x="88.5" y="1382" width="55" height="50"/>
-<text x="116.0" y="1407.0">⌘7</text>
+<text x="116.0" y="1407.0">⌘6</text>
 <rect rx="6" ry="6" x="147.5" y="1382" width="55" height="50"/>
-<text x="175.0" y="1407.0">⌘8</text>
+<text x="175.0" y="1407.0">⌘5</text>
 <rect rx="6" ry="6" x="206.5" y="1382" width="55" height="50"/>
-<text x="234.0" y="1407.0">⌘9</text>
+<text x="234.0" y="1407.0">⌘4</text>
 <rect rx="6" ry="6" x="265.5" y="1382" width="55" height="50"/>
 <rect rx="6" ry="6" x="29.5" y="1436" width="55" height="50"/>
 <rect rx="6" ry="6" x="88.5" y="1436" width="55" height="50"/>
-<text x="116.0" y="1461.0">⌘4</text>
+<text x="116.0" y="1461.0">⌘3</text>
 <rect rx="6" ry="6" x="147.5" y="1436" width="55" height="50"/>
-<text x="175.0" y="1461.0">⌘5</text>
+<text x="175.0" y="1461.0">⌘2</text>
 <rect rx="6" ry="6" x="206.5" y="1436" width="55" height="50"/>
-<text x="234.0" y="1461.0">⌘6</text>
+<text x="234.0" y="1461.0">⌘1</text>
 <rect rx="6" ry="6" x="265.5" y="1436" width="55" height="50"/>
 <text x="293.0" y="1461.0">⌘0</text>
 <rect rx="6" ry="6" x="29.5" y="1490" width="55" height="50"/>
 <rect rx="6" ry="6" x="88.5" y="1490" width="55" height="50"/>
-<text x="116.0" y="1515.0">⌘1</text>
+<text x="116.0" y="1515.0">⌘9</text>
 <rect rx="6" ry="6" x="147.5" y="1490" width="55" height="50"/>
-<text x="175.0" y="1515.0">⌘2</text>
+<text x="175.0" y="1515.0">⌘8</text>
 <rect rx="6" ry="6" x="206.5" y="1490" width="55" height="50"/>
-<text x="234.0" y="1515.0">⌘3</text>
+<text x="234.0" y="1515.0">⌘7</text>
 <rect rx="6" ry="6" x="265.5" y="1490" width="55" height="50"/>
 <rect rx="6" ry="6" x="352.0" y="1382" width="55" height="50"/>
 <rect rx="6" ry="6" x="411.0" y="1382" width="55" height="50"/>

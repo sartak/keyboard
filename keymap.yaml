@@ -138,9 +138,9 @@ layers:
         key: "⌘RC"
   Number:
     left:
-      - ["Bright\nUp", "7", "8", "9", "Scrn\nShot"]
-      - ["Lang", "4", "5", "6", "0"]
-      - ["Bright\nDown", "1", "2", "3", "Lock\nScrn"]
+      - ["Bright\nUp", "6", "5", "4", "Scrn\nShot"]
+      - ["Lang", "3", "2", "1", "0"]
+      - ["Bright\nDown", "9", "8", "7", "Lock\nScrn"]
     right:
       - ["Mute", "Prev", "Play\nPause", "Next", "'"]
       - ["Vol\nUp", "←", "↓", "↑", "→"]
@@ -168,9 +168,9 @@ layers:
         key: RClk
   "Number (hold)":
     left:
-      - [null, "⌘7", "⌘8", "⌘9", null]
-      - [null, "⌘4", "⌘5", "⌘6", "⌘0"]
-      - [null, "⌘1", "⌘2", "⌘3", null]
+      - [null, "⌘6", "⌘5", "⌘4", null]
+      - [null, "⌘3", "⌘2", "⌘1", "⌘0"]
+      - [null, "⌘9", "⌘8", "⌘7", null]
     right:
       - [null, null, null, null, Esc]
       - [null, "⌘←", "⌘↓", "⌘↑", "⌘→"]
