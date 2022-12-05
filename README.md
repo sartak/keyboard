@@ -10,7 +10,7 @@ I'm considering adding a third thumb key to each hand because I really would ben
 
 ![keyboard layout](keymap.svg)
 
-## 392 chords
+## 442 chords
 
 ### Suffixes
 
@@ -336,23 +336,70 @@ I'm considering adding a third thumb key to each hand because I really would ben
 - `h` + `r` + `s` → horse
 - `c` + `u` + `t` → cut
 - `s` + `u` + `r` → sure
+- `w` + `a` + `h` → watch
+- `c` + `o` + `r` → color
+- `w` + `o` + `d` → wood
+- `m` + `i` + `n` → main
+- `n` + `o` + `g` → enough
+- `p` + `a` + `i` → plain
+- `g` + `i` + `r` → girl
+- `u` + `s` + `l` → usual
+- `y` + `o` + `g` → young
+- `e` + `d` + `y` → ready
+- `a` + `b` + `v` → above
 - `r` + `e` + `d` → red
+- `l` + `i` + `s` → list
+- `h` + `u` + `g` → though
+- `b` + `i` + `r` → bird
+- `o` + `d` + `y` → body
+- `f` + `a` + `y` → family
+- `d` + `r` + `c` → direct
+- `p` + `o` + `s` → pose
+- `s` + `n` + `g` → song
+- `a` + `s` + `u` → measure
+- `r` + `d` + `u` → product
+- `b` + `l` + `c` → black
+- `h` + `o` + `r` → short
+- `u` + `m` + `a` → numeral
 - `c` + `l` + `s` → class
+- `w` + `i` + `d` → wind
+- `q` + `e` + `n` → question
+- `h` + `a` + `p` → happen
+- `c` + `m` + `t` → complete
+- `s` + `h` + `p` → ship
+- `h` + `a` + `l` → half
+- `r` + `c` + `k` → rock
+- `f` + `i` + `r` → fire
+- `s` + `u` + `h` → south
+- `t` + `l` + `d` → told
+- `k` + `n` + `e` → knew
+- `p` + `a` + `s` → pass
+- `t` + `o` + `p` → top
+- `w` + `h` + `l` → whole
+- `s` + `p` + `c` → space
+- `b` + `e` + `s` → best
+- `h` + `u` + `r` → hour
+- `b` + `e` + `r` → better
 - `t` + `r` + `u` → true
+- `h` + `u` + `e` → hundred
+- `f` + `i` + `v` → five
 - `s` + `i` + `x` → six
 - `w` + `a` + `r` → war
 - `l` + `a` + `y` → lay
 - `m` + `a` + `p` → map
 - `f` + `l` + `y` → fly
+- `f` + `a` + `l` → fall
 - `c` + `r` + `y` → cry
 - `b` + `o` + `x` → box
 - `n` + `o` + `u` → noun
+- `w` + `e` + `k` → week
 - `o` + `h` + `␣` → oh
 - `f` + `r` + `e` → free
 - `d` + `r` + `y` → dry
 - `a` + `g` + `o` → ago
 - `r` + `a` + `n` → ran
 - `h` + `o` + `t` → hot
+- `b` + `a` + `l` → ball
 - `y` + `e` + `t` → yet
 - `a` + `m` + `␣` → am
 - `a` + `r` + `m` → arm
@@ -360,11 +407,13 @@ I'm considering adding a third thumb key to each hand because I really would ben
 - `m` + `a` + `t` → matter
 - `a` + `r` + `t` → art
 - `c` + `e` + `l` → cell
+- `s` + `m` + `r` → summer
 - `l` + `e` + `g` → leg
 - `j` + `o` + `y` → joy
 - `j` + `o` + `b` → job
 - `g` + `a` + `s` → gas
 - `b` + `u` + `y` → buy
+- `c` + `o` + `k` → cook
 - `h` + `i` + `l` → hill
 - `l` + `a` + `w` → law
 - `l` + `i` + `e` → lie
@@ -405,6 +454,7 @@ I'm considering adding a third thumb key to each hand because I really would ben
 - `n` + `u` + `l` → null
 - `n` + `i` + `l` → nil
 - `a` + `r` + `y` → array
+- `s` + `r` + `t` → sort
 
 ### Misc phrases
 

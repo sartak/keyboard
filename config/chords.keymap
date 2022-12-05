@@ -359,23 +359,70 @@ chord_##name {                                    \
     CHORD(ch_horse, &ch_horse, 26 11 12) // h+r+s -> horse
     CHORD(ch_cut, &ch_cut, 10 8 13) // c+u+t -> cut
     CHORD(ch_sure, &ch_sure, 12 8 11) // s+u+r -> sure
+    CHORD(ch_watch, &ch_watch, 0 19 26) // w+a+h -> watch
+    CHORD(ch_color, &ch_color, 10 7 11) // c+o+r -> color
+    CHORD(ch_wood, &ch_wood, 0 7 23) // w+o+d -> wood
+    CHORD(ch_main, &ch_main, 15 18 16) // m+i+n -> main
+    CHORD(ch_enough, &ch_enough, 16 7 14) // n+o+g -> enough
+    CHORD(ch_plain, &ch_plain, 3 19 18) // p+a+i -> plain
+    CHORD(ch_girl, &ch_girl, 14 18 11) // g+i+r -> girl
+    CHORD(ch_usual, &ch_usual, 8 12 1) // u+s+l -> usual
+    CHORD(ch_young, &ch_young, 2 7 14) // y+o+g -> young
+    CHORD(ch_ready, &ch_ready, 17 23 2) // e+d+y -> ready
+    CHORD(ch_above, &ch_above, 19 4 22) // a+b+v -> above
     CHORD(ch_red, &ch_red, 11 17 23) // r+e+d -> red
+    CHORD(ch_list, &ch_list, 1 18 12) // l+i+s -> list
+    CHORD(ch_though, &ch_though, 26 8 14) // h+u+g -> though
+    CHORD(ch_bird, &ch_bird, 4 18 11) // b+i+r -> bird
+    CHORD(ch_body, &ch_body, 7 23 2) // o+d+y -> body
+    CHORD(ch_family, &ch_family, 6 19 2) // f+a+y -> family
+    CHORD(ch_direct, &ch_direct, 23 11 10) // d+r+c -> direct
+    CHORD(ch_pose, &ch_pose, 3 7 12) // p+o+s -> pose
+    CHORD(ch_song, &ch_song, 12 16 14) // s+n+g -> song
+    CHORD(ch_measure, &ch_measure, 19 12 8) // a+s+u -> measure
+    CHORD(ch_product, &ch_product, 11 23 8) // r+d+u -> product
+    CHORD(ch_black, &ch_black, 4 1 10) // b+l+c -> black
+    CHORD(ch_short, &ch_short, 26 7 11) // h+o+r -> short
+    CHORD(ch_numeral, &ch_numeral, 8 15 19) // u+m+a -> numeral
     CHORD(ch_class, &ch_class, 10 1 12) // c+l+s -> class
+    CHORD(ch_wind, &ch_wind, 0 18 23) // w+i+d -> wind
+    CHORD(ch_questio, &ch_questio, 20 17 16) // q+e+n -> question
+    CHORD(ch_happen, &ch_happen, 26 19 3) // h+a+p -> happen
+    CHORD(ch_complet, &ch_complet, 10 15 13) // c+m+t -> complete
+    CHORD(ch_ship, &ch_ship, 12 26 3) // s+h+p -> ship
+    CHORD(ch_half, &ch_half, 26 19 1) // h+a+l -> half
+    CHORD(ch_rock, &ch_rock, 11 10 24) // r+c+k -> rock
+    CHORD(ch_fire, &ch_fire, 6 18 11) // f+i+r -> fire
+    CHORD(ch_south, &ch_south, 12 8 26) // s+u+h -> south
+    CHORD(ch_told, &ch_told, 13 1 23) // t+l+d -> told
+    CHORD(ch_knew, &ch_knew, 24 16 17) // k+n+e -> knew
+    CHORD(ch_pass, &ch_pass, 3 19 12) // p+a+s -> pass
+    CHORD(ch_top, &ch_top, 13 7 3) // t+o+p -> top
+    CHORD(ch_whole, &ch_whole, 0 26 1) // w+h+l -> whole
+    CHORD(ch_space, &ch_space, 12 3 10) // s+p+c -> space
+    CHORD(ch_best, &ch_best, 4 17 12) // b+e+s -> best
+    CHORD(ch_hour, &ch_hour, 26 8 11) // h+u+r -> hour
+    CHORD(ch_better, &ch_better, 4 17 11) // b+e+r -> better
     CHORD(ch_true, &ch_true, 13 11 8) // t+r+u -> true
+    CHORD(ch_hundred, &ch_hundred, 26 8 17) // h+u+e -> hundred
+    CHORD(ch_five, &ch_five, 6 18 22) // f+i+v -> five
     CHORD(ch_six, &ch_six, 12 18 25) // s+i+x -> six
     CHORD(ch_war, &ch_war, 0 19 11) // w+a+r -> war
     CHORD(ch_lay, &ch_lay, 1 19 2) // l+a+y -> lay
     CHORD(ch_map, &ch_map, 15 19 3) // m+a+p -> map
     CHORD(ch_fly, &ch_fly, 6 1 2) // f+l+y -> fly
+    CHORD(ch_fall, &ch_fall, 6 19 1) // f+a+l -> fall
     CHORD(ch_cry, &ch_cry, 10 11 2) // c+r+y -> cry
     CHORD(ch_box, &ch_box, 4 7 25) // b+o+x -> box
     CHORD(ch_noun, &ch_noun, 16 7 8) // n+o+u -> noun
+    CHORD(ch_week, &ch_week, 0 17 24) // w+e+k -> week
     CHORD(ch_oh, &ch_oh, 7 26 32) // o+h+space -> oh
     CHORD(ch_free, &ch_free, 6 11 17) // f+r+e -> free
     CHORD(ch_dry, &ch_dry, 23 11 2) // d+r+y -> dry
     CHORD(ch_ago, &ch_ago, 19 14 7) // a+g+o -> ago
     CHORD(ch_ran, &ch_ran, 11 19 16) // r+a+n -> ran
     CHORD(ch_hot, &ch_hot, 26 7 13) // h+o+t -> hot
+    CHORD(ch_ball, &ch_ball, 4 19 1) // b+a+l -> ball
     CHORD(ch_yet, &ch_yet, 2 17 13) // y+e+t -> yet
     CHORD(ch_am, &ch_am, 19 15 32) // a+m+space -> am
     CHORD(ch_arm, &ch_arm, 19 11 15) // a+r+m -> arm
@@ -383,11 +430,13 @@ chord_##name {                                    \
     CHORD(ch_matter, &ch_matter, 15 19 13) // m+a+t -> matter
     CHORD(ch_art, &ch_art, 19 11 13) // a+r+t -> art
     CHORD(ch_cell, &ch_cell, 10 17 1) // c+e+l -> cell
+    CHORD(ch_summer, &ch_summer, 12 15 11) // s+m+r -> summer
     CHORD(ch_leg, &ch_leg, 1 17 14) // l+e+g -> leg
     CHORD(ch_joy, &ch_joy, 21 7 2) // j+o+y -> joy
     CHORD(ch_job, &ch_job, 21 7 4) // j+o+b -> job
     CHORD(ch_gas, &ch_gas, 14 19 12) // g+a+s -> gas
     CHORD(ch_buy, &ch_buy, 4 8 2) // b+u+y -> buy
+    CHORD(ch_cook, &ch_cook, 10 7 24) // c+o+k -> cook
     CHORD(ch_hill, &ch_hill, 26 18 1) // h+i+l -> hill
     CHORD(ch_law, &ch_law, 1 19 0) // l+a+w -> law
     CHORD(ch_lie, &ch_lie, 1 18 17) // l+i+e -> lie
@@ -425,6 +474,7 @@ chord_##name {                                    \
     CHORD(ch_null, &ch_null, 16 8 1) // n+u+l -> null
     CHORD(ch_nil, &ch_nil, 16 18 1) // n+i+l -> nil
     CHORD(ch_array, &ch_array, 19 11 2) // a+r+y -> array
+    CHORD(ch_sort, &ch_sort, 12 11 13) // s+r+t -> sort
     CHORD(ch_the_qui, &ch_the_qui, 4 20 25 9) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     CHORD(ch_elberet, &ch_elberet, 17 1 4 26) // e+l+b+h -> Elbereth
     CHORD(ch_shawn, &ch_shawn, 26 19 16) // h+a+n -> Shawn
@@ -780,23 +830,70 @@ name: name##_macro {                  \
     CHMAC(ch_horse, &kp H &kp O &kp R &kp S &kp E &kp SPC) // h+r+s -> horse
     CHMAC(ch_cut, &kp C &kp U &kp T &kp SPC) // c+u+t -> cut
     CHMAC(ch_sure, &kp S &kp U &kp R &kp E &kp SPC) // s+u+r -> sure
+    CHMAC(ch_watch, &kp W &kp A &kp T &kp C &kp H &kp SPC) // w+a+h -> watch
+    CHMAC(ch_color, &kp C &kp O &kp L &kp O &kp R &kp SPC) // c+o+r -> color
+    CHMAC(ch_wood, &kp W &kp O &kp O &kp D &kp SPC) // w+o+d -> wood
+    CHMAC(ch_main, &kp M &kp A &kp I &kp N &kp SPC) // m+i+n -> main
+    CHMAC(ch_enough, &kp E &kp N &kp O &kp U &kp G &kp H &kp SPC) // n+o+g -> enough
+    CHMAC(ch_plain, &kp P &kp L &kp A &kp I &kp N &kp SPC) // p+a+i -> plain
+    CHMAC(ch_girl, &kp G &kp I &kp R &kp L &kp SPC) // g+i+r -> girl
+    CHMAC(ch_usual, &kp U &kp S &kp U &kp A &kp L &kp SPC) // u+s+l -> usual
+    CHMAC(ch_young, &kp Y &kp O &kp U &kp N &kp G &kp SPC) // y+o+g -> young
+    CHMAC(ch_ready, &kp R &kp E &kp A &kp D &kp Y &kp SPC) // e+d+y -> ready
+    CHMAC(ch_above, &kp A &kp B &kp O &kp V &kp E &kp SPC) // a+b+v -> above
     CHMAC(ch_red, &kp R &kp E &kp D &kp SPC) // r+e+d -> red
+    CHMAC(ch_list, &kp L &kp I &kp S &kp T &kp SPC) // l+i+s -> list
+    CHMAC(ch_though, &kp T &kp H &kp O &kp U &kp G &kp H &kp SPC) // h+u+g -> though
+    CHMAC(ch_bird, &kp B &kp I &kp R &kp D &kp SPC) // b+i+r -> bird
+    CHMAC(ch_body, &kp B &kp O &kp D &kp Y &kp SPC) // o+d+y -> body
+    CHMAC(ch_family, &kp F &kp A &kp M &kp I &kp L &kp Y &kp SPC) // f+a+y -> family
+    CHMAC(ch_direct, &kp D &kp I &kp R &kp E &kp C &kp T &kp SPC) // d+r+c -> direct
+    CHMAC(ch_pose, &kp P &kp O &kp S &kp E &kp SPC) // p+o+s -> pose
+    CHMAC(ch_song, &kp S &kp O &kp N &kp G &kp SPC) // s+n+g -> song
+    CHMAC(ch_measure, &kp M &kp E &kp A &kp S &kp U &kp R &kp E &kp SPC) // a+s+u -> measure
+    CHMAC(ch_product, &kp P &kp R &kp O &kp D &kp U &kp C &kp T &kp SPC) // r+d+u -> product
+    CHMAC(ch_black, &kp B &kp L &kp A &kp C &kp K &kp SPC) // b+l+c -> black
+    CHMAC(ch_short, &kp S &kp H &kp O &kp R &kp T &kp SPC) // h+o+r -> short
+    CHMAC(ch_numeral, &kp N &kp U &kp M &kp E &kp R &kp A &kp L &kp SPC) // u+m+a -> numeral
     CHMAC(ch_class, &kp C &kp L &kp A &kp S &kp S &kp SPC) // c+l+s -> class
+    CHMAC(ch_wind, &kp W &kp I &kp N &kp D &kp SPC) // w+i+d -> wind
+    CHMAC(ch_questio, &kp Q &kp U &kp E &kp S &kp T &kp I &kp O &kp N &kp SPC) // q+e+n -> question
+    CHMAC(ch_happen, &kp H &kp A &kp P &kp P &kp E &kp N &kp SPC) // h+a+p -> happen
+    CHMAC(ch_complet, &kp C &kp O &kp M &kp P &kp L &kp E &kp T &kp E &kp SPC) // c+m+t -> complete
+    CHMAC(ch_ship, &kp S &kp H &kp I &kp P &kp SPC) // s+h+p -> ship
+    CHMAC(ch_half, &kp H &kp A &kp L &kp F &kp SPC) // h+a+l -> half
+    CHMAC(ch_rock, &kp R &kp O &kp C &kp K &kp SPC) // r+c+k -> rock
+    CHMAC(ch_fire, &kp F &kp I &kp R &kp E &kp SPC) // f+i+r -> fire
+    CHMAC(ch_south, &kp S &kp O &kp U &kp T &kp H &kp SPC) // s+u+h -> south
+    CHMAC(ch_told, &kp T &kp O &kp L &kp D &kp SPC) // t+l+d -> told
+    CHMAC(ch_knew, &kp K &kp N &kp E &kp W &kp SPC) // k+n+e -> knew
+    CHMAC(ch_pass, &kp P &kp A &kp S &kp S &kp SPC) // p+a+s -> pass
+    CHMAC(ch_top, &kp T &kp O &kp P &kp SPC) // t+o+p -> top
+    CHMAC(ch_whole, &kp W &kp H &kp O &kp L &kp E &kp SPC) // w+h+l -> whole
+    CHMAC(ch_space, &kp S &kp P &kp A &kp C &kp E &kp SPC) // s+p+c -> space
+    CHMAC(ch_best, &kp B &kp E &kp S &kp T &kp SPC) // b+e+s -> best
+    CHMAC(ch_hour, &kp H &kp O &kp U &kp R &kp SPC) // h+u+r -> hour
+    CHMAC(ch_better, &kp B &kp E &kp T &kp T &kp E &kp R &kp SPC) // b+e+r -> better
     CHMAC(ch_true, &kp T &kp R &kp U &kp E &kp SPC) // t+r+u -> true
+    CHMAC(ch_hundred, &kp H &kp U &kp N &kp D &kp R &kp E &kp D &kp SPC) // h+u+e -> hundred
+    CHMAC(ch_five, &kp F &kp I &kp V &kp E &kp SPC) // f+i+v -> five
     CHMAC(ch_six, &kp S &kp I &kp X &kp SPC) // s+i+x -> six
     CHMAC(ch_war, &kp W &kp A &kp R &kp SPC) // w+a+r -> war
     CHMAC(ch_lay, &kp L &kp A &kp Y &kp SPC) // l+a+y -> lay
     CHMAC(ch_map, &kp M &kp A &kp P &kp SPC) // m+a+p -> map
     CHMAC(ch_fly, &kp F &kp L &kp Y &kp SPC) // f+l+y -> fly
+    CHMAC(ch_fall, &kp F &kp A &kp L &kp L &kp SPC) // f+a+l -> fall
     CHMAC(ch_cry, &kp C &kp R &kp Y &kp SPC) // c+r+y -> cry
     CHMAC(ch_box, &kp B &kp O &kp X &kp SPC) // b+o+x -> box
     CHMAC(ch_noun, &kp N &kp O &kp U &kp N &kp SPC) // n+o+u -> noun
+    CHMAC(ch_week, &kp W &kp E &kp E &kp K &kp SPC) // w+e+k -> week
     CHMAC(ch_oh, &kp O &kp H &kp SPC) // o+h+space -> oh
     CHMAC(ch_free, &kp F &kp R &kp E &kp E &kp SPC) // f+r+e -> free
     CHMAC(ch_dry, &kp D &kp R &kp Y &kp SPC) // d+r+y -> dry
     CHMAC(ch_ago, &kp A &kp G &kp O &kp SPC) // a+g+o -> ago
     CHMAC(ch_ran, &kp R &kp A &kp N &kp SPC) // r+a+n -> ran
     CHMAC(ch_hot, &kp H &kp O &kp T &kp SPC) // h+o+t -> hot
+    CHMAC(ch_ball, &kp B &kp A &kp L &kp L &kp SPC) // b+a+l -> ball
     CHMAC(ch_yet, &kp Y &kp E &kp T &kp SPC) // y+e+t -> yet
     CHMAC(ch_am, &kp A &kp M &kp SPC) // a+m+space -> am
     CHMAC(ch_arm, &kp A &kp R &kp M &kp SPC) // a+r+m -> arm
@@ -804,11 +901,13 @@ name: name##_macro {                  \
     CHMAC(ch_matter, &kp M &kp A &kp T &kp T &kp E &kp R &kp SPC) // m+a+t -> matter
     CHMAC(ch_art, &kp A &kp R &kp T &kp SPC) // a+r+t -> art
     CHMAC(ch_cell, &kp C &kp E &kp L &kp L &kp SPC) // c+e+l -> cell
+    CHMAC(ch_summer, &kp S &kp U &kp M &kp M &kp E &kp R &kp SPC) // s+m+r -> summer
     CHMAC(ch_leg, &kp L &kp E &kp G &kp SPC) // l+e+g -> leg
     CHMAC(ch_joy, &kp J &kp O &kp Y &kp SPC) // j+o+y -> joy
     CHMAC(ch_job, &kp J &kp O &kp B &kp SPC) // j+o+b -> job
     CHMAC(ch_gas, &kp G &kp A &kp S &kp SPC) // g+a+s -> gas
     CHMAC(ch_buy, &kp B &kp U &kp Y &kp SPC) // b+u+y -> buy
+    CHMAC(ch_cook, &kp C &kp O &kp O &kp K &kp SPC) // c+o+k -> cook
     CHMAC(ch_hill, &kp H &kp I &kp L &kp L &kp SPC) // h+i+l -> hill
     CHMAC(ch_law, &kp L &kp A &kp W &kp SPC) // l+a+w -> law
     CHMAC(ch_lie, &kp L &kp I &kp E &kp SPC) // l+i+e -> lie
@@ -846,6 +945,7 @@ name: name##_macro {                  \
     CHMAC(ch_null, &kp N &kp U &kp L &kp L &kp SPC) // n+u+l -> null
     CHMAC(ch_nil, &kp N &kp I &kp L &kp SPC) // n+i+l -> nil
     CHMAC(ch_array, &kp A &kp R &kp R &kp A &kp Y &kp SPC) // a+r+y -> array
+    CHMAC(ch_sort, &kp S &kp O &kp R &kp T &kp SPC) // s+r+t -> sort
     CHMAC(ch_the_qui, &kp T &kp H &kp E &kp SPC &kp Q &kp U &kp I &kp C &kp K &kp SPC &kp B &kp R &kp O &kp W &kp N &kp SPC &kp F &kp O &kp X &kp SPC &kp J &kp U &kp M &kp P &kp S &kp SPC &kp O &kp V &kp E &kp R &kp SPC &kp T &kp H &kp E &kp SPC &kp L &kp A &kp Z &kp Y &kp SPC &kp D &kp O &kp G) // b+q+x+' -> the quick brown fox jumps over the lazy dog
     MACRO(ch_elberet, &kp LS(E) &kp L &kp B &kp E &kp R &kp E &kp T &kp H) // e+l+b+h -> Elbereth
     CHMAC(ch_shawn, &kp LS(S) &kp H &kp A &kp W &kp N &kp SPC) // h+a+n -> Shawn
