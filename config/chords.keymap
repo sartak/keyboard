@@ -90,7 +90,7 @@ chord_##name {                                    \
     CHORD(ch_more, &ch_more, 15 11 17) // m+r+e -> more
     CHORD(ch_if, &ch_if, 18 6 32) // i+f+space -> if
     CHORD(ch_no, &ch_no, 16 17 32) // n+e+space -> no
-    CHORD(ch_man, &ch_man, 24 19 16) // k+a+n -> man
+    CHORD(ch_man, &ch_man, 15 19 16) // m+a+n -> man
     CHORD(ch_out, &ch_out, 7 8 13) // o+u+t -> out
     CHORD(ch_other, &ch_other, 7 13 11) // o+t+r -> other
     CHORD(ch_so, &ch_so, 12 7 32) // s+o+space -> so
@@ -511,7 +511,7 @@ name: name##_macro {                  \
     CHMAC(ch_more, &kp M &kp O &kp R &kp E &kp SPC) // m+r+e -> more
     CHMAC(ch_if, &kp I &kp F &kp SPC) // i+f+space -> if
     CHMAC(ch_no, &kp N &kp O &kp SPC) // n+e+space -> no
-    CHMAC(ch_man, &kp M &kp A &kp N &kp SPC) // k+a+n -> man
+    CHMAC(ch_man, &kp M &kp A &kp N &kp SPC) // m+a+n -> man
     CHMAC(ch_out, &kp O &kp U &kp T &kp SPC) // o+u+t -> out
     CHMAC(ch_other, &kp O &kp T &kp H &kp E &kp R &kp SPC) // o+t+r -> other
     CHMAC(ch_so, &kp S &kp O &kp SPC) // s+o+space -> so

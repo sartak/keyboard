@@ -64,7 +64,7 @@ I'm considering adding a third thumb key to each hand because I really would ben
 - `m` + `r` + `e` → more
 - `i` + `f` + `␣` → if
 - `n` + `e` + `␣` → no
-- `k` + `a` + `n` → man
+- `m` + `a` + `n` → man
 - `o` + `u` + `t` → out
 - `o` + `t` + `r` → other
 - `s` + `o` + `␣` → so
