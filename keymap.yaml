@@ -101,9 +101,9 @@ layers:
       - positions: [14, 24]
         key: "⋯"
       - positions: [15, 25]
-        key: "✔"
-      - positions: [16, 26]
         key: "✗"
+      - positions: [16, 26]
+        key: "✔"
       - positions: [5, 15]
         key: "←"
       - positions: [6, 16]
