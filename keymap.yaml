@@ -194,11 +194,11 @@ layers:
         key: "⌘RC"
   Function:
     left:
-      - ["Boot\nLoadr", null, null, null, null]
+      - ["Boot\nLoadr", null, null, null, "Reset"]
       - [null, "BT\n4", "BT\n5", "BT\n6", "BT\nClear"]
       - [null, "BT\n1", "BT\n2", "BT\n3", "BT\nToggl"]
     right:
-      - [null, null, null, null, "Boot\nLoadr"]
+      - ["Reset", null, null, null, "Boot\nLoadr"]
       - [null, null, null, null, null]
       - [null, null, null, null, null]
     left_thumbs:
