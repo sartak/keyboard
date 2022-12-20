@@ -1,8 +1,11 @@
 ![my Ferris Sweep](ferris.jpg)
 
+![Canary layout on iOS](xkeyboard.png)
+
 - [Keyboard hardware](https://github.com/sartak/Sweep)
 - [ZMK config](https://github.com/sartak/zmk-config)
 - [QMK config](https://github.com/sartak/qmk-config)
+- [xKeyboard (iOS) config](https://github.com/sartak/xkeyboard-config)
 
 I use the [Canary layout](https://github.com/Apsu/Canary) on a lightly-modded [Ferris Sweep](https://github.com/sartak/Sweep) with Kailh chocs. I use the lightest switches I can find, currently pinks (linear, which I modded to lighter, 15gf springs).
 
