@@ -1,4 +1,4 @@
-![my Ferris Sweep](ferris.jpg)
+![my Ferris Sweep](keyboard.jpg)
 
 ![Canary layout on iOS](xkeyboard.png)
 
