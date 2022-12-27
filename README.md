@@ -47,7 +47,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `t` + `o` + `⨧` → to
 - `i` + `n` + `⨧` → in
 - `h` + `e` + `⨧` → he
-- `h` + `a` + `v` → have → had
+- `h` + `a` + `v` → have → had → will have
 - `i` + `t` + `⨧` → it → them
 - `t` + `h` + `a` → that → those
 - `f` + `o` + `r` → for
@@ -63,17 +63,17 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `t` + `h` + `s` → this → these
 - `w` + `e` + `⨧` → we → I
 - `y` + `o` + `u` → you
-- `d` + `o` + `⨧` → do
+- `d` + `o` + `⨧` → do → did → will do
 - `i` + `u` + `t` → but
 - `r` + `o` + `m` → from
 - `o` + `r` + `⨧` → or
 - `h` + `i` + `c` → which
-- `o` + `n` + `e` → one
+- `o` + `n` + `e` → one → ones
 - `w` + `o` + `u` → would
 - `a` + `l` + `x` → all
 - `w` + `i` + `l` → will → wills
 - `t` + `h` + `r` → there
-- `s` + `a` + `y` → say → said
+- `s` + `a` + `y` → say → said → will say
 - `w` + `h` + `o` → who
 - `m` + `a` + `k` → make → made → will make
 - `w` + `h` + `e` → when
@@ -100,7 +100,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `s` + `o` + `m` → some
 - `a` + `k` + `e` → take → took → will take
 - `c` + `o` + `m` → come → came → will come
-- `n` + `h` + `s` → these
+- `n` + `h` + `s` → these → this
 - `k` + `n` + `o` → know → knew → will know
 - `s` + `e` + `k` → see → saw → will see
 - `u` + `s` + `e` → use → used → will use
@@ -134,7 +134,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `w` + `h` + `r` → where
 - `m` + `u` + `c` → much
 - `s` + `o` + `u` → should
-- `w` + `e` + `l` → well
+- `w` + `e` + `l` → well → wells
 - `p` + `e` + `l` → people → peoples → person
 - `d` + `w` + `n` → down
 - `o` + `w` + `f` → own → owned → will own
@@ -142,14 +142,14 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `b` + `e` + `a` → because
 - `v` + `o` + `d` → good → better → best
 - `a` + `c` + `h` → each
-- `t` + `o` + `s` → those
+- `t` + `o` + `s` → those → that
 - `f` + `e` + `l` → feel → felt → will feel
 - `s` + `e` + `m` → seem → seemed → will seem
 - `h` + `o` + `u` → how
 - `h` + `i` + `g` → high → higher → highest
 - `t` + `o` + `f` → too
 - `p` + `c` + `e` → place → places
-- `l` + `i` + `t` → little
+- `l` + `i` + `t` → little → littler → littlest
 - `w` + `l` + `d` → world → worlds
 - `v` + `e` + `r` → very
 - `s` + `t` + `l` → still
@@ -462,22 +462,22 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 ### Other common words
 
 - `h` + `e` + `y` → hey
-- `r` + `e` + `t` → return
+- `r` + `e` + `t` → return → returns → returned → will return
 - `p` + `b` + `l` + `y` → probably
 - `t` + `n` + `s` → thanks → thank you → Thanks very much!
 - `i` + `v` + `e` → I've
 - `p` + `e` + `r` → per
-- `n` + `u` + `l` → null
-- `n` + `i` + `l` → nil
-- `a` + `r` + `y` → array
-- `s` + `r` + `t` → sort
+- `n` + `u` + `l` → null → nulls
+- `n` + `i` + `l` → nil → nils
+- `a` + `r` + `y` → array → arrays
+- `s` + `r` + `t` → sort → sorts → sorted → will sort
 
 ### Misc phrases
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `e` + `l` + `b` + `h` → Elbereth
 - `h` + `a` + `n` → Shawn → Shawn Moore
-- `o` + `r` + `e` → Moore
+- `o` + `r` + `e` → Moore → Shawn Moore
 - `s` + `a` + `r` → sartak
 - `s` + `r` + `.` → sartak.org → https://sartak.org
 - `h` + `n` + `.` → shawn.dev → https://shawn.dev
