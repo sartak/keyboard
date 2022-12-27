@@ -35,34 +35,34 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 ### Top 200 words
 
 - `t` + `h` + `e` → the
-- `b` + `e` + `␣` → be
-- `o` + `f` + `␣` → of
+- `b` + `e` + `⨧` → be
+- `o` + `f` + `⨧` → of
 - `a` + `n` + `d` → and
-- `a` + `␣` → a
+- `a` + `⨧` → a
 - `a` + `⌫` → A
-- `t` + `o` + `␣` → to
-- `i` + `n` + `␣` → in
-- `h` + `e` + `␣` → he
+- `t` + `o` + `⨧` → to
+- `i` + `n` + `⨧` → in
+- `h` + `e` + `⨧` → he
 - `h` + `a` + `v` → have
-- `i` + `t` + `␣` → it
+- `i` + `t` + `⨧` → it
 - `t` + `h` + `a` → that
 - `f` + `o` + `r` → for
 - `t` + `h` + `y` → they
-- `i` + `␣` → I
+- `i` + `⨧` → I
 - `w` + `i` + `h` → with
-- `a` + `s` + `␣` → as
+- `a` + `s` + `⨧` → as
 - `n` + `o` + `t` → not
-- `o` + `n` + `␣` → on
+- `o` + `n` + `⨧` → on
 - `s` + `h` + `e` → she
-- `a` + `t` + `␣` → at
-- `b` + `y` + `␣` → by
+- `a` + `t` + `⨧` → at
+- `b` + `y` + `⨧` → by
 - `t` + `h` + `s` → this
-- `w` + `e` + `␣` → we
+- `w` + `e` + `⨧` → we
 - `y` + `o` + `u` → you
-- `d` + `o` + `␣` → do
+- `d` + `o` + `⨧` → do
 - `i` + `u` + `t` → but
 - `r` + `o` + `m` → from
-- `o` + `r` + `␣` → or
+- `o` + `r` + `⨧` → or
 - `h` + `i` + `c` → which
 - `o` + `n` + `e` → one
 - `w` + `o` + `u` → would
@@ -75,16 +75,16 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `w` + `h` + `e` → when
 - `c` + `a` + `n` → can
 - `m` + `r` + `e` → more
-- `i` + `f` + `␣` → if
-- `n` + `e` + `␣` → no
+- `i` + `f` + `⨧` → if
+- `n` + `e` + `⨧` → no
 - `m` + `a` + `n` → man
 - `o` + `u` + `t` → out
 - `o` + `t` + `r` → other
-- `s` + `o` + `␣` → so
+- `s` + `o` + `⨧` → so
 - `w` + `h` + `t` → what
 - `t` + `m` + `e` → time
-- `u` + `p` + `␣` → up
-- `g` + `o` + `␣` → go
+- `u` + `p` + `⨧` → up
+- `g` + `o` + `⨧` → go
 - `b` + `o` + `u` → about
 - `t` + `a` + `n` → than
 - `i` + `n` + `o` → into
@@ -240,17 +240,17 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 - `h` + `i` + `s` → his
 - `h` + `e` + `r` → her
-- `a` + `n` + `␣` → an
-- `m` + `y` + `␣` → my
+- `a` + `n` + `⨧` → an
+- `m` + `y` + `⨧` → my
 - `h` + `i` + `r` → their
-- `m` + `e` + `␣` → me
+- `m` + `e` + `⨧` → me
 - `b` + `i` + `m` → him
 - `y` + `o` + `r` → your
 - `i` + `t` + `s` → its
 - `t` + `w` + `o` → two
 - `o` + `u` + `r` → our
-- `u` + `s` + `␣` → us
-- `i` + `s` + `␣` → is
+- `u` + `s` + `⨧` → us
+- `i` + `s` + `⨧` → is
 - `w` + `a` + `s` → was
 - `a` + `r` + `e` → are
 - `h` + `a` + `d` → had
@@ -406,7 +406,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `b` + `o` + `x` → box
 - `n` + `o` + `u` → noun
 - `w` + `e` + `k` → week
-- `o` + `h` + `␣` → oh
+- `o` + `h` + `⨧` → oh
 - `f` + `r` + `e` → free
 - `d` + `r` + `y` → dry
 - `a` + `g` + `o` → ago
@@ -414,7 +414,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `h` + `o` + `t` → hot
 - `b` + `a` + `l` → ball
 - `y` + `e` + `t` → yet
-- `a` + `m` + `␣` → am
+- `a` + `m` + `⨧` → am
 - `a` + `r` + `m` → arm
 - `i` + `c` + `e` → ice
 - `m` + `a` + `t` → matter
