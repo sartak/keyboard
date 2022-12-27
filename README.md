@@ -21,8 +21,6 @@ My keyboard also emits a sidechannel of keys pressed and chords used. (Astute re
 
 For modifiers, I choose to not use homerow mods since they wouldn't work well with word-chords. Instead, I hold a letter, symbol, or number key for just an extra moment (200ms) to emit the ⌘-modified character. The space and backspace keys act as shift and ctrl when held with another key. Space and backspace also join together for hyper (which I use as an application switcher). For the very few uses of alt that I need, I have dedicated keys (a combo for alt-backspace to delete a word, a handful of characters on the symbol layer, etc).
 
-I'm considering adding a third thumb key to each hand because I really would benefit from a repeat key and rearranging some of the other keys, e.g. to not require a 200ms hold for tab.
-
 ![keyboard layout](keymap.svg)
 
 ## 442 chords

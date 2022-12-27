@@ -14,11 +14,11 @@ layers:
       - [M, N, E, I, A]
       - [X, H, ".", ",", ↵]
     left_thumbs:
-      - Symbol
+      - ⨧
       - ⌫
     right_thumbs:
-      - Space
-      - Number
+      - ␣
+      - ⇥
     combos:
       - positions: [17, 27]
         key: "!"
@@ -42,7 +42,7 @@ layers:
     right:
       - ["⌘Z", "⌘F", "⌘O", "⌘U", Esc]
       - ["⌘M", "⌘N", "⌘E", "⌘I", "⌘A"]
-      - ["⌘X", "⌘H", Tab, Launch, "⌘↵"]
+      - ["⌘X", "⌘H", "⇥", Launch, "⌘↵"]
     left_thumbs:
       - Symbol
       - Shift
@@ -69,8 +69,8 @@ layers:
       - Alpha
       - ⌫
     right_thumbs:
-      - Space
-      - Number
+      - ␣
+      - ⇥
     combos:
       - positions: [17, 27]
         key: "!"
@@ -126,9 +126,9 @@ layers:
     right:
       - ["⌘%", "⌘}", "⌘/", "⌘#", Esc]
       - ["⌘>", "⌘)", "⌘-", "⌘+", "⌘|"]
-      - ["⌘^", "⌘]", Tab, Launch, "⌘↵"]
+      - ["⌘^", "⌘]", "⇥", Launch, "⌘↵"]
     left_thumbs:
-      - Symbol
+      - Alpha
       - Shift
     right_thumbs:
       - Ctrl
@@ -153,8 +153,8 @@ layers:
       - Alpha
       - ⌫
     right_thumbs:
-      - Space
-      - Symbol
+      - ␣
+      - ⨧
     combos:
       - positions: [17, 27]
         key: "!"
@@ -178,13 +178,13 @@ layers:
     right:
       - [null, null, null, null, Esc]
       - [null, "⌘←", "⌘↓", "⌘↑", "⌘→"]
-      - [null, null, Tab, Launch, "⌘↵"]
+      - [null, null, "⇥", Launch, "⌘↵"]
     left_thumbs:
-      - Symbol
+      - Alpha
       - Shift
     right_thumbs:
       - Ctrl
-      - Number
+      - Symbol
     combos:
       - positions: [31, 32]
         key: Hyper
