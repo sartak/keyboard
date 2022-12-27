@@ -27,7 +27,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 ![keyboard layout](keymap.svg)
 
-## 442 chords
+## 441 chords
 
 ### Suffixes
 
@@ -47,21 +47,21 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `t` + `o` + `⨧` → to
 - `i` + `n` + `⨧` → in
 - `h` + `e` + `⨧` → he
-- `h` + `a` + `v` → have
-- `i` + `t` + `⨧` → it
-- `t` + `h` + `a` → that
+- `h` + `a` + `v` → have → had
+- `i` + `t` + `⨧` → it → them
+- `t` + `h` + `a` → that → those
 - `f` + `o` + `r` → for
 - `t` + `h` + `y` → they
-- `i` + `⨧` → I
+- `i` + `⨧` → I → we
 - `w` + `i` + `h` → with
 - `a` + `s` + `⨧` → as
 - `n` + `o` + `t` → not
 - `o` + `n` + `⨧` → on
-- `s` + `h` + `e` → she
+- `s` + `h` + `e` → she → they
 - `a` + `t` + `⨧` → at
 - `b` + `y` + `⨧` → by
-- `t` + `h` + `s` → this
-- `w` + `e` + `⨧` → we
+- `t` + `h` + `s` → this → these
+- `w` + `e` + `⨧` → we → I
 - `y` + `o` + `u` → you
 - `d` + `o` + `⨧` → do
 - `i` + `u` + `t` → but
@@ -71,174 +71,174 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `o` + `n` + `e` → one
 - `w` + `o` + `u` → would
 - `a` + `l` + `x` → all
-- `w` + `i` + `l` → will
+- `w` + `i` + `l` → will → wills
 - `t` + `h` + `r` → there
-- `s` + `a` + `y` → say
+- `s` + `a` + `y` → say → said
 - `w` + `h` + `o` → who
-- `m` + `a` + `k` → make
+- `m` + `a` + `k` → make → made → will make
 - `w` + `h` + `e` → when
 - `c` + `a` + `n` → can
-- `m` + `r` + `e` → more
+- `m` + `r` + `e` → more → most → many
 - `i` + `f` + `⨧` → if
 - `n` + `e` + `⨧` → no
-- `m` + `a` + `n` → man
-- `o` + `u` + `t` → out
-- `o` + `t` + `r` → other
+- `m` + `a` + `n` → man → men
+- `o` + `u` + `t` → out → outs
+- `o` + `t` + `r` → other → others
 - `s` + `o` + `⨧` → so
 - `w` + `h` + `t` → what
-- `t` + `m` + `e` → time
+- `t` + `m` + `e` → time → times
 - `u` + `p` + `⨧` → up
-- `g` + `o` + `⨧` → go
+- `g` + `o` + `⨧` → go → went → will go
 - `b` + `o` + `u` → about
 - `t` + `a` + `n` → than
 - `i` + `n` + `o` → into
 - `c` + `o` + `u` → could
-- `s` + `t` + `a` → state
+- `s` + `t` + `a` → state → states
 - `o` + `l` + `y` → only
-- `n` + `e` + `w` → new
-- `y` + `e` + `a` → year
+- `n` + `e` + `w` → new → newer → newest
+- `y` + `e` + `a` → year → years
 - `s` + `o` + `m` → some
-- `a` + `k` + `e` → take
-- `c` + `o` + `m` → come
+- `a` + `k` + `e` → take → took → will take
+- `c` + `o` + `m` → come → came → will come
 - `n` + `h` + `s` → these
-- `k` + `n` + `o` → know
-- `s` + `e` + `k` → see
-- `u` + `s` + `e` → use
-- `g` + `e` + `t` → get
-- `l` + `i` + `k` → like
+- `k` + `n` + `o` → know → knew → will know
+- `s` + `e` + `k` → see → saw → will see
+- `u` + `s` + `e` → use → used → will use
+- `g` + `e` + `t` → get → got → will get
+- `l` + `i` + `k` → like → liked → will like
 - `t` + `e` + `n` → then
 - `f` + `r` + `s` → first
 - `a` + `n` + `y` → any
-- `o` + `r` + `k` → work
+- `o` + `r` + `k` → work → worked → will work
 - `n` + `o` + `w` → now
 - `m` + `a` + `y` → may
 - `s` + `c` + `h` → such
-- `g` + `i` + `v` → give
+- `g` + `i` + `v` → give → gave → will give
 - `o` + `v` + `r` → over
-- `h` + `i` + `k` → think
-- `m` + `o` + `t` → most
+- `h` + `i` + `k` → think → thought → will think
+- `m` + `o` + `t` → most → many → more
 - `e` + `v` + `n` → even
-- `f` + `i` + `d` → find
-- `d` + `a` + `y` → day
+- `f` + `i` + `d` → find → found → will find
+- `d` + `a` + `y` → day → days
 - `a` + `l` + `o` → also
 - `f` + `t` + `r` → after
-- `w` + `a` + `y` → way
-- `m` + `n` + `y` → many
+- `w` + `a` + `y` → way → ways
+- `m` + `n` + `y` → many → more → most
 - `m` + `u` + `t` → must
-- `l` + `o` + `k` → look
+- `l` + `o` + `k` → look → looked → will looked
 - `b` + `f` + `o` → before
-- `g` + `r` + `e` → great
-- `b` + `a` + `c` → back
+- `g` + `r` + `e` → great → greater → greatest
+- `b` + `a` + `c` → back → backs → backed → will back
 - `h` + `r` + `g` → through
-- `l` + `o` + `n` → long
+- `l` + `o` + `n` → long → longer → longest
 - `w` + `h` + `r` → where
 - `m` + `u` + `c` → much
 - `s` + `o` + `u` → should
 - `w` + `e` + `l` → well
-- `p` + `e` + `l` → people
+- `p` + `e` + `l` → people → peoples → person
 - `d` + `w` + `n` → down
-- `o` + `w` + `f` → own
+- `o` + `w` + `f` → own → owned → will own
 - `u` + `s` + `t` → just
 - `b` + `e` + `a` → because
-- `v` + `o` + `d` → good
+- `v` + `o` + `d` → good → better → best
 - `a` + `c` + `h` → each
 - `t` + `o` + `s` → those
-- `f` + `e` + `l` → feel
-- `s` + `e` + `m` → seem
+- `f` + `e` + `l` → feel → felt → will feel
+- `s` + `e` + `m` → seem → seemed → will seem
 - `h` + `o` + `u` → how
-- `h` + `i` + `g` → high
+- `h` + `i` + `g` → high → higher → highest
 - `t` + `o` + `f` → too
-- `p` + `c` + `e` → place
+- `p` + `c` + `e` → place → places
 - `l` + `i` + `t` → little
-- `w` + `l` + `d` → world
+- `w` + `l` + `d` → world → worlds
 - `v` + `e` + `r` → very
 - `s` + `t` + `l` → still
-- `n` + `a` + `i` → nation
-- `h` + `n` + `d` → hand
-- `o` + `l` + `d` → old
-- `l` + `i` + `f` → life
-- `t` + `e` + `l` → tell
-- `r` + `i` + `e` → write
-- `c` + `m` + `e` → become
+- `n` + `a` + `i` → nation → nations
+- `h` + `n` + `d` → hand → hands
+- `o` + `l` + `d` → old → older → oldest
+- `l` + `i` + `f` → life → lives
+- `t` + `e` + `l` → tell → told → will tell
+- `r` + `i` + `e` → write → wrote → will write
+- `c` + `m` + `e` → become → became → will become
 - `j` + `h` + `e` → here
-- `s` + `h` + `w` → show
-- `h` + `o` + `s` → house
+- `s` + `h` + `w` → show → showed → will show
+- `h` + `o` + `s` → house → houses
 - `b` + `o` + `h` → both
 - `b` + `e` + `n` → between
-- `t` + `n` + `d` → need
-- `m` + `e` + `a` → mean
-- `c` + `a` + `l` → call
-- `d` + `e` + `v` → develop
+- `t` + `n` + `d` → need → needed → will need
+- `m` + `e` + `a` → mean → meant → will mean
+- `c` + `a` + `l` → call → called → will call
+- `d` + `e` + `v` → develop → developed → will develop
 - `u` + `n` + `d` → under
 - `l` + `a` + `s` → last
-- `r` + `i` + `t` → right
-- `m` + `v` + `e` → move
-- `t` + `i` + `n` → thing
-- `g` + `e` + `n` → general
-- `s` + `h` + `l` → school
+- `r` + `i` + `t` → right → rights
+- `m` + `v` + `e` → move → moved → will move
+- `t` + `i` + `n` → thing → things
+- `g` + `e` + `n` → general → generals
+- `s` + `h` + `l` → school → schools
 - `n` + `v` + `r` → never
 - `s` + `a` + `m` → same
 - `a` + `h` + `r` → another
-- `e` + `g` + `i` → begin
+- `e` + `g` + `i` → begin → began → will begin
 - `h` + `i` + `e` → while
-- `n` + `e` + `r` → number
-- `p` + `a` + `r` → part
-- `t` + `u` + `n` → turn
+- `n` + `e` + `r` → number → numbers
+- `p` + `a` + `r` → part → parts → parted → will part
+- `t` + `u` + `n` → turn → turns → turned → will turn
 - `e` + `a` + `l` → real
-- `e` + `a` + `v` → leave
+- `e` + `a` + `v` → leave → left → will leave
 - `m` + `i` + `t` → might
-- `w` + `a` + `t` → want
-- `p` + `o` + `i` → point
-- `z` + `o` + `r` → form
+- `w` + `a` + `t` → want → wanted → will want
+- `p` + `o` + `i` → point → points → pointed → will point
+- `z` + `o` + `r` → form → forms → formed → will form
 - `o` + `f` + `k` → off
-- `c` + `i` + `d` → child
-- `f` + `e` + `w` → few
-- `m` + `a` + `l` → small
+- `c` + `i` + `d` → child → children
+- `f` + `e` + `w` → few → fewer → fewest
+- `m` + `a` + `l` → small → smaller → smallest
 - `s` + `i` + `e` → since
 - `a` + `g` + `n` → against
-- `a` + `s` + `k` → ask
-- `l` + `a` + `t` → late
-- `g` + `m` + `e` → home
-- `i` + `n` + `r` → interest
-- `a` + `r` + `g` → large
-- `p` + `s` + `n` → person
-- `e` + `n` + `d` → end
-- `o` + `p` + `n` → open
+- `a` + `s` + `k` → ask → asked → will ask
+- `l` + `a` + `t` → late → later → latest
+- `g` + `m` + `e` → home → homes
+- `i` + `n` + `r` → interest → interests → interested → will interest
+- `a` + `r` + `g` → large → larger → largest
+- `p` + `s` + `n` → person → people
+- `e` + `n` + `d` → end → ends → ended → will end
+- `o` + `p` + `n` → open → opened → will open
 - `p` + `l` + `i` → public
-- `f` + `o` + `l` → follow
+- `f` + `o` + `l` → follow → followed → will follow
 - `d` + `r` + `n` → during
-- `r` + `n` + `t` → present
+- `r` + `n` + `t` → present → presents → presented → will present
 - `i` + `t` + `o` → without
 - `a` + `g` + `i` → again
-- `h` + `o` + `d` → hold
-- `g` + `r` + `n` → govern
+- `h` + `o` + `d` → hold → held → will hold
+- `g` + `r` + `n` → govern → governed → will govern
 - `a` + `r` + `d` → around
 - `p` + `s` + `e` → possible
-- `h` + `e` + `d` → head
-- `c` + `n` + `d` → consider
-- `w` + `r` + `d` → word
-- `r` + `g` + `m` → program
-- `l` + `e` + `m` → problem
+- `h` + `e` + `d` → head → heads → headed → will head
+- `c` + `n` + `d` → consider → considered → will consider
+- `w` + `r` + `d` → word → words → worded → will word
+- `r` + `g` + `m` → program → programs → programmed → will program
+- `l` + `e` + `m` → problem → problems
 - `h` + `e` + `v` → however
-- `e` + `a` + `d` → lead
-- `s` + `t` + `m` → system
-- `s` + `e` + `t` → set
-- `o` + `r` + `d` → order
-- `e` + `y` + `x` → eye
-- `p` + `l` + `n` → plan
-- `r` + `u` + `n` → run
-- `k` + `e` + `x` → keep
-- `f` + `a` + `c` → face
-- `f` + `c` + `t` → fact
-- `g` + `o` + `u` → group
-- `p` + `l` + `y` → play
-- `s` + `n` + `d` → stand
-- `i` + `n` + `c` → increase
-- `e` + `l` + `y` → early
-- `o` + `r` + `s` → course
-- `c` + `h` + `e` → change
-- `h` + `l` + `p` → help
-- `l` + `n` + `e` → line
+- `e` + `a` + `d` → lead → leads → led → will lead
+- `s` + `t` + `m` → system → systems
+- `s` + `e` + `t` → set → sets → will set
+- `o` + `r` + `d` → order → orders → ordered → will order
+- `e` + `y` + `x` → eye → eyes → eyed → will eye
+- `p` + `l` + `n` → plan → plans → planned → will plan
+- `r` + `u` + `n` → run → runs → ran → will run
+- `k` + `e` + `x` → keep → kept → will keep
+- `f` + `a` + `c` → face → faces → faced → will face
+- `f` + `c` + `t` → fact → facts
+- `g` + `o` + `u` → group → groups → grouped → will group
+- `p` + `l` + `y` → play → plays → played → will play
+- `s` + `n` + `d` → stand → stands → stood → will stand
+- `i` + `n` + `c` → increase → increased → will increase
+- `e` + `l` + `y` → early → earlier → earliest
+- `o` + `r` + `s` → course → courses
+- `c` + `h` + `e` → change → changes → changed → will change
+- `h` + `l` + `p` → help → helped → will help
+- `l` + `n` + `e` → line → lines
 
 ### Top 1000 words (wip)
 
@@ -464,8 +464,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `h` + `e` + `y` → hey
 - `r` + `e` + `t` → return
 - `p` + `b` + `l` + `y` → probably
-- `t` + `a` + `y` → thank you
-- `t` + `n` + `s` → thanks
+- `t` + `n` + `s` → thanks → thank you → Thanks very much!
 - `i` + `v` + `e` → I've
 - `p` + `e` + `r` → per
 - `n` + `u` + `l` → null
@@ -477,11 +476,11 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `e` + `l` + `b` + `h` → Elbereth
-- `h` + `a` + `n` → Shawn
+- `h` + `a` + `n` → Shawn → Shawn Moore
 - `o` + `r` + `e` → Moore
 - `s` + `a` + `r` → sartak
-- `s` + `r` + `.` → sartak.org
-- `h` + `n` + `.` → shawn.dev
+- `s` + `r` + `.` → sartak.org → https://sartak.org
+- `h` + `n` + `.` → shawn.dev → https://shawn.dev
 - `s` + `e` + `v` → Somerville
 - `b` + `s` + `n` → Boston
 - `c` + `h` + `u` → Massachusetts
