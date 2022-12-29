@@ -162,7 +162,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `c` + `m` + `e` → become → became → will become
 - `j` + `h` + `e` → here
 - `s` + `h` + `w` → show → showed → will show
-- `h` + `o` + `s` → house → houses
+- `o` + `s` + `e` → house → houses
 - `b` + `o` + `h` → both
 - `b` + `e` + `n` → between
 - `t` + `n` + `d` → need → needed → will need
