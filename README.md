@@ -221,7 +221,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `l` + `e` + `m` → problem → problems
 - `h` + `e` + `v` → however
 - `e` + `a` + `d` → lead → leads → led → will lead
-- `s` + `t` + `m` → system → systems
+- `s` + `y` + `t` → system → systems
 - `s` + `e` + `t` → set → sets → will set
 - `o` + `r` + `d` → order → orders → ordered → will order
 - `e` + `y` + `x` → eye → eyes → eyed → will eye
