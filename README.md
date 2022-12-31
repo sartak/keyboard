@@ -70,7 +70,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `h` + `i` + `c` → which
 - `o` + `n` + `e` → one → ones
 - `w` + `o` + `u` → would
-- `a` + `l` + `x` → all
+- `a` + `l` + `⨧` → all
 - `w` + `i` + `l` → will → wills
 - `t` + `h` + `r` → there
 - `s` + `a` + `y` → say → said → will say
@@ -160,7 +160,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `t` + `e` + `l` → tell → told → will tell
 - `r` + `i` + `e` → write → wrote → will write
 - `c` + `m` + `e` → become → became → will become
-- `j` + `h` + `e` → here
+- `h` + `r` + `⨧` → here
 - `s` + `h` + `w` → show → showed → will show
 - `o` + `s` + `e` → house → houses
 - `b` + `o` + `h` → both
@@ -227,7 +227,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `e` + `y` + `x` → eye → eyes → eyed → will eye
 - `p` + `l` + `n` → plan → plans → planned → will plan
 - `r` + `u` + `n` → run → runs → ran → will run
-- `k` + `e` + `x` → keep → kept → will keep
+- `e` + `p` + `⨧` → keep → kept → will keep
 - `f` + `a` + `c` → face → faces → faced → will face
 - `f` + `c` + `t` → fact → facts
 - `g` + `o` + `u` → group → groups → grouped → will group
