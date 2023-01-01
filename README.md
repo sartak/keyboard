@@ -17,7 +17,7 @@ Chording a word also makes the following punctuation smarter. For example typing
 
 I have a duplicate key (`⨧`) on a thumb which enables a bunch of functionality. On its own, it repeats the previous keystroke. (If you know vim, think of it like the `.` command for your keyboard). When typing a word like "success", it's quicker to hit the dup key than to repeatedly use the same finger to type the double letters. That seems esoteric, but, given a reasonable corpus of English text, a distinct dup key is higher frequency than half the alphabet (including letters like `p` and `c`). I also have an (optional) way to forbid typing double letters the usual way, to force you to build the muscle memory for the dup key. dup even on its own will also repeat any modifiers, which makes a lot of keyboard shortcuts easier to manage.
 
-The dup key interacts with the chording system in two separate ways. One, it's a valid input into chords. This opens up the namespace of manageable combos, especially for short anagrams. For example, `who` is `w+h+o`, but that takes the combo from `how`. Having dup means `how` can at least get `h+w+⨧` rather than adding some unrelated letter. Second, tapping dup on its own immediately after a chord will cycle through alternate, predefined expansions. For example, chording `t+n+s` emits `thanks ` (with a trailing space). If I then tap dup, it will backspace twice to remove the trailing space and the last letter `s`, then emit `you` to produce the final result of `thank you `. Tapping dup again will delete both words then emit `Thank you very much!`. Finally tapping dup again will cycle back to the first version, `thanks `. My own convention is that dupping a noun will pluralize it, dupping a verb will cycle between past; present; and future tenses, dupping an adjective (`new`) will include comparatives (`newer`) and superlatives (`newest`). It's all driven by user-defined data, so there are no hard rules.
+The dup key interacts with the chording system in two separate ways. One, it's a valid input into chords. This opens up the namespace of manageable combos, especially for short anagrams. For example, `who` is `w+h+o`, but that takes the combo from `how`. Having dup means `how` can at least get `h+w+⨧` rather than adding some unrelated letter. Second, tapping dup on its own immediately after a chord will cycle through alternate, predefined expansions. For example, chording `t+n+s` emits `thanks ` (with a trailing space). If I then tap dup, it will backspace twice to remove the trailing space and the last letter `s`, then emit `you` to produce the final result of `thank you `. Tapping dup again will delete both words then emit `Thank you very much!`. Finally tapping dup again will cycle back to the first version, `thanks `. My own convention is that dupping a noun will pluralize it, dupping a verb will cycle tenses (`become`, `became`, `becoming`), dupping an adjective (`new`) will include comparatives (`newer`) and superlatives (`newest`). It's all driven by user-defined data, so there are no hard rules.
 
 My keyboard also emits a sidechannel of keys pressed and chords used. (Astute readers will recognize this as a _keylogger_!) Ordinarily, the host computer can only see the outputs of chords; this allows seeing the inputs too. I have a daemon listening to that sidechannel to track whether each word was typed using character entry or a chord. This unlocks some neat benefits, like noticing I type a word the slow way frequently, and either remind me of the chord I already have for it, or offer up an available combo. It also offers a more accurate visualization of where my fingers are on the keyboard, which I can iframe into a website like Monkeytype like so:
 
@@ -47,7 +47,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `t` + `o` + `⨧` → to
 - `i` + `n` + `⨧` → in
 - `h` + `e` + `⨧` → he
-- `h` + `a` + `v` → have → had → will have
+- `h` + `a` + `v` → have → had → having
 - `i` + `t` + `⨧` → it → them
 - `t` + `h` + `a` → that → those
 - `f` + `o` + `r` → for
@@ -63,7 +63,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `t` + `h` + `s` → this → these
 - `w` + `e` + `⨧` → we → I
 - `y` + `o` + `u` → you
-- `d` + `o` + `⨧` → do → did → will do
+- `d` + `o` + `⨧` → do → did → doing
 - `i` + `u` + `t` → but
 - `r` + `o` + `m` → from
 - `o` + `r` + `⨧` → or
@@ -73,9 +73,9 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `a` + `l` + `⨧` → all
 - `w` + `i` + `l` → will → wills
 - `t` + `h` + `r` → there
-- `s` + `a` + `y` → say → said → will say
+- `s` + `a` + `y` → say → said → saying
 - `w` + `h` + `o` → who
-- `m` + `a` + `k` → make → made → will make
+- `m` + `a` + `k` → make → made → making
 - `w` + `h` + `e` → when
 - `c` + `a` + `n` → can
 - `m` + `r` + `e` → more → most → many
@@ -88,7 +88,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `w` + `h` + `t` → what
 - `t` + `m` + `e` → time → times
 - `u` + `p` + `⨧` → up
-- `g` + `o` + `⨧` → go → went → will go
+- `g` + `o` + `⨧` → go → went → going
 - `b` + `o` + `u` → about
 - `t` + `a` + `n` → than
 - `i` + `n` + `o` → into
@@ -98,37 +98,37 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `n` + `e` + `w` → new → newer → newest
 - `y` + `e` + `a` → year → years
 - `s` + `o` + `m` → some
-- `a` + `k` + `e` → take → took → will take
-- `c` + `o` + `m` → come → came → will come
+- `a` + `k` + `e` → take → took → taking
+- `c` + `o` + `m` → come → came → coming
 - `n` + `h` + `s` → these → this
-- `k` + `n` + `o` → know → knew → will know
-- `s` + `e` + `k` → see → saw → will see
-- `u` + `s` + `e` → use → used → will use
-- `g` + `e` + `t` → get → got → will get
-- `l` + `i` + `k` → like → liked → will like
+- `k` + `n` + `o` → know → knew → knowing
+- `s` + `e` + `k` → see → saw → seeing
+- `u` + `s` + `e` → use → used → using
+- `g` + `e` + `t` → get → got → getting
+- `l` + `i` + `k` → like → liked → liking
 - `t` + `e` + `n` → then
 - `f` + `r` + `s` → first
 - `a` + `n` + `y` → any
-- `o` + `r` + `k` → work → worked → will work
+- `o` + `r` + `k` → work → worked → working
 - `n` + `o` + `w` → now
 - `m` + `a` + `y` → may
 - `s` + `c` + `h` → such
-- `g` + `i` + `v` → give → gave → will give
+- `g` + `i` + `v` → give → gave → giving
 - `o` + `v` + `r` → over
-- `h` + `i` + `k` → think → thought → will think
+- `h` + `i` + `k` → think → thought → thinking
 - `m` + `o` + `t` → most → many → more
 - `e` + `v` + `n` → even
-- `f` + `i` + `d` → find → found → will find
+- `f` + `i` + `d` → find → found → finding
 - `d` + `a` + `y` → day → days
 - `a` + `l` + `o` → also
 - `f` + `t` + `r` → after
 - `w` + `a` + `y` → way → ways
 - `m` + `n` + `y` → many → more → most
 - `m` + `u` + `t` → must
-- `l` + `o` + `k` → look → looked → will looked
+- `l` + `o` + `k` → look → looked → looking
 - `b` + `f` + `o` → before
 - `g` + `r` + `e` → great → greater → greatest
-- `b` + `a` + `c` → back → backs → backed → will back
+- `b` + `a` + `c` → back → backs → backed → backing
 - `h` + `r` + `g` → through
 - `l` + `o` + `n` → long → longer → longest
 - `w` + `h` + `r` → where
@@ -137,14 +137,14 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `w` + `e` + `l` → well → wells
 - `p` + `e` + `l` → people → peoples → person
 - `d` + `w` + `n` → down
-- `o` + `w` + `f` → own → owned → will own
+- `o` + `w` + `f` → own → owned → owning
 - `u` + `s` + `t` → just
 - `b` + `e` + `a` → because
 - `v` + `o` + `d` → good → better → best
 - `a` + `c` + `h` → each
 - `t` + `o` + `s` → those → that
-- `f` + `e` + `l` → feel → felt → will feel
-- `s` + `e` + `m` → seem → seemed → will seem
+- `f` + `e` + `l` → feel → felt → feeling
+- `s` + `e` + `m` → seem → seemed → seeming
 - `h` + `o` + `u` → how
 - `h` + `i` + `g` → high → higher → highest
 - `t` + `o` + `f` → too
@@ -157,87 +157,87 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `h` + `n` + `d` → hand → hands
 - `o` + `l` + `d` → old → older → oldest
 - `l` + `i` + `f` → life → lives
-- `t` + `e` + `l` → tell → told → will tell
-- `r` + `i` + `e` → write → wrote → will write
-- `c` + `m` + `e` → become → became → will become
+- `t` + `e` + `l` → tell → told → telling
+- `r` + `i` + `e` → write → wrote → writing
+- `c` + `m` + `e` → become → became → becoming
 - `h` + `r` + `⨧` → here
-- `s` + `h` + `w` → show → showed → will show
+- `s` + `h` + `w` → show → showed → showing
 - `o` + `s` + `e` → house → houses
 - `b` + `o` + `h` → both
 - `b` + `e` + `n` → between
-- `t` + `n` + `d` → need → needed → will need
-- `m` + `e` + `a` → mean → meant → will mean
-- `c` + `a` + `l` → call → called → will call
-- `d` + `e` + `v` → develop → developed → will develop
+- `t` + `n` + `d` → need → needed → needing
+- `m` + `e` + `a` → mean → meant → meaning
+- `c` + `a` + `l` → call → called → calling
+- `d` + `e` + `v` → develop → developed → developing
 - `u` + `n` + `d` → under
 - `l` + `a` + `s` → last
 - `r` + `i` + `t` → right → rights
-- `m` + `v` + `e` → move → moved → will move
+- `m` + `v` + `e` → move → moved → moving
 - `t` + `i` + `n` → thing → things
 - `g` + `e` + `n` → general → generals
 - `s` + `h` + `l` → school → schools
 - `n` + `v` + `r` → never
 - `s` + `a` + `m` → same
 - `a` + `h` + `r` → another
-- `e` + `g` + `i` → begin → began → will begin
+- `e` + `g` + `i` → begin → began → beginning
 - `h` + `i` + `e` → while
 - `n` + `e` + `r` → number → numbers
-- `p` + `a` + `r` → part → parts → parted → will part
-- `t` + `u` + `n` → turn → turns → turned → will turn
+- `p` + `a` + `r` → part → parts → parted → parting
+- `t` + `u` + `n` → turn → turns → turned → turning
 - `e` + `a` + `l` → real
-- `e` + `a` + `v` → leave → left → will leave
+- `e` + `a` + `v` → leave → left → leaving
 - `m` + `i` + `t` → might
-- `w` + `a` + `t` → want → wanted → will want
-- `p` + `o` + `i` → point → points → pointed → will point
-- `z` + `o` + `r` → form → forms → formed → will form
+- `w` + `a` + `t` → want → wanted → wanting
+- `p` + `o` + `i` → point → points → pointed → pointing
+- `z` + `o` + `r` → form → forms → formed → forming
 - `o` + `f` + `k` → off
 - `c` + `i` + `d` → child → children
 - `f` + `e` + `w` → few → fewer → fewest
 - `m` + `a` + `l` → small → smaller → smallest
 - `s` + `i` + `e` → since
 - `a` + `g` + `n` → against
-- `a` + `s` + `k` → ask → asked → will ask
+- `a` + `s` + `k` → ask → asked → asking
 - `l` + `a` + `t` → late → later → latest
 - `g` + `m` + `e` → home → homes
-- `i` + `n` + `r` → interest → interests → interested → will interest
+- `i` + `n` + `r` → interest → interests → interested → interesting
 - `a` + `r` + `g` → large → larger → largest
 - `p` + `s` + `n` → person → people
-- `e` + `n` + `d` → end → ends → ended → will end
-- `o` + `p` + `n` → open → opened → will open
+- `e` + `n` + `d` → end → ends → ended → ending
+- `o` + `p` + `n` → open → opened → opening
 - `p` + `l` + `i` → public
-- `f` + `o` + `l` → follow → followed → will follow
+- `f` + `o` + `l` → follow → followed → following
 - `d` + `r` + `n` → during
-- `r` + `n` + `t` → present → presents → presented → will present
+- `r` + `n` + `t` → present → presents → presented → presenting
 - `i` + `t` + `o` → without
 - `a` + `g` + `i` → again
-- `h` + `o` + `d` → hold → held → will hold
-- `g` + `r` + `n` → govern → governed → will govern
+- `h` + `o` + `d` → hold → held → holding
+- `g` + `r` + `n` → govern → governed → governing
 - `a` + `r` + `d` → around
 - `p` + `s` + `e` → possible
-- `h` + `e` + `d` → head → heads → headed → will head
-- `c` + `n` + `d` → consider → considered → will consider
-- `w` + `r` + `d` → word → words → worded → will word
-- `r` + `g` + `m` → program → programs → programmed → will program
+- `h` + `e` + `d` → head → heads → headed → heading
+- `c` + `n` + `d` → consider → considered → considering
+- `w` + `r` + `d` → word → words → worded → wording
+- `r` + `g` + `m` → program → programs → programmed → programming
 - `l` + `e` + `m` → problem → problems
 - `h` + `e` + `v` → however
-- `e` + `a` + `d` → lead → leads → led → will lead
+- `e` + `a` + `d` → lead → leads → led → leading
 - `s` + `y` + `t` → system → systems
-- `s` + `e` + `t` → set → sets → will set
-- `o` + `r` + `d` → order → orders → ordered → will order
-- `e` + `y` + `x` → eye → eyes → eyed → will eye
-- `p` + `l` + `n` → plan → plans → planned → will plan
-- `r` + `u` + `n` → run → runs → ran → will run
-- `e` + `p` + `⨧` → keep → kept → will keep
-- `f` + `a` + `c` → face → faces → faced → will face
+- `s` + `e` + `t` → set → sets → setting
+- `o` + `r` + `d` → order → orders → ordered → ordering
+- `e` + `y` + `x` → eye → eyes → eyed → eyeing
+- `p` + `l` + `n` → plan → plans → planned → planning
+- `r` + `u` + `n` → run → runs → ran → running
+- `e` + `p` + `⨧` → keep → kept → keeping
+- `f` + `a` + `c` → face → faces → faced → facing
 - `f` + `c` + `t` → fact → facts
-- `g` + `o` + `u` → group → groups → grouped → will group
-- `p` + `l` + `y` → play → plays → played → will play
-- `s` + `n` + `d` → stand → stands → stood → will stand
-- `i` + `n` + `c` → increase → increased → will increase
+- `g` + `o` + `u` → group → groups → grouped → grouping
+- `p` + `l` + `y` → play → plays → played → playing
+- `s` + `n` + `d` → stand → stands → stood → standing
+- `i` + `n` + `c` → increase → increased → increasing
 - `e` + `l` + `y` → early → earlier → earliest
 - `o` + `r` + `s` → course → courses
-- `c` + `h` + `e` → change → changes → changed → will change
-- `h` + `l` + `p` → help → helped → will help
+- `c` + `h` + `e` → change → changes → changed → changing
+- `h` + `l` + `p` → help → helped → helping
 - `l` + `n` + `e` → line → lines
 
 ### Top 1000 words (wip)
