@@ -119,7 +119,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `m` + `o` + `t` → most → many → more
 - `e` + `v` + `n` → even
 - `f` + `i` + `d` → find → found → finding
-- `d` + `a` + `y` → day → days
+- `a` + `y` + `⨧` → day → days
 - `a` + `l` + `o` → also
 - `f` + `t` + `r` → after
 - `w` + `a` + `y` → way → ways
