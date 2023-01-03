@@ -105,7 +105,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `s` + `e` + `k` → see → saw → seeing
 - `u` + `s` + `e` → use → used → using
 - `g` + `e` + `t` → get → got → getting
-- `l` + `i` + `k` → like → liked → liking
+- `i` + `e` + `⨧` → like → liked → liking
 - `t` + `e` + `n` → then
 - `f` + `r` + `s` → first
 - `a` + `n` + `y` → any
@@ -325,7 +325,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `w` + `i` + `e` → white
 - `h` + `i` + `d` → children
 - `g` + `o` + `t` → got
-- `a` + `l` + `k` → walk
+- `w` + `a` + `⨧` → walk
 - `m` + `p` + `l` → example
 - `l` + `w` + `y` → always
 - `m` + `s` + `c` → music
