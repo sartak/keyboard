@@ -27,7 +27,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 ![keyboard layout](keymap.svg)
 
-## 441 chords
+## 443 chords
 
 ### Suffixes
 
@@ -471,6 +471,8 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `n` + `i` + `l` → nil → nils
 - `a` + `r` + `y` → array → arrays
 - `s` + `r` + `t` → sort → sorts → sorted → will sort
+- `h` + `t` + `p` → http:// → https://
+- `h` + `t` + `p` + `s` → https:// → http://
 
 ### Misc phrases
 
