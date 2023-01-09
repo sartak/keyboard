@@ -27,7 +27,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 ![keyboard layout](keymap.svg)
 
-## 443 chords
+## 454 chords
 
 ### Suffixes
 
@@ -473,6 +473,20 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `s` + `r` + `t` → sort → sorts → sorted → will sort
 - `h` + `t` + `p` → http:// → https://
 - `h` + `t` + `p` + `s` → https:// → http://
+
+### Common pairs of words
+
+- `i` + `n` + `t` + `e` → in the
+- `o` + `t` + `e` + `⨧` → of the
+- `o` + `b` + `e` + `⨧` → to be
+- `t` + `h` + `e` + `⨧` → to the
+- `a` + `n` + `t` + `h` → and the
+- `a` + `n` + `d` + `i` → and I
+- `o` + `n` + `h` + `e` → on the
+- `i` + `t` + `s` + `⨧` → it is
+- `f` + `y` + `o` + `u` → if you
+- `t` + `h` + `e` + `w` → the world
+- `i` + `n` + `a` + `⨧` → in a
 
 ### Misc phrases
 
