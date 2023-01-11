@@ -1,0 +1,26 @@
+{
+  "Alpha": [
+    ["w", "l", "y", "p", "b",   "z", "f", "o", "u", "'"],
+    ["c", "r", "s", "t", "g",   "m", "n", "e", "i", "a"],
+    ["q", "j", "v", "d", "k",   "x", "h", ".", ",", "Ret"],
+    [          "Dup", "Bksp",   "Spc", "Tab"]
+  ],
+  "Symbol": [
+    ["`", "~", "\\", "{", "$",   "%", "}", "/",  "#",  null],
+    ["&", "*", "=",  "(", "<",   ">", ")", "-",  "+",  "|"],
+    ["—", "@", "_",  "[", "…",   "^", "]", null, null, null],
+    [              null, null,   null, null]
+  ],
+  "Number": [
+    ["BrUp", "6", "5", "4", "ScSh",   "Mute", "Prev", "PlPs", "Next", null],
+    ["Lang", "3", "2", "1", "0",      "VlUp", "Left", "Down", "Up",   "Rght"],
+    ["BrDn", "9", "8", "7", "Lock",   "VlDn", "Zoom", null,   null,   null],
+    [                   null, null,   null, null]
+  ],
+  "Function": [
+    ["BtlL", "",    "",    "",    "RstL",   "RstR", "", "", "", "BtlR"],
+    ["",     "BT4", "BT5", "BT6", "BTCl",   "",     "", "", "", ""],
+    ["",     "BT1", "BT2", "BT3", "BTTg",   "",     "", "", "", ""],
+    [                         "Alph", "",   "", ""]
+  ]
+}
