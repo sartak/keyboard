@@ -27,7 +27,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 ![keyboard layout](keymap.svg)
 
-## 454 chords
+## 446 chords
 
 ### Suffixes
 
@@ -492,11 +492,3 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
 - `e` + `l` + `b` + `h` → Elbereth
-- `h` + `a` + `n` → Shawn → Shawn Moore
-- `o` + `r` + `e` → Moore → Shawn Moore
-- `s` + `a` + `r` → sartak
-- `s` + `r` + `.` → sartak.org → https://sartak.org
-- `h` + `n` + `.` → shawn.dev → https://shawn.dev
-- `s` + `e` + `v` → Somerville
-- `b` + `s` + `n` → Boston
-- `c` + `h` + `u` → Massachusetts
