@@ -1,6 +1,6 @@
-![my Ferris Sweep](keyboard.jpg)
+![my Ferris Sweep](images/keyboard.jpg)
 
-![Canary layout on iOS](xkeyboard.png)
+![Canary layout on iOS](images/xkeyboard.png)
 
 - [Keyboard hardware](https://github.com/sartak/Sweep)
 - [ZMK config](https://github.com/sartak/zmk-config)
@@ -21,11 +21,11 @@ The dup key interacts with the chording system in two separate ways. One, it's a
 
 My keyboard also emits a sidechannel of keys pressed and chords used. (Astute readers will recognize this as a _keylogger_!) Ordinarily, the host computer can only see the outputs of chords; this allows seeing the inputs too. I have a daemon listening to that sidechannel to track whether each word was typed using character entry or a chord. This unlocks some neat benefits, like noticing I type a word the slow way frequently, and either remind me of the chord I already have for it, or offer up an available combo. It also offers a more accurate visualization of where my fingers are on the keyboard, which I can iframe into a website like Monkeytype like so:
 
-![Chorded entry visualizer](chords.gif)
+![Chorded entry visualizer](images/chords.gif)
 
 For modifiers, I choose to not use homerow mods since they wouldn't work well with word-chords. Instead, I hold a letter, symbol, or number key for just an extra moment (200ms) to emit the ⌘-modified character. The space and backspace keys act as shift and ctrl when held with another key. Space and backspace also join together for hyper (which I use as an application switcher). For the very few uses of alt that I need, I have dedicated keys (a combo for alt-backspace to delete a word, a handful of characters on the symbol layer, etc).
 
-![keyboard layout](keymap.svg)
+![keyboard layout](images/keymap.svg)
 
 ## 446 chords
 
