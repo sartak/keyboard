@@ -78,7 +78,7 @@ const parseChords = (files) => {
           throw new Error(
             `Unexpected keys ${Object.keys(rest)
               .map((r) => `'${r}'`)
-              .join(", ")} in chord '${JSON.stringify(input)}'`
+              .join(", ")}`
           );
         }
 
