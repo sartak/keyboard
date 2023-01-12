@@ -181,13 +181,59 @@ const parseChords = (files) => {
   return result;
 };
 
-const chordsAndCategories = parseChords(
-  chordFiles.map((file) => JSON.parse(fs.readFileSync(file)))
-);
-
 const dropAfter = (xs, re) => {
   const i = xs.findIndex((x) => x.match(re));
   return i === -1 ? xs : xs.slice(0, i);
+};
+
+const makeAlternates = ({ output, exact }) => {
+  const alternates = [];
+  for (let i = 0, max = output.length - 1; i < max; i++) {
+    alternates.push([i, i + 1, output[i], output[i + 1]]);
+  }
+  const i = output.length - 1;
+  alternates.push([i, 0, output[i], output[0]]);
+
+  alternates.forEach((alt) => {
+    let [, , from, to] = alt;
+
+    if (!exact) {
+      from += " ";
+      to += " ";
+    }
+
+    let f = from;
+
+    while (f.length) {
+      if (to.substr(0, f.length) === f) {
+        break;
+      }
+      f = f.substring(0, f.length - 1);
+    }
+
+    let backspaces = from.length - f.length;
+    let append = to.substring(f.length);
+
+    if (!exact) {
+      append = append.substring(0, append.length - 1);
+    }
+
+    alt.push(backspaces);
+    alt.push(append);
+    alt.push(exact);
+  });
+
+  return alternates;
+};
+
+const macro = (name, params, lines) => {
+  const sig = params === null ? "" : `(${params.join(", ")})`;
+  const define = `#define ${name}${sig}`;
+  if (Array.isArray(lines)) {
+    return [define, ...lines.map((l) => `  ${l}`)].join(" \\\n");
+  } else {
+    return [`${define} ${lines}`];
+  }
 };
 
 const renderCombo = ({ combo }) => {
@@ -211,7 +257,7 @@ const renderOutput = ({ output }) => {
     .join(" → ");
 };
 
-const updateReadme = (original) => {
+const readmeContent = (chordsAndCategories, original) => {
   const lines = dropAfter(original, new RegExp(/^## \d+ chords$/));
 
   const visibleChords = chordsAndCategories.filter(
@@ -233,17 +279,7 @@ const updateReadme = (original) => {
   });
   lines.push("");
 
-  fs.writeFileSync(readmeFile, lines.join("\n"));
-};
-
-const macro = (name, params, lines) => {
-  const sig = params === null ? "" : `(${params.join(", ")})`;
-  const define = `#define ${name}${sig}`;
-  if (Array.isArray(lines)) {
-    return [define, ...lines.map((l) => `  ${l}`)].join(" \\\n");
-  } else {
-    return [`${define} ${lines}`];
-  }
+  return lines;
 };
 
 const qmkCombo = ({ combo, layers }) => {
@@ -306,46 +342,6 @@ const qmkOutput = ({ output }) => {
   emit();
 
   return out;
-};
-
-const qmkAlternates = ({ output, exact }) => {
-  const alternates = [];
-  for (let i = 0, max = output.length - 1; i < max; i++) {
-    alternates.push([i, i + 1, output[i], output[i + 1]]);
-  }
-  const i = output.length - 1;
-  alternates.push([i, 0, output[i], output[0]]);
-
-  alternates.forEach((alt) => {
-    let [, , from, to] = alt;
-
-    if (!exact) {
-      from += " ";
-      to += " ";
-    }
-
-    let f = from;
-
-    while (f.length) {
-      if (to.substr(0, f.length) === f) {
-        break;
-      }
-      f = f.substring(0, f.length - 1);
-    }
-
-    let backspaces = from.length - f.length;
-    let append = to.substring(f.length);
-
-    if (!exact) {
-      append = append.substring(0, append.length - 1);
-    }
-
-    alt.push(backspaces);
-    alt.push(append);
-    alt.push(exact);
-  });
-
-  return alternates;
 };
 
 const qmkEnum = (chords) => [
@@ -428,7 +424,7 @@ const qmkDupFunction = (chords) => {
     .forEach((chord) => {
       cases.push(`    case CHORD_${chord.identifier}:`);
       cases.push("      switch(last_chord_cycle) {");
-      qmkAlternates(chord).forEach(([i, j, _from, _to, bs, append, exact]) => {
+      makeAlternates(chord).forEach(([i, j, _from, _to, bs, append, exact]) => {
         cases.push(`        case ${i}:`);
         if (bs) {
           cases.push(`          backspaces = ${bs};`);
@@ -471,7 +467,7 @@ const qmkDupFunction = (chords) => {
   ];
 };
 
-const updateQmk = () => {
+const qmkConfig = (chordsAndCategories) => {
   const lines = [];
   const chords = chordsAndCategories.filter(
     (chord) => typeof chord === "object"
@@ -483,7 +479,7 @@ const updateQmk = () => {
   lines.push(...qmkFunction(chords), "");
   lines.push(...qmkDupFunction(chords), "");
 
-  fs.writeFileSync(qmkChordFile, lines.join("\n"));
+  return lines;
 };
 
 const zmkPress = {
@@ -679,7 +675,7 @@ const zmkMacros = (chords) => {
   return lines;
 };
 
-const updateZmk = () => {
+const zmkConfig = (chordsAndCategories) => {
   const lines = [];
   const chords = [];
 
@@ -707,9 +703,19 @@ const updateZmk = () => {
   lines.push(...zmkCombos(chords), "");
   lines.push(...zmkMacros(chords), "");
 
-  fs.writeFileSync(zmkChordFile, lines.join("\n"));
+  return lines;
 };
 
-updateReadme(fs.readFileSync(readmeFile, "utf-8").split("\n"));
-updateQmk();
-updateZmk();
+const chordsAndCategories = parseChords(
+  chordFiles.map((file) => JSON.parse(fs.readFileSync(file)))
+);
+
+fs.writeFileSync(
+  readmeFile,
+  readmeContent(
+    chordsAndCategories,
+    fs.readFileSync(readmeFile, "utf-8").split("\n")
+  ).join("\n")
+);
+fs.writeFileSync(qmkChordFile, qmkConfig(chordsAndCategories).join("\n"));
+fs.writeFileSync(zmkChordFile, zmkConfig(chordsAndCategories).join("\n"));
