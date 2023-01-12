@@ -113,7 +113,7 @@ const parseChords = (files) => {
   return result;
 };
 
-const chords = parseChords(
+const chordsAndCategories = parseChords(
   chordFiles.map((file) => JSON.parse(fs.readFileSync(file)))
 );
 
@@ -146,12 +146,12 @@ const renderOutput = ({ output }) => {
 const updateReadme = (original) => {
   const lines = dropAfter(original, new RegExp(/^## \d+ chords$/));
 
-  const visibleChords = chords.filter(
+  const visibleChords = chordsAndCategories.filter(
     (chord) => typeof chord === "object" && !chord.quiet
   );
   lines.push(`## ${visibleChords.length} chords`);
 
-  chords.forEach((chord) => {
+  chordsAndCategories.forEach((chord) => {
     if (typeof chord === "string") {
       lines.push("", `### ${chord}`, "");
       return;
