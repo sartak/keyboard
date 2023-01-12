@@ -1,9 +1,9 @@
 {
   "chords": [
-    { "combo": ["e", "."], "output": "!", "exact": true, "quiet": true },
-    { "combo": ["i", ","], "output": "?", "exact": true, "quiet": true },
-    { "combo": ["a", "Ret"], "output": ":", "exact": true, "quiet": true },
-    { "combo": ["a", "'"], "output": ";", "exact": true, "quiet": true },
+    { "combo": ["e", "."], "output": "!", "exact": true, "quiet": true, "label": "excl" },
+    { "combo": ["i", ","], "output": "?", "exact": true, "quiet": true, "label": "qmark" },
+    { "combo": ["a", "Ret"], "output": ":", "exact": true, "quiet": true, "label": "colon" },
+    { "combo": ["a", "'"], "output": ";", "exact": true, "quiet": true, "label": "semi" },
 
     { "combo": ["c", "q"], "output": "¢", "label": "cent", "exact": true, "quiet": true, "layers": "Symbol" },
     { "combo": ["r", "j"], "output": "£", "label": "pound", "exact": true, "quiet": true, "layers": "Symbol" },

@@ -22,6 +22,12 @@ const intuitLabel = ({ output }) =>
     .map((l) => tidyReadmeOutput[l] || l)
     .join("");
 
+const intuitIdentifierStem = ({ label }) => {
+  let identifier = label.toLowerCase();
+  identifier = identifier.replaceAll(/[^a-z_0-9]+/g, "_");
+  return identifier.substring(0, 7);
+};
+
 const parseLayout = (layers) => {
   const validKey = {};
   layers.Alpha.forEach((row) => {
@@ -48,6 +54,7 @@ const validateCombo = ({ combo }) => {
 
 const parseChords = (files) => {
   const result = [];
+  let seenIdentifier = {};
 
   files.forEach(({ chords, defaults, ...rest }) => {
     if (Object.keys(rest).length) {
@@ -76,6 +83,7 @@ const parseChords = (files) => {
             quiet,
             skipSentence,
             layers,
+            identifier,
             ...rest
           } = chord;
 
@@ -103,6 +111,26 @@ const parseChords = (files) => {
 
         if (typeof chord.layers === "string") {
           chord.layers = [chord.layers];
+        }
+
+        if (chord.identifier === undefined) {
+          const stem = intuitIdentifierStem(chord);
+          let identifier = stem;
+          let i = 0;
+          while (seenIdentifier[identifier]) {
+            i++;
+            identifier = stem + i;
+          }
+          chord.identifier = identifier;
+        } else {
+          if (seenIdentifier[chord.identifier]) {
+            throw new Error(`Duplicate identifier '${chord.identifier}'`);
+          }
+        }
+        seenIdentifier[chord.identifier] = true;
+
+        if (!chord.identifier.match(/^[a-z_][a-z_0-9]{0,6}$/)) {
+          throw new Error(`Malformed identifier '${chord.identifier}'`);
         }
 
         result.push(chord);
