@@ -63,51 +63,47 @@ const parseChords = (files) => {
       }
 
       try {
-        let {
-          combo,
-          output,
-          label,
-          exact,
-          quiet,
-          skipSentence,
-          layers,
-          ...rest
-        } = { ...defaults, ...input };
+        const chord = { ...defaults, ...input };
 
-        if (Object.keys(rest).length) {
-          throw new Error(
-            `Unexpected keys ${Object.keys(rest)
-              .map((r) => `'${r}'`)
-              .join(", ")}`
-          );
+        {
+          const {
+            combo,
+            output,
+            label,
+            exact,
+            quiet,
+            skipSentence,
+            layers,
+            ...rest
+          } = chord;
+
+          if (Object.keys(rest).length) {
+            throw new Error(
+              `Unexpected keys ${Object.keys(rest)
+                .map((r) => `'${r}'`)
+                .join(", ")}`
+            );
+          }
         }
 
-        if (combo.length === 0) {
+        if (chord.combo.length === 0) {
           return;
         }
-        validateCombo(input);
+        validateCombo(chord);
 
-        if (label === undefined) {
-          label = intuitLabel(input);
+        if (typeof chord.output === "string") {
+          chord.output = [chord.output];
         }
 
-        if (typeof output === "string") {
-          output = [output];
+        if (chord.label === undefined) {
+          chord.label = intuitLabel(chord);
         }
 
-        if (typeof layers === "string") {
-          layers = [layers];
+        if (typeof chord.layers === "string") {
+          chord.layers = [chord.layers];
         }
 
-        result.push({
-          combo,
-          output,
-          label,
-          exact,
-          quiet,
-          skipSentence,
-          layers,
-        });
+        result.push(chord);
       } catch (err) {
         throw new Error(`${err.message} in chord '${JSON.stringify(input)}'`);
       }
