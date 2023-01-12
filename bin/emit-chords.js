@@ -4,6 +4,7 @@ const chordFiles = ["chords.json", "personal.json"];
 const layoutFile = "layout.json";
 const readmeFile = "README.md";
 const qmkChordFile = "../qmk-config/chords.c";
+const zmkChordFile = "../zmk-config/config/chords.keymap";
 
 const tidyReadmeCombo = {
   Ret: "↵",
@@ -32,10 +33,13 @@ const intuitIdentifierStem = ({ label }) => {
 const parseLayout = (layers) => {
   const validKey = {};
   const qmkKey = {};
+  const zmkKey = {};
 
+  let z = 0;
   layers.Alpha.forEach((row) => {
     row.forEach((key) => {
       validKey[key] = true;
+      zmkKey[key] = z++;
     });
   });
 
@@ -63,14 +67,17 @@ const parseLayout = (layers) => {
     });
   });
 
+  const zmkLayers = Object.keys(layers).filter((l) => l !== "Function");
   return {
     layers: Object.keys(layers),
     validKey,
     qmkKey,
+    zmkKey,
+    zmkLayers,
   };
 };
 
-const { validKey, qmkKey } = parseLayout(
+const { validKey, qmkKey, zmkKey, zmkLayers } = parseLayout(
   JSON.parse(fs.readFileSync(layoutFile))
 );
 
@@ -112,6 +119,7 @@ const parseChords = (files) => {
             exact,
             quiet,
             skipSentence,
+            sentenceShift,
             layers,
             identifier,
             ...rest
@@ -478,5 +486,230 @@ const updateQmk = () => {
   fs.writeFileSync(qmkChordFile, lines.join("\n"));
 };
 
+const zmkPress = {
+  " ": "&kp SPC",
+  "!": "&kp EXCL",
+  "'": "&kp APOS",
+  ",": "&kp COMMA",
+  ".": "&kp DOT",
+  "/": "&kp SLASH",
+  ":": "&kp COLON",
+  ";": "&kp SEMI",
+  "\b": "&kp BSPC",
+  "<SKLS>": "&sk LSHFT",
+  "?": "&kp QMARK",
+  "¢": "&kp LA(N4)",
+  "£": "&kp LA(N3)",
+  "¥": "&kp INT_YEN",
+  "°": "&kp LA(LS(N8))",
+  "•": "&kp LA(N8)",
+  "‽": "&kp QMARK",
+  "€": "&kp LA(LS(N2))",
+  "←": "&kp QMARK",
+  "↑": "&kp QMARK",
+  "→": "&kp QMARK",
+  "↓": "&kp QMARK",
+  "∞": "&kp LA(N5)",
+  "⋯": "&kp QMARK",
+  "✔": "&kp QMARK",
+  "✗": "&kp QMARK",
+  λ: "&kp QMARK",
+};
+
+"abcdefghijklmnopqrstuvwxyz".split("").forEach((alpha) => {
+  const upper = alpha.toUpperCase();
+  zmkPress[upper] = `&kp LS(${upper})`;
+  zmkPress[alpha] = `&kp ${upper}`;
+});
+"0123456789".split("").forEach((digit) => {
+  zmkPress[digit] = `&kp NUM_${digit}`;
+});
+
+const zmkPresses = (output) => {
+  const presses = [];
+  let o = output;
+  while (o.length) {
+    let key;
+    const special = o.match(/^<\w+>/);
+    if (special) {
+      key = special[0];
+    } else {
+      key = o.substring(0, 1);
+    }
+
+    if (!(key in zmkPress)) {
+      throw new Error(`Unable to handle zmkPress for '${key}'`);
+    }
+
+    o = o.substring(key.length);
+    presses.push(zmkPress[key]);
+  }
+
+  return presses;
+};
+
+const zmkOutput = (chord) => {
+  let content = chord.output[0];
+  if (!chord.exact) {
+    content += " ";
+  }
+
+  const presses = zmkPresses(content);
+  const macro = `ch_${chord.identifier}`;
+
+  return presses.length === 1 ? [presses[0], null] : [presses.join(" "), macro];
+};
+
+const zmkCombo = (chord) => chord.combo.map((key) => zmkKey[key]).join(" ");
+
+const zmkCombos = (chords) => {
+  const lines = [
+    macro(
+      "COMBO",
+      ["name", "keypress", "keypos"],
+      [
+        "combo_##name {",
+        "  timeout-ms = <60>;",
+        "  bindings = <keypress>;",
+        "  key-positions = <keypos>;",
+        "};",
+      ]
+    ),
+    "",
+    macro(
+      "LAYER_CHORD",
+      ["name", "keypress", "keypos", "lays"],
+      [
+        "chord_##name {",
+        "  timeout-ms = <60>;",
+        "  bindings = <keypress>;",
+        "  key-positions = <keypos>",
+        "  layers = <lays>;",
+        "};",
+      ]
+    ),
+    "",
+    macro(
+      "CHORD",
+      ["name", "keypress", "keypos"],
+      ["LAYER_CHORD(name, keypress, keypos, ALPHA SENTENCE)"]
+    ),
+    "",
+    "/ {",
+    "  combos {",
+    '    compatible = "zmk,combos";',
+  ];
+
+  chords.forEach((chord) => {
+    let macro = "CHORD";
+    const output = zmkOutput(chord);
+    const args = [
+      `ch_${chord.identifier}`,
+      output[1] ? `&${output[1]}` : output[0],
+      zmkCombo(chord),
+    ];
+
+    if (chord.layers) {
+      macro = "LAYER_CHORD";
+      args.push(chord.layers.map((l) => l.toUpperCase()).join(" "));
+    }
+
+    lines.push(`    ${macro}(${args.join(", ")})`);
+  });
+
+  lines.push("  };", "};");
+
+  return lines;
+};
+
+const zmkMacros = (chords) => {
+  const lines = [
+    macro(
+      "MACRO",
+      ["name", "keys"],
+      [
+        "name: name##_macro {",
+        "label = #name;",
+        'compatible = "zmk,behavior-macro";',
+        "#binding-cells = <0>;",
+        "tap-ms = <1>;",
+        "wait-ms = <1>;",
+        "bindings = <keys>;",
+        "};",
+      ]
+    ),
+    "",
+    macro(
+      "CHMAC",
+      ["name", "keys"],
+      [
+        "name: name##_macro {",
+        "  label = #name;",
+        '  compatible = "zmk,behavior-macro";',
+        "  #binding-cells = <0>;",
+        "  tap-ms = <1>;",
+        "  wait-ms = <1>;",
+        "  bindings = <keys>, <&to SENTENCE>;",
+        "};",
+      ]
+    ),
+    "",
+    "/ {",
+    "  macros {",
+  ];
+
+  chords.forEach((chord) => {
+    const [content, identifier] = zmkOutput(chord);
+    if (!identifier) {
+      return;
+    }
+
+    let macro = "CHMAC";
+    const args = [identifier, content];
+
+    if (chord.skipSentence) {
+      macro = "MACRO";
+    }
+
+    lines.push(`    ${macro}(${args.join(", ")})`);
+  });
+
+  lines.push("  };", "};");
+
+  return lines;
+};
+
+const updateZmk = () => {
+  const lines = [];
+  const chords = [];
+
+  chordsAndCategories
+    .filter((chord) => typeof chord === "object")
+    .forEach((chord) => {
+      if (chord.sentenceShift !== undefined) {
+        chords.push({
+          ...chord,
+          identifier: `${chord.identifier}_s`,
+          output: [
+            `\b${chord.output[0]} ${chord.sentenceShift ? "<SKLS>" : ""}`,
+          ],
+          layers: ["Sentence"],
+        });
+        chords.push({
+          ...chord,
+          layers: zmkLayers,
+        });
+      } else {
+        chords.push(chord);
+      }
+    });
+
+  lines.push(...zmkCombos(chords), "");
+  lines.push(...zmkMacros(chords), "");
+
+  fs.writeFileSync(zmkChordFile, lines.join("\n"));
+};
+
 updateReadme(fs.readFileSync(readmeFile, "utf-8").split("\n"));
 updateQmk();
+updateZmk();
