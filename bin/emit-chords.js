@@ -16,9 +16,11 @@ const tidyReadmeOutput = {
   "\b": "⌫",
 };
 
-const intuitLabel = ({ output }) => {
-  return Array.isArray(output) ? output[0] : output;
-};
+const intuitLabel = ({ output }) =>
+  output[0]
+    .split("")
+    .map((l) => tidyReadmeOutput[l] || l)
+    .join("");
 
 const parseLayout = (layers) => {
   const validKey = {};
