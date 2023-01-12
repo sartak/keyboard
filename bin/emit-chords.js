@@ -309,9 +309,15 @@ const qmkAlternates = ({ output, exact }) => {
   alternates.push([i, 0, output[i], output[0]]);
 
   alternates.forEach((alt) => {
-    const [, , from, to] = alt;
+    let [, , from, to] = alt;
+
+    if (!exact) {
+      from += " ";
+      to += " ";
+    }
 
     let f = from;
+
     while (f.length) {
       if (to.substr(0, f.length) === f) {
         break;
@@ -320,10 +326,10 @@ const qmkAlternates = ({ output, exact }) => {
     }
 
     let backspaces = from.length - f.length;
-    const append = to.substring(f.length);
+    let append = to.substring(f.length);
 
     if (!exact) {
-      backspaces++;
+      append = append.substring(0, append.length - 1);
     }
 
     alt.push(backspaces);
