@@ -161,7 +161,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `r` + `i` + `e` → write → wrote → writing
 - `c` + `m` + `e` → become → became → becoming
 - `h` + `r` + `⨧` → here
-- `s` + `h` + `w` → show → showed → showing
+- `s` + `h` + `⨧` → show → showed → showing
 - `o` + `s` + `e` → house → houses
 - `b` + `o` + `h` → both
 - `b` + `e` + `n` → between
@@ -210,7 +210,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `r` + `n` + `t` → present → presents → presented → presenting
 - `i` + `t` + `o` → without
 - `a` + `g` + `i` → again
-- `h` + `o` + `d` → hold → held → holding
+- `h` + `d` + `⨧` → hold → held → holding
 - `g` + `r` + `n` → govern → governed → governing
 - `a` + `r` + `d` → around
 - `p` + `s` + `e` → possible
