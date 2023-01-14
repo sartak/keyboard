@@ -23,6 +23,8 @@ My keyboard also emits a sidechannel of keys pressed and chords used. (Astute re
 
 ![Chorded entry visualizer](images/chords.gif)
 
+Given that this keyboard is designed around chording entire words, deleting words becomes a much more common operation. Comboing space+backspace sends alt+backspace to delete the preceding word. And as a special case, comboing space+backspace immediately after a chord deletes that chord's output. This makes it more like an "undo chord" rather than delete word. This better matches intent when a chord emitted multiple words, or was not separated from the previous text by a space (such as in a long identifier name in code).
+
 For modifiers, I choose to not use homerow mods since they wouldn't work well with word-chords. Instead, I hold a letter, symbol, or number key for just an extra moment (200ms) to emit the ⌘-modified character. The space and backspace keys act as shift and ctrl when held with another key. Space and backspace also join together for hyper (which I use as an application switcher). For the very few uses of alt that I need, I have dedicated keys (a combo for alt-backspace to delete a word, a handful of characters on the symbol layer, etc).
 
 ![keyboard layout](images/keymap.svg)
