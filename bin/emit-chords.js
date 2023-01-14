@@ -5,6 +5,7 @@ const layoutFile = "layout.json";
 const readmeFile = "README.md";
 const qmkChordFile = "../qmk-config/chords.c";
 const zmkChordFile = "../zmk-config/config/chords.keymap";
+const processedChords = "processed.json";
 
 const tidyReadmeCombo = {
   Ret: "↵",
@@ -77,9 +78,9 @@ const parseLayout = (layers) => {
   };
 };
 
-const { validKey, qmkKey, zmkKey, zmkLayers } = parseLayout(
-  JSON.parse(fs.readFileSync(layoutFile))
-);
+const layout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
+
+const { validKey, qmkKey, zmkKey, zmkLayers } = layout;
 
 const validateCombo = ({ combo }) => {
   combo.forEach((key) => {
@@ -748,3 +749,10 @@ fs.writeFileSync(
 );
 fs.writeFileSync(qmkChordFile, qmkConfig(chordsAndCategories).join("\n"));
 fs.writeFileSync(zmkChordFile, zmkConfig(chordsAndCategories).join("\n"));
+fs.writeFileSync(
+  processedChords,
+  JSON.stringify({
+    layout,
+    chords: chordsAndCategories,
+  })
+);
