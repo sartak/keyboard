@@ -591,7 +591,7 @@ const zmkCombos = (chords) => {
         "chord_##name {",
         "  timeout-ms = <60>;",
         "  bindings = <keypress>;",
-        "  key-positions = <keypos>",
+        "  key-positions = <keypos>;",
         "  layers = <lays>;",
         "};",
       ]
