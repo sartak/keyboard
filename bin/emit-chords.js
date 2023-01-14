@@ -19,7 +19,7 @@ const tidyReadmeOutput = {
 };
 
 const intuitLabel = ({ output }) =>
-  output[0]
+  output
     .split("")
     .map((l) => tidyReadmeOutput[l] || l)
     .join("");
@@ -89,6 +89,56 @@ const validateCombo = ({ combo }) => {
   });
 };
 
+const makeAlternates = ({ output, exact }) => {
+  if (!Array.isArray(output) || output.length === 1) {
+    return null;
+  }
+
+  const alternates = [];
+  for (let i = 0, max = output.length - 1; i < max; i++) {
+    alternates.push([i, i + 1, output[i], output[i + 1]]);
+  }
+  const i = output.length - 1;
+  alternates.push([i, 0, output[i], output[0]]);
+
+  return alternates.map((alt) => {
+    let [, , from, to] = alt;
+    const length = to.length;
+
+    if (!exact) {
+      from += " ";
+      to += " ";
+    }
+
+    let f = from;
+
+    while (f.length) {
+      if (to.substr(0, f.length) === f) {
+        break;
+      }
+      f = f.substring(0, f.length - 1);
+    }
+
+    let backspaces = from.length - f.length;
+    let append = to.substring(f.length);
+
+    if (!exact) {
+      append = append.substring(0, append.length - 1);
+    }
+
+    return {
+      fromIdx: alt[0],
+      toIdx: alt[1],
+      from: alt[2],
+      to: alt[3],
+      backspaces,
+      append,
+      exact,
+      length,
+    };
+  });
+};
+
 const parseChords = (files) => {
   const result = [];
   let seenIdentifier = {};
@@ -139,8 +189,10 @@ const parseChords = (files) => {
         }
         validateCombo(chord);
 
-        if (typeof chord.output === "string") {
-          chord.output = [chord.output];
+        chord.alternates = makeAlternates(chord);
+
+        if (Array.isArray(chord.output)) {
+          chord.output = chord.output[0];
         }
 
         if (chord.label === undefined) {
@@ -186,48 +238,6 @@ const dropAfter = (xs, re) => {
   return i === -1 ? xs : xs.slice(0, i);
 };
 
-const makeAlternates = ({ output, exact }) => {
-  const alternates = [];
-  for (let i = 0, max = output.length - 1; i < max; i++) {
-    alternates.push([i, i + 1, output[i], output[i + 1]]);
-  }
-  const i = output.length - 1;
-  alternates.push([i, 0, output[i], output[0]]);
-
-  alternates.forEach((alt) => {
-    let [, , from, to] = alt;
-    const length = to.length;
-
-    if (!exact) {
-      from += " ";
-      to += " ";
-    }
-
-    let f = from;
-
-    while (f.length) {
-      if (to.substr(0, f.length) === f) {
-        break;
-      }
-      f = f.substring(0, f.length - 1);
-    }
-
-    let backspaces = from.length - f.length;
-    let append = to.substring(f.length);
-
-    if (!exact) {
-      append = append.substring(0, append.length - 1);
-    }
-
-    alt.push(backspaces);
-    alt.push(append);
-    alt.push(exact);
-    alt.push(length);
-  });
-
-  return alternates;
-};
-
 const macro = (name, params, lines) => {
   const sig = params === null ? "" : `(${params.join(", ")})`;
   const define = `#define ${name}${sig}`;
@@ -246,8 +256,17 @@ const renderCombo = ({ combo }) => {
     .join(" + ");
 };
 
-const renderOutput = ({ output }) => {
-  return output
+const renderOutput = ({ output, alternates }) => {
+  const outputs = [output];
+  if (alternates) {
+    alternates.forEach(({ to, toIdx }) => {
+      if (toIdx !== 0) {
+        outputs.push(to);
+      }
+    });
+  }
+
+  return outputs
     .map((output) =>
       output
         .split("")
@@ -300,7 +319,7 @@ const qmkCombo = ({ combo, layers }) => {
 
 const qmkOutput = ({ output }) => {
   const out = [];
-  let rest = output[0];
+  let rest = output;
   let buf = [];
   let ascii = null;
   let length = 0;
@@ -428,15 +447,15 @@ const qmkDupFunction = (chords) => {
 
   const cases = [];
   chords
-    .filter((chord) => chord.output.length > 1)
-    .forEach((chord) => {
-      cases.push(`    case CHORD_${chord.identifier}:`);
+    .filter((chord) => chord.alternates)
+    .forEach(({ identifier, alternates }) => {
+      cases.push(`    case CHORD_${identifier}:`);
       cases.push("      switch(last_chord_cycle) {");
-      makeAlternates(chord).forEach(
-        ([i, j, _from, _to, bs, append, exact, length]) => {
-          cases.push(`        case ${i}:`);
-          if (bs) {
-            cases.push(`          backspaces = ${bs};`);
+      alternates.forEach(
+        ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
+          cases.push(`        case ${fromIdx}:`);
+          if (backspaces) {
+            cases.push(`          backspaces = ${backspaces};`);
           }
           if (append.length) {
             cases.push(`          append = "${append}";`);
@@ -445,7 +464,7 @@ const qmkDupFunction = (chords) => {
             cases.push(`          space = false;`);
           }
           cases.push(`          last_chord_length = ${length};`);
-          cases.push(`          next_chord_cycle = ${j};`);
+          cases.push(`          next_chord_cycle = ${toIdx};`);
           cases.push(`        break;`);
         }
       );
@@ -557,12 +576,12 @@ const zmkPresses = (output) => {
 };
 
 const zmkOutput = (chord) => {
-  let content = chord.output[0];
+  let { output } = chord;
   if (!chord.exact) {
-    content += " ";
+    output += " ";
   }
 
-  const presses = zmkPresses(content);
+  const presses = zmkPresses(output);
   const macro = `ch_${chord.identifier}`;
 
   return presses.length === 1 ? [presses[0], null] : [presses.join(" "), macro];
@@ -698,9 +717,7 @@ const zmkConfig = (chordsAndCategories) => {
         chords.push({
           ...chord,
           identifier: `${chord.identifier}_s`,
-          output: [
-            `\b${chord.output[0]} ${chord.sentenceShift ? "<SKLS>" : ""}`,
-          ],
+          output: `\b${chord.output} ${chord.sentenceShift ? "<SKLS>" : ""}`,
           layers: ["Sentence"],
         });
         chords.push({
