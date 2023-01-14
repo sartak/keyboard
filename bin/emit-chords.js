@@ -196,6 +196,7 @@ const makeAlternates = ({ output, exact }) => {
 
   alternates.forEach((alt) => {
     let [, , from, to] = alt;
+    const length = to.length;
 
     if (!exact) {
       from += " ";
@@ -221,6 +222,7 @@ const makeAlternates = ({ output, exact }) => {
     alt.push(backspaces);
     alt.push(append);
     alt.push(exact);
+    alt.push(length);
   });
 
   return alternates;
@@ -301,6 +303,7 @@ const qmkOutput = ({ output }) => {
   let rest = output[0];
   let buf = [];
   let ascii = null;
+  let length = 0;
 
   const emit = () => {
     if (buf.length) {
@@ -321,6 +324,7 @@ const qmkOutput = ({ output }) => {
     if (head === "\b") {
       emit();
       out.push("tap_code16(KC_BSPC);");
+      length--;
       continue;
     }
 
@@ -336,12 +340,13 @@ const qmkOutput = ({ output }) => {
       ascii = true;
     }
 
+    length++;
     buf.push(head);
   }
 
   emit();
 
-  return out;
+  return [out, length];
 };
 
 const qmkEnum = (chords) => [
@@ -386,9 +391,11 @@ const qmkFunction = (chords) => {
     if (chord.exact) {
       cases.push("      space = false;");
     }
-    qmkOutput(chord).forEach((line) => {
+    const [calls, length] = qmkOutput(chord);
+    calls.forEach((line) => {
       cases.push(`      ${line}`);
     });
+    cases.push(`      last_chord_length = ${length};`);
     cases.push("      break;");
   });
 
@@ -398,6 +405,7 @@ const qmkFunction = (chords) => {
   }
   if (space) {
     tap_code(KC_SPC);
+    last_chord_length++;
   }
 }`;
 
@@ -424,20 +432,23 @@ const qmkDupFunction = (chords) => {
     .forEach((chord) => {
       cases.push(`    case CHORD_${chord.identifier}:`);
       cases.push("      switch(last_chord_cycle) {");
-      makeAlternates(chord).forEach(([i, j, _from, _to, bs, append, exact]) => {
-        cases.push(`        case ${i}:`);
-        if (bs) {
-          cases.push(`          backspaces = ${bs};`);
+      makeAlternates(chord).forEach(
+        ([i, j, _from, _to, bs, append, exact, length]) => {
+          cases.push(`        case ${i}:`);
+          if (bs) {
+            cases.push(`          backspaces = ${bs};`);
+          }
+          if (append.length) {
+            cases.push(`          append = "${append}";`);
+          }
+          if (exact) {
+            cases.push(`          space = false;`);
+          }
+          cases.push(`          last_chord_length = ${length};`);
+          cases.push(`          next_chord_cycle = ${j};`);
+          cases.push(`        break;`);
         }
-        if (append.length) {
-          cases.push(`          append = "${append}";`);
-        }
-        if (exact) {
-          cases.push(`          space = false;`);
-        }
-        cases.push(`          next_chord_cycle = ${j};`);
-        cases.push(`        break;`);
-      });
+      );
       cases.push("      }");
       cases.push("      break;");
     });
@@ -454,6 +465,7 @@ const qmkDupFunction = (chords) => {
   }
   if (space) {
     tap_code(KC_SPC);
+    last_chord_length++;
   }
   return next_chord_cycle;
 }`;
