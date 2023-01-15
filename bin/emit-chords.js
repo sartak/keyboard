@@ -4,6 +4,7 @@ const chordFiles = ["chords.json", "personal.json"];
 const layoutFile = "layout.json";
 const readmeFile = "README.md";
 const qmkChordFile = "../qmk-config/chords.c";
+const qmkPersonalFile = "../qmk-config/personal.c";
 const zmkChordFile = "../zmk-config/config/chords.keymap";
 const zmkConfigFile = "../zmk-config/config/cradio.conf";
 const processedChords = "processed.json";
@@ -371,35 +372,67 @@ const qmkOutput = ({ output }) => {
   return [out, length];
 };
 
-const qmkEnum = (chords) => [
-  macro(
-    "CHORD_ENUM",
-    null,
-    chords.map(({ identifier }) => `CHORD_${identifier},`)
-  ),
-];
+const qmkPreamble = (chords, personalFile) => {
+  if (personalFile) {
+    return [];
+  }
+
+  return [
+    macro(
+      "COMBO_FOR_CHORD",
+      ["name", "..."],
+      "const uint16_t PROGMEM chord_##name[] = {__VA_ARGS__, COMBO_END};"
+    ),
+    "",
+    macro(
+      "CHORD_COMBO",
+      ["name"],
+      "[CHORD_##name] = COMBO_ACTION(chord_##name)"
+    ),
+    "",
+    '#include "personal.c"',
+  ];
+};
+
+const qmkEnum = (chords, personalFile) => {
+  const lines = [];
+
+  chords.forEach(({ identifier }) => {
+    lines.push(`CHORD_${identifier},`);
+  });
+
+  if (!personalFile) {
+    lines.push("PERSONAL_CHORD_ENUM");
+  }
+
+  return [
+    macro(personalFile ? "PERSONAL_CHORD_ENUM" : "CHORD_ENUM", null, lines),
+  ];
+};
 
 const qmkCombos = (chords) => [
-  macro(
-    "COMBO_FOR_CHORD",
-    ["name", "..."],
-    "const uint16_t PROGMEM chord_##name[] = {__VA_ARGS__, COMBO_END};"
-  ),
   ...chords.map(
     (chord) => `COMBO_FOR_CHORD(${chord.identifier}, ${qmkCombo(chord)});`
   ),
 ];
 
-const qmkActions = (chords) => [
-  macro("CHORD_COMBO", ["name"], "[CHORD_##name] = COMBO_ACTION(chord_##name)"),
-  macro(
-    "CHORD_COMBOS",
-    null,
-    chords.map(({ identifier }) => `CHORD_COMBO(${identifier}),`)
-  ),
-];
+const qmkActions = (chords, personalFile) => {
+  const lines = [];
 
-const qmkFunction = (chords) => {
+  chords.forEach(({ identifier }) => {
+    lines.push(`CHORD_COMBO(${identifier}),`);
+  });
+
+  if (!personalFile) {
+    lines.push("PERSONAL_CHORD_COMBOS");
+  }
+
+  return [
+    macro(personalFile ? "PERSONAL_CHORD_COMBOS" : "CHORD_COMBOS", null, lines),
+  ];
+};
+
+const qmkFunction = (chords, personalFile) => {
   const intro = `void process_chord_event(uint16_t combo_index, bool pressed) {
   if (!pressed) {
     return;
@@ -421,7 +454,8 @@ const qmkFunction = (chords) => {
     cases.push("      break;");
   });
 
-  const outro = `    default:
+  const outro = `    PERSONAL_CHORD_FUNC
+    default:
       space = false;
       break;
   }
@@ -431,16 +465,20 @@ const qmkFunction = (chords) => {
   }
 }`;
 
-  return [
-    macro("CHORD_FUNC", null, [
-      ...intro.split("\n"),
-      ...cases,
-      ...outro.split("\n"),
-    ]),
-  ];
+  if (personalFile) {
+    return [macro("PERSONAL_CHORD_FUNC", null, cases)];
+  } else {
+    return [
+      macro("CHORD_FUNC", null, [
+        ...intro.split("\n"),
+        ...cases,
+        ...outro.split("\n"),
+      ]),
+    ];
+  }
 };
 
-const qmkDupFunction = (chords) => {
+const qmkDupFunction = (chords, personalFile) => {
   const intro = `uint8_t process_chord_dup(uint16_t last_chord, uint8_t last_chord_cycle) {
   uint8_t next_chord_cycle = 0;
   uint8_t backspaces = 0;
@@ -475,7 +513,8 @@ const qmkDupFunction = (chords) => {
       cases.push("      break;");
     });
 
-  const outro = `    default:
+  const outro = `    PERSONAL_DUP_FUNC
+    default:
       space = false;
       break;
   }
@@ -492,26 +531,31 @@ const qmkDupFunction = (chords) => {
   return next_chord_cycle;
 }`;
 
-  return [
-    macro("CHORD_DUP_FUNC", null, [
-      ...intro.split("\n"),
-      ...cases,
-      ...outro.split("\n"),
-    ]),
-  ];
+  if (personalFile) {
+    return [macro("PERSONAL_DUP_FUNC", null, cases)];
+  } else {
+    return [
+      macro("CHORD_DUP_FUNC", null, [
+        ...intro.split("\n"),
+        ...cases,
+        ...outro.split("\n"),
+      ]),
+    ];
+  }
 };
 
-const qmkConfig = (chordsAndCategories) => {
+const qmkConfig = (chordsAndCategories, personalFile) => {
   const lines = [];
   const chords = chordsAndCategories.filter(
-    (chord) => typeof chord === "object"
+    (chord) => typeof chord === "object" && !!chord.personal === personalFile
   );
 
-  lines.push(...qmkEnum(chords), "");
+  lines.push(...qmkPreamble(chords, personalFile), "");
+  lines.push(...qmkEnum(chords, personalFile), "");
   lines.push(...qmkCombos(chords), "");
-  lines.push(...qmkActions(chords), "");
-  lines.push(...qmkFunction(chords), "");
-  lines.push(...qmkDupFunction(chords), "");
+  lines.push(...qmkActions(chords, personalFile), "");
+  lines.push(...qmkFunction(chords, personalFile), "");
+  lines.push(...qmkDupFunction(chords, personalFile), "");
 
   return lines;
 };
@@ -801,7 +845,14 @@ fs.writeFileSync(
     fs.readFileSync(readmeFile, "utf-8").split("\n")
   ).join("\n")
 );
-fs.writeFileSync(qmkChordFile, qmkConfig(chordsAndCategories).join("\n"));
+fs.writeFileSync(
+  qmkChordFile,
+  qmkConfig(chordsAndCategories, false).join("\n")
+);
+fs.writeFileSync(
+  qmkPersonalFile,
+  qmkConfig(chordsAndCategories, true).join("\n")
+);
 fs.writeFileSync(zmkChordFile, zmkConfig(chordsAndCategories).join("\n"));
 fs.writeFileSync(
   zmkConfigFile,
