@@ -38,12 +38,14 @@ const parseLayout = (layers) => {
   const validKey = {};
   const qmkKey = {};
   const zmkKey = {};
+  const keys = [];
 
   let z = 0;
   layers.Alpha.forEach((row) => {
     row.forEach((key) => {
       validKey[key] = true;
       zmkKey[key] = z++;
+      keys.push({});
     });
   });
 
@@ -62,11 +64,13 @@ const parseLayout = (layers) => {
       qmkKeyTidy[key] = `${prefix}T${i}`;
     });
 
+    let i = 0;
     rows.forEach((row, r) => {
-      row.forEach((_, c) => {
+      row.forEach((key, c) => {
         const alpha = layers.Alpha[r][c];
         qmkKey[layer][alpha] =
           qmkKeyTidy[alpha] || `${prefix}_${alpha.toUpperCase()}`;
+        keys[i++][layer] = key;
       });
     });
   });
@@ -74,6 +78,7 @@ const parseLayout = (layers) => {
   const zmkLayers = Object.keys(layers).filter((l) => l !== "Function");
   return {
     layers: Object.keys(layers),
+    keys,
     validKey,
     qmkKey,
     zmkKey,
