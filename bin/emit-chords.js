@@ -5,6 +5,7 @@ const layoutFile = "layout.json";
 const readmeFile = "README.md";
 const qmkChordFile = "../qmk-config/chords.c";
 const zmkChordFile = "../zmk-config/config/chords.keymap";
+const zmkConfigFile = "../zmk-config/config/cradio.conf";
 const processedChords = "processed.json";
 
 const tidyReadmeCombo = {
@@ -707,10 +708,8 @@ const zmkMacros = (chords) => {
   return lines;
 };
 
-const zmkConfig = (chordsAndCategories) => {
-  const lines = [];
+const zmkChords = (chordsAndCategories) => {
   const chords = [];
-
   chordsAndCategories
     .filter((chord) => typeof chord === "object")
     .forEach((chord) => {
@@ -729,9 +728,63 @@ const zmkConfig = (chordsAndCategories) => {
         chords.push(chord);
       }
     });
+  return chords;
+};
+
+const zmkConfig = (chordsAndCategories) => {
+  const lines = [];
+  const chords = zmkChords(chordsAndCategories);
 
   lines.push(...zmkCombos(chords), "");
   lines.push(...zmkMacros(chords), "");
+
+  return lines;
+};
+
+const zmkSettings = (chordsAndCategories, original) => {
+  const lines = dropAfter(original, new RegExp(/^# Chording$/));
+
+  let maxQueueSize = 0;
+  let maxKeysPerCombo = 0;
+  let maxPressedCombos = 8;
+  const combosPerKey = {};
+
+  zmkChords(chordsAndCategories).forEach((chord) => {
+    const { combo, output, exact } = chord;
+
+    if (combo.length > maxKeysPerCombo) {
+      maxKeysPerCombo = combo.length;
+    }
+
+    let presses = zmkPresses(output).length;
+    if (exact) {
+      presses++;
+    }
+    presses = presses * 2 + 5;
+
+    if (presses > maxQueueSize) {
+      maxQueueSize = presses;
+    }
+
+    combo.forEach((key) => {
+      combosPerKey[key] = (combosPerKey[key] || 0) + 1;
+    });
+  });
+
+  let maxCombosPerKey = 0;
+  Object.entries(combosPerKey).forEach(([, combos]) => {
+    if (combos > maxCombosPerKey) {
+      maxCombosPerKey = combos;
+    }
+  });
+
+  lines.push("# Chording");
+  lines.push("");
+  lines.push(`CONFIG_ZMK_BEHAVIORS_QUEUE_SIZE=${maxQueueSize}`);
+  lines.push(`CONFIG_ZMK_COMBO_MAX_COMBOS_PER_KEY=${maxCombosPerKey}`);
+  lines.push(`CONFIG_ZMK_COMBO_MAX_KEYS_PER_COMBO=${maxKeysPerCombo}`);
+  lines.push(`CONFIG_ZMK_COMBO_MAX_PRESSED_COMBOS=${maxPressedCombos}`);
+  lines.push("");
 
   return lines;
 };
@@ -749,6 +802,13 @@ fs.writeFileSync(
 );
 fs.writeFileSync(qmkChordFile, qmkConfig(chordsAndCategories).join("\n"));
 fs.writeFileSync(zmkChordFile, zmkConfig(chordsAndCategories).join("\n"));
+fs.writeFileSync(
+  zmkConfigFile,
+  zmkSettings(
+    chordsAndCategories,
+    fs.readFileSync(zmkConfigFile, "utf-8").split("\n")
+  ).join("\n")
+);
 fs.writeFileSync(
   processedChords,
   JSON.stringify({
