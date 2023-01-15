@@ -6,6 +6,7 @@ const readmeFile = "README.md";
 const qmkChordFile = "../qmk-config/chords.c";
 const qmkPersonalFile = "../qmk-config/personal.c";
 const zmkChordFile = "../zmk-config/config/chords.keymap";
+const zmkPersonalFile = "../zmk-config/config/personal.keymap";
 const zmkConfigFile = "../zmk-config/config/cradio.conf";
 const processedChords = "processed.json";
 
@@ -636,8 +637,12 @@ const zmkOutput = (chord) => {
 
 const zmkCombo = (chord) => chord.combo.map((key) => zmkKey[key]).join(" ");
 
-const zmkCombos = (chords) => {
-  const lines = [
+const zmkPreamble = (chords, personalFile) => {
+  if (personalFile) {
+    return [];
+  }
+
+  return [
     macro(
       "COMBO",
       ["name", "keypress", "keypos"],
@@ -669,35 +674,6 @@ const zmkCombos = (chords) => {
       ["LAYER_CHORD(name, keypress, keypos, ALPHA SENTENCE)"]
     ),
     "",
-    "/ {",
-    "  combos {",
-    '    compatible = "zmk,combos";',
-  ];
-
-  chords.forEach((chord) => {
-    let macro = "CHORD";
-    const output = zmkOutput(chord);
-    const args = [
-      `ch_${chord.identifier}`,
-      output[1] ? `&${output[1]}` : output[0],
-      zmkCombo(chord),
-    ];
-
-    if (chord.layers) {
-      macro = "LAYER_CHORD";
-      args.push(chord.layers.map((l) => l.toUpperCase()).join(" "));
-    }
-
-    lines.push(`    ${macro}(${args.join(", ")})`);
-  });
-
-  lines.push("  };", "};");
-
-  return lines;
-};
-
-const zmkMacros = (chords) => {
-  const lines = [
     macro(
       "MACRO",
       ["name", "keys"],
@@ -728,9 +704,37 @@ const zmkMacros = (chords) => {
       ]
     ),
     "",
-    "/ {",
-    "  macros {",
+    '#include "personal.keymap"',
   ];
+};
+
+const zmkCombos = (chords) => {
+  const lines = ["/ {", "  combos {", '    compatible = "zmk,combos";'];
+
+  chords.forEach((chord) => {
+    let macro = "CHORD";
+    const output = zmkOutput(chord);
+    const args = [
+      `ch_${chord.identifier}`,
+      output[1] ? `&${output[1]}` : output[0],
+      zmkCombo(chord),
+    ];
+
+    if (chord.layers) {
+      macro = "LAYER_CHORD";
+      args.push(chord.layers.map((l) => l.toUpperCase()).join(" "));
+    }
+
+    lines.push(`    ${macro}(${args.join(", ")})`);
+  });
+
+  lines.push("  };", "};");
+
+  return lines;
+};
+
+const zmkMacros = (chords) => {
+  const lines = ["/ {", "  macros {"];
 
   chords.forEach((chord) => {
     const [content, identifier] = zmkOutput(chord);
@@ -776,10 +780,13 @@ const zmkChords = (chordsAndCategories) => {
   return chords;
 };
 
-const zmkConfig = (chordsAndCategories) => {
+const zmkConfig = (chordsAndCategories, personalFile) => {
   const lines = [];
-  const chords = zmkChords(chordsAndCategories);
+  const chords = zmkChords(chordsAndCategories).filter(
+    ({ personal }) => !!personal === personalFile
+  );
 
+  lines.push(...zmkPreamble(chords, personalFile), "");
   lines.push(...zmkCombos(chords), "");
   lines.push(...zmkMacros(chords), "");
 
@@ -853,7 +860,14 @@ fs.writeFileSync(
   qmkPersonalFile,
   qmkConfig(chordsAndCategories, true).join("\n")
 );
-fs.writeFileSync(zmkChordFile, zmkConfig(chordsAndCategories).join("\n"));
+fs.writeFileSync(
+  zmkChordFile,
+  zmkConfig(chordsAndCategories, false).join("\n")
+);
+fs.writeFileSync(
+  zmkPersonalFile,
+  zmkConfig(chordsAndCategories, true).join("\n")
+);
 fs.writeFileSync(
   zmkConfigFile,
   zmkSettings(
