@@ -174,6 +174,7 @@ const parseChords = (files) => {
             sentenceShift,
             layers,
             identifier,
+            personal,
             ...rest
           } = chord;
 
