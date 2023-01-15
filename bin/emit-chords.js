@@ -85,6 +85,8 @@ const layout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
 
 const { validKey, qmkKey, zmkKey, zmkLayers } = layout;
 
+const allCombos = {};
+
 const validateCombo = ({ combo }) => {
   combo.forEach((key) => {
     if (!validKey[key]) {
@@ -227,6 +229,14 @@ const parseChords = (files) => {
         if (!chord.identifier.match(/^[a-z_][a-z_0-9]{0,6}$/)) {
           throw new Error(`Malformed identifier '${chord.identifier}'`);
         }
+
+        const comboKey = [...chord.combo].sort().join("+");
+        if (comboKey in allCombos) {
+          throw new Error(
+            `Collision for combo '${comboKey}': '${chord.output}' vs '${allCombos[comboKey]}'`
+          );
+        }
+        allCombos[comboKey] = chord.output;
 
         result.push(chord);
       } catch (err) {
