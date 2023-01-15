@@ -894,6 +894,6 @@ fs.writeFileSync(
   processedChords,
   JSON.stringify({
     layout,
-    chords: chordsAndCategories,
+    chords: chordsAndCategories.filter((chord) => typeof chord === "object"),
   })
 );
