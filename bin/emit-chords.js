@@ -75,9 +75,11 @@ const parseLayout = (layers) => {
     });
   });
 
-  const zmkLayers = Object.keys(layers).filter((l) => l !== "Function");
+  const zmkLayers = Object.keys(layers).filter(
+    (l) => l !== "Function" && !l.endsWith("-Shift")
+  );
   return {
-    layers: Object.keys(layers),
+    layers: Object.keys(layers).filter((l) => !l.endsWith("-Shift")),
     keys,
     validKey,
     qmkKey,

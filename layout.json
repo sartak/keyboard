@@ -5,17 +5,35 @@
     ["q", "j", "v", "d", "k",   "x", "h", ".", ",", "Ret"],
     [          "Dup", "Bksp",   "Spc", "Tab"]
   ],
+  "Alpha-Shift": [
+    ["W", "L", "Y", "P", "B",   "Z", "F", "O", "U", "\""],
+    ["C", "R", "S", "T", "G",   "M", "N", "E", "I", "A"],
+    ["Q", "J", "V", "D", "K",   "X", "H", ">", "<", null],
+    [             null, null,   null, null]
+  ],
   "Symbol": [
     ["`", "~", "\\", "{", "$",   "%", "}", "/",  "#",  null],
     ["&", "*", "=",  "(", "<",   ">", ")", "-",  "+",  "|"],
     ["—", "@", "_",  "[", "…",   "^", "]", null, null, null],
     [             "Sym", null,   null, null]
   ],
+  "Symbol-Shift": [
+    [null, null, null, null, null,   null, null, null, null, "\""],
+    [null, null, null, null, null,   null, null, null, null, null],
+    [null, null, null, null, null,   null, null, ">",  "<",  null],
+    [                  null, null,   null, null]
+  ],
   "Number": [
     ["BrUp", "6", "5", "4", "ScSh",   "Mute", "Prev", "PlPs", "Next", null],
     ["Lang", "3", "2", "1", "0",      "VlUp", "Left", "Down", "Up",   "Rght"],
-    ["BrDn", "9", "8", "7", "Lock",   "VlDn", "Zoom", null,   null,   null],
+    ["BrDn", "9", "8", "7", "Lock",   "VlDn", "ZmIn", null,   null,   null],
     [                   null, null,   null, "Num"]
+  ],
+  "Number-Shift": [
+    [null, null, null, null, null,   null, null,   null, null, "\""],
+    [null, null, null, null, null,   null, null,   null, null, null],
+    [null, null, null, null, null,   null, "ZmOt", ">",  "<",  null],
+    [                  null, null,   null, null]
   ],
   "Function": [
     ["BtlL", "",    "",    "",    "RstL",   "RstR", "", "", "", "BtlR"],
