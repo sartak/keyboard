@@ -9,13 +9,13 @@
     ["`", "~", "\\", "{", "$",   "%", "}", "/",  "#",  null],
     ["&", "*", "=",  "(", "<",   ">", ")", "-",  "+",  "|"],
     ["—", "@", "_",  "[", "…",   "^", "]", null, null, null],
-    [              null, null,   null, null]
+    [             "Sym", null,   null, null]
   ],
   "Number": [
     ["BrUp", "6", "5", "4", "ScSh",   "Mute", "Prev", "PlPs", "Next", null],
     ["Lang", "3", "2", "1", "0",      "VlUp", "Left", "Down", "Up",   "Rght"],
     ["BrDn", "9", "8", "7", "Lock",   "VlDn", "Zoom", null,   null,   null],
-    [                   null, null,   null, null]
+    [                   null, null,   null, "Num"]
   ],
   "Function": [
     ["BtlL", "",    "",    "",    "RstL",   "RstR", "", "", "", "BtlR"],
