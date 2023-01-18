@@ -88,9 +88,13 @@ const parseLayout = (layers) => {
   };
 };
 
-const layout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
-
-const { validKey, qmkKey, zmkKey, zmkLayers } = layout;
+const parsedLayout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
+const { validKey, qmkKey, zmkKey, zmkLayers } = parsedLayout;
+const layout = {
+  layers: parsedLayout.layers,
+  keys: parsedLayout.keys,
+  validKey,
+};
 
 const allCombos = {};
 
