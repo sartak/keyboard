@@ -183,7 +183,7 @@
     { "combo": ["m","i","t"], "output": "might" },
     { "combo": ["w","a","t"], "output": ["want","wanted","wanting"] },
     { "combo": ["p","o","i"], "output": ["point","points","pointed","pointing"] },
-    { "combo": ["z","o","r"], "output": ["form","forms","formed","forming"] },
+    { "combo": ["f","r","Dup"], "output": ["form","forms","formed","forming"] },
     { "combo": ["o","f","k"], "output": "off" },
     { "combo": ["c","i","d"], "output": ["child","children"] },
     { "combo": ["f","e","w"], "output": ["few","fewer","fewest"] },

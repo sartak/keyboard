@@ -191,7 +191,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `m` + `i` + `t` → might
 - `w` + `a` + `t` → want → wanted → wanting
 - `p` + `o` + `i` → point → points → pointed → pointing
-- `z` + `o` + `r` → form → forms → formed → forming
+- `f` + `r` + `⨧` → form → forms → formed → forming
 - `o` + `f` + `k` → off
 - `c` + `i` + `d` → child → children
 - `f` + `e` + `w` → few → fewer → fewest
