@@ -202,6 +202,7 @@ const parseChords = (files) => {
             layers,
             identifier,
             personal,
+            builtin,
             ...rest
           } = chord;
 
@@ -581,7 +582,10 @@ const qmkDupFunction = (chords, personalFile) => {
 const qmkConfig = (chordsAndCategories, personalFile) => {
   const lines = [];
   const chords = chordsAndCategories.filter(
-    (chord) => typeof chord === "object" && !!chord.personal === personalFile
+    (chord) =>
+      typeof chord === "object" &&
+      !!chord.personal === personalFile &&
+      !chord.builtin
   );
 
   lines.push(...qmkPreamble(chords, personalFile), "");
@@ -793,7 +797,7 @@ const zmkMacros = (chords) => {
 const zmkChords = (chordsAndCategories) => {
   const chords = [];
   chordsAndCategories
-    .filter((chord) => typeof chord === "object")
+    .filter((chord) => typeof chord === "object" && !chord.builtin)
     .forEach((chord) => {
       if (chord.sentenceShift !== undefined) {
         chords.push({
