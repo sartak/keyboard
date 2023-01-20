@@ -17,6 +17,12 @@
     [null, null, null, null, null,   null, null, null, null, null],
     [                  null, null,   "Ctrl", null]
   ],
+  "Alpha-Hold": [
+    [null, null, null, null, null,   null, null, null,  null,   "Esc"],
+    [null, null, null, null, null,   null, null, null,  null,   null],
+    [null, null, null, null, null,   null, null, "Tab", "Alfr", null],
+    [               "Sym", "Shft",   "Ctrl", "Num"]
+  ],
   "Symbol": [
     ["`", "~", "\\", "{", "$",   "%", "}", "/",  "#",  null],
     ["&", "*", "=",  "(", "<",   ">", ")", "-",  "+",  "|"],
@@ -35,6 +41,12 @@
     [null, null, null, null, null,   null, null, null, null, null],
     [                  null, null,   "Ctrl", null]
   ],
+  "Symbol-Hold": [
+    [null, null, null, null, null,   null, null, null,  null,   "Esc"],
+    [null, null, null, null, null,   null, null, null,  null,   null],
+    [null, null, null, null, null,   null, null, "Tab", "Alfr", null],
+    [               "Sym", "Shft",   "Ctrl", "Num"]
+  ],
   "Number": [
     ["BrUp", "6", "5", "4", "ScSh",   "Mute", "Prev", "PlPs", "Next", null],
     ["Lang", "3", "2", "1", "0",      "VlUp", "Left", "Down", "Up",   "Rght"],
@@ -52,6 +64,12 @@
     [null, null, null, null, null,   null, null,   null, null, null],
     [null, null, null, null, null,   null, null,   null, null, null],
     [                null,   null,   "Ctrl", null]
+  ],
+  "Number-Hold": [
+    [null, null, null, null, null,   null, null, null,  null,   "Esc"],
+    [null, null, null, null, null,   null, null, null,  null,   null],
+    [null, null, null, null, null,   null, null, "Tab", "Alfr", null],
+    [               "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Function": [
     ["BtlL", "",    "",    "",    "RstL",   "RstR", "", "", "", "BtlR"],

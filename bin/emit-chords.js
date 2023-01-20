@@ -81,7 +81,8 @@ const parseLayout = (layers) => {
       !l.endsWith("-Shift") &&
       !l.endsWith("-Ctrl") &&
       !l.endsWith("-Alt") &&
-      !l.endsWith("-Gui")
+      !l.endsWith("-Gui") &&
+      !l.endsWith("-Hold")
   );
   return {
     layers: Object.keys(layers).filter(
@@ -89,7 +90,8 @@ const parseLayout = (layers) => {
         !l.endsWith("-Shift") &&
         !l.endsWith("-Ctrl") &&
         !l.endsWith("-Alt") &&
-        !l.endsWith("-Gui")
+        !l.endsWith("-Gui") &&
+        !l.endsWith("-Hold")
     ),
     keys,
     validKey,
