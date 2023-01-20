@@ -419,6 +419,13 @@ const qmkOutput = ({ output }) => {
 
 const qmkBehavior = ({ behavior }) => {
   switch (behavior) {
+    case "function-layer":
+      return `if (pressed) {
+  set_oneshot_layer(FUNCTION, ONESHOT_START);
+} else {
+  clear_oneshot_layer_state(ONESHOT_PRESSED);
+}
+return;`.split("\n");
     default:
       throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
   }
