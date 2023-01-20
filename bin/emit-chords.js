@@ -417,6 +417,13 @@ const qmkOutput = ({ output }) => {
   return [out, length];
 };
 
+const qmkBehavior = ({ behavior }) => {
+  switch (behavior) {
+    default:
+      throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
+  }
+};
+
 const qmkPreamble = (chords, personalFile) => {
   if (personalFile) {
     return [];
@@ -478,32 +485,20 @@ const qmkActions = (chords, personalFile) => {
 };
 
 const qmkFunction = (chords, personalFile) => {
-  const intro = `void process_chord_event(uint16_t combo_index, bool pressed) {
-  if (!pressed) {
-    return;
-  }
+  const behaviorIntro = `void process_chord_event(uint16_t combo_index, bool pressed) {
   bool space = true;
   switch(combo_index) {`;
 
-  const cases = [];
-  chords.forEach((chord) => {
-    cases.push(`    case CHORD_${chord.identifier}:`);
-    if (chord.behavior) {
-      cases.push("      return;");
-    } else {
-      if (chord.exact) {
-        cases.push("      space = false;");
-      }
-      const [calls, length] = qmkOutput(chord);
-      calls.forEach((line) => {
-        cases.push(`      ${line}`);
-      });
-      cases.push(`      last_chord_length = ${length};`);
-      cases.push("      break;");
-    }
-  });
+  const behaviorOutro = `    PERSONAL_CHORD_BEHAVIOR_FUNC
+  }`;
 
-  const outro = `    PERSONAL_CHORD_FUNC
+  const bridge = `  if (!pressed) {
+    return;
+  }`;
+
+  const outputIntro = `  switch(combo_index) {`;
+
+  const outputOutro = `    PERSONAL_CHORD_OUTPUT_FUNC
     default:
       space = false;
       break;
@@ -514,14 +509,48 @@ const qmkFunction = (chords, personalFile) => {
   }
 }`;
 
+  const behaviorCases = [];
+  const outputCases = [];
+  chords.forEach((chord) => {
+    const branch = [];
+
+    branch.push(`    case CHORD_${chord.identifier}:`);
+    if (chord.behavior) {
+      branch.push(...qmkBehavior(chord).map((line) => `      ${line}`));
+    } else {
+      if (chord.exact) {
+        branch.push("      space = false;");
+      }
+      const [calls, length] = qmkOutput(chord);
+      calls.forEach((line) => {
+        branch.push(`      ${line}`);
+      });
+      branch.push(`      last_chord_length = ${length};`);
+      branch.push("      break;");
+    }
+
+    if (chord.behavior) {
+      behaviorCases.push(...branch);
+    } else {
+      outputCases.push(...branch);
+    }
+  });
+
   if (personalFile) {
-    return [macro("PERSONAL_CHORD_FUNC", null, cases)];
+    return [
+      macro("PERSONAL_CHORD_BEHAVIOR_FUNC", null, behaviorCases),
+      macro("PERSONAL_CHORD_OUTPUT_FUNC", null, outputCases),
+    ];
   } else {
     return [
       macro("CHORD_FUNC", null, [
-        ...intro.split("\n"),
-        ...cases,
-        ...outro.split("\n"),
+        ...behaviorIntro.split("\n"),
+        ...behaviorCases,
+        ...behaviorOutro.split("\n"),
+        ...bridge.split("\n"),
+        ...outputIntro.split("\n"),
+        ...outputCases,
+        ...outputOutro.split("\n"),
       ]),
     ];
   }
