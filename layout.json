@@ -9,7 +9,7 @@
     ["W", "L", "Y", "P", "B",   "Z", "F", "O", "U", "\""],
     ["C", "R", "S", "T", "G",   "M", "N", "E", "I", "A"],
     ["Q", "J", "V", "D", "K",   "X", "H", ">", "<", null],
-    [             null, null,   null, null]
+    [           null, "Shft",   null, null]
   ],
   "Symbol": [
     ["`", "~", "\\", "{", "$",   "%", "}", "/",  "#",  null],
@@ -21,7 +21,7 @@
     [null, null, null, null, null,   null, null, null, null, "\""],
     [null, null, null, null, null,   null, null, null, null, null],
     [null, null, null, null, null,   null, null, ">",  "<",  null],
-    [                  null, null,   null, null]
+    [                null, "Shft",   null, null]
   ],
   "Number": [
     ["BrUp", "6", "5", "4", "ScSh",   "Mute", "Prev", "PlPs", "Next", null],
@@ -33,7 +33,7 @@
     [null, null, null, null, null,   null, null,   null, null, "\""],
     [null, null, null, null, null,   null, null,   null, null, null],
     [null, null, null, null, null,   null, "ZmOt", ">",  "<",  null],
-    [                  null, null,   null, null]
+    [                null, "Shft",   null, null]
   ],
   "Function": [
     ["BtlL", "",    "",    "",    "RstL",   "RstR", "", "", "", "BtlR"],
