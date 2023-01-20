@@ -11,6 +11,12 @@
     ["Q", "J", "V", "D", "K",   "X", "H", ">", "<", null],
     [           null, "Shft",   null, null]
   ],
+  "Alpha-Ctrl": [
+    [null, null, null, null, null,   null, null, null, null, null],
+    [null, null, null, null, null,   null, null, null, null, null],
+    [null, null, null, null, null,   null, null, null, null, null],
+    [                  null, null,   "Ctrl", null]
+  ],
   "Symbol": [
     ["`", "~", "\\", "{", "$",   "%", "}", "/",  "#",  null],
     ["&", "*", "=",  "(", "<",   ">", ")", "-",  "+",  "|"],
@@ -23,6 +29,12 @@
     [null, null, null, null, null,   null, null, ">",  "<",  null],
     [                null, "Shft",   null, null]
   ],
+  "Symbol-Ctrl": [
+    [null, null, null, null, null,   null, null, null, null, null],
+    [null, null, null, null, null,   null, null, null, null, null],
+    [null, null, null, null, null,   null, null, null, null, null],
+    [                  null, null,   "Ctrl", null]
+  ],
   "Number": [
     ["BrUp", "6", "5", "4", "ScSh",   "Mute", "Prev", "PlPs", "Next", null],
     ["Lang", "3", "2", "1", "0",      "VlUp", "Left", "Down", "Up",   "Rght"],
@@ -34,6 +46,12 @@
     [null, null, null, null, null,   null, null,   null, null, null],
     [null, null, null, null, null,   null, "ZmOt", ">",  "<",  null],
     [                null, "Shft",   null, null]
+  ],
+  "Number-Ctrl": [
+    [null, null, null, null, null,   null, null,   null, null, null],
+    [null, null, null, null, null,   null, null,   null, null, null],
+    [null, null, null, null, null,   null, null,   null, null, null],
+    [                null,   null,   "Ctrl", null]
   ],
   "Function": [
     ["BtlL", "",    "",    "",    "RstL",   "RstR", "", "", "", "BtlR"],
