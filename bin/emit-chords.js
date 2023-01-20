@@ -76,10 +76,21 @@ const parseLayout = (layers) => {
   });
 
   const zmkLayers = Object.keys(layers).filter(
-    (l) => l !== "Function" && !l.endsWith("-Shift")
+    (l) =>
+      l !== "Function" &&
+      !l.endsWith("-Shift") &&
+      !l.endsWith("-Ctrl") &&
+      !l.endsWith("-Alt") &&
+      !l.endsWith("-Gui")
   );
   return {
-    layers: Object.keys(layers).filter((l) => !l.endsWith("-Shift")),
+    layers: Object.keys(layers).filter(
+      (l) =>
+        !l.endsWith("-Shift") &&
+        !l.endsWith("-Ctrl") &&
+        !l.endsWith("-Alt") &&
+        !l.endsWith("-Gui")
+    ),
     keys,
     validKey,
     qmkKey,
