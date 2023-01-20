@@ -22,8 +22,8 @@ const tidyReadmeOutput = {
   "\b": "⌫",
 };
 
-const intuitLabel = ({ output }) =>
-  output
+const intuitLabel = ({ output, behavior }) =>
+  (behavior || output)
     .split("")
     .map((l) => tidyReadmeOutput[l] || l)
     .join("");
@@ -203,6 +203,7 @@ const parseChords = (files) => {
             identifier,
             personal,
             builtin,
+            behavior,
             ...rest
           } = chord;
 
@@ -215,15 +216,20 @@ const parseChords = (files) => {
           }
         }
 
+        if ("output" in chord && "behavior" in chord) {
+          throw new Error("Chord cannot have output and behavior");
+        }
+
         if (chord.combo.length === 0) {
           return;
         }
         validateCombo(chord);
 
-        chord.alternates = makeAlternates(chord);
-
-        if (Array.isArray(chord.output)) {
-          chord.output = chord.output[0];
+        if ("output" in chord) {
+          chord.alternates = makeAlternates(chord);
+          if (Array.isArray(chord.output)) {
+            chord.output = chord.output[0];
+          }
         }
 
         if (chord.label === undefined) {
@@ -295,7 +301,11 @@ const renderCombo = ({ combo }) => {
     .join(" + ");
 };
 
-const renderOutput = ({ output, alternates }) => {
+const renderOutput = ({ behavior, output, alternates }) => {
+  if (behavior) {
+    return `_${behavior}_`;
+  }
+
   const outputs = [output];
   if (alternates) {
     alternates.forEach(({ to, toIdx }) => {
@@ -478,15 +488,19 @@ const qmkFunction = (chords, personalFile) => {
   const cases = [];
   chords.forEach((chord) => {
     cases.push(`    case CHORD_${chord.identifier}:`);
-    if (chord.exact) {
-      cases.push("      space = false;");
+    if (chord.behavior) {
+      cases.push("      return;");
+    } else {
+      if (chord.exact) {
+        cases.push("      space = false;");
+      }
+      const [calls, length] = qmkOutput(chord);
+      calls.forEach((line) => {
+        cases.push(`      ${line}`);
+      });
+      cases.push(`      last_chord_length = ${length};`);
+      cases.push("      break;");
     }
-    const [calls, length] = qmkOutput(chord);
-    calls.forEach((line) => {
-      cases.push(`      ${line}`);
-    });
-    cases.push(`      last_chord_length = ${length};`);
-    cases.push("      break;");
   });
 
   const outro = `    PERSONAL_CHORD_FUNC
@@ -661,13 +675,17 @@ const zmkPresses = (output) => {
 };
 
 const zmkOutput = (chord) => {
-  let { output } = chord;
-  if (!chord.exact) {
-    output += " ";
+  let { output, behavior, exact, identifier } = chord;
+  const macro = `ch_${identifier}`;
+
+  if (behavior) {
+    return [null, macro];
   }
 
+  if (!exact) {
+    output += " ";
+  }
   const presses = zmkPresses(output);
-  const macro = `ch_${chord.identifier}`;
 
   return presses.length === 1 ? [presses[0], null] : [presses.join(" "), macro];
 };
@@ -775,7 +793,7 @@ const zmkMacros = (chords) => {
 
   chords.forEach((chord) => {
     const [content, identifier] = zmkOutput(chord);
-    if (!identifier) {
+    if (!identifier || content === null) {
       return;
     }
 
@@ -839,20 +857,23 @@ const zmkSettings = (chordsAndCategories, original) => {
   const combosPerKey = {};
 
   zmkChords(chordsAndCategories).forEach((chord) => {
-    const { combo, output, exact } = chord;
+    const { combo, output, behavior, exact } = chord;
 
     if (combo.length > maxKeysPerCombo) {
       maxKeysPerCombo = combo.length;
     }
 
-    let presses = zmkPresses(output).length;
-    if (exact) {
-      presses++;
-    }
-    presses = presses * 2 + 5;
+    if (behavior) {
+    } else {
+      let presses = zmkPresses(output).length;
+      if (exact) {
+        presses++;
+      }
+      presses = presses * 2 + 5;
 
-    if (presses > maxQueueSize) {
-      maxQueueSize = presses;
+      if (presses > maxQueueSize) {
+        maxQueueSize = presses;
+      }
     }
 
     combo.forEach((key) => {
