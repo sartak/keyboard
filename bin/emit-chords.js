@@ -104,7 +104,6 @@ const { validKey, qmkKey, zmkKey, zmkLayers } = parsedLayout;
 const layout = {
   layers: parsedLayout.layers,
   keys: parsedLayout.keys,
-  validKey,
 };
 
 const allCombos = {};
