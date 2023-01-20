@@ -426,6 +426,19 @@ const qmkBehavior = ({ behavior }) => {
   clear_oneshot_layer_state(ONESHOT_PRESSED);
 }
 return;`.split("\n");
+
+    case "left-click":
+      return `if (pressed) {
+  tap_code16(KC_MS_BTN1);
+}
+return;`.split("\n");
+
+    case "right-click":
+      return `if (pressed) {
+  tap_code16(KC_MS_BTN2);
+}
+return;`.split("\n");
+
     default:
       throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
   }

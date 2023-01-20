@@ -1,8 +1,8 @@
 {
   "chords": [
     { "combo": ["Bksp", "Spc"], "behavior": "delete-word", "quiet": true, "builtin": true },
-    { "combo": ["Dup", "Bksp"], "behavior": "left-click", "quiet": true, "builtin": true },
-    { "combo": ["Spc", "Tab"], "behavior": "right-click", "quiet": true, "builtin": true },
+    { "combo": ["Dup", "Bksp"], "behavior": "left-click", "quiet": true, "builtin": "zmk" },
+    { "combo": ["Spc", "Tab"], "behavior": "right-click", "quiet": true, "builtin": "zmk" },
     { "combo": ["Dup", "Tab"], "behavior": "function-layer", "quiet": true, "builtin": "zmk" },
 
     { "combo": ["e", "."], "output": "!", "exact": true, "quiet": true, "label": "excl", "sentenceShift": true },
