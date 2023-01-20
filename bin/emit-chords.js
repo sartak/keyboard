@@ -599,7 +599,7 @@ const qmkConfig = (chordsAndCategories, personalFile) => {
     (chord) =>
       typeof chord === "object" &&
       !!chord.personal === personalFile &&
-      !chord.builtin
+      !(chord.builtin === true || chord.builtin === "qmk")
   );
 
   lines.push(...qmkPreamble(chords, personalFile), "");
@@ -815,7 +815,11 @@ const zmkMacros = (chords) => {
 const zmkChords = (chordsAndCategories) => {
   const chords = [];
   chordsAndCategories
-    .filter((chord) => typeof chord === "object" && !chord.builtin)
+    .filter(
+      (chord) =>
+        typeof chord === "object" &&
+        !(chord.builtin === true || chord.builtin === "zmk")
+    )
     .forEach((chord) => {
       if (chord.sentenceShift !== undefined) {
         chords.push({
