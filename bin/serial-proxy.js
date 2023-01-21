@@ -54,6 +54,14 @@ const serial = new SerialPort({
   baudRate: 115200,
 });
 
+const describeModded = (mods, output) => {
+  const m = Object.entries(mods)
+    .map(([mod, down]) => (down ? mod : null))
+    .filter(Boolean)
+    .join(" ");
+  return `${m}${m ? " " : ""}${output}`;
+};
+
 const layersToCheck = (mods) => {
   let layers = [currentLayer];
   ["Shift", "Ctrl", "Alt", "Gui"].forEach((mod) => {
@@ -99,26 +107,27 @@ serial.on("data", (data) => {
           if (output === "Dup") {
             output = currentDup;
             mods = { ...dupMods };
-            console.log(`${output} dupped`);
+            console.log(`Dupped ${describeModded(mods, output)}`);
           } else {
             currentDup = output;
-            dupMods = { ...currentMods };
-            console.log(`${output} typed`);
+            dupMods = { ...mods };
+            console.log(`Typed ${describeModded(mods, output)}`);
           }
         } else if (type == VIRT_KEYMULT_HOLD) {
           const label = key[currentLayer] ?? key.Alpha;
-          const output = key[`${currentLayer}-Hold`];
+          let output = key[`${currentLayer}-Hold`];
+          const mods = { ...currentMods };
+
           if (output === null) {
-            console.log(`${label} held for gui ${label}`);
-            currentDup = label;
-            dupMods = { ...currentMods };
-            // Not implemented yet in qmk-config
-            // dupMods.gui = true;
-          } else {
-            console.log(`${label} held to type ${output}`);
-            currentDup = output;
-            dupMods = { ...currentMods };
+            mods.gui = true;
+            output = label;
           }
+
+          console.log(`${label} held to type ${describeModded(mods, output)}`);
+          currentDup = output;
+          dupMods = { ...currentMods };
+          // Not implemented yet in qmk-config
+          // dupMods = { ...mods };
         } else {
           console.warn(`Unhandled key byte: ${byte}`);
         }
