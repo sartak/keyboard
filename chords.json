@@ -152,7 +152,7 @@
     { "combo": ["w","l","d"], "output": ["world","worlds"] },
     { "combo": ["v","e","r"], "output": "very" },
     { "combo": ["s","t","l"], "output": "still" },
-    { "combo": ["n","a","i"], "output": ["nation","nations"] },
+    { "combo": ["a","t","i"], "output": ["nation","nations"] },
     { "combo": ["h","n","d"], "output": ["hand","hands"] },
     { "combo": ["o","l","d"], "output": ["old","older","oldest"] },
     { "combo": ["l","i","f"], "output": ["life","lives"] },

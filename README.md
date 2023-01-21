@@ -155,7 +155,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `w` + `l` + `d` → world → worlds
 - `v` + `e` + `r` → very
 - `s` + `t` + `l` → still
-- `n` + `a` + `i` → nation → nations
+- `a` + `t` + `i` → nation → nations
 - `h` + `n` + `d` → hand → hands
 - `o` + `l` + `d` → old → older → oldest
 - `l` + `i` + `f` → life → lives
