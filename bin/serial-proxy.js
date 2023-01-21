@@ -46,6 +46,8 @@ let currentMods = {
   alt: false,
   gui: false,
 };
+let currentDup;
+let dupMods = { ...currentMods };
 
 const serial = new SerialPort({
   path: serialPath,
@@ -93,14 +95,29 @@ serial.on("data", (data) => {
               output = key[layer];
             }
           });
-          console.log(`${output} typed`);
+
+          if (output === "Dup") {
+            output = currentDup;
+            mods = { ...dupMods };
+            console.log(`${output} dupped`);
+          } else {
+            currentDup = output;
+            dupMods = { ...currentMods };
+            console.log(`${output} typed`);
+          }
         } else if (type == VIRT_KEYMULT_HOLD) {
           const label = key[currentLayer] ?? key.Alpha;
           const output = key[`${currentLayer}-Hold`];
           if (output === null) {
             console.log(`${label} held for gui ${label}`);
+            currentDup = label;
+            dupMods = { ...currentMods };
+            // Not implemented yet in qmk-config
+            // dupMods.gui = true;
           } else {
             console.log(`${label} held to type ${output}`);
+            currentDup = output;
+            dupMods = { ...currentMods };
           }
         } else {
           console.warn(`Unhandled key byte: ${byte}`);
