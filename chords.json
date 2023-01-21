@@ -165,7 +165,7 @@
     { "combo": ["b","o","h"], "output": "both" },
     { "combo": ["b","e","n"], "output": "between" },
     { "combo": ["t","n","d"], "output": ["need","needed","needing"] },
-    { "combo": ["m","e","a"], "output": ["mean","meant","meaning"] },
+    { "combo": ["m","n","Dup"], "output": ["mean","meant","meaning"] },
     { "combo": ["c","a","l"], "output": ["call","called","calling"] },
     { "combo": ["d","e","v"], "output": ["develop","developed","developing"] },
     { "combo": ["u","n","d"], "output": "under" },

@@ -168,7 +168,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `b` + `o` + `h` → both
 - `b` + `e` + `n` → between
 - `t` + `n` + `d` → need → needed → needing
-- `m` + `e` + `a` → mean → meant → meaning
+- `m` + `n` + `⨧` → mean → meant → meaning
 - `c` + `a` + `l` → call → called → calling
 - `d` + `e` + `v` → develop → developed → developing
 - `u` + `n` + `d` → under
