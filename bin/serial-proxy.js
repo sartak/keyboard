@@ -92,6 +92,9 @@ const layersToCheck = (mods) => {
 };
 
 const typed = (output, mods, mode) => {
+  if (output === "") {
+    return;
+  }
   emit("typed", { output, mods, mode });
 };
 
