@@ -61,6 +61,7 @@ let currentMods = {
   gui: false,
 };
 let currentDup;
+let currentDupAlternate;
 let dupMods = { ...currentMods };
 
 const serial = new SerialPort({
@@ -123,8 +124,31 @@ serial.on("data", (data) => {
           });
 
           if (output === "Dup") {
-            output = currentDup;
             mods = { ...dupMods };
+
+            if (typeof currentDup === "string") {
+              output = currentDup;
+            } else if (typeof currentDup === "object") {
+              const chord = currentDup;
+              if (chord.alternates?.length) {
+                const alternate = chord.alternates[currentDupAlternate];
+                currentDupAlternate =
+                  (currentDupAlternate + 1) % chord.alternates.length;
+                if (alternate.backspaces) {
+                  typed("\b".repeat(alternate.backspaces), mods);
+                }
+                output = alternate.append;
+                if (!alternate.exact) {
+                  output += " ";
+                }
+              } else {
+                console.log("Dupping chord but has no alternates", { chord });
+                output = "";
+              }
+            } else {
+              output = "";
+              console.warn(`Unexpected dup: ${currentDup}`);
+            }
           } else {
             currentDup = output;
             dupMods = { ...mods };
