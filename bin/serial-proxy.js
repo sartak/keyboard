@@ -87,6 +87,10 @@ const layersToCheck = (mods) => {
   return layers;
 };
 
+const typed = (output, mods) => {
+  console.log(`Typed ${describeModded(mods, output)}`);
+};
+
 serial.on("data", (data) => {
   for (let i = 0; i < data.length; i++) {
     const byte = data[i];
@@ -121,12 +125,11 @@ serial.on("data", (data) => {
           if (output === "Dup") {
             output = currentDup;
             mods = { ...dupMods };
-            console.log(`Dupped ${describeModded(mods, output)}`);
           } else {
             currentDup = output;
             dupMods = { ...mods };
-            console.log(`Typed ${describeModded(mods, output)}`);
           }
+          typed(output, mods);
         } else if (type == VIRT_KEYMULT_HOLD) {
           const label = key[currentLayer] ?? key.Alpha;
           let output = key[`${currentLayer}-Hold`];
@@ -137,7 +140,7 @@ serial.on("data", (data) => {
             output = label;
           }
 
-          console.log(`${label} held to type ${describeModded(mods, output)}`);
+          typed(output, mods);
           currentDup = output;
           dupMods = { ...currentMods };
           // Not implemented yet in qmk-config
@@ -151,7 +154,17 @@ serial.on("data", (data) => {
     } else if (byte === VIRT_CHORD_ENDED) {
       const key = currentCombo.sort().join("+");
       const chord = chordForCombo[key];
-      console.log(`Chord ${chord.output ?? chord.behavior}`);
+
+      if (chord.behavior) {
+        console.log(`Chord behavior ${chord.behavior}`);
+      } else {
+        let output = chord.output;
+        if (!chord.exact) {
+          output += " ";
+        }
+        typed(output, currentMods);
+      }
+
       currentCombo = undefined;
     } else if (byte >= VIRT_LAYER_ZERO && byte <= VIRT_LAYER_LAST) {
       const layer = config.layout.layers[byte - VIRT_LAYER_ZERO];
