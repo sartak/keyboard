@@ -149,7 +149,7 @@ serial.on("data", (data) => {
             }
           });
 
-          emit("tap", { output, key, index });
+          emit("type", { output, key, index });
 
           if (output === "Dup") {
             mods = { ...dupMods };
@@ -197,6 +197,8 @@ serial.on("data", (data) => {
           if (output === null) {
             mods.gui = true;
             output = label;
+          } else {
+            emit("type", { output, key, index });
           }
 
           emit("hold", { key, index });
