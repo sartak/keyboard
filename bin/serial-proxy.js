@@ -180,8 +180,27 @@ serial.on("data", (data) => {
       const key = currentCombo.sort().join("+");
       const chord = chordForCombo[key];
 
+      currentDup = chord;
+      currentDupAlternate = 0;
+
       if (chord.behavior) {
-        console.log(`Chord behavior ${chord.behavior}`);
+        switch (chord.behavior) {
+          case "delete-word":
+            console.log("Delete word");
+            break;
+          case "left-click":
+            console.log("Left click");
+            break;
+          case "right-click":
+            console.log("Right click");
+            break;
+          case "function-layer":
+            // Handled in layer event
+            break;
+          default:
+            console.warn(`Unhandled chord behavior: ${chord.behavior}`);
+            break;
+        }
       } else {
         let output = chord.output;
         if (!chord.exact) {
