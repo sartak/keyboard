@@ -38,6 +38,20 @@ if (process.argv.length !== 3) {
   process.exit(1);
 }
 
+const indexForAlpha = {};
+config.layout.keys.forEach((key, i) => {
+  indexForAlpha[key.Alpha] = i;
+});
+
+const chordForCombo = {};
+config.chords.forEach((chord) => {
+  const key = chord.combo
+    .map((k) => indexForAlpha[k])
+    .sort()
+    .join("+");
+  chordForCombo[key] = chord;
+});
+
 let currentCombo;
 let currentLayer = config.layout.layers[0];
 let currentMods = {
@@ -135,7 +149,9 @@ serial.on("data", (data) => {
     } else if (byte === VIRT_CHORD_STARTED) {
       currentCombo = [];
     } else if (byte === VIRT_CHORD_ENDED) {
-      console.log("Combo", currentCombo);
+      const key = currentCombo.sort().join("+");
+      const chord = chordForCombo[key];
+      console.log(`Chord ${chord.output ?? chord.behavior}`);
       currentCombo = undefined;
     } else if (byte >= VIRT_LAYER_ZERO && byte <= VIRT_LAYER_LAST) {
       const layer = config.layout.layers[byte - VIRT_LAYER_ZERO];
