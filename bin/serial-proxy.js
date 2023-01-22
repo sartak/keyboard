@@ -73,7 +73,6 @@ const serial = new SerialPort({
 
 const emit = (type, event = {}) => {
   let e = JSON.stringify({ ...event, type });
-  console.log(e);
   e += "\n";
   listeners.forEach((l) => {
     l.write(e);
@@ -123,6 +122,7 @@ serial.on("data", (data) => {
     const byte = data[i];
 
     if (byte === VIRT_WARN) {
+      console.log("Got warning from keyboard");
       emit("warning");
     } else if (byte === VIRT_HEARTBEAT) {
     } else if (byte >= VIRT_KEYS_START && byte <= VIRT_KEYS_END) {
@@ -255,19 +255,15 @@ serial.on("data", (data) => {
                   output += " ";
                 }
               }
-              console.log(`Delete last chord '${output}'`);
               typed("\b".repeat(output.length), currentMods, "chord");
             } else {
-              console.log("Delete word");
               typed("\b", { alt: true }, "chord");
             }
             currentDup = undefined;
             break;
           case "left-click":
-            console.log("Left click");
-            break;
           case "right-click":
-            console.log("Right click");
+            emit(chord.behavior);
             break;
           case "function-layer":
             // Handled in layer event
@@ -394,6 +390,7 @@ app.get("/events", (req, res) => {
   e += "\n";
   res.write(e);
 
+  console.log("Listener connected");
   emit("listener");
 
   req.on("end", () => {
