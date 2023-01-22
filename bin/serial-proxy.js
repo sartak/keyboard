@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const { SerialPort } = require("serialport");
+const express = require("express");
 const processedChords = "processed.json";
 
 const config = JSON.parse(fs.readFileSync(processedChords));
@@ -32,9 +33,9 @@ const VIRT_GUI_UP = VIRT_GUI_DOWN + 1;
 const VIRT_MOD_LAST = VIRT_GUI_UP;
 const VIRT_TIMEOUT = 1000;
 
-const [nodePath, scriptPath, serialPath] = process.argv;
-if (process.argv.length !== 3) {
-  console.error(`usage: ${nodePath} ${scriptPath} serial-path`);
+const [nodePath, scriptPath, serialPath, port] = process.argv;
+if (process.argv.length !== 4) {
+  console.error(`usage: ${nodePath} ${scriptPath} serial-path port`);
   process.exit(1);
 }
 
@@ -320,3 +321,20 @@ serial.on("open", () => {
 setInterval(() => {
   serial.write(String.fromCharCode(VIRT_HEARTBEAT));
 }, VIRT_TIMEOUT / 2);
+
+const app = express();
+
+app.get("/events", (req, res) => {
+  res.writeHead(200, {
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+  });
+
+  req.on("end", () => {
+    res.end();
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on ${port}`);
+});
