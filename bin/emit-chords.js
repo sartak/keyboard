@@ -22,6 +22,52 @@ const tidyReadmeOutput = {
   "\b": "⌫",
 };
 
+const outputForKey = {
+  Spc: " ",
+  Bksp: "\b",
+  Ret: "\n",
+  Tab: "\t",
+  Esc: "\x1B",
+
+  Shft: "",
+  Ctrl: "",
+  Sym: "",
+  Num: "",
+  Alph: "",
+
+  Alfr: "",
+  BrUp: "",
+  Lang: "",
+  BrDn: "",
+  ScSh: "",
+  Lock: "",
+  Mute: "",
+  VlUp: "",
+  VlDn: "",
+  Prev: "",
+  Left: "",
+  ZmIn: "",
+  ZmOt: "",
+  PlPs: "",
+  Down: "",
+  Next: "",
+  Up: "",
+  Rght: "",
+
+  BtlL: "",
+  RstL: "",
+  RstR: "",
+  BtlR: "",
+  BT1: "",
+  BT2: "",
+  BT3: "",
+  BT4: "",
+  BT5: "",
+  BT6: "",
+  BTCl: "",
+  BTTg: "",
+};
+
 const intuitLabel = ({ output, behavior }) =>
   (behavior || output)
     .split("")
@@ -71,6 +117,14 @@ const parseLayout = (layers) => {
         qmkKey[layer][alpha] =
           qmkKeyTidy[alpha] || `${prefix}_${alpha.toUpperCase()}`;
         keys[i++][layer] = key;
+
+        if (key === null || key === "" || key in outputForKey) {
+          return;
+        }
+
+        if (key.length !== 1 && key !== "Dup") {
+          console.warn(`Layout has key '${key}' which is not in outputForKey`);
+        }
       });
     });
   });
@@ -106,6 +160,7 @@ const { validKey, qmkKey, zmkKey, zmkLayers } = parsedLayout;
 const layout = {
   layers: parsedLayout.layers,
   keys: parsedLayout.keys,
+  outputForKey,
 };
 
 const allCombos = {};
