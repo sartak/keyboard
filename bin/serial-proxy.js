@@ -80,14 +80,6 @@ const emit = (type, event = {}) => {
   });
 };
 
-const describeModded = (mods, output) => {
-  const m = Object.entries(mods)
-    .map(([mod, down]) => (down ? mod : null))
-    .filter(Boolean)
-    .join(" ");
-  return `${m}${m ? " " : ""}${output}`;
-};
-
 const layersToCheck = (mods) => {
   let layers = [currentLayer];
   ["Shift", "Ctrl", "Alt", "Gui"].forEach((mod) => {
@@ -100,8 +92,7 @@ const layersToCheck = (mods) => {
 };
 
 const typed = (output, mods) => {
-  const label = output.replaceAll(/\x08/g, "⌫");
-  console.log(`Typed '${describeModded(mods, label)}'`);
+  emit("typed", { output, mods });
 };
 
 serial.on("data", (data) => {
@@ -109,9 +100,8 @@ serial.on("data", (data) => {
     const byte = data[i];
 
     if (byte === VIRT_WARN) {
-      console.warn("Got warning from keyboard");
+      emit("warning");
     } else if (byte === VIRT_HEARTBEAT) {
-      console.log("");
     } else if (byte >= VIRT_KEYS_START && byte <= VIRT_KEYS_END) {
       const index = (byte - VIRT_KEYS_START) % VIRT_KEYS;
 
@@ -122,9 +112,9 @@ serial.on("data", (data) => {
         const key = config.layout.keys[index];
 
         if (type == VIRT_KEYMULT_DOWN) {
-          console.log(`${key.Alpha} down`);
+          emit("down", { key, index });
         } else if (type == VIRT_KEYMULT_UP) {
-          console.log(`${key.Alpha} up`);
+          emit("up", { key, index });
         } else if (type == VIRT_KEYMULT_CHENTRY) {
           let output = null;
           let mods = currentMods;
@@ -176,6 +166,8 @@ serial.on("data", (data) => {
             output = label;
           }
 
+          emit("hold", { key, index });
+
           typed(output, mods);
           currentDup = output;
           dupMods = { ...currentMods };
@@ -188,8 +180,11 @@ serial.on("data", (data) => {
     } else if (byte === VIRT_CHORD_STARTED) {
       currentCombo = [];
     } else if (byte === VIRT_CHORD_ENDED) {
-      const key = currentCombo.sort().join("+");
+      const indexes = currentCombo.sort();
+      const key = indexes.join("+");
       const chord = chordForCombo[key];
+      emit("chord", { chord, indexes });
+
       const prevDup = currentDup;
       const prevAlt = currentDupAlternate;
 
@@ -248,7 +243,7 @@ serial.on("data", (data) => {
       currentCombo = undefined;
     } else if (byte >= VIRT_LAYER_ZERO && byte <= VIRT_LAYER_LAST) {
       const layer = config.layout.layers[byte - VIRT_LAYER_ZERO];
-      console.log(`Layer ${currentLayer} -> ${layer}`);
+      emit("layer", { layer, from: currentLayer });
       currentLayer = layer;
     } else if (byte >= VIRT_MOD_ZERO && byte <= VIRT_MOD_LAST) {
       let mod;
@@ -297,7 +292,7 @@ serial.on("data", (data) => {
       }
 
       currentMods[mod] = down;
-      console.log(`${mod} ${down ? "down" : "up"}`);
+      emit("mod", { mod, down });
     } else {
       console.warn(`Unhandled input ${byte}`);
     }
@@ -305,8 +300,9 @@ serial.on("data", (data) => {
 });
 
 serial.on("error", (error) => {
-  console.log(`Error on serial port: ${error}`);
   if (serial.isOpen) {
+    emit("error", { error });
+    emit("close", { error });
     serial.close();
     serial.open();
   } else {
@@ -317,14 +313,18 @@ serial.on("error", (error) => {
 });
 
 serial.on("close", (error) => {
-  console.log(`Serial port closed: ${error}`);
+  emit("close", { error });
   if (!error || error.disconnected) {
     serial.open();
   }
 });
 
 serial.on("open", () => {
-  console.log(`Serial port opened`);
+  emit("connected");
+  emit("layer", { layer: currentLayer, from: null });
+  Object.entries(currentMods).forEach(([mod, down]) => {
+    emit("mod", { mod, down });
+  });
   serial.write(String.fromCharCode(VIRT_HEARTBEAT));
 });
 
@@ -349,6 +349,8 @@ app.get("/events", (req, res) => {
   });
   e += "\n";
   res.write(e);
+
+  emit("listener");
 
   req.on("end", () => {
     listeners = listeners.filter((r) => r !== res);
