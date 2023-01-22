@@ -341,6 +341,15 @@ app.get("/events", (req, res) => {
   });
   listeners.push(res);
 
+  let e = JSON.stringify({
+    type: "initialize",
+    config,
+    currentLayer,
+    currentMods,
+  });
+  e += "\n";
+  res.write(e);
+
   req.on("end", () => {
     listeners = listeners.filter((r) => r !== res);
     res.end();
