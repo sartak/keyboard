@@ -53,6 +53,7 @@ config.chords.forEach((chord) => {
   chordForCombo[key] = chord;
 });
 
+let listeners = [];
 let currentCombo;
 let currentLayer = config.layout.layers[0];
 let currentMods = {
@@ -69,6 +70,15 @@ const serial = new SerialPort({
   path: serialPath,
   baudRate: 115200,
 });
+
+const emit = (type, event = {}) => {
+  let e = JSON.stringify({ ...event, type });
+  console.log(e);
+  e += "\n";
+  listeners.forEach((l) => {
+    l.write(e);
+  });
+};
 
 const describeModded = (mods, output) => {
   const m = Object.entries(mods)
@@ -329,8 +339,10 @@ app.get("/events", (req, res) => {
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
   });
+  listeners.push(res);
 
   req.on("end", () => {
+    listeners = listeners.filter((r) => r !== res);
     res.end();
   });
 });
