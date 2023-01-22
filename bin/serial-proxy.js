@@ -180,6 +180,7 @@ serial.on("data", (data) => {
       const key = currentCombo.sort().join("+");
       const chord = chordForCombo[key];
       const prevDup = currentDup;
+      const prevAlt = currentDupAlternate;
 
       currentDup = chord;
       currentDupAlternate = 0;
@@ -189,11 +190,22 @@ serial.on("data", (data) => {
           case "delete-word":
             if (typeof prevDup === "object") {
               const chord = prevDup;
-              let output = chord.output;
-              if (!chord.exact) {
-                output += " ";
+              let output;
+              if (chord.alternates?.length) {
+                const i =
+                  prevAlt === 0 ? chord.alternates.length - 1 : prevAlt - 1;
+                const alternate = chord.alternates[i];
+                output = alternate.to;
+                if (!alternate.exact) {
+                  output += " ";
+                }
+              } else {
+                output = chord.output;
+                if (!chord.exact) {
+                  output += " ";
+                }
               }
-              console.log("Delete last chord");
+              console.log(`Delete last chord '${output}'`);
               typed("\b".repeat(output.length), currentMods);
             } else {
               console.log("Delete word");
