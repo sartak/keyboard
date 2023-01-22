@@ -179,6 +179,7 @@ serial.on("data", (data) => {
     } else if (byte === VIRT_CHORD_ENDED) {
       const key = currentCombo.sort().join("+");
       const chord = chordForCombo[key];
+      const prevDup = currentDup;
 
       currentDup = chord;
       currentDupAlternate = 0;
@@ -186,7 +187,19 @@ serial.on("data", (data) => {
       if (chord.behavior) {
         switch (chord.behavior) {
           case "delete-word":
-            console.log("Delete word");
+            if (typeof prevDup === "object") {
+              const chord = prevDup;
+              let output = chord.output;
+              if (!chord.exact) {
+                output += " ";
+              }
+              console.log("Delete last chord");
+              typed("\b".repeat(output.length), currentMods);
+            } else {
+              console.log("Delete word");
+              typed("\b", { alt: true });
+            }
+            currentDup = undefined;
             break;
           case "left-click":
             console.log("Left click");
