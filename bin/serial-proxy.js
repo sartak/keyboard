@@ -131,6 +131,9 @@ serial.on("data", (data) => {
 
             if (typeof currentDup === "string") {
               output = currentDup;
+              if (output in config.layout.outputForKey) {
+                output = config.layout.outputForKey[output];
+              }
             } else if (typeof currentDup === "object") {
               mode = "alternate";
               const chord = currentDup;
@@ -155,6 +158,9 @@ serial.on("data", (data) => {
             }
           } else {
             currentDup = output;
+            if (output in config.layout.outputForKey) {
+              output = config.layout.outputForKey[output];
+            }
             dupMods = { ...mods };
           }
           typed(output, mods, mode);
@@ -169,6 +175,10 @@ serial.on("data", (data) => {
           }
 
           emit("hold", { key, index });
+
+          if (output in config.layout.outputForKey) {
+            output = config.layout.outputForKey[output];
+          }
 
           typed(output, mods, "hold");
           currentDup = output;
