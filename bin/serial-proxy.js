@@ -91,11 +91,31 @@ const layersToCheck = (mods) => {
   return layers;
 };
 
+let wordBuffer = "";
 const typed = (output, mods, mode) => {
   if (output === "") {
     return;
   }
   emit("typed", { output, mods, mode });
+
+  output.split("").forEach((c) => {
+    if (c === " " || c === "\n" || c === "\t") {
+      if (wordBuffer.length) {
+        emit("word", { word: wordBuffer });
+      }
+      wordBuffer = "";
+    } else if (c === "\b") {
+      if (mods.alt) {
+        wordBuffer = "";
+      } else {
+        wordBuffer = wordBuffer.slice(0, wordBuffer.length - 1);
+      }
+    } else if (c === "\x1B") {
+    } else if (mods.ctrl || mods.alt || mods.gui) {
+    } else {
+      wordBuffer += c;
+    }
+  });
 };
 
 serial.on("data", (data) => {
