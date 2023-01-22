@@ -222,6 +222,11 @@ serial.on("data", (data) => {
       const indexes = currentCombo.sort();
       const key = indexes.join("+");
       const chord = chordForCombo[key];
+      if (!chord) {
+        console.warn(`No chord for combo '${key}'`);
+        return;
+      }
+
       emit("chord", { chord, indexes });
 
       const prevDup = currentDup;
