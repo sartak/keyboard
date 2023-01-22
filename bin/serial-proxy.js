@@ -10,7 +10,7 @@ const TOPLAYER = config.layout.layers.length - 1;
 const VIRT_KEYS = config.layout.keys.length;
 const VIRT_KEYMULT_DOWN = 0;
 const VIRT_KEYMULT_UP = 1;
-const VIRT_KEYMULT_CHENTRY = 2;
+const VIRT_KEYMULT_TAP = 2;
 const VIRT_KEYMULT_HOLD = 3;
 const VIRT_KEYMULT_LAST = 4;
 const VIRT_WARN = 0;
@@ -91,8 +91,8 @@ const layersToCheck = (mods) => {
   return layers;
 };
 
-const typed = (output, mods) => {
-  emit("typed", { output, mods });
+const typed = (output, mods, mode) => {
+  emit("typed", { output, mods, mode });
 };
 
 serial.on("data", (data) => {
@@ -115,9 +115,10 @@ serial.on("data", (data) => {
           emit("down", { key, index });
         } else if (type == VIRT_KEYMULT_UP) {
           emit("up", { key, index });
-        } else if (type == VIRT_KEYMULT_CHENTRY) {
+        } else if (type == VIRT_KEYMULT_TAP) {
           let output = null;
           let mods = currentMods;
+          let mode = "tap";
 
           layersToCheck(mods).forEach((layer) => {
             if (output === null && layer in key) {
@@ -131,17 +132,18 @@ serial.on("data", (data) => {
             if (typeof currentDup === "string") {
               output = currentDup;
             } else if (typeof currentDup === "object") {
+              mode = "alternate";
               const chord = currentDup;
               if (chord.alternates?.length) {
                 const alternate = chord.alternates[currentDupAlternate];
                 currentDupAlternate =
                   (currentDupAlternate + 1) % chord.alternates.length;
-                if (alternate.backspaces) {
-                  typed("\b".repeat(alternate.backspaces), mods);
-                }
                 output = alternate.append;
                 if (!alternate.exact) {
                   output += " ";
+                }
+                if (alternate.backspaces) {
+                  output = "\b".repeat(alternate.backspaces) + output;
                 }
               } else {
                 console.log("Dupping chord but has no alternates", { chord });
@@ -155,7 +157,7 @@ serial.on("data", (data) => {
             currentDup = output;
             dupMods = { ...mods };
           }
-          typed(output, mods);
+          typed(output, mods, mode);
         } else if (type == VIRT_KEYMULT_HOLD) {
           const label = key[currentLayer] ?? key.Alpha;
           let output = key[`${currentLayer}-Hold`];
@@ -168,7 +170,7 @@ serial.on("data", (data) => {
 
           emit("hold", { key, index });
 
-          typed(output, mods);
+          typed(output, mods, "hold");
           currentDup = output;
           dupMods = { ...currentMods };
           // Not implemented yet in qmk-config
@@ -212,10 +214,10 @@ serial.on("data", (data) => {
                 }
               }
               console.log(`Delete last chord '${output}'`);
-              typed("\b".repeat(output.length), currentMods);
+              typed("\b".repeat(output.length), currentMods, "chord");
             } else {
               console.log("Delete word");
-              typed("\b", { alt: true });
+              typed("\b", { alt: true }, "chord");
             }
             currentDup = undefined;
             break;
@@ -237,7 +239,7 @@ serial.on("data", (data) => {
         if (!chord.exact) {
           output += " ";
         }
-        typed(output, currentMods);
+        typed(output, currentMods, "chord");
       }
 
       currentCombo = undefined;
