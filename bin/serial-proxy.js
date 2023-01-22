@@ -89,7 +89,8 @@ const layersToCheck = (mods) => {
 };
 
 const typed = (output, mods) => {
-  console.log(`Typed ${describeModded(mods, output)}`);
+  const label = output.replaceAll(/\x08/g, "⌫");
+  console.log(`Typed '${describeModded(mods, label)}'`);
 };
 
 serial.on("data", (data) => {
