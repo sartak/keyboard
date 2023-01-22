@@ -129,6 +129,8 @@ serial.on("data", (data) => {
             }
           });
 
+          emit("tap", { output, key, index });
+
           if (output === "Dup") {
             mods = { ...dupMods };
 
