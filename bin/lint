@@ -30,22 +30,26 @@ type ChordInput = {
 
 type ChordResult = {
   output: string | Array<string>;
+  exact?: boolean;
+  sentenceShift?: boolean;
+  skipSentence?: boolean;
 } | {
   behavior: Behavior;
+  exact?: never;
+  sentenceShift?: never;
+  skipSentence?: never;
 };
 
 type ChordDefaults = {
-  label?: string;
-  layers?: Layer | Array<Layer>;
-  exact?: boolean;
-  skipSentence?: boolean;
-  sentenceShift?: boolean;
   quiet?: boolean;
   personal?: boolean;
-  builtin?: boolean | "zmk" | "qmk";
 };
 
-type Chord = ChordInput & ChordResult & ChordDefaults;
+type Chord = ChordInput & ChordResult & ChordDefaults & {
+  label?: string;
+  builtin?: boolean | "zmk" | "qmk";
+  layers?: Layer | Array<Layer>;
+};
 
 type ChordHeader = string;
 
