@@ -30,7 +30,7 @@ type ChordInput = {
   combo: Array<Key>;
 };
 
-type ChordResult = {
+type ChordResultInner = {
   output: string | Array<string>;
   exact?: boolean;
   sentenceShift?: boolean;
@@ -40,6 +40,10 @@ type ChordResult = {
   exact?: never;
   sentenceShift?: never;
   skipSentence?: never;
+};
+
+type ChordResult = ChordResultInner & {
+  hold?: ChordResultInner;
 };
 
 type ChordDefaults = {
