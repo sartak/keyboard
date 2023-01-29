@@ -80,14 +80,14 @@ const intuitIdentifierStem = ({ label }) => {
   return identifier.substring(0, 7);
 };
 
-const parseLayout = (layers) => {
+const parseLayout = (config) => {
   const validKey = {};
   const qmkKey = {};
   const zmkKey = {};
   const keys = [];
 
   let z = 0;
-  layers.Alpha.forEach((row) => {
+  config.Alpha.forEach((row) => {
     row.forEach((key) => {
       validKey[key] = true;
       zmkKey[key] = z++;
@@ -95,7 +95,7 @@ const parseLayout = (layers) => {
     });
   });
 
-  Object.entries(layers).forEach(([layer, rows]) => {
+  Object.entries(config).forEach(([layer, rows]) => {
     qmkKey[layer] = {};
     const prefix = layer.substring(0, 1);
 
@@ -113,7 +113,7 @@ const parseLayout = (layers) => {
     let i = 0;
     rows.forEach((row, r) => {
       row.forEach((key, c) => {
-        const alpha = layers.Alpha[r][c];
+        const alpha = config.Alpha[r][c];
         qmkKey[layer][alpha] =
           qmkKeyTidy[alpha] || `${prefix}_${alpha.toUpperCase()}`;
         keys[i++][layer] = key;
@@ -129,24 +129,19 @@ const parseLayout = (layers) => {
     });
   });
 
-  const zmkLayers = Object.keys(layers).filter(
+  const layers = Object.keys(config).filter(
     (l) =>
-      l !== "Function" &&
       !l.endsWith("-Shift") &&
       !l.endsWith("-Ctrl") &&
       !l.endsWith("-Alt") &&
       !l.endsWith("-Gui") &&
       !l.endsWith("-Hold")
   );
+
+  const zmkLayers = layers.filter((l) => l !== "Function");
+
   return {
-    layers: Object.keys(layers).filter(
-      (l) =>
-        !l.endsWith("-Shift") &&
-        !l.endsWith("-Ctrl") &&
-        !l.endsWith("-Alt") &&
-        !l.endsWith("-Gui") &&
-        !l.endsWith("-Hold")
-    ),
+    layers,
     keys,
     validKey,
     qmkKey,
