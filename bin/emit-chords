@@ -426,13 +426,18 @@ const qmkOutput = ({ output }) => {
 
 const qmkBehavior = ({ behavior }) => {
   switch (behavior) {
-    case "function-layer":
+    case "oneshot-Alpha":
+    case "oneshot-Symbol":
+    case "oneshot-Number":
+    case "oneshot-Function": {
+      const layer = behavior.replace("oneshot-", "");
       return `if (pressed) {
-  set_oneshot_layer(FUNCTION, ONESHOT_START);
+  set_oneshot_layer(${layer.toUpperCase()}, ONESHOT_START);
 } else {
   clear_oneshot_layer_state(ONESHOT_PRESSED);
 }
 return;`.split("\n");
+    }
 
     case "left-click":
       return `if (pressed) {
@@ -731,19 +736,36 @@ const zmkPresses = (output) => {
 };
 
 const zmkOutput = (chord) => {
-  let { output, behavior, exact, identifier } = chord;
+  const { output, behavior, exact, identifier } = chord;
   const macro = `ch_${identifier}`;
+  let presses;
 
   if (behavior) {
-    return [null, macro];
+    presses = zmkBehavior(chord);
+  } else {
+    let o = output;
+    if (!exact) {
+      o += " ";
+    }
+    presses = zmkPresses(o);
   }
 
-  if (!exact) {
-    output += " ";
-  }
-  const presses = zmkPresses(output);
+  return presses.length === 1 ? [null, presses[0]] : [macro, presses.join(" ")];
+};
 
-  return presses.length === 1 ? [presses[0], null] : [presses.join(" "), macro];
+const zmkBehavior = ({ behavior }) => {
+  switch (behavior) {
+    case "oneshot-Alpha":
+    case "oneshot-Symbol":
+    case "oneshot-Number":
+    case "oneshot-Function": {
+      const layer = behavior.replace("oneshot-", "");
+      return [`&sl ${layer.toUpperCase()}`];
+    }
+
+    default:
+      throw new Error(`Unimplemented zmkBehavior '${behavior}'`);
+  }
 };
 
 const zmkCombo = (chord) => chord.combo.map((key) => zmkKey[key]).join(" ");
@@ -827,7 +849,7 @@ const zmkCombos = (chords) => {
     const output = zmkOutput(chord);
     const args = [
       `ch_${chord.identifier}`,
-      output[1] ? `&${output[1]}` : output[0],
+      output[0] ? `&${output[0]}` : output[1],
       zmkCombo(chord),
     ];
 
@@ -848,7 +870,7 @@ const zmkMacros = (chords) => {
   const lines = ["/ {", "  macros {"];
 
   chords.forEach((chord) => {
-    const [content, identifier] = zmkOutput(chord);
+    const [identifier, content] = zmkOutput(chord);
     if (!identifier || content === null) {
       return;
     }

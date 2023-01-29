@@ -3,7 +3,7 @@
     { "combo": ["Bksp", "Spc"], "behavior": "delete-word", "quiet": true, "builtin": true },
     { "combo": ["Dup", "Bksp"], "behavior": "left-click", "quiet": true, "builtin": "zmk" },
     { "combo": ["Spc", "Tab"], "behavior": "right-click", "quiet": true, "builtin": "zmk" },
-    { "combo": ["Dup", "Tab"], "behavior": "function-layer", "quiet": true, "builtin": "zmk" },
+    { "combo": ["Dup", "Tab"], "behavior": "oneshot-Function", "quiet": true },
 
     { "combo": ["e", "."], "output": "!", "exact": true, "quiet": true, "label": "excl", "sentenceShift": true },
     { "combo": ["i", ","], "output": "?", "exact": true, "quiet": true, "label": "qmark", "sentenceShift": true },

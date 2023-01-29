@@ -265,7 +265,10 @@ serial.on("data", (data) => {
           case "right-click":
             emit(chord.behavior);
             break;
-          case "function-layer":
+          case "oneshot-Alpha":
+          case "oneshot-Symbol":
+          case "oneshot-Number":
+          case "oneshot-Function":
             // Handled in layer event
             break;
           default:
