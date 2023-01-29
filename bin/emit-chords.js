@@ -227,15 +227,7 @@ const parseChords = (files) => {
   const result = [];
   let seenIdentifier = {};
 
-  files.forEach(({ chords, defaults, ...rest }) => {
-    if (Object.keys(rest).length) {
-      throw new Error(
-        `Unexpected keys ${Object.keys(rest)
-          .map((r) => `'${r}'`)
-          .join(", ")} in file`
-      );
-    }
-
+  files.forEach(({ chords, defaults }) => {
     chords.forEach((input) => {
       if (typeof input === "string") {
         result.push(input);
@@ -244,36 +236,6 @@ const parseChords = (files) => {
 
       try {
         const chord = { ...defaults, ...input };
-
-        {
-          const {
-            combo,
-            output,
-            label,
-            exact,
-            quiet,
-            skipSentence,
-            sentenceShift,
-            layers,
-            identifier,
-            personal,
-            builtin,
-            behavior,
-            ...rest
-          } = chord;
-
-          if (Object.keys(rest).length) {
-            throw new Error(
-              `Unexpected keys ${Object.keys(rest)
-                .map((r) => `'${r}'`)
-                .join(", ")}`
-            );
-          }
-        }
-
-        if ("output" in chord && "behavior" in chord) {
-          throw new Error("Chord cannot have output and behavior");
-        }
 
         if (chord.combo.length === 0) {
           return;
