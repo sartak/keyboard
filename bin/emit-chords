@@ -248,6 +248,13 @@ const parseChords = (files) => {
           }
         }
 
+        if (chord.hold && "output" in chord.hold) {
+          chord.hold.alternates = makeAlternates(chord.hold);
+          if (Array.isArray(chord.hold.output)) {
+            chord.hold.output = chord.hold.output[0];
+          }
+        }
+
         if (chord.label === undefined) {
           chord.label = intuitLabel(chord);
         }
@@ -309,7 +316,13 @@ const renderCombo = ({ combo }) => {
     .join(" + ");
 };
 
-const renderOutput = ({ behavior, output, alternates }) => {
+const renderOutput = ({ behavior, output, alternates, hold }) => {
+  if (hold) {
+    const tapOutput = renderOutput({ behavior, output, alternates });
+    const holdOutput = renderOutput(hold);
+    return `tap: ${tapOutput} / hold: ${holdOutput}`;
+  }
+
   if (behavior) {
     return `_${behavior}_`;
   }
