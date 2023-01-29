@@ -4,12 +4,26 @@ const os = require("os");
 const { join: pathJoin } = require("path");
 const { spawnSync } = require("child_process");
 const chordFiles = ["chords.json", "personal.json"];
+const layoutFiles = ["layout.json"];
 
 const types = `
 type Layer = "Alpha" | "Symbol" | "Number" | "Function";
+type Modifier = "Shift" | "Ctrl" | "Alt" | "Gui" | "Hold";
+type LayerWithModifier = Layer | ${"`${Layer}-${Modifier}`"};
+
+type AlphaKey = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+type NumberKey = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+type SymbolKey = '"' | "#" | "$" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | "<" | "=" | ">" | "@" | "[" | "\\\\" | "]" | "^" | "_" | "\`" | "{" | "|" | "}" | "~" | "—" | "…";
+type NavigationKey = "Spc" | "Bksp" | "Ret" | "Tab" | "Esc" | "Up" | "Down" | "Left" | "Rght" | "Dup";
+type ModifierKey = "Shft" | "Ctrl" | "Alt" | "Gui";
+type LayerKey = "Alph" | "Sym" | "Num";
+type MediaKey = "Alfr" | "VlUp" | "VlDn" | "Mute" | "Prev" | "PlPs" | "Next" | "BrUp" | "BrDn" | "ZmIn" | "ZmOt" | "Lang" | "ScSh" | "Lock";
+type BluetoothKey = "BTTg" | "BTCl" | "BT1" | "BT2" | "BT3" | "BT4" | "BT5" | "BT6";
+type KeyboardKey = "BtlL" | "BtlR" | "RstL" | "RstR";
+type Key = AlphaKey | NumberKey | SymbolKey | NavigationKey | ModifierKey | LayerKey | MediaKey | BluetoothKey | KeyboardKey;
 
 type ChordInput = {
-  combo: Array<string>;
+  combo: Array<Key>;
 };
 
 type ChordResult = {
@@ -36,6 +50,30 @@ type ChordHeader = string;
 type ChordConfig = {
   defaults?: ChordDefaults;
   chords: Array<Chord | ChordHeader>;
+};
+
+type KeyConfig = Key | "" | null;
+
+type MainRowConfig = [
+  KeyConfig, KeyConfig, KeyConfig, KeyConfig, KeyConfig,
+  KeyConfig, KeyConfig, KeyConfig, KeyConfig, KeyConfig,
+];
+
+type ThumbRowConfig = [
+  KeyConfig, KeyConfig, KeyConfig, KeyConfig,
+];
+
+type LayerConfig = [
+  MainRowConfig,
+  MainRowConfig,
+  MainRowConfig,
+  ThumbRowConfig,
+];
+
+type LayoutConfig = {
+  Alpha: LayerConfig;
+} & {
+  [L in LayerWithModifier]?: LayerConfig;
 };
 `;
 
@@ -72,5 +110,11 @@ const lint = (file, content) => {
 chordFiles.forEach((file) => {
   const json = fs.readFileSync(file);
   const content = `const config: ChordConfig = ${json}`;
+  lint(file, content);
+});
+
+layoutFiles.forEach((file) => {
+  const json = fs.readFileSync(file);
+  const content = `const config: LayoutConfig = ${json}`;
   lint(file, content);
 });
