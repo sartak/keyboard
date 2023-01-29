@@ -22,6 +22,8 @@ type BluetoothKey = "BTTg" | "BTCl" | "BT1" | "BT2" | "BT3" | "BT4" | "BT5" | "B
 type KeyboardKey = "BtlL" | "BtlR" | "RstL" | "RstR";
 type Key = AlphaKey | NumberKey | SymbolKey | NavigationKey | ModifierKey | LayerKey | MediaKey | BluetoothKey | KeyboardKey;
 
+type Behavior = "delete-word" | "left-click" | "right-click" | "function-layer";
+
 type ChordInput = {
   combo: Array<Key>;
 };
@@ -29,7 +31,7 @@ type ChordInput = {
 type ChordResult = {
   output: string | Array<string>;
 } | {
-  behavior: string;
+  behavior: Behavior;
 };
 
 type ChordDefaults = {
