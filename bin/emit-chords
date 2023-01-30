@@ -822,9 +822,16 @@ const zmkPresses = (output) => {
 };
 
 const zmkOutput = (chord) => {
-  const { output, behavior, exact, identifier } = chord;
+  const { output, behavior, exact, identifier, hold } = chord;
   const macro = `ch_${identifier}`;
   let presses;
+
+  if (hold) {
+    const [, tapPresses] = zmkOutput({ behavior, exact, output, identifier });
+    const [, holdPresses] = zmkOutput({ ...hold, identifier });
+    const macros = [`${macro}_t`, `${macro}_h`];
+    return [macros, tapPresses, holdPresses];
+  }
 
   if (behavior) {
     presses = zmkBehavior(chord);
@@ -836,7 +843,9 @@ const zmkOutput = (chord) => {
     presses = zmkPresses(o);
   }
 
-  return presses.length === 1 ? [null, presses[0]] : [macro, presses.join(" ")];
+  return presses.length === 1
+    ? [null, presses[0], null]
+    : [macro, presses.join(" "), null];
 };
 
 const zmkModifier = {
@@ -874,6 +883,24 @@ const zmkPreamble = (chords, personalFile) => {
   }
 
   return [
+    macro("str", ["s"], "#s"),
+    "",
+    macro(
+      "THCHORD",
+      ["name", "tapMacro", "holdMacro"],
+      [
+        "name: name {",
+        '  compatible = "zmk,behavior-hold-tap";',
+        "  label = str(name);",
+        "  #binding-cells = <2>;",
+        "  tapping_term_ms = <200>;",
+        "  quick_tap_ms = <0>;",
+        '  flavor = "tap-preferred";',
+        "  bindings = <&holdMacro>, <&tapMacro>;",
+        "};",
+      ]
+    ),
+    "",
     macro(
       "COMBO",
       ["name", "keypress", "keypos"],
@@ -939,17 +966,43 @@ const zmkPreamble = (chords, personalFile) => {
   ];
 };
 
+const zmkBehaviors = (chords) => {
+  const lines = ["/ {", "  behaviors {"];
+
+  chords.forEach((chord) => {
+    const [macroIdentifier] = zmkOutput(chord);
+
+    if (!Array.isArray(macroIdentifier)) {
+      return;
+    }
+
+    const macro = "THCHORD";
+    const args = [`ht_${chord.identifier}`, ...macroIdentifier];
+
+    lines.push(`    ${macro}(${args.join(", ")})`);
+  });
+
+  lines.push("  };", "};");
+
+  return lines;
+};
+
 const zmkCombos = (chords) => {
   const lines = ["/ {", "  combos {", '    compatible = "zmk,combos";'];
 
   chords.forEach((chord) => {
     let macro = "CHORD";
-    const output = zmkOutput(chord);
-    const args = [
-      `ch_${chord.identifier}`,
-      output[0] ? `&${output[0]}` : output[1],
-      zmkCombo(chord),
-    ];
+    const [macroIdentifier, tapBehavior] = zmkOutput(chord);
+
+    const args = [`ch_${chord.identifier}`];
+
+    if (Array.isArray(macroIdentifier)) {
+      args.push(`&ht_${chord.identifier} 0 0`);
+    } else {
+      args.push(macroIdentifier ? `&${macroIdentifier}` : tapBehavior);
+    }
+
+    args.push(zmkCombo(chord));
 
     if (chord.layers) {
       macro = "LAYER_CHORD";
@@ -968,19 +1021,32 @@ const zmkMacros = (chords) => {
   const lines = ["/ {", "  macros {"];
 
   chords.forEach((chord) => {
-    const [identifier, content] = zmkOutput(chord);
-    if (!identifier || content === null) {
+    const [identifier, tapBehavior, holdBehavior] = zmkOutput(chord);
+    if (!identifier || tapBehavior === null) {
       return;
     }
 
-    let macro = "CHMAC";
-    const args = [identifier, content];
+    const macros = Array.isArray(identifier)
+      ? [
+          [identifier[0], tapBehavior, chord.skipSentence || chord.behavior],
+          [
+            identifier[1],
+            holdBehavior,
+            chord.hold.skipSentence || chord.hold.behavior,
+          ],
+        ]
+      : [[identifier, tapBehavior, chord.skipSentence]];
 
-    if (chord.skipSentence) {
-      macro = "MACRO";
-    }
+    macros.forEach(([identifier, behavior, skipSentence]) => {
+      const args = [identifier, behavior];
 
-    lines.push(`    ${macro}(${args.join(", ")})`);
+      let macro = "MACRO";
+      if (!skipSentence) {
+        macro = "CHMAC";
+      }
+
+      lines.push(`    ${macro}(${args.join(", ")})`);
+    });
   });
 
   lines.push("  };", "};");
@@ -1022,6 +1088,7 @@ const zmkConfig = (chordsAndCategories, personalFile) => {
   );
 
   lines.push(...zmkPreamble(chords, personalFile), "");
+  lines.push(...zmkBehaviors(chords), "");
   lines.push(...zmkCombos(chords), "");
   lines.push(...zmkMacros(chords), "");
 
