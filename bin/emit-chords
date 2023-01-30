@@ -138,12 +138,18 @@ const parseLayout = (config) => {
       !l.endsWith("-Hold")
   );
 
+  const layerIndex = {};
+  layers.forEach((layer, i) => {
+    layerIndex[layer] = i;
+  });
+
   const zmkLayers = layers.filter((l) => l !== "Function");
 
   return {
     layers,
     keys,
     validKey,
+    layerIndex,
     qmkKey,
     zmkKey,
     zmkLayers,
@@ -151,7 +157,7 @@ const parseLayout = (config) => {
 };
 
 const parsedLayout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
-const { validKey, qmkKey, zmkKey, zmkLayers } = parsedLayout;
+const { validKey, layerIndex, qmkKey, zmkKey, zmkLayers } = parsedLayout;
 const layout = {
   layers: parsedLayout.layers,
   keys: parsedLayout.keys,
@@ -419,21 +425,32 @@ const qmkOutput = ({ output }) => {
   return [out, length];
 };
 
+const qmkModifier = {
+  Shift: "MOD_LSFT",
+  Ctrl: "MOD_LCTL",
+  Alt: "MOD_LALT",
+  Gui: "MOD_LGUI",
+};
+
 const qmkBehavior = ({ behavior }) => {
-  switch (behavior) {
-    case "oneshot-Alpha":
-    case "oneshot-Symbol":
-    case "oneshot-Number":
-    case "oneshot-Function": {
-      const layer = behavior.replace("oneshot-", "");
+  if (behavior.startsWith("oneshot-")) {
+    const rest = behavior.replace("oneshot-", "");
+    if (rest in layerIndex) {
       return `if (pressed) {
-  set_oneshot_layer(${layer.toUpperCase()}, ONESHOT_START);
+  set_oneshot_layer(${rest.toUpperCase()}, ONESHOT_START);
 } else {
   clear_oneshot_layer_state(ONESHOT_PRESSED);
 }
 return;`.split("\n");
+    } else if (rest in qmkModifier) {
+      return `if (pressed) {
+  add_oneshot_mods(${qmkModifier[rest]});
+}
+return;`.split("\n");
     }
+  }
 
+  switch (behavior) {
     case "left-click":
       return `if (pressed) {
   tap_code16(KC_MS_BTN1);
@@ -748,16 +765,24 @@ const zmkOutput = (chord) => {
   return presses.length === 1 ? [null, presses[0]] : [macro, presses.join(" ")];
 };
 
-const zmkBehavior = ({ behavior }) => {
-  switch (behavior) {
-    case "oneshot-Alpha":
-    case "oneshot-Symbol":
-    case "oneshot-Number":
-    case "oneshot-Function": {
-      const layer = behavior.replace("oneshot-", "");
-      return [`&sl ${layer.toUpperCase()}`];
-    }
+const zmkModifier = {
+  Shift: "LSHIFT",
+  Ctrl: "LCTRL",
+  Alt: "LALT",
+  Gui: "LGUI",
+};
 
+const zmkBehavior = ({ behavior }) => {
+  if (behavior.startsWith("oneshot-")) {
+    const rest = behavior.replace("oneshot-", "");
+    if (rest in layerIndex) {
+      return [`&sl ${rest.toUpperCase()}`];
+    } else if (rest in zmkModifier) {
+      return [`&sk ${zmkModifier[rest]}`];
+    }
+  }
+
+  switch (behavior) {
     default:
       throw new Error(`Unimplemented zmkBehavior '${behavior}'`);
   }
