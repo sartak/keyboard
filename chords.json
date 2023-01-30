@@ -1,6 +1,6 @@
 {
   "chords": [
-    { "combo": ["Bksp", "Spc"], "behavior": "delete-word", "quiet": true, "builtin": "qmk" },
+    { "combo": ["Bksp", "Spc"], "behavior": "delete-word", "quiet": true },
     { "combo": ["Dup", "Bksp"], "behavior": "left-click", "quiet": true, "builtin": "zmk" },
     { "combo": ["Spc", "Tab"], "behavior": "right-click", "quiet": true, "builtin": "zmk" },
     { "combo": ["Dup", "Tab"], "behavior": "oneshot-Function", "quiet": true },

@@ -452,6 +452,19 @@ return;`.split("\n");
   }
 
   switch (behavior) {
+    case "delete-word":
+      return `if (pressed) {
+  if (prev_chord_length) {
+    for (uint16_t i = 0; i < prev_chord_length; i++) {
+      tap_code16(KC_BSPC);
+    }
+  }
+  else {
+    tap_code16(LALT(KC_BSPC));
+  }
+}
+return;`.split("\n");
+
     case "left-click":
       return `if (pressed) {
   tap_code16(KC_MS_BTN1);
@@ -532,6 +545,14 @@ const qmkActions = (chords, personalFile) => {
 const qmkFunction = (chords, personalFile) => {
   const behaviorIntro = `void process_chord_event(uint16_t combo_index, bool pressed) {
   bool space = true;
+  uint16_t prev_chord_length = last_chord_length;
+
+  if (pressed) {
+    last_chord_length = 0;
+  }
+  last_chord = combo_index;
+  last_chord_cycle = 0;
+
   switch(combo_index) {`;
 
   const behaviorOutro = `    PERSONAL_CHORD_BEHAVIOR_FUNC
