@@ -430,6 +430,7 @@ const qmkModifier = {
   Ctrl: "MOD_LCTL",
   Alt: "MOD_LALT",
   Gui: "MOD_LGUI",
+  Hyper: "MOD_LCTL | MOD_LALT | MOD_LGUI",
 };
 
 const qmkBehavior = ({ behavior }) => {
@@ -770,6 +771,7 @@ const zmkModifier = {
   Ctrl: "LCTRL",
   Alt: "LALT",
   Gui: "LGUI",
+  Hyper: "LG(LA(LCTRL))",
 };
 
 const zmkBehavior = ({ behavior }) => {
