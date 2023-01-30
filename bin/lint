@@ -122,11 +122,30 @@ chordFiles.forEach((file) => {
   });
 });
 
+const position = {};
 layoutFiles.forEach((file) => {
   const json = fs.readFileSync(file);
   const content = `const config: LayoutConfig = ${json}`;
   lint(file, content);
+
+  const { Alpha } = JSON.parse(json);
+  Alpha.forEach((row, r) => {
+    row.forEach((key, c) => {
+      position[key] = [r, c];
+    });
+  });
 });
+
+const fingers = {
+  "left pinky": [0],
+  "left ring": [1],
+  "left middle": [2],
+  "left index": [3, 4],
+  "right index": [5, 6],
+  "right middle": [7],
+  "right ring": [8],
+  "right pinky": [9],
+};
 
 let ok = true;
 const combos = {};
@@ -141,6 +160,51 @@ chords.forEach((chord) => {
       console.warn(`  ${JSON.stringify(chord)}`);
     }
     combos[id] = chord;
+
+    const positions = [];
+    for (key of combo) {
+      if (!(key in position)) {
+        ok = false;
+        console.warn(`Missing position for combo key '${key}':`);
+        console.warn(`  ${JSON.stringify(chord)}`);
+        return;
+      } else {
+        positions.push(position[key]);
+      }
+    }
+
+    Object.entries(fingers).forEach(([finger, cols]) => {
+      let minRow, maxRow, minCol, maxCol;
+      positions
+        .filter(([, c]) => cols.includes(c))
+        .forEach(([row, col]) => {
+          // any thumb combo is fine
+          if (row === 3) {
+            return;
+          }
+          if (minRow === undefined || row < minRow) {
+            minRow = row;
+          }
+          if (maxRow === undefined || row > minRow) {
+            maxRow = row;
+          }
+          if (minCol === undefined || col < minCol) {
+            minCol = col;
+          }
+          if (maxCol === undefined || col > minCol) {
+            maxCol = col;
+          }
+        });
+
+      const rowDist = maxRow - minRow;
+      const colDist = maxCol - minCol;
+
+      if (rowDist > 1 || colDist > 1 || (rowDist && colDist)) {
+        ok = false;
+        console.warn(`Combo has ${finger} doing too much work:`);
+        console.warn(`  ${JSON.stringify(chord)}`);
+      }
+    });
   }
 });
 
