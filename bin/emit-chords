@@ -785,6 +785,9 @@ const zmkBehavior = ({ behavior }) => {
   }
 
   switch (behavior) {
+    case "delete-word":
+      return [`&kp LA(BSPC)`];
+
     default:
       throw new Error(`Unimplemented zmkBehavior '${behavior}'`);
   }
