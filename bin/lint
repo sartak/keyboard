@@ -109,10 +109,17 @@ const lint = (file, content) => {
   }
 };
 
+const chords = [];
 chordFiles.forEach((file) => {
   const json = fs.readFileSync(file);
   const content = `const config: ChordConfig = ${json}`;
   lint(file, content);
+
+  JSON.parse(json).chords.forEach((chord) => {
+    if (typeof chord === "object") {
+      chords.push(chord);
+    }
+  });
 });
 
 layoutFiles.forEach((file) => {
@@ -120,3 +127,23 @@ layoutFiles.forEach((file) => {
   const content = `const config: LayoutConfig = ${json}`;
   lint(file, content);
 });
+
+let ok = true;
+const combos = {};
+chords.forEach((chord) => {
+  const { combo } = chord;
+  if (combo.length) {
+    const id = [...chord.combo].sort().join("+");
+    if (id in combos) {
+      ok = false;
+      console.warn(`Collision for combo '${id}':`);
+      console.warn(`  ${JSON.stringify(combos[id])}`);
+      console.warn(`  ${JSON.stringify(chord)}`);
+    }
+    combos[id] = chord;
+  }
+});
+
+if (!ok) {
+  process.exit(1);
+}
