@@ -266,7 +266,7 @@ const parseChords = (files) => {
         }
         seenIdentifier[chord.identifier] = true;
 
-        if (!chord.identifier.match(/^[a-z_][a-z_0-9]{0,6}$/)) {
+        if (!chord.identifier.match(/^[a-z_][a-z_0-9]{0,8}$/)) {
           throw new Error(`Malformed identifier '${chord.identifier}'`);
         }
 
