@@ -433,49 +433,58 @@ const qmkModifier = {
   Hyper: "MOD_LCTL | MOD_LALT | MOD_LGUI",
 };
 
-const qmkBehavior = ({ behavior }) => {
+const qmkBehavior = ({ behavior }, pressed) => {
   if (behavior.startsWith("oneshot-")) {
     const rest = behavior.replace("oneshot-", "");
     if (rest in layerIndex) {
-      return `if (pressed) {
-  set_oneshot_layer(${rest.toUpperCase()}, ONESHOT_START);
-} else {
-  clear_oneshot_layer_state(ONESHOT_PRESSED);
-}
+      if (pressed) {
+        return `set_oneshot_layer(${rest.toUpperCase()}, ONESHOT_START);
 return;`.split("\n");
+      } else {
+        return `clear_oneshot_layer_state(ONESHOT_PRESSED);
+return;`.split("\n");
+      }
     } else if (rest in qmkModifier) {
-      return `if (pressed) {
-  add_oneshot_mods(${qmkModifier[rest]});
-}
+      if (pressed) {
+        return `add_oneshot_mods(${qmkModifier[rest]});
 return;`.split("\n");
+      } else {
+        return `return;`.split("\n");
+      }
     }
   }
 
   switch (behavior) {
     case "delete-word":
-      return `if (pressed) {
-  if (prev_chord_length) {
-    for (uint16_t i = 0; i < prev_chord_length; i++) {
-      tap_code16(KC_BSPC);
-    }
-  }
-  else {
-    tap_code16(LALT(KC_BSPC));
+      if (pressed) {
+        return `if (prev_chord_length) {
+  for (uint16_t i = 0; i < prev_chord_length; i++) {
+    tap_code16(KC_BSPC);
   }
 }
+else {
+  tap_code16(LALT(KC_BSPC));
+}
 return;`.split("\n");
+      } else {
+        return `return;`.split("\n");
+      }
 
     case "left-click":
-      return `if (pressed) {
-  tap_code16(KC_MS_BTN1);
-}
+      if (pressed) {
+        return `tap_code16(KC_MS_BTN1);
 return;`.split("\n");
+      } else {
+        return `return;`.split("\n");
+      }
 
     case "right-click":
-      return `if (pressed) {
-  tap_code16(KC_MS_BTN2);
-}
+      if (pressed) {
+        return `tap_code16(KC_MS_BTN2);
 return;`.split("\n");
+      } else {
+        return `return;`.split("\n");
+      }
 
     default:
       throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
@@ -597,7 +606,13 @@ const qmkPressFunction = (chords, personalFile) => {
 
     branch.push(`    case CHORD_${chord.identifier}:`);
     if (chord.behavior) {
-      branch.push(...qmkBehavior(chord).map((line) => `      ${line}`));
+      branch.push("      if (pressed) {");
+      branch.push(...qmkBehavior(chord, true).map((line) => `        ${line}`));
+      branch.push("      } else {");
+      branch.push(
+        ...qmkBehavior(chord, false).map((line) => `        ${line}`)
+      );
+      branch.push("      }");
     } else {
       branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
     }
