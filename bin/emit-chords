@@ -434,56 +434,58 @@ const qmkModifier = {
 };
 
 const qmkBehavior = ({ behavior }, pressed) => {
-  if (behavior.startsWith("oneshot-")) {
-    const rest = behavior.replace("oneshot-", "");
-    if (rest in layerIndex) {
-      if (pressed) {
-        return `set_oneshot_layer(${rest.toUpperCase()}, ONESHOT_START);`.split(
-          "\n"
-        );
-      } else {
-        return `clear_oneshot_layer_state(ONESHOT_PRESSED);`.split("\n");
-      }
-    } else if (rest in qmkModifier) {
-      if (pressed) {
-        return `add_oneshot_mods(${qmkModifier[rest]});`.split("\n");
-      } else {
-        return null;
+  const res = (() => {
+    if (behavior.startsWith("oneshot-")) {
+      const rest = behavior.replace("oneshot-", "");
+      if (rest in layerIndex) {
+        if (pressed) {
+          return `set_oneshot_layer(${rest.toUpperCase()}, ONESHOT_START);`;
+        } else {
+          return "clear_oneshot_layer_state(ONESHOT_PRESSED);";
+        }
+      } else if (rest in qmkModifier) {
+        if (pressed) {
+          return `add_oneshot_mods(${qmkModifier[rest]});`;
+        } else {
+          return null;
+        }
       }
     }
-  }
 
-  switch (behavior) {
-    case "delete-word":
-      if (pressed) {
-        return `if (prev_chord_length) {
+    switch (behavior) {
+      case "delete-word":
+        if (pressed) {
+          return `if (prev_chord_length) {
   for (uint16_t i = 0; i < prev_chord_length; i++) {
     tap_code16(KC_BSPC);
   }
 }
 else {
   tap_code16(LALT(KC_BSPC));
-}`.split("\n");
-      }
-      break;
+}`;
+        }
+        break;
 
-    case "left-click":
-      if (pressed) {
-        return `tap_code16(KC_MS_BTN1);`.split("\n");
-      }
-      break;
+      case "left-click":
+        if (pressed) {
+          return "tap_code16(KC_MS_BTN1);";
+        }
+        break;
 
-    case "right-click":
-      if (pressed) {
-        return `tap_code16(KC_MS_BTN2);`.split("\n");
-      }
-      break;
+      case "right-click":
+        if (pressed) {
+          return "tap_code16(KC_MS_BTN2);";
+        }
+        break;
 
-    default:
-      throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
-  }
+      default:
+        throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
+    }
 
-  return null;
+    return null;
+  })();
+
+  return typeof res === "string" ? res.split("\n") : res;
 };
 
 const qmkOutputCase = (chord) => {
