@@ -561,15 +561,15 @@ const qmkActions = (chords, personalFile) => {
 };
 
 const qmkReleaseFunction = (chords, personalFile) => {
-  const personalBehavior = "PERSONAL_RELEASE_BEHAVIOR_FUNC";
-  const behaviorIntro = `void process_chord_release(uint16_t combo_index) {
+  const personalCases = "PERSONAL_RELEASE_CASES";
+  const intro = `void process_chord_release(uint16_t combo_index) {
   switch(combo_index) {`;
 
-  const behaviorOutro = `    ${personalBehavior}
+  const outro = `    ${personalCases}
   }
 }`;
 
-  const behaviorCases = [];
+  const cases = [];
   chords.forEach((chord) => {
     if (!chord.behavior) {
       return;
@@ -583,25 +583,20 @@ const qmkReleaseFunction = (chords, personalFile) => {
     branch.push(`    case CHORD_${chord.identifier}:`);
     branch.push(...up.map((line) => `      ${line}`));
     branch.push(`      break;`);
-    behaviorCases.push(...branch);
+    cases.push(...branch);
   });
 
   if (personalFile) {
-    return [macro(personalBehavior, null, behaviorCases)];
+    return [macro(personalCases, null, cases)];
   } else {
-    return [
-      ...behaviorIntro.split("\n"),
-      ...behaviorCases,
-      ...behaviorOutro.split("\n"),
-    ];
+    return [...intro.split("\n"), ...cases, ...outro.split("\n")];
   }
 };
 
 const qmkPressFunction = (chords, personalFile) => {
-  const personalBehavior = "PERSONAL_CHORD_BEHAVIOR_FUNC";
-  const personalOutput = "PERSONAL_CHORD_OUTPUT_FUNC";
+  const personalCases = "PERSONAL_PRESS_CASES";
 
-  const behaviorIntro = `void process_chord_event(uint16_t combo_index, bool pressed) {
+  const intro = `void process_chord_event(uint16_t combo_index, bool pressed) {
   if (!pressed) {
     process_chord_release(combo_index);
     return;
@@ -617,12 +612,7 @@ const qmkPressFunction = (chords, personalFile) => {
 
   switch(combo_index) {`;
 
-  const behaviorOutro = `    ${personalBehavior}
-  }`;
-
-  const outputIntro = `  switch(combo_index) {`;
-
-  const outputOutro = `    ${personalOutput}
+  const outro = `    ${personalCases}
     default:
       space = false;
       break;
@@ -635,8 +625,7 @@ const qmkPressFunction = (chords, personalFile) => {
   emit_virt_combo(combo_index, chord_event);
 }`;
 
-  const behaviorCases = [];
-  const outputCases = [];
+  const cases = [];
   chords.forEach((chord) => {
     const branch = [];
 
@@ -652,32 +641,18 @@ const qmkPressFunction = (chords, personalFile) => {
       branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
     }
 
-    if (chord.behavior) {
-      behaviorCases.push(...branch);
-    } else {
-      outputCases.push(...branch);
-    }
+    cases.push(...branch);
   });
 
   if (personalFile) {
-    return [
-      macro(personalBehavior, null, behaviorCases),
-      macro(personalOutput, null, outputCases),
-    ];
+    return [macro(personalCases, null, cases)];
   } else {
-    return [
-      ...behaviorIntro.split("\n"),
-      ...behaviorCases,
-      ...behaviorOutro.split("\n"),
-      ...outputIntro.split("\n"),
-      ...outputCases,
-      ...outputOutro.split("\n"),
-    ];
+    return [...intro.split("\n"), ...cases, ...outro.split("\n")];
   }
 };
 
 const qmkDupFunction = (chords, personalFile) => {
-  const personalDup = "PERSONAL_DUP_FUNC";
+  const personalCases = "PERSONAL_DUP_CASES";
   const intro = `uint8_t process_chord_dup(uint16_t last_chord, uint8_t last_chord_cycle) {
   uint8_t next_chord_cycle = 0;
   uint8_t backspaces = 0;
@@ -712,7 +687,7 @@ const qmkDupFunction = (chords, personalFile) => {
       cases.push("      break;");
     });
 
-  const outro = `    ${personalDup}
+  const outro = `    ${personalCases}
     default:
       space = false;
       break;
@@ -731,7 +706,7 @@ const qmkDupFunction = (chords, personalFile) => {
 }`;
 
   if (personalFile) {
-    return [macro(personalDup, null, cases)];
+    return [macro(personalCases, null, cases)];
   } else {
     return [...intro.split("\n"), ...cases, ...outro.split("\n")];
   }
