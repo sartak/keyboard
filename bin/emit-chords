@@ -572,29 +572,86 @@ const qmkActions = (chords, personalFile) => {
   return [macro(personalFile ? personalCombos : "CHORD_COMBOS", null, lines)];
 };
 
+const qmkGlobals = [
+  "bool releasedWithinTapThreshold = true;",
+  "deferred_token chord_token = INVALID_DEFERRED_TOKEN;",
+  "uint16_t prev_chord_length;",
+];
+
 const qmkReleaseFunction = (chords, personalFile) => {
   const personalCases = "PERSONAL_RELEASE_CASES";
   const intro = `void process_chord_release(uint16_t combo_index) {
+  cancel_deferred_exec(chord_token);
+
+  bool space = true;
+
   switch(combo_index) {`;
 
   const outro = `    ${personalCases}
+    default:
+      return;
+  }
+
+  if (space) {
+    tap_code(KC_SPC);
+    last_chord_length++;
+  }
+
+  if (releasedWithinTapThreshold) {
+    emit_virt_combo(last_chord, VIRT_CHORD_ENDED_TAP);
   }
 }`;
 
   const cases = [];
   chords.forEach((chord) => {
-    if (!chord.behavior) {
-      return;
-    }
-
-    const up = qmkBehavior(chord, false);
-    if (!up) {
-      return;
-    }
     const branch = [];
     branch.push(`    case CHORD_${chord.identifier}:`);
-    branch.push(...up.map((line) => `      ${line}`));
-    branch.push(`      break;`);
+
+    if (chord.behavior) {
+      branch.push(`      space = false;`);
+      if (chord.hold) {
+        const down = qmkBehavior(chord, true);
+        const up = qmkBehavior(chord, false);
+        if (down || up) {
+          branch.push(`      if (releasedWithinTapThreshold) {`);
+          if (down) {
+            branch.push(...down.map((line) => `        ${line}`));
+          }
+          if (up) {
+            branch.push(...up.map((line) => `        ${line}`));
+          }
+        }
+        const holdChord = { ...chord, ...chord.hold };
+        const holdUp = qmkBehavior(holdChord, false);
+        if (holdUp) {
+          if (down || up) {
+            branch.push(`      } else {`);
+          } else {
+            branch.push(`      if (!releasedWithinTapThreshold) {`);
+          }
+          branch.push(...holdUp.map((line) => `        ${line}`));
+        }
+        branch.push(`      }`);
+      } else {
+        const up = qmkBehavior(chord, false);
+        if (!up) {
+          return;
+        }
+        branch.push(...up.map((line) => `      ${line}`));
+      }
+    } else {
+      if (!chord.hold) {
+        return;
+      }
+
+      branch.push(`      if (!releasedWithinTapThreshold) {`);
+      branch.push(`        return;`);
+      branch.push(`      }`);
+      branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
+    }
+
+    branch.push("      break;");
+
     cases.push(...branch);
   });
 
@@ -605,26 +662,37 @@ const qmkReleaseFunction = (chords, personalFile) => {
   }
 };
 
-const qmkPressFunction = (chords, personalFile) => {
-  const personalCases = "PERSONAL_PRESS_CASES";
+const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
+  const personalCases = holdFunc ? "PERSONAL_HOLD_CASES" : "PERSONAL_TAP_CASES";
 
-  const intro = `void process_chord_event(uint16_t combo_index, bool pressed) {
+  const returnStatement = holdFunc ? "return 0" : "return";
+
+  const tapIntro = `void process_chord_event(uint16_t combo_index, bool pressed) {
   if (!pressed) {
     process_chord_release(combo_index);
-    return;
+    ${returnStatement};
   }
 
-  bool space = true;
-  uint16_t prev_chord_length = last_chord_length;
-  uint8_t chord_event = VIRT_CHORD_ENDED_TAP;
+  releasedWithinTapThreshold = true;
+  prev_chord_length = last_chord_length;
 
   last_chord_length = 0;
   last_chord = combo_index;
   last_chord_cycle = 0;
 
+  bool space = true;
+  bool scheduleTimer = false;
+
   switch(combo_index) {`;
 
-  const outro = `    ${personalCases}
+  const holdIntro = `uint32_t process_chord_hold(uint32_t trigger_time, void* cb_arg) {
+  releasedWithinTapThreshold = false;
+
+  bool space = true;
+
+  switch(last_chord) {`;
+
+  const tapOutro = `    ${personalCases}
     default:
       space = false;
       break;
@@ -633,16 +701,44 @@ const qmkPressFunction = (chords, personalFile) => {
     tap_code(KC_SPC);
     last_chord_length++;
   }
+  if (scheduleTimer) {
+    chord_token = defer_exec(TAPPING_TERM, process_chord_hold, NULL);
+  }
 
-  emit_virt_combo(combo_index, chord_event);
+  emit_virt_combo(last_chord, scheduleTimer ? VIRT_CHORD_ENDED_INDETERMINATE : VIRT_CHORD_ENDED_TAP);
+  ${returnStatement};
+}`;
+
+  const holdOutro = `    ${personalCases}
+    default:
+      ${returnStatement};
+  }
+  if (space) {
+    tap_code(KC_SPC);
+    last_chord_length++;
+  }
+  emit_virt_combo(last_chord, VIRT_CHORD_ENDED_HOLD);
+  ${returnStatement};
 }`;
 
   const cases = [];
-  chords.forEach((chord) => {
-    const branch = [];
+  const timerChords = [];
+  chords.forEach((c) => {
+    if (holdFunc && !c.hold) {
+      return;
+    }
+    if (!holdFunc && c.hold) {
+      timerChords.push(c);
+      return;
+    }
 
+    const chord = holdFunc ? { ...c, ...c.hold } : c;
+
+    const branch = [];
     branch.push(`    case CHORD_${chord.identifier}:`);
+
     if (chord.behavior) {
+      branch.push("      space = false;");
       const down = qmkBehavior(chord, true);
       if (!down) {
         return;
@@ -652,9 +748,20 @@ const qmkPressFunction = (chords, personalFile) => {
       branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
     }
     branch.push("      break;");
-
     cases.push(...branch);
   });
+
+  if (timerChords.length) {
+    cases.push(
+      ...timerChords.map(({ identifier }) => `    case CHORD_${identifier}:`)
+    );
+    cases.push("      space = false;");
+    cases.push("      scheduleTimer = true;");
+    cases.push("      break;");
+  }
+
+  const intro = holdFunc ? holdIntro : tapIntro;
+  const outro = holdFunc ? holdOutro : tapOutro;
 
   if (personalFile) {
     return [macro(personalCases, null, cases)];
@@ -670,6 +777,7 @@ const qmkDupFunction = (chords, personalFile) => {
   uint8_t backspaces = 0;
   char *append = NULL;
   bool space = true;
+
   switch(last_chord) {`;
 
   const cases = [];
@@ -728,7 +836,9 @@ const qmkFunctions = (chords, personalFile) => {
   const results = [
     qmkReleaseFunction,
     "",
-    qmkPressFunction,
+    qmkPressFunction(true),
+    "",
+    qmkPressFunction(false),
     "",
     qmkDupFunction,
   ].map((fn) => (typeof fn === "string" ? fn : fn(chords, personalFile)));
@@ -753,6 +863,9 @@ const qmkConfig = (chordsAndCategories, personalFile) => {
   lines.push(...qmkEnum(chords, personalFile), "");
   lines.push(...qmkCombos(chords), "");
   lines.push(...qmkActions(chords, personalFile), "");
+  if (!personalFile) {
+    lines.push(...qmkGlobals, "");
+  }
   lines.push(...qmkFunctions(chords, personalFile), "");
 
   return lines;
