@@ -607,12 +607,11 @@ const qmkPressFunction = (chords, personalFile) => {
 
   bool space = true;
   uint16_t prev_chord_length = last_chord_length;
+  uint8_t chord_event = VIRT_CHORD_ENDED_TAP;
 
   last_chord_length = 0;
   last_chord = combo_index;
   last_chord_cycle = 0;
-
-  emit_virt_combo(combo_index, VIRT_CHORD_ENDED_TAP);
 
   switch(combo_index) {`;
 
@@ -630,6 +629,8 @@ const qmkPressFunction = (chords, personalFile) => {
     tap_code(KC_SPC);
     last_chord_length++;
   }
+
+  emit_virt_combo(combo_index, chord_event);
 }`;
 
   const behaviorCases = [];
