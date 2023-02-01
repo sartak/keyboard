@@ -18,8 +18,10 @@ const VIRT_HEARTBEAT = 1;
 const VIRT_KEYS_START = VIRT_HEARTBEAT + 1;
 const VIRT_KEYS_END = VIRT_KEYS_START + VIRT_KEYS * VIRT_KEYMULT_LAST;
 const VIRT_CHORD_STARTED = VIRT_KEYS_END + 1;
-const VIRT_CHORD_ENDED = VIRT_CHORD_STARTED + 1;
-const VIRT_LAYER_ZERO = VIRT_CHORD_ENDED + 1;
+const VIRT_CHORD_ENDED_INDETERMINATE = VIRT_CHORD_STARTED + 1;
+const VIRT_CHORD_ENDED_TAP = VIRT_CHORD_ENDED_INDETERMINATE + 1;
+const VIRT_CHORD_ENDED_HOLD = VIRT_CHORD_ENDED_TAP + 1;
+const VIRT_LAYER_ZERO = VIRT_CHORD_ENDED_HOLD + 1;
 const VIRT_LAYER_LAST = VIRT_LAYER_ZERO + TOPLAYER;
 const VIRT_MOD_ZERO = VIRT_LAYER_LAST + 1;
 const VIRT_SHIFT_DOWN = VIRT_MOD_ZERO;
@@ -218,7 +220,11 @@ serial.on("data", (data) => {
       }
     } else if (byte === VIRT_CHORD_STARTED) {
       currentCombo = [];
-    } else if (byte === VIRT_CHORD_ENDED) {
+    } else if (
+      byte === VIRT_CHORD_ENDED_INDETERMINATE ||
+      byte === VIRT_CHORD_ENDED_TAP ||
+      byte === VIRT_CHORD_ENDED_HOLD
+    ) {
       const indexes = currentCombo.sort();
       const key = indexes.join("+");
       const chord = chordForCombo[key];
