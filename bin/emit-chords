@@ -491,6 +491,16 @@ else {
         }
         break;
 
+      case "Gui-left-click":
+        if (pressed) {
+          return [
+            `register_mods(${qmkModifier.Gui});`,
+            "tap_code16(KC_MS_BTN1);",
+            `unregister_mods(${qmkModifier.Gui});`,
+          ];
+        }
+        break;
+
       default:
         throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
     }

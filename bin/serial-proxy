@@ -269,6 +269,7 @@ serial.on("data", (data) => {
             break;
           case "left-click":
           case "right-click":
+          case "Gui-left-click":
             emit(chord.behavior);
             break;
           case "oneshot-Alpha":
