@@ -483,7 +483,7 @@ else {
       throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
   }
 
-  return [];
+  return null;
 };
 
 const qmkOutputCase = (chord) => {
@@ -560,25 +560,60 @@ const qmkActions = (chords, personalFile) => {
   ];
 };
 
+const qmkReleaseFunction = (chords, personalFile) => {
+  const behaviorIntro = `void process_chord_release(uint16_t combo_index) {
+  switch(combo_index) {`;
+
+  const behaviorOutro = `    PERSONAL_RELEASE_BEHAVIOR_FUNC
+  }
+}`;
+
+  const behaviorCases = [];
+  chords.forEach((chord) => {
+    if (!chord.behavior) {
+      return;
+    }
+
+    const up = qmkBehavior(chord, false);
+    const branch = [];
+    branch.push(`    case CHORD_${chord.identifier}:`);
+    if (up) {
+      branch.push(...up.map((line) => `      ${line}`));
+    }
+    branch.push(`      return;`);
+    behaviorCases.push(...branch);
+  });
+
+  if (personalFile) {
+    return [macro("PERSONAL_RELEASE_BEHAVIOR_FUNC", null, behaviorCases)];
+  } else {
+    return [
+      ...behaviorIntro.split("\n"),
+      ...behaviorCases,
+      ...behaviorOutro.split("\n"),
+    ];
+  }
+};
+
 const qmkPressFunction = (chords, personalFile) => {
   const behaviorIntro = `void process_chord_event(uint16_t combo_index, bool pressed) {
+  if (!pressed) {
+    process_chord_release(combo_index);
+    return;
+  }
+
   bool space = true;
   uint16_t prev_chord_length = last_chord_length;
 
-  if (pressed) {
-    last_chord_length = 0;
-    emit_virt_combo(combo_index, VIRT_CHORD_ENDED_TAP);
-  }
+  last_chord_length = 0;
   last_chord = combo_index;
   last_chord_cycle = 0;
+
+  emit_virt_combo(combo_index, VIRT_CHORD_ENDED_TAP);
 
   switch(combo_index) {`;
 
   const behaviorOutro = `    PERSONAL_CHORD_BEHAVIOR_FUNC
-  }`;
-
-  const bridge = `  if (!pressed) {
-    return;
   }`;
 
   const outputIntro = `  switch(combo_index) {`;
@@ -601,13 +636,10 @@ const qmkPressFunction = (chords, personalFile) => {
 
     branch.push(`    case CHORD_${chord.identifier}:`);
     if (chord.behavior) {
-      branch.push("      if (pressed) {");
-      branch.push(...qmkBehavior(chord, true).map((line) => `        ${line}`));
-      branch.push("      } else {");
-      branch.push(
-        ...qmkBehavior(chord, false).map((line) => `        ${line}`)
-      );
-      branch.push("      }");
+      const down = qmkBehavior(chord, true);
+      if (down) {
+        branch.push(...down.map((line) => `      ${line}`));
+      }
       branch.push("      return;");
     } else {
       branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
@@ -630,7 +662,6 @@ const qmkPressFunction = (chords, personalFile) => {
       ...behaviorIntro.split("\n"),
       ...behaviorCases,
       ...behaviorOutro.split("\n"),
-      ...bridge.split("\n"),
       ...outputIntro.split("\n"),
       ...outputCases,
       ...outputOutro.split("\n"),
@@ -699,9 +730,13 @@ const qmkDupFunction = (chords, personalFile) => {
 };
 
 const qmkFunctions = (chords, personalFile) => {
-  const results = [qmkPressFunction, "", qmkDupFunction].map((fn) =>
-    typeof fn === "string" ? fn : fn(chords, personalFile)
-  );
+  const results = [
+    qmkReleaseFunction,
+    "",
+    qmkPressFunction,
+    "",
+    qmkDupFunction,
+  ].map((fn) => (typeof fn === "string" ? fn : fn(chords, personalFile)));
 
   if (personalFile) {
     return results.flat();
