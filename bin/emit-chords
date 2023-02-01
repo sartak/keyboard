@@ -438,18 +438,17 @@ const qmkBehavior = ({ behavior }, pressed) => {
     const rest = behavior.replace("oneshot-", "");
     if (rest in layerIndex) {
       if (pressed) {
-        return `set_oneshot_layer(${rest.toUpperCase()}, ONESHOT_START);
-return;`.split("\n");
+        return `set_oneshot_layer(${rest.toUpperCase()}, ONESHOT_START);`.split(
+          "\n"
+        );
       } else {
-        return `clear_oneshot_layer_state(ONESHOT_PRESSED);
-return;`.split("\n");
+        return `clear_oneshot_layer_state(ONESHOT_PRESSED);`.split("\n");
       }
     } else if (rest in qmkModifier) {
       if (pressed) {
-        return `add_oneshot_mods(${qmkModifier[rest]});
-return;`.split("\n");
+        return `add_oneshot_mods(${qmkModifier[rest]});`.split("\n");
       } else {
-        return `return;`.split("\n");
+        return null;
       }
     }
   }
@@ -464,31 +463,27 @@ return;`.split("\n");
 }
 else {
   tap_code16(LALT(KC_BSPC));
-}
-return;`.split("\n");
-      } else {
-        return `return;`.split("\n");
+}`.split("\n");
       }
+      break;
 
     case "left-click":
       if (pressed) {
-        return `tap_code16(KC_MS_BTN1);
-return;`.split("\n");
-      } else {
-        return `return;`.split("\n");
+        return `tap_code16(KC_MS_BTN1);`.split("\n");
       }
+      break;
 
     case "right-click":
       if (pressed) {
-        return `tap_code16(KC_MS_BTN2);
-return;`.split("\n");
-      } else {
-        return `return;`.split("\n");
+        return `tap_code16(KC_MS_BTN2);`.split("\n");
       }
+      break;
 
     default:
       throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
   }
+
+  return [];
 };
 
 const qmkOutputCase = (chord) => {
@@ -613,6 +608,7 @@ const qmkPressFunction = (chords, personalFile) => {
         ...qmkBehavior(chord, false).map((line) => `        ${line}`)
       );
       branch.push("      }");
+      branch.push("      return;");
     } else {
       branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
     }
