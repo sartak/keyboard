@@ -556,7 +556,7 @@ const qmkActions = (chords, personalFile) => {
   ];
 };
 
-const qmkFunction = (chords, personalFile) => {
+const qmkPressFunction = (chords, personalFile) => {
   const behaviorIntro = `void process_chord_event(uint16_t combo_index, bool pressed) {
   bool space = true;
   uint16_t prev_chord_length = last_chord_length;
@@ -567,7 +567,6 @@ const qmkFunction = (chords, personalFile) => {
   }
   last_chord = combo_index;
   last_chord_cycle = 0;
-
 
   switch(combo_index) {`;
 
@@ -617,15 +616,13 @@ const qmkFunction = (chords, personalFile) => {
     ];
   } else {
     return [
-      macro("CHORD_FUNC", null, [
-        ...behaviorIntro.split("\n"),
-        ...behaviorCases,
-        ...behaviorOutro.split("\n"),
-        ...bridge.split("\n"),
-        ...outputIntro.split("\n"),
-        ...outputCases,
-        ...outputOutro.split("\n"),
-      ]),
+      ...behaviorIntro.split("\n"),
+      ...behaviorCases,
+      ...behaviorOutro.split("\n"),
+      ...bridge.split("\n"),
+      ...outputIntro.split("\n"),
+      ...outputCases,
+      ...outputOutro.split("\n"),
     ];
   }
 };
@@ -686,13 +683,19 @@ const qmkDupFunction = (chords, personalFile) => {
   if (personalFile) {
     return [macro("PERSONAL_DUP_FUNC", null, cases)];
   } else {
-    return [
-      macro("CHORD_DUP_FUNC", null, [
-        ...intro.split("\n"),
-        ...cases,
-        ...outro.split("\n"),
-      ]),
-    ];
+    return [...intro.split("\n"), ...cases, ...outro.split("\n")];
+  }
+};
+
+const qmkFunctions = (chords, personalFile) => {
+  const results = [qmkPressFunction, "", qmkDupFunction].map((fn) =>
+    typeof fn === "string" ? fn : fn(chords, personalFile)
+  );
+
+  if (personalFile) {
+    return results.flat();
+  } else {
+    return [macro("CHORD_FUNCS", null, results.flat())];
   }
 };
 
@@ -709,8 +712,7 @@ const qmkConfig = (chordsAndCategories, personalFile) => {
   lines.push(...qmkEnum(chords, personalFile), "");
   lines.push(...qmkCombos(chords), "");
   lines.push(...qmkActions(chords, personalFile), "");
-  lines.push(...qmkFunction(chords, personalFile), "");
-  lines.push(...qmkDupFunction(chords, personalFile), "");
+  lines.push(...qmkFunctions(chords, personalFile), "");
 
   return lines;
 };
