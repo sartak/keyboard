@@ -575,12 +575,13 @@ const qmkReleaseFunction = (chords, personalFile) => {
     }
 
     const up = qmkBehavior(chord, false);
+    if (!up) {
+      return;
+    }
     const branch = [];
     branch.push(`    case CHORD_${chord.identifier}:`);
-    if (up) {
-      branch.push(...up.map((line) => `      ${line}`));
-    }
-    branch.push(`      return;`);
+    branch.push(...up.map((line) => `      ${line}`));
+    branch.push(`      break;`);
     behaviorCases.push(...branch);
   });
 
@@ -637,10 +638,11 @@ const qmkPressFunction = (chords, personalFile) => {
     branch.push(`    case CHORD_${chord.identifier}:`);
     if (chord.behavior) {
       const down = qmkBehavior(chord, true);
-      if (down) {
-        branch.push(...down.map((line) => `      ${line}`));
+      if (!down) {
+        return;
       }
-      branch.push("      return;");
+      branch.push(...down.map((line) => `      ${line}`));
+      branch.push("      break;");
     } else {
       branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
     }
