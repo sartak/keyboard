@@ -482,6 +482,20 @@ return;`.split("\n");
   }
 };
 
+const qmkOutputCase = (chord) => {
+  const lines = [];
+  if (chord.exact) {
+    lines.push("space = false;");
+  }
+  const [calls, length] = qmkOutput(chord);
+  calls.forEach((line) => {
+    lines.push(line);
+  });
+  lines.push(`last_chord_length = ${length};`);
+  lines.push("break;");
+  return lines;
+};
+
 const qmkPreamble = (chords, personalFile) => {
   if (personalFile) {
     return [];
@@ -586,15 +600,7 @@ const qmkFunction = (chords, personalFile) => {
     if (chord.behavior) {
       branch.push(...qmkBehavior(chord).map((line) => `      ${line}`));
     } else {
-      if (chord.exact) {
-        branch.push("      space = false;");
-      }
-      const [calls, length] = qmkOutput(chord);
-      calls.forEach((line) => {
-        branch.push(`      ${line}`);
-      });
-      branch.push(`      last_chord_length = ${length};`);
-      branch.push("      break;");
+      branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
     }
 
     if (chord.behavior) {
