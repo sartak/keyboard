@@ -498,7 +498,6 @@ const qmkOutputCase = (chord) => {
     lines.push(line);
   });
   lines.push(`last_chord_length = ${length};`);
-  lines.push("break;");
   return lines;
 };
 
@@ -636,10 +635,10 @@ const qmkPressFunction = (chords, personalFile) => {
         return;
       }
       branch.push(...down.map((line) => `      ${line}`));
-      branch.push("      break;");
     } else {
       branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
     }
+    branch.push("      break;");
 
     cases.push(...branch);
   });
