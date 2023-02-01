@@ -754,6 +754,7 @@ const zmkPress = {
   "/": "&kp SLASH",
   ":": "&kp COLON",
   ";": "&kp SEMI",
+  "@": "&kp AT",
   "\b": "&kp BSPC",
   "<SKLS>": "&sk LSHFT",
   "?": "&kp QMARK",
