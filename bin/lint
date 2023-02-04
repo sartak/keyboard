@@ -32,6 +32,7 @@ type ChordInput = {
 
 type ChordResultInner = {
   output: string | Array<string>;
+  shift?: string | Array<string> | null;
   exact?: boolean;
   sentenceShift?: boolean;
   skipSentence?: boolean;
@@ -132,18 +133,33 @@ chordFiles.forEach((file) => {
   });
 });
 
+let shiftBase;
 const position = {};
 layoutFiles.forEach((file) => {
   const json = fs.readFileSync(file);
   const content = `const config: LayoutConfig = ${json}`;
   lint(file, content);
 
-  const { Alpha } = JSON.parse(json);
-  Alpha.forEach((row, r) => {
+  const layers = JSON.parse(json);
+  layers.Alpha.forEach((row, r) => {
     row.forEach((key, c) => {
       position[key] = [r, c];
     });
   });
+
+  Object.values(layers).forEach((rows) => {
+    rows.forEach((row, r) => {
+      row.forEach((key, c) => {
+        if (!shiftBase && key == "Shft") {
+          shiftBase = layers.Alpha[r][c];
+        }
+      });
+    });
+  });
+
+  if (!shiftBase) {
+    throw new Error("Cannot find Shft in layout");
+  }
 });
 
 const fingers = {
@@ -162,14 +178,33 @@ const combos = {};
 chords.forEach((chord) => {
   const { combo } = chord;
   if (combo.length) {
-    const id = [...chord.combo].sort().join("+");
-    if (id in combos) {
-      ok = false;
-      console.warn(`Collision for combo '${id}':`);
-      console.warn(`  ${JSON.stringify(combos[id])}`);
-      console.warn(`  ${JSON.stringify(chord)}`);
+    const idParts = [[chord.combo], [...chord.combo, shiftBase]];
+    if (chord.combo.includes(shiftBase)) {
+      if (chord.shift || chord.hold?.shift) {
+        ok = false;
+        console.warn(
+          `Chord '${chord.combo
+            .sort()
+            .join(
+              "+"
+            )}' has both shift (${shiftBase}) in combo and a shift output`
+        );
+        console.warn(`  ${JSON.stringify(chord)}`);
+      }
+
+      idParts.pop();
     }
-    combos[id] = chord;
+
+    idParts.forEach((idPart) => {
+      const id = idPart.sort().join("+");
+      if (id in combos) {
+        ok = false;
+        console.warn(`Collision for combo '${id}':`);
+        console.warn(`  ${JSON.stringify(combos[id])}`);
+        console.warn(`  ${JSON.stringify(chord)}`);
+      }
+      combos[id] = chord;
+    });
 
     const positions = [];
     for (key of combo) {
