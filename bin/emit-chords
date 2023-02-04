@@ -398,9 +398,16 @@ const renderCombo = ({ combo }) => {
     .join(" + ");
 };
 
-const renderOutputAction = ({ behavior, output, alternates }) => {
+const renderOutputAction = ({ behavior, output, alternates, shift }) => {
   if (behavior) {
     return `_${behavior}_`;
+  }
+
+  if (shift && !shift.intuited) {
+    const baseOutput = renderOutputAction({ behavior, output, alternates });
+    const shiftOutput = renderOutputAction(shift);
+
+    return `${baseOutput} (shifted: ${shiftOutput})`;
   }
 
   const outputs = [output];
