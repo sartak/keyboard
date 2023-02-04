@@ -95,67 +95,92 @@ config.chords.forEach((chord) => {
   chordForCombo[key] = chord;
 });
 
-Object.entries(chordForCombo).forEach(([key, chord]) => {
-  let ok = true;
-  let k = key;
-  let card = cardForInput[k];
-  if (!card && chord.layers?.length) {
-    k = [...chord.layers, ...chord.combo]
-      .map((c) => c.toUpperCase())
-      .sort()
-      .join("+");
-    card = cardForInput[k];
-  }
+Object.values(chordForCombo).forEach((chord) => {
+  const actions = [
+    [false, chord.tap],
+    [true, chord.hold],
+  ];
 
-  const combo = chord.combo.join("+");
-  let context = `${combo} => ${chord.output || chord.behavior}`;
+  actions.forEach(([forHold, action]) => {
+    if (!action) {
+      return;
+    }
 
-  if (!card) {
-    ok = false;
-    console.warn(`No Anki card for chord: ${context}`);
-    return;
-  }
+    let ok = true;
 
-  context = `card nid:${card.id} for ${context}`;
-  if (!card.tags.includes("chord")) {
-    ok = false;
-    console.warn(`Missing tag 'chord' for ${context}`);
-  }
+    const keyParts = [[...chord.combo]];
+    if (chord.layers?.length) {
+      keyParts.push([...chord.layers, ...chord.combo]);
+    }
 
-  if (chord.behavior) {
-    if (card.output !== chord.behavior) {
+    if (forHold) {
+      keyParts.forEach((keyPart) => {
+        keyPart.push("Hold");
+      });
+    }
+
+    const keys = keyParts.map((keyPart) =>
+      keyPart
+        .map((c) => c.toUpperCase())
+        .sort()
+        .join("+")
+    );
+
+    const key = keys.find((key) => cardForInput[key]);
+    const card = cardForInput[key];
+
+    const combo = chord.combo.join("+");
+    let context = `${forHold ? "hold" : "tap"} ${combo} => ${
+      action.output || action.behavior
+    }`;
+
+    if (!card) {
       ok = false;
-      console.warn(
-        `Card nid:${card.id} for combo ${combo} does not match expected behavior`
-      );
-      console.warn(` Card: ${card.output}`);
-      console.warn(`Chord: ${chord.behavior}`);
+      console.warn(`No Anki card for chord: ${context}`);
+      return;
     }
-  } else {
-    let expected = chord.output;
-    if (expected.length === 1 && expected.match(/[a-zA-Z]/)) {
-      expected += " (word)";
-    }
-    expected = expected.replaceAll(/\x08/g, "⌫");
 
-    if (card.output !== expected) {
+    context = `card nid:${card.id} for ${context}`;
+    if (!card.tags.includes("chord")) {
       ok = false;
-      console.warn(
-        `Card nid:${card.id} for combo ${combo} does not match expected output`
-      );
-      console.warn(` Card: ${card.output}`);
-      console.warn(`Chord: ${expected}`);
+      console.warn(`Missing tag 'chord' for ${context}`);
     }
-  }
 
-  delete cardForInput[k];
+    if (action.behavior) {
+      if (card.output !== action.behavior) {
+        ok = false;
+        console.warn(
+          `Card nid:${card.id} for combo ${combo} does not match expected behavior`
+        );
+        console.warn(` Card: ${card.output}`);
+        console.warn(`Chord: ${action.behavior}`);
+      }
+    } else {
+      let expected = action.output;
+      if (expected.length === 1 && expected.match(/[a-zA-Z]/)) {
+        expected += " (word)";
+      }
+      expected = expected.replaceAll(/\x08/g, "⌫");
 
-  if (ok) {
-    chord.anki = card;
-    if (card.suspended === false) {
-      studyingChords++;
+      if (card.output !== expected) {
+        ok = false;
+        console.warn(
+          `Card nid:${card.id} for combo ${combo} does not match expected output`
+        );
+        console.warn(` Card: ${card.output}`);
+        console.warn(`Chord: ${expected}`);
+      }
     }
-  }
+
+    delete cardForInput[key];
+
+    if (ok) {
+      action.anki = card;
+      if (card.suspended === false) {
+        studyingChords++;
+      }
+    }
+  });
 });
 
 Object.values(cardForInput).forEach((card) => {
