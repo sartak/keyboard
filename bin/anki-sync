@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const sqlite3 = require("better-sqlite3");
-const processedChords = "processed.json";
+const inputFile = "processed.json";
+const outputFile = "processed-anki.json";
 
 const [nodeArg, scriptArg, ankiDatabase, noteType] = process.argv;
 if (process.argv.length !== 4) {
@@ -70,7 +71,7 @@ const getCards = () => {
   return cards;
 };
 
-const config = JSON.parse(fs.readFileSync(processedChords));
+const config = JSON.parse(fs.readFileSync(inputFile));
 const cards = getCards();
 const cardForInput = {};
 const chordForCombo = {};
@@ -171,7 +172,7 @@ Object.values(cardForInput).forEach((card) => {
   );
 });
 
-fs.writeFileSync(processedChords, JSON.stringify(config));
+fs.writeFileSync(outputFile, JSON.stringify(config));
 
 console.log(
   `Studying ${studyingChords} of ${config.chords.length} chords, plus ${studyingOther} others`
