@@ -95,6 +95,7 @@ const parseLayout = (config) => {
   const qmkKey = {};
   const zmkKey = {};
   const keys = [];
+  let shiftBase;
 
   let z = 0;
   config.Alpha.forEach((row) => {
@@ -126,6 +127,11 @@ const parseLayout = (config) => {
         const alpha = config.Alpha[r][c];
         qmkKey[layer][alpha] =
           qmkKeyTidy[alpha] || `${prefix}_${alpha.toUpperCase()}`;
+
+        if (!shiftBase && key === "Shft") {
+          shiftBase = alpha;
+        }
+
         keys[i++][layer] = key;
 
         if (key === null || key === "" || key in outputForKey) {
@@ -160,6 +166,7 @@ const parseLayout = (config) => {
     keys,
     validKey,
     layerIndex,
+    shiftBase,
     qmkKey,
     zmkKey,
     zmkLayers,
@@ -167,11 +174,13 @@ const parseLayout = (config) => {
 };
 
 const parsedLayout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
-const { validKey, layerIndex, qmkKey, zmkKey, zmkLayers } = parsedLayout;
+const { validKey, layerIndex, shiftBase, qmkKey, zmkKey, zmkLayers } =
+  parsedLayout;
 const layout = {
   layers: parsedLayout.layers,
   keys: parsedLayout.keys,
   outputForKey,
+  shiftBase,
 };
 
 const validateCombo = ({ combo }) => {
