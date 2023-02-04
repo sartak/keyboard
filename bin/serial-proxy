@@ -230,6 +230,7 @@ serial.on("data", (data) => {
       const chord = chordForCombo[key];
       if (!chord) {
         console.warn(`No chord for combo '${key}'`);
+        currentCombo = undefined;
         return;
       }
 
