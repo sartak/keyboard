@@ -792,28 +792,56 @@ const qmkDupFunction = (chords, personalFile) => {
 
   const cases = [];
   chords
-    .filter((chord) => chord.alternates)
-    .forEach(({ identifier, alternates }) => {
+    .filter((chord) => chord.alternates || chord.hold?.alternates)
+    .forEach(({ hold, identifier, alternates }) => {
       cases.push(`    case CHORD_${identifier}:`);
-      cases.push("      switch(last_chord_cycle) {");
-      alternates.forEach(
-        ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
-          cases.push(`        case ${fromIdx}:`);
-          if (backspaces) {
-            cases.push(`          backspaces = ${backspaces};`);
+
+      const actions = [[false, alternates]];
+      if (hold) {
+        actions.push([true, hold.alternates]);
+      }
+
+      actions.forEach(([forHold, alternates]) => {
+        let indent = "      ";
+
+        if (hold) {
+          if (!forHold) {
+            cases.push(`${indent}if (releasedWithinTapThreshold) {`);
+          } else {
+            cases.push(`${indent}} else {`);
           }
-          if (append.length) {
-            cases.push(`          append = "${append}";`);
-          }
-          if (exact) {
-            cases.push(`          space = false;`);
-          }
-          cases.push(`          last_chord_length = ${length};`);
-          cases.push(`          next_chord_cycle = ${toIdx};`);
-          cases.push(`        break;`);
+
+          indent += "  ";
         }
-      );
-      cases.push("      }");
+
+        if (alternates?.length) {
+          cases.push(`${indent}switch(last_chord_cycle) {`);
+          alternates.forEach(
+            ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
+              cases.push(`${indent}  case ${fromIdx}:`);
+              if (backspaces) {
+                cases.push(`${indent}    backspaces = ${backspaces};`);
+              }
+              if (append.length) {
+                cases.push(`${indent}    append = "${append}";`);
+              }
+              if (exact) {
+                cases.push(`${indent}    space = false;`);
+              }
+              cases.push(`${indent}    last_chord_length = ${length};`);
+              cases.push(`${indent}    next_chord_cycle = ${toIdx};`);
+              cases.push(`${indent}  break;`);
+            }
+          );
+          cases.push(`${indent}}`);
+        } else if (hold) {
+          cases.push(`${indent}space = false;`);
+        }
+
+        if (hold && forHold) {
+          cases.push("      }");
+        }
+      });
       cases.push("      break;");
     });
 
