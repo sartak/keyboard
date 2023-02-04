@@ -241,27 +241,42 @@ const parseChords = (files) => {
         }
         validateCombo(chord);
 
-        if ("output" in chord) {
-          chord.alternates = makeAlternates(chord);
-          if (Array.isArray(chord.output)) {
-            chord.output = chord.output[0];
+        chord.tap = {};
+        [
+          "output",
+          "behavior",
+          "exact",
+          "sentenceShift",
+          "skipSentence",
+        ].forEach((key) => {
+          if (key in chord) {
+            chord.tap[key] = chord[key];
+            delete chord[key];
           }
-        }
+        });
 
         if (chord.hold) {
           if (typeof chord.hold === "string" || Array.isArray(chord.hold)) {
-            chord.hold = { output: chord.hold };
-          }
-          if ("output" in chord.hold) {
-            chord.hold.alternates = makeAlternates(chord.hold);
-            if (Array.isArray(chord.hold.output)) {
-              chord.hold.output = chord.hold.output[0];
-            }
+            chord.hold = {
+              output: chord.hold,
+            };
+            ["exact", "sentenceShift", "skipSentence"].forEach((key) => {
+              if (key in chord.tap) {
+                chord.hold[key] = chord.tap[key];
+              }
+            });
           }
         }
 
+        [chord.tap, chord.hold].filter(Boolean).forEach((action) => {
+          action.alternates = makeAlternates(action);
+          if (Array.isArray(action.output)) {
+            action.output = action.output[0];
+          }
+        });
+
         if (chord.label === undefined) {
-          chord.label = intuitLabel(chord);
+          chord.label = intuitLabel(chord.tap);
         }
 
         if (typeof chord.layers === "string") {
@@ -321,13 +336,7 @@ const renderCombo = ({ combo }) => {
     .join(" + ");
 };
 
-const renderOutput = ({ behavior, output, alternates, hold }) => {
-  if (hold) {
-    const tapOutput = renderOutput({ behavior, output, alternates });
-    const holdOutput = renderOutput(hold);
-    return `tap: ${tapOutput} / hold: ${holdOutput}`;
-  }
-
+const renderOutputAction = ({ behavior, output, alternates }) => {
   if (behavior) {
     return `_${behavior}_`;
   }
@@ -351,6 +360,17 @@ const renderOutput = ({ behavior, output, alternates, hold }) => {
         .join("")
     )
     .join(" → ");
+};
+
+const renderOutput = ({ tap, hold }) => {
+  const tapOutput = renderOutputAction(tap);
+
+  if (hold) {
+    const holdOutput = renderOutputAction(hold);
+    return `tap: ${tapOutput} / hold: ${holdOutput}`;
+  }
+
+  return tapOutput;
 };
 
 const readmeContent = (chordsAndCategories, original) => {
@@ -392,7 +412,7 @@ const qmkCombo = ({ combo, layers }) => {
   return combo.map((key) => qmkKey[layer][key]).join(", ");
 };
 
-const qmkOutput = ({ output }) => {
+const qmkOutput = (output) => {
   const out = [];
   let rest = output;
   let buf = [];
@@ -451,7 +471,7 @@ const qmkModifier = {
   Hyper: "MOD_LCTL | MOD_LALT | MOD_LGUI",
 };
 
-const qmkBehavior = ({ behavior }, pressed) => {
+const qmkBehaviorAction = ({ behavior }, pressed) => {
   const res = (() => {
     if (behavior.startsWith("oneshot-")) {
       const rest = behavior.replace("oneshot-", "");
@@ -507,7 +527,7 @@ else {
         break;
 
       default:
-        throw new Error(`Unimplemented qmkBehavior '${behavior}'`);
+        throw new Error(`Unimplemented qmkBehaviorAction '${behavior}'`);
     }
 
     return null;
@@ -516,12 +536,12 @@ else {
   return typeof res === "string" ? res.split("\n") : res;
 };
 
-const qmkOutputCase = (chord) => {
+const qmkOutputActionCase = ({ output, exact }) => {
   const lines = [];
-  if (chord.exact) {
+  if (exact) {
     lines.push("space = false;");
   }
-  const [calls, length] = qmkOutput(chord);
+  const [calls, length] = qmkOutput(output);
   calls.forEach((line) => {
     lines.push(line);
   });
@@ -622,11 +642,11 @@ const qmkReleaseFunction = (chords, personalFile) => {
     const branch = [];
     branch.push(`    case CHORD_${chord.identifier}:`);
 
-    if (chord.behavior) {
+    if (chord.tap.behavior) {
       branch.push(`      space = false;`);
       if (chord.hold) {
-        const down = qmkBehavior(chord, true);
-        const up = qmkBehavior(chord, false);
+        const down = qmkBehaviorAction(chord.tap, true);
+        const up = qmkBehaviorAction(chord.tap, false);
         if (down || up) {
           branch.push(`      if (releasedWithinTapThreshold) {`);
           if (down) {
@@ -636,8 +656,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
             branch.push(...up.map((line) => `        ${line}`));
           }
         }
-        const holdChord = { ...chord, ...chord.hold };
-        const holdUp = qmkBehavior(holdChord, false);
+        const holdUp = qmkBehaviorAction(chord.hold, false);
         if (holdUp) {
           if (down || up) {
             branch.push(`      } else {`);
@@ -648,7 +667,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
         }
         branch.push(`      }`);
       } else {
-        const up = qmkBehavior(chord, false);
+        const up = qmkBehaviorAction(chord.tap, false);
         if (!up) {
           return;
         }
@@ -662,7 +681,9 @@ const qmkReleaseFunction = (chords, personalFile) => {
       branch.push(`      if (!releasedWithinTapThreshold) {`);
       branch.push(`        return;`);
       branch.push(`      }`);
-      branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
+      branch.push(
+        ...qmkOutputActionCase(chord.tap).map((line) => `      ${line}`)
+      );
     }
 
     branch.push("      break;");
@@ -738,29 +759,31 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
 
   const cases = [];
   const timerChords = [];
-  chords.forEach((c) => {
-    if (holdFunc && !c.hold) {
+  chords.forEach((chord) => {
+    if (holdFunc && !chord.hold) {
       return;
     }
-    if (!holdFunc && c.hold) {
-      timerChords.push(c);
+    if (!holdFunc && chord.hold) {
+      timerChords.push(chord);
       return;
     }
 
-    const chord = holdFunc ? { ...c, ...c.hold } : c;
+    const action = holdFunc ? chord.hold : chord.tap;
 
     const branch = [];
     branch.push(`    case CHORD_${chord.identifier}:`);
 
-    if (chord.behavior) {
+    if (action.behavior) {
       branch.push("      space = false;");
-      const down = qmkBehavior(chord, true);
+      const down = qmkBehaviorAction(action, true);
       if (!down) {
         return;
       }
       branch.push(...down.map((line) => `      ${line}`));
     } else {
-      branch.push(...qmkOutputCase(chord).map((line) => `      ${line}`));
+      branch.push(
+        ...qmkOutputActionCase(action).map((line) => `      ${line}`)
+      );
     }
     branch.push("      break;");
     cases.push(...branch);
@@ -797,16 +820,16 @@ const qmkDupFunction = (chords, personalFile) => {
 
   const cases = [];
   chords
-    .filter((chord) => chord.alternates || chord.hold?.alternates)
-    .forEach(({ hold, identifier, alternates }) => {
+    .filter((chord) => chord.tap?.alternates || chord.hold?.alternates)
+    .forEach(({ tap, hold, identifier }) => {
       cases.push(`    case CHORD_${identifier}:`);
 
-      const actions = [[false, alternates]];
+      const actions = [[false, tap]];
       if (hold) {
-        actions.push([true, hold.alternates]);
+        actions.push([true, hold]);
       }
 
-      actions.forEach(([forHold, alternates]) => {
+      actions.forEach(([forHold, action]) => {
         let indent = "      ";
 
         if (hold) {
@@ -819,9 +842,9 @@ const qmkDupFunction = (chords, personalFile) => {
           indent += "  ";
         }
 
-        if (alternates?.length) {
+        if (action.alternates?.length) {
           cases.push(`${indent}switch(last_chord_cycle) {`);
-          alternates.forEach(
+          action.alternates.forEach(
             ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
               cases.push(`${indent}  case ${fromIdx}:`);
               if (backspaces) {
@@ -977,28 +1000,27 @@ const zmkPresses = (output) => {
   return presses;
 };
 
-const zmkOutput = (chord) => {
-  const { output, behavior, exact, identifier, hold } = chord;
+const zmkOutputAction = ({ behavior, output, exact }) => {
+  if (behavior) {
+    return zmkBehavior(behavior);
+  }
+
+  let o = output;
+  if (!exact) {
+    o += " ";
+  }
+  return zmkPresses(o);
+};
+
+const zmkOutput = ({ identifier, tap, hold }) => {
   const macro = `ch_${identifier}`;
-  let presses;
 
   if (hold) {
-    const [, tapPresses] = zmkOutput({ behavior, exact, output, identifier });
-    const [, holdPresses] = zmkOutput({ ...hold, identifier });
     const macros = [`${macro}_t`, `${macro}_h`];
-    return [macros, tapPresses, holdPresses];
+    return [macros, zmkOutputAction(tap), zmkOutputAction(hold)];
   }
 
-  if (behavior) {
-    presses = zmkBehavior(chord);
-  } else {
-    let o = output;
-    if (!exact) {
-      o += " ";
-    }
-    presses = zmkPresses(o);
-  }
-
+  const presses = zmkOutputAction(tap);
   return presses.length === 1
     ? [null, presses[0], null]
     : [macro, presses.join(" "), null];
@@ -1012,7 +1034,7 @@ const zmkModifier = {
   Hyper: "LG(LA(LCTRL))",
 };
 
-const zmkBehavior = ({ behavior }) => {
+const zmkBehavior = (behavior) => {
   if (behavior.startsWith("oneshot-")) {
     const rest = behavior.replace("oneshot-", "");
     if (rest in layerIndex) {
@@ -1177,6 +1199,7 @@ const zmkMacros = (chords) => {
   const lines = ["/ {", "  macros {"];
 
   chords.forEach((chord) => {
+    const { tap, hold } = chord;
     const [identifier, tapBehavior, holdBehavior] = zmkOutput(chord);
     if (!identifier || tapBehavior === null) {
       return;
@@ -1184,14 +1207,10 @@ const zmkMacros = (chords) => {
 
     const macros = Array.isArray(identifier)
       ? [
-          [identifier[0], tapBehavior, chord.skipSentence || chord.behavior],
-          [
-            identifier[1],
-            holdBehavior,
-            chord.hold.skipSentence || chord.hold.behavior,
-          ],
+          [identifier[0], tapBehavior, tap.skipSentence || tap.behavior],
+          [identifier[1], holdBehavior, hold.skipSentence || hold.behavior],
         ]
-      : [[identifier, tapBehavior, chord.skipSentence]];
+      : [[identifier, tapBehavior, tap.skipSentence]];
 
     macros.forEach(([identifier, behavior, skipSentence]) => {
       const args = [identifier, behavior];
@@ -1219,11 +1238,16 @@ const zmkChords = (chordsAndCategories) => {
         !(chord.builtin === true || chord.builtin === "zmk")
     )
     .forEach((chord) => {
-      if (chord.sentenceShift !== undefined) {
+      if (chord.tap.sentenceShift !== undefined) {
         chords.push({
           ...chord,
           identifier: `${chord.identifier}_s`,
-          output: `\b${chord.output} ${chord.sentenceShift ? "<SKLS>" : ""}`,
+          tap: {
+            ...chord.tap,
+            output: `\b${chord.tap.output} ${
+              chord.tap.sentenceShift ? "<SKLS>" : ""
+            }`,
+          },
           layers: ["Sentence"],
         });
         chords.push({
@@ -1260,24 +1284,26 @@ const zmkSettings = (chordsAndCategories, original) => {
   const combosPerKey = {};
 
   zmkChords(chordsAndCategories).forEach((chord) => {
-    const { combo, output, behavior, exact } = chord;
+    const { combo, tap, hold } = chord;
 
     if (combo.length > maxKeysPerCombo) {
       maxKeysPerCombo = combo.length;
     }
 
-    if (behavior) {
-    } else {
-      let presses = zmkPresses(output).length;
-      if (exact) {
-        presses++;
-      }
-      presses = presses * 2 + 5;
+    [tap, hold].filter(Boolean).forEach(({ behavior, output, exact }) => {
+      if (behavior) {
+      } else {
+        let presses = zmkPresses(output).length;
+        if (exact) {
+          presses++;
+        }
+        presses = presses * 2 + 5;
 
-      if (presses > maxQueueSize) {
-        maxQueueSize = presses;
+        if (presses > maxQueueSize) {
+          maxQueueSize = presses;
+        }
       }
-    }
+    });
 
     combo.forEach((key) => {
       combosPerKey[key] = (combosPerKey[key] || 0) + 1;
