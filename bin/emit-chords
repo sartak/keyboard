@@ -248,10 +248,15 @@ const parseChords = (files) => {
           }
         }
 
-        if (chord.hold && "output" in chord.hold) {
-          chord.hold.alternates = makeAlternates(chord.hold);
-          if (Array.isArray(chord.hold.output)) {
-            chord.hold.output = chord.hold.output[0];
+        if (chord.hold) {
+          if (typeof chord.hold === "string" || Array.isArray(chord.hold)) {
+            chord.hold = { output: chord.hold };
+          }
+          if ("output" in chord.hold) {
+            chord.hold.alternates = makeAlternates(chord.hold);
+            if (Array.isArray(chord.hold.output)) {
+              chord.hold.output = chord.hold.output[0];
+            }
           }
         }
 
