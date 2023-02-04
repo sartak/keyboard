@@ -492,5 +492,5 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 ### Misc phrases
 
-- `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog
+- `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog (shifted: The quick brown fox jumps over the lazy dog.)
 - `e` + `l` + `b` + `h` → Elbereth
