@@ -80,6 +80,16 @@ const intuitIdentifierStem = ({ label }) => {
   return identifier.substring(0, 7);
 };
 
+const intuitShifted = (output) => {
+  const first = output.substr(0, 1);
+  const shifted = first.toUpperCase();
+  if (first === shifted) {
+    return null;
+  }
+
+  return shifted + output.substr(1);
+};
+
 const parseLayout = (config) => {
   const validKey = {};
   const qmkKey = {};
@@ -245,6 +255,7 @@ const parseChords = (files) => {
         [
           "output",
           "behavior",
+          "shift",
           "exact",
           "sentenceShift",
           "skipSentence",
@@ -269,12 +280,60 @@ const parseChords = (files) => {
         }
 
         [chord.tap, chord.hold].filter(Boolean).forEach((action) => {
+          action.originalOutput = action.output;
+
           const alternates = makeAlternates(action);
           if (alternates) {
             action.alternates = alternates;
           }
           if (Array.isArray(action.output)) {
             action.output = action.output[0];
+          }
+        });
+
+        [chord.tap, chord.hold].filter(Boolean).forEach((action) => {
+          let shifted = null;
+          let alternates = null;
+          let intuited = false;
+          let exact = action.exact;
+
+          const originalOutput = action.originalOutput;
+          delete action.originalOutput;
+
+          if ("shift" in action) {
+            if (action.shift === null) {
+              delete action.shift;
+              return;
+            }
+
+            alternates = makeAlternates({ output: action.shift, exact });
+            shifted = Array.isArray(action.shift)
+              ? action.shift[0]
+              : action.shift;
+          } else if ("output" in action) {
+            intuited = true;
+            shifted = intuitShifted(action.output);
+            if (Array.isArray(originalOutput)) {
+              const shiftedOutput = originalOutput.map((output) => {
+                const shifted = intuitShifted(output);
+                return shifted === null ? output : shifted;
+              });
+              alternates = makeAlternates({ output: shiftedOutput, exact });
+            }
+          }
+
+          if (shifted === null) {
+            return;
+          }
+
+          action.shift = {
+            output: shifted,
+            exact,
+            intuited,
+          };
+
+          if (alternates) {
+            action.shift.alternates = alternates;
           }
         });
 
