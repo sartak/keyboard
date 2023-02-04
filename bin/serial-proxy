@@ -66,6 +66,8 @@ let currentMods = {
 };
 let currentDup;
 let currentDupAlternate;
+let currentDupAction;
+let currentChordAction;
 let dupMods = { ...currentMods };
 
 const serial = new SerialPort({
@@ -164,10 +166,11 @@ serial.on("data", (data) => {
             } else if (typeof currentDup === "object") {
               mode = "alternate";
               const chord = currentDup;
-              if (chord.alternates?.length) {
-                const alternate = chord.alternates[currentDupAlternate];
+              const action = chord[currentDupAction];
+              if (action.alternates?.length) {
+                const alternate = action.alternates[currentDupAlternate];
                 currentDupAlternate =
-                  (currentDupAlternate + 1) % chord.alternates.length;
+                  (currentDupAlternate + 1) % action.alternates.length;
                 output = alternate.append;
                 if (!alternate.exact) {
                   output += " ";
@@ -234,61 +237,82 @@ serial.on("data", (data) => {
         return;
       }
 
-      emit("chord", { chord, indexes });
-
       const prevDup = currentDup;
       const prevAlt = currentDupAlternate;
+      const prevAction = currentDupAction;
 
-      currentDup = chord;
-      currentDupAlternate = 0;
-
-      if (chord.behavior) {
-        switch (chord.behavior) {
-          case "delete-word":
-            if (typeof prevDup === "object") {
-              const chord = prevDup;
-              let output;
-              if (chord.alternates?.length) {
-                const i =
-                  prevAlt === 0 ? chord.alternates.length - 1 : prevAlt - 1;
-                const alternate = chord.alternates[i];
-                output = alternate.to;
-                if (!alternate.exact) {
-                  output += " ";
-                }
-              } else {
-                output = chord.output;
-                if (!chord.exact) {
-                  output += " ";
-                }
-              }
-              typed("\b".repeat(output.length), currentMods, "chord");
-            } else {
-              typed("\b", { alt: true }, "chord");
-            }
-            currentDup = undefined;
-            break;
-          case "left-click":
-          case "right-click":
-          case "Gui-left-click":
-            emit(chord.behavior);
-            break;
-          case "oneshot-Alpha":
-          case "oneshot-Symbol":
-          case "oneshot-Number":
-          case "oneshot-Function":
-            // Handled in layer event
-            break;
-          default:
-            console.warn(`Unhandled chord behavior: ${chord.behavior}`);
-            break;
-        }
+      if (byte === VIRT_CHORD_ENDED_TAP) {
+        currentChordAction = "tap";
+      } else if (byte === VIRT_CHORD_ENDED_HOLD) {
+        currentChordAction = "hold";
       } else {
-        let output = chord.output;
-        if (!chord.exact) {
-          output += " ";
+        currentChordAction = undefined;
+      }
+
+      if (currentChordAction) {
+        emit("chord", { chord, indexes, action: currentChordAction });
+      } else {
+        emit("indeterminate-chord", { chord, indexes });
+      }
+
+      if (currentChordAction) {
+        currentDup = chord;
+        currentDupAlternate = 0;
+        currentDupAction = currentChordAction;
+      }
+
+      if (currentChordAction) {
+        const action = chord[currentChordAction];
+
+        if (action.behavior) {
+          switch (action.behavior) {
+            case "delete-word":
+              if (typeof prevDup === "object") {
+                const chord = prevDup;
+                const action = chord[prevAction];
+                let output;
+                if (action.alternates?.length) {
+                  const i =
+                    prevAlt === 0 ? action.alternates.length - 1 : prevAlt - 1;
+                  const alternate = action.alternates[i];
+                  output = alternate.to;
+                  if (!alternate.exact) {
+                    output += " ";
+                  }
+                } else {
+                  output = action.output;
+                  if (!action.exact) {
+                    output += " ";
+                  }
+                }
+                typed("\b".repeat(output.length), currentMods, "chord");
+              } else {
+                typed("\b", { alt: true }, "chord");
+              }
+              currentDup = undefined;
+              break;
+            case "left-click":
+            case "right-click":
+            case "Gui-left-click":
+              emit(action.behavior);
+              break;
+            case "oneshot-Alpha":
+            case "oneshot-Symbol":
+            case "oneshot-Number":
+            case "oneshot-Function":
+              // Handled in layer event
+              break;
+            default:
+              console.warn(`Unhandled chord behavior: ${action.behavior}`);
+              break;
+          }
+        } else {
+          let output = action.output;
+          if (!action.exact) {
+            output += " ";
+          }
+          typed(output, currentMods, "chord");
         }
-        typed(output, currentMods, "chord");
       }
 
       currentCombo = undefined;
