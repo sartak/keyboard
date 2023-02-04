@@ -69,6 +69,7 @@ let currentDupAlternate;
 let currentDupAction;
 let currentChordAction;
 let dupMods = { ...currentMods };
+let oneshotMods;
 
 const serial = new SerialPort({
   path: serialPath,
@@ -144,7 +145,11 @@ serial.on("data", (data) => {
           emit("up", { key, index });
         } else if (type == VIRT_KEYMULT_TAP) {
           let output = null;
-          let mods = currentMods;
+
+          const effectiveMods = { ...currentMods, ...(oneshotMods || {}) };
+          oneshotMods = undefined;
+
+          let mods = effectiveMods;
           let mode = "tap";
 
           layersToCheck(mods).forEach((layer) => {
@@ -191,13 +196,17 @@ serial.on("data", (data) => {
             if (output in config.layout.outputForKey) {
               output = config.layout.outputForKey[output];
             }
-            dupMods = { ...mods };
+            dupMods = effectiveMods;
           }
           typed(output, mods, mode);
         } else if (type == VIRT_KEYMULT_HOLD) {
           const label = key[currentLayer] ?? key.Alpha;
           let output = key[`${currentLayer}-Hold`];
-          const mods = { ...currentMods };
+
+          const effectiveMods = { ...currentMods, ...(oneshotMods || {}) };
+          oneshotMods = undefined;
+
+          const mods = { ...effectiveMods };
 
           if (output === null) {
             mods.gui = true;
@@ -214,7 +223,7 @@ serial.on("data", (data) => {
 
           typed(output, mods, "hold");
           currentDup = output;
-          dupMods = { ...currentMods };
+          dupMods = { ...effectiveMods };
           // Not implemented yet in qmk-config
           // dupMods = { ...mods };
         } else {
@@ -301,6 +310,9 @@ serial.on("data", (data) => {
             case "oneshot-Number":
             case "oneshot-Function":
               // Handled in layer event
+              break;
+            case "oneshot-Hyper":
+              oneshotMods = { ctrl: true, alt: true, gui: true };
               break;
             default:
               console.warn(`Unhandled chord behavior: ${action.behavior}`);
