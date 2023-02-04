@@ -269,7 +269,10 @@ const parseChords = (files) => {
         }
 
         [chord.tap, chord.hold].filter(Boolean).forEach((action) => {
-          action.alternates = makeAlternates(action);
+          const alternates = makeAlternates(action);
+          if (alternates) {
+            action.alternates = alternates;
+          }
           if (Array.isArray(action.output)) {
             action.output = action.output[0];
           }
