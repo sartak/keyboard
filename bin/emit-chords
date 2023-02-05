@@ -495,13 +495,13 @@ const qmkCombo = ({ combo, layers }, shift) => {
   return keys.map((key) => qmkKey[layer][key]).join(", ");
 };
 
-const qmkOutput = (output) => {
+const qmkOutput = (output, forbidSimple) => {
   const out = [];
   let rest = output;
   let buf = [];
   let ascii = null;
   let length = 0;
-  let simple = true;
+  let simple = !forbidSimple;
 
   const emit = () => {
     if (buf.length) {
@@ -637,9 +637,15 @@ const allEqualOr = (values, fallback) => {
 };
 
 const qmkOutputActionCase = (action, conditional) => {
-  const actions = [[action, qmkOutput(action.output)]];
-  if ("shift" in action && conditional) {
-    actions.push([action.shift, qmkOutput(action.shift.output)]);
+  const actions = [];
+
+  if (!action.shift) {
+    actions.push([action, qmkOutput(action.output, true)]);
+  } else if (action.shift.intuited) {
+    actions.push([action, qmkOutput(action.output)]);
+  } else {
+    actions.push([action, qmkOutput(action.output, true)]);
+    actions.push([action.shift, qmkOutput(action.shift.output, true)]);
   }
 
   const allExact = allEqualOr(
