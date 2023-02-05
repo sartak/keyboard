@@ -501,12 +501,14 @@ const qmkOutput = (output) => {
   let buf = [];
   let ascii = null;
   let length = 0;
+  let simple = true;
 
   const emit = () => {
     if (buf.length) {
       if (ascii) {
         out.push(`SEND_STRING("${buf.join("")}");`);
       } else {
+        simple = false;
         out.push(`send_unicode_string("${buf.join("")}");`);
       }
     }
@@ -521,6 +523,7 @@ const qmkOutput = (output) => {
     if (head === "\b") {
       emit();
       out.push("tap_code16(KC_BSPC);");
+      simple = false;
       length--;
       continue;
     }
@@ -542,6 +545,10 @@ const qmkOutput = (output) => {
   }
 
   emit();
+
+  if (simple && out.length === 1) {
+    return output;
+  }
 
   return [out, length];
 };
@@ -641,19 +648,30 @@ const qmkOutputActionCase = (action, conditional) => {
   );
 
   const allLength = allEqualOr(
-    actions.map(([, [, length]]) => length),
+    actions.map(([, output]) =>
+      Array.isArray(output) ? output[1] : output.length
+    ),
     null
   );
 
-  const [normal, shifted] = actions.map(([{ exact }, [calls, length]]) => {
+  const [normal, shifted] = actions.map(([{ exact }, output]) => {
     const lines = [];
     if (allExact === null && exact) {
       lines.push("space = false;");
     }
-    if (allLength === null) {
-      lines.push(`last_chord_length = ${length};`);
+    if (Array.isArray(output)) {
+      const [calls, length] = output;
+      if (allLength === null) {
+        lines.push(`last_chord_length = ${length};`);
+      }
+      lines.push(...calls);
+    } else {
+      const length = output.length;
+      if (allLength === null) {
+        lines.push(`last_chord_length = ${length};`);
+      }
+      lines.push(`append = "${output}";`);
     }
-    lines.push(...calls);
     return lines;
   });
 
@@ -777,6 +795,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
   cancel_deferred_exec(chord_token);
 
   bool space = true;
+  char *append = NULL;
 
   const uint8_t mods = get_mods();
   del_mods(MOD_MASK_SHIFT);
@@ -789,6 +808,10 @@ const qmkReleaseFunction = (chords, personalFile) => {
     default:
       set_mods(mods);
       return;
+  }
+
+  if (append != NULL) {
+    send_string(append);
   }
 
   if (space) {
@@ -895,6 +918,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   last_chord = combo_index;
   last_chord_cycle = 0;
 
+  char *append = NULL;
   bool space = true;
   bool scheduleTimer = false;
 
@@ -914,6 +938,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
 
   releasedWithinTapThreshold = false;
 
+  char *append = NULL;
   bool space = true;
 
   const uint8_t mods = get_mods();
@@ -928,10 +953,16 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
       space = false;
       break;
   }
+
+  if (append != NULL) {
+    send_string(append);
+  }
+
   if (space) {
     tap_code(KC_SPC);
     last_chord_length++;
   }
+
   if (scheduleTimer) {
     chord_token = defer_exec(TAPPING_TERM, process_chord_hold, NULL);
   }
@@ -948,10 +979,16 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
       set_mods(mods);
       ${returnStatement};
   }
+
+  if (append != NULL) {
+    send_string(append);
+  }
+
   if (space) {
     tap_code(KC_SPC);
     last_chord_length++;
   }
+
   emit_virt_combo(last_chord, VIRT_CHORD_ENDED_HOLD);
   set_mods(mods);
   ${returnStatement};
@@ -1160,17 +1197,22 @@ const qmkDupFunction = (chords, personalFile) => {
       space = false;
       break;
   }
+
   for (uint8_t i = 0; i < backspaces; i++) {
     tap_code(KC_BSPC);
   }
+
   if (append != NULL) {
     send_string(append);
   }
+
   if (space) {
     tap_code(KC_SPC);
     last_chord_length++;
   }
+
   set_mods(mods);
+
   return next_chord_cycle;
 }`;
 
