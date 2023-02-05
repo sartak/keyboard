@@ -9,6 +9,7 @@ const zmkChordFile = "../zmk-config/config/chords.keymap";
 const zmkPersonalFile = "../zmk-config/config/personal.keymap";
 const zmkConfigFile = "../zmk-config/config/cradio.conf";
 const processedChords = "processed.json";
+const keymapFile = "keymap.json";
 
 const tidyReadmeCombo = {
   Ret: "↵",
@@ -1726,6 +1727,82 @@ const zmkSettings = (chordsAndCategories, original) => {
   return lines;
 };
 
+const generateKeymap = (layout) => {
+  const layers = {};
+
+  layout.layers.forEach((layer) => {
+    [
+      [layer, layer, false, ["Alpha"]],
+      [`${layer}-Hold`, `${layer} (hold)`, true, [layer, "Alpha"]],
+    ].forEach(([layer, layerLabel, isHold, inheritLayers]) => {
+      if (layer === "Function-Hold") {
+        return;
+      }
+
+      const combos = [];
+      const left = [];
+      const right = [];
+      const left_thumbs = [];
+      const right_thumbs = [];
+      const thumbrow = layout.keymap.length - 1;
+
+      layout.keymap.forEach((row, r) => {
+        if (r < thumbrow) {
+          left.push([]);
+          right.push([]);
+        }
+
+        row.forEach((key, c) => {
+          let target;
+          if (r === thumbrow) {
+            target = c < 2 ? left_thumbs : right_thumbs;
+          } else {
+            target = c < 5 ? left[r] : right[r];
+          }
+
+          const k = [layer, ...inheritLayers]
+            .map((l) => key[l])
+            .find((k) => k !== null);
+          const inherited = key[layer] === null;
+
+          let label = k;
+          if (label in tidyReadmeCombo) {
+            label = tidyReadmeCombo[label];
+          }
+          if (label.match(/^[a-z]$/)) {
+            label = label.toUpperCase();
+          }
+          if (isHold && inherited && label !== "") {
+            label = `⌘${label}`;
+          }
+          if (label === "") {
+            label = null;
+          }
+          target.push(label);
+        });
+      });
+
+      layers[layerLabel] = {
+        left,
+        right,
+        left_thumbs,
+        right_thumbs,
+        combos,
+      };
+    });
+  });
+
+  return {
+    layout: {
+      split: true,
+      rows: layers.Alpha.left.length,
+      columns: layers.Alpha.left[0].length,
+      thumbs: layers.Alpha.left_thumbs.length,
+    },
+    layers,
+  };
+};
+
 const chordsAndCategories = parseChords(
   chordFiles.map((file) => JSON.parse(fs.readFileSync(file)))
 );
@@ -1767,3 +1844,4 @@ fs.writeFileSync(
     chords: chordsAndCategories.filter((chord) => typeof chord === "object"),
   })
 );
+fs.writeFileSync(keymapFile, JSON.stringify(generateKeymap(layout)));
