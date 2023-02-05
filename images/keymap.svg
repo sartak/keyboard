@@ -113,13 +113,11 @@
 <rect rx="6" ry="6" x="411.0" y="214" width="55" height="50"/>
 <text x="438.5" y="239.0">⇥</text>
 <rect rx="6" ry="6" x="322.5" y="226.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="239.0" class="small">delete-word</text>
+<text x="336.25" y="239.0" class="small">⌫Word</text>
 <rect rx="6" ry="6" x="249.75" y="226.5" width="27.5" height="25.0" class="combo"/>
-<text x="263.5" y="239.0" class="small">left-click</text>
+<text x="263.5" y="239.0" class="small">LClk</text>
 <rect rx="6" ry="6" x="395.25" y="226.5" width="27.5" height="25.0" class="combo"/>
-<text x="409.0" y="239.0" class="small">right-click</text>
-<rect rx="6" ry="6" x="322.5" y="226.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="239.0" class="small">oneshot-Function</text>
+<text x="409.0" y="239.0" class="small">RClk</text>
 <rect rx="6" ry="6" x="483.75" y="145.5" width="27.5" height="25.0" class="combo"/>
 <text x="497.5" y="158.0" class="small">!</text>
 <rect rx="6" ry="6" x="542.75" y="145.5" width="27.5" height="25.0" class="combo"/>
@@ -170,7 +168,7 @@
 <rect rx="6" ry="6" x="529.0" y="318" width="55" height="50"/>
 <text x="556.5" y="343.0">⌘U</text>
 <rect rx="6" ry="6" x="588.0" y="318" width="55" height="50"/>
-<text x="615.5" y="343.0">Esc</text>
+<text x="615.5" y="343.0">⎋</text>
 <rect rx="6" ry="6" x="352.0" y="372" width="55" height="50"/>
 <text x="379.5" y="397.0">⌘M</text>
 <rect rx="6" ry="6" x="411.0" y="372" width="55" height="50"/>
@@ -188,21 +186,21 @@
 <rect rx="6" ry="6" x="470.0" y="426" width="55" height="50"/>
 <text x="497.5" y="451.0">⇥</text>
 <rect rx="6" ry="6" x="529.0" y="426" width="55" height="50"/>
-<text x="556.5" y="451.0">Alfr</text>
+<text x="556.5" y="451.0">Alfred</text>
 <rect rx="6" ry="6" x="588.0" y="426" width="55" height="50"/>
 <text x="615.5" y="451.0">⌘↵</text>
 <rect rx="6" ry="6" x="206.5" y="480" width="55" height="50"/>
-<text x="234.0" y="505.0">Sym</text>
+<text x="234.0" y="505.0">λ</text>
 <rect rx="6" ry="6" x="265.5" y="480" width="55" height="50"/>
-<text x="293.0" y="505.0">Shft</text>
+<text x="293.0" y="505.0">⇧</text>
 <rect rx="6" ry="6" x="352.0" y="480" width="55" height="50"/>
-<text x="379.5" y="505.0">Ctrl</text>
+<text x="379.5" y="505.0">⌃</text>
 <rect rx="6" ry="6" x="411.0" y="480" width="55" height="50"/>
-<text x="438.5" y="505.0">Num</text>
+<text x="438.5" y="505.0">#</text>
 <rect rx="6" ry="6" x="322.5" y="492.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="505.0" class="small">oneshot-Hyper</text>
+<text x="336.25" y="505.0" class="small">Hyper</text>
 <rect rx="6" ry="6" x="249.75" y="492.5" width="27.5" height="25.0" class="combo"/>
-<text x="263.5" y="505.0" class="small">Gui-left-click</text>
+<text x="263.5" y="505.0" class="small">⌘LC</text>
 <text x="27.5" y="557.0" class="label">Symbol:</text>
 <rect rx="6" ry="6" x="29.5" y="584" width="55" height="50"/>
 <text x="57.0" y="609.0">`</text>
@@ -265,7 +263,7 @@
 <rect rx="6" ry="6" x="588.0" y="692" width="55" height="50"/>
 <text x="615.5" y="717.0">↵</text>
 <rect rx="6" ry="6" x="206.5" y="746" width="55" height="50"/>
-<text x="234.0" y="771.0">Sym</text>
+<text x="234.0" y="771.0">λ</text>
 <rect rx="6" ry="6" x="265.5" y="746" width="55" height="50"/>
 <text x="293.0" y="771.0">⌫</text>
 <rect rx="6" ry="6" x="352.0" y="746" width="55" height="50"/>
@@ -273,13 +271,11 @@
 <rect rx="6" ry="6" x="411.0" y="746" width="55" height="50"/>
 <text x="438.5" y="771.0">⇥</text>
 <rect rx="6" ry="6" x="322.5" y="758.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="771.0" class="small">delete-word</text>
+<text x="336.25" y="771.0" class="small">⌫Word</text>
 <rect rx="6" ry="6" x="249.75" y="758.5" width="27.5" height="25.0" class="combo"/>
-<text x="263.5" y="771.0" class="small">left-click</text>
+<text x="263.5" y="771.0" class="small">LClk</text>
 <rect rx="6" ry="6" x="395.25" y="758.5" width="27.5" height="25.0" class="combo"/>
-<text x="409.0" y="771.0" class="small">right-click</text>
-<rect rx="6" ry="6" x="322.5" y="758.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="771.0" class="small">oneshot-Function</text>
+<text x="409.0" y="771.0" class="small">RClk</text>
 <rect rx="6" ry="6" x="483.75" y="677.5" width="27.5" height="25.0" class="combo"/>
 <text x="497.5" y="690.0" class="small">!</text>
 <rect rx="6" ry="6" x="542.75" y="677.5" width="27.5" height="25.0" class="combo"/>
@@ -362,7 +358,7 @@
 <rect rx="6" ry="6" x="529.0" y="850" width="55" height="50"/>
 <text x="556.5" y="875.0">⌘#</text>
 <rect rx="6" ry="6" x="588.0" y="850" width="55" height="50"/>
-<text x="615.5" y="875.0">Esc</text>
+<text x="615.5" y="875.0">⎋</text>
 <rect rx="6" ry="6" x="352.0" y="904" width="55" height="50"/>
 <text x="379.5" y="929.0">⌘&gt;</text>
 <rect rx="6" ry="6" x="411.0" y="904" width="55" height="50"/>
@@ -380,24 +376,26 @@
 <rect rx="6" ry="6" x="470.0" y="958" width="55" height="50"/>
 <text x="497.5" y="983.0">⇥</text>
 <rect rx="6" ry="6" x="529.0" y="958" width="55" height="50"/>
-<text x="556.5" y="983.0">Alfr</text>
+<text x="556.5" y="983.0">Alfred</text>
 <rect rx="6" ry="6" x="588.0" y="958" width="55" height="50"/>
 <text x="615.5" y="983.0">⌘↵</text>
 <rect rx="6" ry="6" x="206.5" y="1012" width="55" height="50"/>
-<text x="234.0" y="1037.0">Sym</text>
+<text x="234.0" y="1037.0">λ</text>
 <rect rx="6" ry="6" x="265.5" y="1012" width="55" height="50"/>
-<text x="293.0" y="1037.0">Shft</text>
+<text x="293.0" y="1037.0">⇧</text>
 <rect rx="6" ry="6" x="352.0" y="1012" width="55" height="50"/>
-<text x="379.5" y="1037.0">Ctrl</text>
+<text x="379.5" y="1037.0">⌃</text>
 <rect rx="6" ry="6" x="411.0" y="1012" width="55" height="50"/>
-<text x="438.5" y="1037.0">Num</text>
+<text x="438.5" y="1037.0">#</text>
 <rect rx="6" ry="6" x="322.5" y="1024.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="1037.0" class="small">oneshot-Hyper</text>
+<text x="336.25" y="1037.0" class="small">Hyper</text>
 <rect rx="6" ry="6" x="249.75" y="1024.5" width="27.5" height="25.0" class="combo"/>
-<text x="263.5" y="1037.0" class="small">Gui-left-click</text>
+<text x="263.5" y="1037.0" class="small">⌘LC</text>
 <text x="27.5" y="1089.0" class="label">Number:</text>
 <rect rx="6" ry="6" x="29.5" y="1116" width="55" height="50"/>
-<text x="57.0" y="1141.0">BrUp</text>
+<text x="57.0" y="1141.0">
+<tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Up</tspan>
+</text>
 <rect rx="6" ry="6" x="88.5" y="1116" width="55" height="50"/>
 <text x="116.0" y="1141.0">6</text>
 <rect rx="6" ry="6" x="147.5" y="1116" width="55" height="50"/>
@@ -405,9 +403,13 @@
 <rect rx="6" ry="6" x="206.5" y="1116" width="55" height="50"/>
 <text x="234.0" y="1141.0">4</text>
 <rect rx="6" ry="6" x="265.5" y="1116" width="55" height="50"/>
-<text x="293.0" y="1141.0">ScSh</text>
+<text x="293.0" y="1141.0">
+<tspan x="293.0" dy="-0.6em">Screen</tspan><tspan x="293.0" dy="1.2em">Shot</tspan>
+</text>
 <rect rx="6" ry="6" x="29.5" y="1170" width="55" height="50"/>
-<text x="57.0" y="1195.0">Lang</text>
+<text x="57.0" y="1195.0">
+<tspan x="57.0" dy="-0.6em">Switch</tspan><tspan x="57.0" dy="1.2em">Lang</tspan>
+</text>
 <rect rx="6" ry="6" x="88.5" y="1170" width="55" height="50"/>
 <text x="116.0" y="1195.0">3</text>
 <rect rx="6" ry="6" x="147.5" y="1170" width="55" height="50"/>
@@ -417,7 +419,9 @@
 <rect rx="6" ry="6" x="265.5" y="1170" width="55" height="50"/>
 <text x="293.0" y="1195.0">0</text>
 <rect rx="6" ry="6" x="29.5" y="1224" width="55" height="50"/>
-<text x="57.0" y="1249.0">BrDn</text>
+<text x="57.0" y="1249.0">
+<tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Down</tspan>
+</text>
 <rect rx="6" ry="6" x="88.5" y="1224" width="55" height="50"/>
 <text x="116.0" y="1249.0">9</text>
 <rect rx="6" ry="6" x="147.5" y="1224" width="55" height="50"/>
@@ -425,31 +429,41 @@
 <rect rx="6" ry="6" x="206.5" y="1224" width="55" height="50"/>
 <text x="234.0" y="1249.0">7</text>
 <rect rx="6" ry="6" x="265.5" y="1224" width="55" height="50"/>
-<text x="293.0" y="1249.0">Lock</text>
+<text x="293.0" y="1249.0">
+<tspan x="293.0" dy="-0.6em">Lock</tspan><tspan x="293.0" dy="1.2em">Screen</tspan>
+</text>
 <rect rx="6" ry="6" x="352.0" y="1116" width="55" height="50"/>
 <text x="379.5" y="1141.0">Mute</text>
 <rect rx="6" ry="6" x="411.0" y="1116" width="55" height="50"/>
 <text x="438.5" y="1141.0">Prev</text>
 <rect rx="6" ry="6" x="470.0" y="1116" width="55" height="50"/>
-<text x="497.5" y="1141.0">PlPs</text>
+<text x="497.5" y="1141.0">
+<tspan x="497.5" dy="-0.6em">Play</tspan><tspan x="497.5" dy="1.2em">Pause</tspan>
+</text>
 <rect rx="6" ry="6" x="529.0" y="1116" width="55" height="50"/>
 <text x="556.5" y="1141.0">Next</text>
 <rect rx="6" ry="6" x="588.0" y="1116" width="55" height="50"/>
 <text x="615.5" y="1141.0">&#x27;</text>
 <rect rx="6" ry="6" x="352.0" y="1170" width="55" height="50"/>
-<text x="379.5" y="1195.0">VlUp</text>
+<text x="379.5" y="1195.0">
+<tspan x="379.5" dy="-0.6em">Volume</tspan><tspan x="379.5" dy="1.2em">Up</tspan>
+</text>
 <rect rx="6" ry="6" x="411.0" y="1170" width="55" height="50"/>
-<text x="438.5" y="1195.0">Left</text>
+<text x="438.5" y="1195.0">←</text>
 <rect rx="6" ry="6" x="470.0" y="1170" width="55" height="50"/>
-<text x="497.5" y="1195.0">Down</text>
+<text x="497.5" y="1195.0">↓</text>
 <rect rx="6" ry="6" x="529.0" y="1170" width="55" height="50"/>
-<text x="556.5" y="1195.0">Up</text>
+<text x="556.5" y="1195.0">↑</text>
 <rect rx="6" ry="6" x="588.0" y="1170" width="55" height="50"/>
-<text x="615.5" y="1195.0">Rght</text>
+<text x="615.5" y="1195.0">→</text>
 <rect rx="6" ry="6" x="352.0" y="1224" width="55" height="50"/>
-<text x="379.5" y="1249.0">VlDn</text>
+<text x="379.5" y="1249.0">
+<tspan x="379.5" dy="-0.6em">Volume</tspan><tspan x="379.5" dy="1.2em">Down</tspan>
+</text>
 <rect rx="6" ry="6" x="411.0" y="1224" width="55" height="50"/>
-<text x="438.5" y="1249.0">ZmIn</text>
+<text x="438.5" y="1249.0">
+<tspan x="438.5" dy="-0.6em">Zoom</tspan><tspan x="438.5" dy="1.2em">In/Out</tspan>
+</text>
 <rect rx="6" ry="6" x="470.0" y="1224" width="55" height="50"/>
 <text x="497.5" y="1249.0">.</text>
 <rect rx="6" ry="6" x="529.0" y="1224" width="55" height="50"/>
@@ -463,15 +477,13 @@
 <rect rx="6" ry="6" x="352.0" y="1278" width="55" height="50"/>
 <text x="379.5" y="1303.0">␣</text>
 <rect rx="6" ry="6" x="411.0" y="1278" width="55" height="50"/>
-<text x="438.5" y="1303.0">Num</text>
+<text x="438.5" y="1303.0">#</text>
 <rect rx="6" ry="6" x="322.5" y="1290.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="1303.0" class="small">delete-word</text>
+<text x="336.25" y="1303.0" class="small">⌫Word</text>
 <rect rx="6" ry="6" x="249.75" y="1290.5" width="27.5" height="25.0" class="combo"/>
-<text x="263.5" y="1303.0" class="small">left-click</text>
+<text x="263.5" y="1303.0" class="small">LClk</text>
 <rect rx="6" ry="6" x="395.25" y="1290.5" width="27.5" height="25.0" class="combo"/>
-<text x="409.0" y="1303.0" class="small">right-click</text>
-<rect rx="6" ry="6" x="322.5" y="1290.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="1303.0" class="small">oneshot-Function</text>
+<text x="409.0" y="1303.0" class="small">RClk</text>
 <rect rx="6" ry="6" x="483.75" y="1209.5" width="27.5" height="25.0" class="combo"/>
 <text x="497.5" y="1222.0" class="small">!</text>
 <rect rx="6" ry="6" x="542.75" y="1209.5" width="27.5" height="25.0" class="combo"/>
@@ -513,44 +525,46 @@
 <rect rx="6" ry="6" x="470.0" y="1382" width="55" height="50"/>
 <rect rx="6" ry="6" x="529.0" y="1382" width="55" height="50"/>
 <rect rx="6" ry="6" x="588.0" y="1382" width="55" height="50"/>
-<text x="615.5" y="1407.0">Esc</text>
+<text x="615.5" y="1407.0">⎋</text>
 <rect rx="6" ry="6" x="352.0" y="1436" width="55" height="50"/>
 <rect rx="6" ry="6" x="411.0" y="1436" width="55" height="50"/>
-<text x="438.5" y="1461.0">⌘Left</text>
+<text x="438.5" y="1461.0">⌘←</text>
 <rect rx="6" ry="6" x="470.0" y="1436" width="55" height="50"/>
-<text x="497.5" y="1461.0">⌘Down</text>
+<text x="497.5" y="1461.0">⌘↓</text>
 <rect rx="6" ry="6" x="529.0" y="1436" width="55" height="50"/>
-<text x="556.5" y="1461.0">⌘Up</text>
+<text x="556.5" y="1461.0">⌘↑</text>
 <rect rx="6" ry="6" x="588.0" y="1436" width="55" height="50"/>
-<text x="615.5" y="1461.0">⌘Rght</text>
+<text x="615.5" y="1461.0">⌘→</text>
 <rect rx="6" ry="6" x="352.0" y="1490" width="55" height="50"/>
 <rect rx="6" ry="6" x="411.0" y="1490" width="55" height="50"/>
 <rect rx="6" ry="6" x="470.0" y="1490" width="55" height="50"/>
 <text x="497.5" y="1515.0">⇥</text>
 <rect rx="6" ry="6" x="529.0" y="1490" width="55" height="50"/>
-<text x="556.5" y="1515.0">Alfr</text>
+<text x="556.5" y="1515.0">Alfred</text>
 <rect rx="6" ry="6" x="588.0" y="1490" width="55" height="50"/>
 <text x="615.5" y="1515.0">⌘↵</text>
 <rect rx="6" ry="6" x="206.5" y="1544" width="55" height="50"/>
-<text x="234.0" y="1569.0">Sym</text>
+<text x="234.0" y="1569.0">λ</text>
 <rect rx="6" ry="6" x="265.5" y="1544" width="55" height="50"/>
-<text x="293.0" y="1569.0">Shft</text>
+<text x="293.0" y="1569.0">⇧</text>
 <rect rx="6" ry="6" x="352.0" y="1544" width="55" height="50"/>
-<text x="379.5" y="1569.0">Ctrl</text>
+<text x="379.5" y="1569.0">⌃</text>
 <rect rx="6" ry="6" x="411.0" y="1544" width="55" height="50"/>
-<text x="438.5" y="1569.0">Num</text>
+<text x="438.5" y="1569.0">#</text>
 <rect rx="6" ry="6" x="322.5" y="1556.5" width="27.5" height="25.0" class="combo"/>
-<text x="336.25" y="1569.0" class="small">oneshot-Hyper</text>
+<text x="336.25" y="1569.0" class="small">Hyper</text>
 <rect rx="6" ry="6" x="249.75" y="1556.5" width="27.5" height="25.0" class="combo"/>
-<text x="263.5" y="1569.0" class="small">Gui-left-click</text>
+<text x="263.5" y="1569.0" class="small">⌘LC</text>
 <text x="27.5" y="1621.0" class="label">Function:</text>
 <rect rx="6" ry="6" x="29.5" y="1648" width="55" height="50"/>
-<text x="57.0" y="1673.0">BtlL</text>
+<text x="57.0" y="1673.0">
+<tspan x="57.0" dy="-0.6em">Boot</tspan><tspan x="57.0" dy="1.2em">Load</tspan>
+</text>
 <rect rx="6" ry="6" x="88.5" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="147.5" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="206.5" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="265.5" y="1648" width="55" height="50"/>
-<text x="293.0" y="1673.0">RstL</text>
+<text x="293.0" y="1673.0">Reset</text>
 <rect rx="6" ry="6" x="29.5" y="1702" width="55" height="50"/>
 <rect rx="6" ry="6" x="88.5" y="1702" width="55" height="50"/>
 <text x="116.0" y="1727.0">BT4</text>
@@ -559,7 +573,9 @@
 <rect rx="6" ry="6" x="206.5" y="1702" width="55" height="50"/>
 <text x="234.0" y="1727.0">BT6</text>
 <rect rx="6" ry="6" x="265.5" y="1702" width="55" height="50"/>
-<text x="293.0" y="1727.0">BTCl</text>
+<text x="293.0" y="1727.0">
+<tspan x="293.0" dy="-0.6em">BT</tspan><tspan x="293.0" dy="1.2em">Clear</tspan>
+</text>
 <rect rx="6" ry="6" x="29.5" y="1756" width="55" height="50"/>
 <rect rx="6" ry="6" x="88.5" y="1756" width="55" height="50"/>
 <text x="116.0" y="1781.0">BT1</text>
@@ -568,14 +584,18 @@
 <rect rx="6" ry="6" x="206.5" y="1756" width="55" height="50"/>
 <text x="234.0" y="1781.0">BT3</text>
 <rect rx="6" ry="6" x="265.5" y="1756" width="55" height="50"/>
-<text x="293.0" y="1781.0">BTTg</text>
+<text x="293.0" y="1781.0">
+<tspan x="293.0" dy="-0.6em">BT</tspan><tspan x="293.0" dy="1.2em">Toggl</tspan>
+</text>
 <rect rx="6" ry="6" x="352.0" y="1648" width="55" height="50"/>
-<text x="379.5" y="1673.0">RstR</text>
+<text x="379.5" y="1673.0">Reset</text>
 <rect rx="6" ry="6" x="411.0" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="470.0" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="529.0" y="1648" width="55" height="50"/>
 <rect rx="6" ry="6" x="588.0" y="1648" width="55" height="50"/>
-<text x="615.5" y="1673.0">BtlR</text>
+<text x="615.5" y="1673.0">
+<tspan x="615.5" dy="-0.6em">Boot</tspan><tspan x="615.5" dy="1.2em">Load</tspan>
+</text>
 <rect rx="6" ry="6" x="352.0" y="1702" width="55" height="50"/>
 <rect rx="6" ry="6" x="411.0" y="1702" width="55" height="50"/>
 <rect rx="6" ry="6" x="470.0" y="1702" width="55" height="50"/>
@@ -587,7 +607,7 @@
 <rect rx="6" ry="6" x="529.0" y="1756" width="55" height="50"/>
 <rect rx="6" ry="6" x="588.0" y="1756" width="55" height="50"/>
 <rect rx="6" ry="6" x="206.5" y="1810" width="55" height="50"/>
-<text x="234.0" y="1835.0">Alph</text>
+<text x="234.0" y="1835.0">A</text>
 <rect rx="6" ry="6" x="265.5" y="1810" width="55" height="50"/>
 <rect rx="6" ry="6" x="352.0" y="1810" width="55" height="50"/>
 <rect rx="6" ry="6" x="411.0" y="1810" width="55" height="50"/>

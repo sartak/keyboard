@@ -17,6 +17,45 @@ const tidyReadmeCombo = {
   Bksp: `⌫`,
   Spc: "␣",
   Tab: "⇥",
+  Esc: "⎋",
+  Caps: "⇪",
+};
+
+const tidyKeymap = {
+  ...tidyReadmeCombo,
+  "left-click": "LClk",
+  "Gui-left-click": "⌘LC",
+  "right-click": "RClk",
+  "oneshot-Function": null,
+  "oneshot-Hyper": "Hyper",
+  "delete-word": "⌫Word",
+  Alph: "A",
+  Sym: "λ",
+  Num: "#",
+  Shft: "⇧",
+  Ctrl: "⌃",
+  Alt: "⌥",
+  Gui: "⌘",
+  BtlR: "Boot\nLoad",
+  BtlL: "Boot\nLoad",
+  RstL: "Reset",
+  RstR: "Reset",
+  BTCl: "BT\nClear",
+  BTTg: "BT\nToggl",
+  Alfr: "Alfred",
+  BrUp: "Bright\nUp",
+  BrDn: "Bright\nDown",
+  VlUp: "Volume\nUp",
+  VlDn: "Volume\nDown",
+  ScSh: "Screen\nShot",
+  Lock: "Lock\nScreen",
+  Lang: "Switch\nLang",
+  PlPs: "Play\nPause",
+  ZmIn: "Zoom\nIn/Out",
+  Left: "←",
+  Down: "↓",
+  Up: "↑",
+  Rght: "→",
 };
 
 const tidyReadmeOutput = {
@@ -1766,8 +1805,8 @@ const generateKeymap = ({ layout, chords }) => {
           const inherited = key[layer] === null;
 
           let label = k;
-          if (label in tidyReadmeCombo) {
-            label = tidyReadmeCombo[label];
+          if (label in tidyKeymap) {
+            label = tidyKeymap[label];
           }
           if (label.match(/^[a-z]$/)) {
             label = label.toUpperCase();
@@ -1803,10 +1842,16 @@ const generateKeymap = ({ layout, chords }) => {
           return;
         }
 
-        const label = action.output ?? action.behavior;
         const positions = chord.combo.map((key) => zmkKey[key]);
-
         if (positions.filter((p) => layout.keys[p][layer] === "").length) {
+          return;
+        }
+
+        let label = action.output ?? action.behavior;
+        if (label in tidyKeymap) {
+          label = tidyKeymap[label];
+        }
+        if (label === null) {
           return;
         }
 
