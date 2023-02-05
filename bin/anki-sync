@@ -97,11 +97,13 @@ config.chords.forEach((chord) => {
 
 Object.values(chordForCombo).forEach((chord) => {
   const actions = [
-    [false, chord.tap],
-    [true, chord.hold],
+    [false, false, chord.tap],
+    [false, true, chord.tap?.shift],
+    [true, false, chord.hold],
+    [true, true, chord.hold?.shift],
   ];
 
-  actions.forEach(([forHold, action]) => {
+  actions.forEach(([forHold, forShift, action]) => {
     if (!action) {
       return;
     }
@@ -119,6 +121,12 @@ Object.values(chordForCombo).forEach((chord) => {
       });
     }
 
+    if (forShift) {
+      keyParts.forEach((keyPart) => {
+        keyPart.push("Shift");
+      });
+    }
+
     const keys = keyParts.map((keyPart) =>
       keyPart
         .map((c) => c.toUpperCase())
@@ -130,13 +138,15 @@ Object.values(chordForCombo).forEach((chord) => {
     const card = cardForInput[key];
 
     const combo = chord.combo.join("+");
-    let context = `${forHold ? "hold" : "tap"} ${combo} => ${
-      action.output || action.behavior
-    }`;
+    let context = `${forHold ? "hold" : "tap"}${
+      forShift ? " shift" : ""
+    } ${combo} => ${action.output || action.behavior}`;
 
     if (!card) {
-      ok = false;
-      console.warn(`No Anki card for chord: ${context}`);
+      if (!action.intuited) {
+        ok = false;
+        console.warn(`No Anki card for chord: ${context}`);
+      }
       return;
     }
 
