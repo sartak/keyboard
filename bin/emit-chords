@@ -905,7 +905,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
   }
 };
 
-const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
+const qmkPressFunction = (chords, personalFile, holdFunc) => {
   const firstShiftedChord = chords.find(
     (chord) => "shift" in chord.tap || (chord.hold && "shift" in chord.hold)
   );
@@ -1227,20 +1227,45 @@ const qmkDupFunction = (chords, personalFile) => {
 };
 
 const qmkFunctions = (chords, personalFile) => {
-  const results = [
-    qmkReleaseFunction,
-    "",
-    qmkPressFunction(true),
-    "",
-    qmkPressFunction(false),
-    "",
-    qmkDupFunction,
-  ].map((fn) => (typeof fn === "string" ? fn : fn(chords, personalFile)));
-
   if (personalFile) {
-    return results.flat();
+    return [
+      ...qmkReleaseFunction(chords, personalFile),
+      "",
+      ...qmkPressFunction(chords, personalFile, true),
+      "",
+      ...qmkPressFunction(chords, personalFile, false),
+      "",
+      ...qmkDupFunction(chords, personalFile),
+    ];
   } else {
-    return [macro("CHORD_FUNCS", null, results.flat())];
+    return [
+      macro(
+        "CHORD_FUNC_RELEASE",
+        null,
+        qmkReleaseFunction(chords, personalFile)
+      ),
+      "",
+      macro(
+        "CHORD_FUNC_HOLD",
+        null,
+        qmkPressFunction(chords, personalFile, true)
+      ),
+      "",
+      macro(
+        "CHORD_FUNC_TAP",
+        null,
+        qmkPressFunction(chords, personalFile, false)
+      ),
+      "",
+      macro("CHORD_FUNC_DUP", null, qmkDupFunction(chords, personalFile)),
+      "",
+      macro("CHORD_FUNCS", null, [
+        "CHORD_FUNC_RELEASE",
+        "CHORD_FUNC_HOLD",
+        "CHORD_FUNC_TAP",
+        "CHORD_FUNC_DUP",
+      ]),
+    ];
   }
 };
 
