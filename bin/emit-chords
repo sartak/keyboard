@@ -689,6 +689,7 @@ const qmkGlobals = [
   "bool releasedWithinTapThreshold = true;",
   "deferred_token chord_token = INVALID_DEFERRED_TOKEN;",
   "uint16_t prev_chord_length;",
+  "bool chord_shifted;",
 ];
 
 const qmkReleaseFunction = (chords, personalFile) => {
@@ -698,10 +699,16 @@ const qmkReleaseFunction = (chords, personalFile) => {
 
   bool space = true;
 
+  const uint8_t mods = get_mods();
+  del_mods(MOD_MASK_SHIFT);
+  del_weak_mods(MOD_MASK_SHIFT);
+  del_oneshot_mods(MOD_MASK_SHIFT);
+
   switch(combo_index) {`;
 
   const outro = `    ${personalCases}
     default:
+      set_mods(mods);
       return;
   }
 
@@ -713,6 +720,8 @@ const qmkReleaseFunction = (chords, personalFile) => {
   if (releasedWithinTapThreshold) {
     emit_virt_combo(last_chord, VIRT_CHORD_ENDED_TAP);
   }
+
+  set_mods(mods);
 }`;
 
   const cases = [];
@@ -797,14 +806,27 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   bool space = true;
   bool scheduleTimer = false;
 
+  const uint8_t mods = get_mods();
+  chord_shifted = (mods | get_weak_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT;
+  del_mods(MOD_MASK_SHIFT);
+  del_weak_mods(MOD_MASK_SHIFT);
+  del_oneshot_mods(MOD_MASK_SHIFT);
+
   switch(combo_index) {`;
 
   const holdIntro = `uint32_t process_chord_hold(uint32_t trigger_time, void* cb_arg) {
+  uint16_t combo_index = last_chord;
+
   releasedWithinTapThreshold = false;
 
   bool space = true;
 
-  switch(last_chord) {`;
+  const uint8_t mods = get_mods();
+  del_mods(MOD_MASK_SHIFT);
+  del_weak_mods(MOD_MASK_SHIFT);
+  del_oneshot_mods(MOD_MASK_SHIFT);
+
+  switch(combo_index) {`;
 
   const tapOutro = `    ${personalCases}
     default:
@@ -820,11 +842,15 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   }
 
   emit_virt_combo(last_chord, scheduleTimer ? VIRT_CHORD_ENDED_INDETERMINATE : VIRT_CHORD_ENDED_TAP);
+
+  set_mods(mods);
+
   ${returnStatement};
 }`;
 
   const holdOutro = `    ${personalCases}
     default:
+      set_mods(mods);
       ${returnStatement};
   }
   if (space) {
@@ -832,6 +858,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
     last_chord_length++;
   }
   emit_virt_combo(last_chord, VIRT_CHORD_ENDED_HOLD);
+  set_mods(mods);
   ${returnStatement};
 }`;
 
@@ -893,6 +920,11 @@ const qmkDupFunction = (chords, personalFile) => {
   uint8_t backspaces = 0;
   char *append = NULL;
   bool space = true;
+
+  const uint8_t mods = get_mods();
+  del_mods(MOD_MASK_SHIFT);
+  del_weak_mods(MOD_MASK_SHIFT);
+  del_oneshot_mods(MOD_MASK_SHIFT);
 
   switch(last_chord) {`;
 
@@ -966,6 +998,7 @@ const qmkDupFunction = (chords, personalFile) => {
     tap_code(KC_SPC);
     last_chord_length++;
   }
+  set_mods(mods);
   return next_chord_cycle;
 }`;
 
