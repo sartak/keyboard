@@ -586,6 +586,7 @@ const qmkBehaviorAction = ({ behavior }, pressed) => {
   for (uint16_t i = 0; i < prev_chord_length; i++) {
     tap_code16(KC_BSPC);
   }
+  last_chord_length = 0;
 }
 else {
   tap_code16(LALT(KC_BSPC));
@@ -653,9 +654,7 @@ const qmkOutputActionCase = (action, conditional) => {
   );
 
   const allLength = allEqualOr(
-    actions.map(([, output]) =>
-      Array.isArray(output) ? output[1] : output.length
-    ),
+    actions.map(([, output]) => (Array.isArray(output) ? output[1] : null)),
     null
   );
 
@@ -671,10 +670,6 @@ const qmkOutputActionCase = (action, conditional) => {
       }
       lines.push(...calls);
     } else {
-      const length = output.length;
-      if (allLength === null) {
-        lines.push(`last_chord_length = ${length};`);
-      }
       lines.push(`append = "${output}";`);
     }
     return lines;
@@ -801,6 +796,8 @@ const qmkReleaseFunction = (chords, personalFile) => {
 
   bool space = true;
   char *append = NULL;
+  prev_chord_length = last_chord_length;
+  last_chord_length = 0;
 
   const uint8_t mods = get_mods();
   del_mods(MOD_MASK_SHIFT);
@@ -812,6 +809,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
   const outro = `    ${personalCases}
     default:
       set_mods(mods);
+      last_chord_length = prev_chord_length;
       return;
   }
 
@@ -820,6 +818,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
       add_oneshot_mods(MOD_MASK_SHIFT);
     }
     SEND_STRING(append);
+    last_chord_length += strlen(append);
   }
 
   if (space) {
@@ -846,7 +845,8 @@ const qmkReleaseFunction = (chords, personalFile) => {
     }
 
     if (chord.tap.behavior) {
-      branch.push(`      space = false;`);
+      branch.push("      last_chord_length = prev_chord_length;");
+      branch.push("      space = false;");
       if (chord.hold) {
         const down = qmkBehaviorAction(chord.tap, true);
         const up = qmkBehaviorAction(chord.tap, false);
@@ -881,9 +881,10 @@ const qmkReleaseFunction = (chords, personalFile) => {
         return;
       }
 
-      branch.push(`      if (!releasedWithinTapThreshold) {`);
-      branch.push(`        return;`);
-      branch.push(`      }`);
+      branch.push("      if (!releasedWithinTapThreshold) {");
+      branch.push("        last_chord_length = prev_chord_length;");
+      branch.push("        return;");
+      branch.push("      }");
       branch.push(
         ...qmkOutputActionCase(
           chord.tap,
@@ -948,6 +949,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
 
   char *append = NULL;
   bool space = true;
+  last_chord_length = 0;
 
   const uint8_t mods = get_mods();
   del_mods(MOD_MASK_SHIFT);
@@ -959,6 +961,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   const tapOutro = `    ${personalCases}
     default:
       space = false;
+      last_chord_length = prev_chord_length;
       break;
   }
 
@@ -967,6 +970,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
       add_oneshot_mods(MOD_MASK_SHIFT);
     }
     SEND_STRING(append);
+    last_chord_length += strlen(append);
   }
 
   if (space) {
@@ -988,6 +992,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   const holdOutro = `    ${personalCases}
     default:
       set_mods(mods);
+      last_chord_length = prev_chord_length;
       ${returnStatement};
   }
 
@@ -996,6 +1001,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
       add_oneshot_mods(MOD_MASK_SHIFT);
     }
     SEND_STRING(append);
+    last_chord_length += strlen(append);
   }
 
   if (space) {
@@ -1031,6 +1037,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
 
     if (action.behavior) {
       branch.push("      space = false;");
+      branch.push("      last_chord_length = prev_chord_length;");
       const down = qmkBehaviorAction(action, true);
       if (!down) {
         return;
@@ -1056,6 +1063,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
       }
     });
     cases.push("      space = false;");
+    cases.push("      last_chord_length = prev_chord_length;");
     cases.push("      scheduleTimer = true;");
     cases.push("      break;");
   }
