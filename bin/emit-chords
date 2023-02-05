@@ -476,7 +476,7 @@ const readmeContent = (chordsAndCategories, original) => {
   return lines;
 };
 
-const qmkCombo = ({ combo, layers }) => {
+const qmkCombo = ({ combo, layers }, shift) => {
   let layer = "Alpha";
 
   if (Array.isArray(layers)) {
@@ -487,7 +487,12 @@ const qmkCombo = ({ combo, layers }) => {
     }
   }
 
-  return combo.map((key) => qmkKey[layer][key]).join(", ");
+  const keys = [...combo];
+  if (shift) {
+    keys.push(shiftBase);
+  }
+
+  return keys.map((key) => qmkKey[layer][key]).join(", ");
 };
 
 const qmkOutput = (output) => {
@@ -674,8 +679,11 @@ const qmkEnum = (chords, personalFile) => {
   const lines = [];
   const personalEnum = "PERSONAL_CHORD_ENUM";
 
-  chords.forEach(({ identifier }) => {
+  chords.forEach(({ identifier, tap, hold }) => {
     lines.push(`CHORD_${identifier},`);
+    if ("shift" in tap || (hold && "shift" in hold)) {
+      lines.push(`CHORD_S_${identifier},`);
+    }
   });
 
   if (!personalFile) {
@@ -685,18 +693,30 @@ const qmkEnum = (chords, personalFile) => {
   return [macro(personalFile ? personalEnum : "CHORD_ENUM", null, lines)];
 };
 
-const qmkCombos = (chords) => [
-  ...chords.map(
-    (chord) => `COMBO_FOR_CHORD(${chord.identifier}, ${qmkCombo(chord)});`
-  ),
-];
+const qmkCombos = (chords) => {
+  const lines = [];
+
+  chords.forEach((chord) => {
+    lines.push(`COMBO_FOR_CHORD(${chord.identifier}, ${qmkCombo(chord)});`);
+    if ("shift" in chord.tap || (chord.hold && "shift" in chord.hold)) {
+      lines.push(
+        `COMBO_FOR_CHORD(S_${chord.identifier}, ${qmkCombo(chord, true)});`
+      );
+    }
+  });
+
+  return lines;
+};
 
 const qmkActions = (chords, personalFile) => {
   const lines = [];
   const personalCombos = "PERSONAL_CHORD_COMBOS";
 
-  chords.forEach(({ identifier }) => {
+  chords.forEach(({ identifier, tap, hold }) => {
     lines.push(`CHORD_COMBO(${identifier}),`);
+    if ("shift" in tap || (hold && "shift" in hold)) {
+      lines.push(`CHORD_COMBO(S_${identifier}),`);
+    }
   });
 
   if (!personalFile) {
@@ -752,6 +772,9 @@ const qmkReleaseFunction = (chords, personalFile) => {
       "shift" in chord.tap || (chord.hold && "shift" in chord.hold);
 
     branch.push(`    case CHORD_${chord.identifier}:`);
+    if (hasShift) {
+      branch.push(`    case CHORD_S_${chord.identifier}:`);
+    }
 
     if (chord.tap.behavior) {
       branch.push(`      space = false;`);
@@ -795,7 +818,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
       branch.push(
         ...qmkOutputActionCase(
           chord.tap,
-          "chord_shifted"
+          `chord_shifted || combo_index == CHORD_S_${chord.identifier}`
         ).map((line) => `      ${line}`)
       );
     }
@@ -906,6 +929,9 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
 
     const branch = [];
     branch.push(`    case CHORD_${chord.identifier}:`);
+    if (hasShift) {
+      branch.push(`    case CHORD_S_${chord.identifier}:`);
+    }
 
     if (action.behavior) {
       branch.push("      space = false;");
@@ -918,7 +944,7 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
       branch.push(
         ...qmkOutputActionCase(
           action,
-          "chord_shifted"
+          `chord_shifted || combo_index == CHORD_S_${chord.identifier}`
         ).map((line) => `      ${line}`)
       );
     }
@@ -927,9 +953,12 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   });
 
   if (timerChords.length) {
-    cases.push(
-      ...timerChords.map(({ identifier }) => `    case CHORD_${identifier}:`)
-    );
+    timerChords.forEach(({ identifier, tap, hold }) => {
+      cases.push(`    case CHORD_${identifier}:`);
+      if ("shift" in tap || (hold && "shift" in hold)) {
+        cases.push(`    case CHORD_S_${identifier}:`);
+      }
+    });
     cases.push("      space = false;");
     cases.push("      scheduleTimer = true;");
     cases.push("      break;");
