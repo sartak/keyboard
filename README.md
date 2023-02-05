@@ -7,25 +7,45 @@
 - [QMK config](https://github.com/sartak/qmk-config)
 - [xKeyboard (iOS) config](https://github.com/sartak/xkeyboard-config)
 
+## Overview
+
 I use the [Canary layout](https://github.com/Apsu/Canary) on a lightly-modded [Ferris Sweep](https://github.com/sartak/Sweep) with Kailh chocs. I use the lightest switches I can find, currently pinks (linear, which I modded to lighter, 15gf springs).
 
 I do a lot of programming in vim. For gaming, I… use other devices, so I'm happy to tradeoff a little bit of input latency (&lt;100ms, even in the worst case) for keyboard superpowers.
 
-I use chords heavily to type entire words (see below!), inspired by steno and [CharaChorder](https://www.charachorder.com) For example, combo'ing `c+n+d` together types the word `consider`, along with a trailing space.
+## Chording
 
-Chording a word also makes the following punctuation smarter. For example typing a `.` will delete the chord's trailing space, add the period then a new trailing space, and turn on sticky shift for the next letter. Typing `,` is similar but doesn't enable the sticky shift. I achieve this with a "sentence" layer that most chords enable and most other characters disable.
+I use chords heavily to type entire words (see below!), inspired by steno and [CharaChorder](https://www.charachorder.com). For example, combo'ing `c+n+d` together types the word `consider`, along with a trailing space.
+
+Either holding shift, or adding shift to the combo, will output the chord with the first letter capitalized. That's the default; each chord can customize whether to take that default, disable shifting entirely (e.g. the chord that outputs `https://` _never_ emits `Https://`, yuck), or provide some completely different behavior (e.g. if I were living in Paris, maybe a chord for `champs-elysees` gets shifted to `Champs-Élysées`).
+
+Chording a word also makes the following punctuation smarter. For example typing a `.` will delete the chord's trailing space, add the period then a new trailing space, and turn on sticky shift for the next letter (or the aforementioned shifting for chords). Typing `,` is similar but doesn't enable the shifting behavior. In ZMK, I achieve this with a "sentence" layer that most chords enable and most other characters disable.
+
+Instead of outputting words with trailing spaces, chords can define arbitrary behavior as well. They can turn on oneshot mods or oneshot layers, click with left or right mouse button, etc.
+
+One such behavior is `delete-word`. Given that this keyboard is designed around chording entire words, deleting words becomes a much more common operation. Comboing space+backspace sends alt+backspace to delete the preceding word. And as a special case, comboing space+backspace immediately after a chord deletes that chord's output. This makes it more like an "undo chord" rather than delete word. This better matches intent when a chord emitted multiple words, or was not separated from the previous text by a space (such as in a long identifier name in code).
+
+## Duplicate key
 
 I have a duplicate key (`⨧`) on a thumb which enables a bunch of functionality. On its own, it repeats the previous keystroke. (If you know vim, think of it like the `.` command for your keyboard). When typing a word like "success", it's quicker to hit the dup key than to repeatedly use the same finger to type the double letters. That seems esoteric, but, given a reasonable corpus of English text, a distinct dup key is higher frequency than half the alphabet (including letters like `p` and `c`). I also have an (optional) way to forbid typing double letters the usual way, to force you to build the muscle memory for the dup key. dup even on its own will also repeat any modifiers, which makes a lot of keyboard shortcuts easier to manage.
 
 The dup key interacts with the chording system in two separate ways. One, it's a valid input into chords. This opens up the namespace of manageable combos, especially for short anagrams. For example, `who` is `w+h+o`, but that takes the combo from `how`. Having dup means `how` can at least get `h+w+⨧` rather than adding some unrelated letter. Second, tapping dup on its own immediately after a chord will cycle through alternate, predefined expansions. For example, chording `t+n+s` emits `thanks ` (with a trailing space). If I then tap dup, it will backspace twice to remove the trailing space and the last letter `s`, then emit `you` to produce the final result of `thank you `. Tapping dup again will delete both words then emit `Thank you very much!`. Finally tapping dup again will cycle back to the first version, `thanks `. My own convention is that dupping a noun will pluralize it, dupping a verb will cycle tenses (`become`, `became`, `becoming`), dupping an adjective (`new`) will include comparatives (`newer`) and superlatives (`newest`). It's all driven by user-defined data, so there are no hard rules.
 
+Tapping dup after a behavior chord repeat it, though that can be customized per-behavior as well.
+
+## Sidechannel
+
 My keyboard also emits a sidechannel of keys pressed and chords used. (Astute readers will recognize this as a _keylogger_!) Ordinarily, the host computer can only see the outputs of chords; this allows seeing the inputs too. I have a daemon listening to that sidechannel to track whether each word was typed using character entry or a chord. This unlocks some neat benefits, like noticing I type a word the slow way frequently, and either remind me of the chord I already have for it, or offer up an available combo. It also offers a more accurate visualization of where my fingers are on the keyboard, which I can iframe into a website like Monkeytype like so:
 
 ![Chorded entry visualizer](images/chords.gif)
 
-Given that this keyboard is designed around chording entire words, deleting words becomes a much more common operation. Comboing space+backspace sends alt+backspace to delete the preceding word. And as a special case, comboing space+backspace immediately after a chord deletes that chord's output. This makes it more like an "undo chord" rather than delete word. This better matches intent when a chord emitted multiple words, or was not separated from the previous text by a space (such as in a long identifier name in code).
+## Modifiers
 
 For modifiers, I choose to not use homerow mods since they wouldn't work well with word-chords. Instead, I hold a letter, symbol, or number key for just an extra moment (200ms) to emit the ⌘-modified character. The space and backspace keys act as shift and ctrl when held with another key. Space and backspace also join together for hyper (which I use as an application switcher). For the very few uses of alt that I need, I have dedicated keys (a combo for alt-backspace to delete a word, a handful of characters on the symbol layer, etc).
+
+Building off the feature for ⌘-modified character characters, each chord can have a custom behavior when held for 200ms. I added this not for words, but to extend the key layout. Tapping the left two thumb keys will emit a left click, but holding it will emit a ⌘-modified left clicke. Holding the two inner thumb keys will delete word when tapped, but turn on oneshot Hyper when held. As an example of where this is useful for "ordinary" chords, I have a chord that outputs my domain name `shawn.dev` on tap, or the full URL `https://shawn.dev/` when held. This combines with the custom shifting behavior so each chord can have four variants (base, shifted, held, held shifted), and each of those variants can have its own bespoke cycle of expansions with `⨧`.
+
+## Keymap
 
 ![keyboard layout](images/keymap.svg)
 
