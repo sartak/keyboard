@@ -614,16 +614,37 @@ else {
   return typeof res === "string" ? res.split("\n") : res;
 };
 
-const qmkOutputActionCase = ({ output, exact }) => {
-  const lines = [];
-  if (exact) {
-    lines.push("space = false;");
+const qmkOutputActionCase = (action, conditional) => {
+  const actions = [action];
+  if ("shift" in action && conditional) {
+    actions.push(action.shift);
   }
-  const [calls, length] = qmkOutput(output);
-  calls.forEach((line) => {
-    lines.push(line);
+
+  const [normal, shifted] = actions.map(({ exact, output }) => {
+    const lines = [];
+    if (exact) {
+      lines.push("space = false;");
+    }
+    const [calls, length] = qmkOutput(output);
+    calls.forEach((line) => {
+      lines.push(line);
+    });
+    lines.push(`last_chord_length = ${length};`);
+    return lines;
   });
-  lines.push(`last_chord_length = ${length};`);
+
+  if (!shifted) {
+    return normal;
+  }
+
+  const lines = [];
+
+  lines.push(`if (${conditional}) {`);
+  lines.push(...shifted.map((line) => `  ${line}`));
+  lines.push("} else {");
+  lines.push(...normal.map((line) => `  ${line}`));
+  lines.push("}");
+
   return lines;
 };
 
@@ -727,6 +748,9 @@ const qmkReleaseFunction = (chords, personalFile) => {
   const cases = [];
   chords.forEach((chord) => {
     const branch = [];
+    const hasShift =
+      "shift" in chord.tap || (chord.hold && "shift" in chord.hold);
+
     branch.push(`    case CHORD_${chord.identifier}:`);
 
     if (chord.tap.behavior) {
@@ -769,7 +793,10 @@ const qmkReleaseFunction = (chords, personalFile) => {
       branch.push(`        return;`);
       branch.push(`      }`);
       branch.push(
-        ...qmkOutputActionCase(chord.tap).map((line) => `      ${line}`)
+        ...qmkOutputActionCase(
+          chord.tap,
+          "chord_shifted"
+        ).map((line) => `      ${line}`)
       );
     }
 
@@ -874,6 +901,8 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
     }
 
     const action = holdFunc ? chord.hold : chord.tap;
+    let hasShift =
+      "shift" in chord.tap || (chord.hold && "shift" in chord.hold);
 
     const branch = [];
     branch.push(`    case CHORD_${chord.identifier}:`);
@@ -887,7 +916,10 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
       branch.push(...down.map((line) => `      ${line}`));
     } else {
       branch.push(
-        ...qmkOutputActionCase(action).map((line) => `      ${line}`)
+        ...qmkOutputActionCase(
+          action,
+          "chord_shifted"
+        ).map((line) => `      ${line}`)
       );
     }
     branch.push("      break;");
