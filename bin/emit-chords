@@ -1593,26 +1593,62 @@ const zmkChords = (chordsAndCategories) => {
         !(chord.builtin === true || chord.builtin === "zmk")
     )
     .forEach((chord) => {
-      if (chord.tap.sentenceShift !== undefined) {
-        chords.push({
-          ...chord,
-          identifier: `${chord.identifier}_s`,
-          tap: {
-            ...chord.tap,
-            output: `\b${chord.tap.output} ${
-              chord.tap.sentenceShift ? "<SKLS>" : ""
-            }`,
-          },
-          layers: ["Sentence"],
-        });
-        chords.push({
-          ...chord,
-          layers: zmkLayers,
-        });
-      } else {
-        chords.push(chord);
-      }
+      [false, true].forEach((shift) => {
+        const combo = [...chord.combo];
+        let identifier = chord.identifier;
+        let tapAction = chord.tap;
+        let holdAction = chord.hold;
+
+        if (shift) {
+          let skip = true;
+          if (tapAction.shift) {
+            tapAction = tapAction.shift;
+            skip = false;
+          }
+          if (holdAction?.shift) {
+            holdAction = holdAction.shift;
+            skip = false;
+          }
+          if (skip) {
+            return;
+          }
+          combo.push(shiftBase[0]);
+          identifier = "S_" + identifier;
+        }
+
+        if (tapAction.sentenceShift !== undefined) {
+          chords.push({
+            ...chord,
+            combo,
+            identifier: `${identifier}_s`,
+            tap: {
+              ...tapAction,
+              output: `\b${tapAction.output} ${
+                tapAction.sentenceShift ? "<SKLS>" : ""
+              }`,
+            },
+            layers: ["Sentence"],
+          });
+          chords.push({
+            ...chord,
+            combo,
+            identifier,
+            tap: tapAction,
+            hold: holdAction,
+            layers: zmkLayers,
+          });
+        } else {
+          chords.push({
+            ...chord,
+            identifier,
+            combo,
+            tap: tapAction,
+            hold: holdAction,
+          });
+        }
+      });
     });
+
   return chords;
 };
 
