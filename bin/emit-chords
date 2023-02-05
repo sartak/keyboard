@@ -817,7 +817,10 @@ const qmkReleaseFunction = (chords, personalFile) => {
   }
 
   if (append != NULL) {
-    send_string(append);
+    if (chord_shifted && append[0] >= 'a' && append[0] <= 'z') {
+      add_oneshot_mods(MOD_MASK_SHIFT);
+    }
+    SEND_STRING(append);
   }
 
   if (space) {
@@ -961,7 +964,10 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   }
 
   if (append != NULL) {
-    send_string(append);
+    if (chord_shifted && append[0] >= 'a' && append[0] <= 'z') {
+      add_oneshot_mods(MOD_MASK_SHIFT);
+    }
+    SEND_STRING(append);
   }
 
   if (space) {
@@ -987,7 +993,10 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   }
 
   if (append != NULL) {
-    send_string(append);
+    if (chord_shifted && append[0] >= 'a' && append[0] <= 'z') {
+      add_oneshot_mods(MOD_MASK_SHIFT);
+    }
+    SEND_STRING(append);
   }
 
   if (space) {
@@ -1209,7 +1218,7 @@ const qmkDupFunction = (chords, personalFile) => {
   }
 
   if (append != NULL) {
-    send_string(append);
+    SEND_STRING(append);
   }
 
   if (space) {
