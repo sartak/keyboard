@@ -676,21 +676,33 @@ const qmkPreamble = (chords, personalFile) => {
 };
 
 const qmkEnum = (chords, personalFile) => {
-  const lines = [];
+  const normalLines = [];
+  const shiftedLines = [];
   const personalEnum = "PERSONAL_CHORD_ENUM";
+  const personalShiftedEnum = "PERSONAL_SHIFTED_ENUM";
 
   chords.forEach(({ identifier, tap, hold }) => {
-    lines.push(`CHORD_${identifier},`);
+    normalLines.push(`CHORD_${identifier},`);
     if ("shift" in tap || (hold && "shift" in hold)) {
-      lines.push(`CHORD_S_${identifier},`);
+      shiftedLines.push(`CHORD_S_${identifier},`);
     }
   });
 
-  if (!personalFile) {
-    lines.push(personalEnum);
+  if (personalFile) {
+    return [
+      macro(personalEnum, null, normalLines),
+      macro(personalShiftedEnum, null, shiftedLines),
+    ];
+  } else {
+    return [
+      macro("CHORD_ENUM", null, [
+        ...normalLines,
+        personalEnum,
+        ...shiftedLines,
+        personalShiftedEnum,
+      ]),
+    ];
   }
-
-  return [macro(personalFile ? personalEnum : "CHORD_ENUM", null, lines)];
 };
 
 const qmkCombos = (chords) => {
