@@ -66,9 +66,9 @@
     [                null,   null,   "Ctrl", null]
   ],
   "Number-Hold": [
-    [null, null, null, null, null,   null, null, null,  null,   "Esc"],
-    [null, null, null, null, null,   null, null, null,  null,   null],
-    [null, null, null, null, null,   null, null, "Tab", "Alfr", null],
+    ["", null, null, null, "",     "", "",   "",    "",     "Esc"],
+    ["", null, null, null, null,   "", null, null,  null,   null],
+    ["", null, null, null, "",     "", "",   "Tab", "Alfr", null],
     [               "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Function": [
