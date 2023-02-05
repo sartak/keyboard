@@ -96,15 +96,20 @@ const parseLayout = (config) => {
   const qmkKey = {};
   const zmkKey = {};
   const keys = [];
+  const keymap = [];
   let shiftBase;
 
   let z = 0;
   config.Alpha.forEach((row) => {
+    const keymapRow = [];
     row.forEach((key) => {
       validKey[key] = true;
       zmkKey[key] = z++;
-      keys.push({});
+      const k = {};
+      keys.push(k);
+      keymapRow.push(k);
     });
+    keymap.push(keymapRow);
   });
 
   Object.entries(config).forEach(([layer, rows]) => {
@@ -165,6 +170,7 @@ const parseLayout = (config) => {
   return {
     layers,
     keys,
+    keymap,
     validKey,
     layerIndex,
     shiftBase,
@@ -180,6 +186,7 @@ const { validKey, layerIndex, shiftBase, qmkKey, zmkKey, zmkLayers } =
 const layout = {
   layers: parsedLayout.layers,
   keys: parsedLayout.keys,
+  keymap: parsedLayout.keymap,
   outputForKey,
   shiftBase,
 };
