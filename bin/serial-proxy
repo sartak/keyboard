@@ -273,9 +273,18 @@ serial.on("data", (data) => {
       }
 
       if (currentChordAction) {
-        emit("chord", { chord, indexes, action: currentChordAction });
+        emit("chord", {
+          chord,
+          indexes,
+          action: currentChordAction,
+          shifted: currentComboShifted,
+        });
       } else {
-        emit("indeterminate-chord", { chord, indexes });
+        emit("indeterminate-chord", {
+          chord,
+          indexes,
+          shifted: currentComboShifted,
+        });
       }
 
       if (currentChordAction) {
@@ -285,7 +294,10 @@ serial.on("data", (data) => {
       }
 
       if (currentChordAction) {
-        const action = chord[currentChordAction];
+        let action = chord[currentChordAction];
+        if (currentComboShifted && action.shift) {
+          action = action.shift;
+        }
 
         if (action.behavior) {
           switch (action.behavior) {
