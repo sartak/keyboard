@@ -619,26 +619,52 @@ else {
   return typeof res === "string" ? res.split("\n") : res;
 };
 
+const allEqualOr = (values, fallback) => {
+  let v = values[0];
+  for (let i = 1, len = values.length; i < len; ++i) {
+    if (values[i] !== v) {
+      return fallback;
+    }
+  }
+  return v;
+};
+
 const qmkOutputActionCase = (action, conditional) => {
-  const actions = [action];
+  const actions = [[action, qmkOutput(action.output)]];
   if ("shift" in action && conditional) {
-    actions.push(action.shift);
+    actions.push([action.shift, qmkOutput(action.shift.output)]);
   }
 
-  const [normal, shifted] = actions.map(({ exact, output }) => {
+  const allExact = allEqualOr(
+    actions.map(([{ exact }]) => exact),
+    null
+  );
+
+  const allLength = allEqualOr(
+    actions.map(([, [, length]]) => length),
+    null
+  );
+
+  const [normal, shifted] = actions.map(([{ exact }, [calls, length]]) => {
     const lines = [];
-    if (exact) {
+    if (allExact === null && exact) {
       lines.push("space = false;");
     }
-    const [calls, length] = qmkOutput(output);
-    calls.forEach((line) => {
-      lines.push(line);
-    });
-    lines.push(`last_chord_length = ${length};`);
+    if (allLength === null) {
+      lines.push(`last_chord_length = ${length};`);
+    }
+    lines.push(...calls);
     return lines;
   });
 
   const lines = [];
+
+  if (allExact) {
+    lines.push("space = false;");
+  }
+  if (allLength !== null) {
+    lines.push(`last_chord_length = ${allLength};`);
+  }
 
   if (shifted && normal.join("\n") !== shifted.join("\n")) {
     lines.push(`if (${conditional}) {`);
@@ -999,24 +1025,58 @@ const qmkDupActionCase = (action, conditional) => {
     actions.push(action.shift);
   }
 
-  const [normal, shifted] = actions.map((action) => {
+  const globalLengths = allEqualOr(
+    actions.flatMap(({ alternates }) =>
+      alternates?.map(({ length }) => length)
+    ),
+    null
+  );
+
+  const [normal, shifted] = actions.map(({ alternates }) => {
     const lines = [];
-    if (action.alternates?.length) {
+    if (alternates?.length) {
+      const allBackspaces = allEqualOr(
+        alternates.map(({ backspaces }) => backspaces),
+        null
+      );
+      if (allBackspaces) {
+        lines.push(`backspaces = ${allBackspaces};`);
+      }
+
+      const allExact = allEqualOr(
+        alternates.map(({ exact }) => exact),
+        null
+      );
+      if (allExact) {
+        lines.push("space = false;");
+      }
+
+      const allLength = allEqualOr(
+        alternates.map(({ length }) => length),
+        null
+      );
+
+      if (globalLengths === null && allLength !== null) {
+        lines.push(`last_chord_length = ${allLength};`);
+      }
+
       lines.push("switch(last_chord_cycle) {");
-      action.alternates.forEach(
+      alternates.forEach(
         ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
           lines.push(`  case ${fromIdx}:`);
-          if (backspaces) {
+          if (allBackspaces === null && backspaces) {
             lines.push(`    backspaces = ${backspaces};`);
           }
+          if (allExact === null && exact) {
+            lines.push("    space = false;");
+          }
+          if (globalLengths === null && allLength === null) {
+            lines.push(`    last_chord_length = ${length};`);
+          }
+          lines.push(`    next_chord_cycle = ${toIdx};`);
           if (append.length) {
             lines.push(`    append = "${append}";`);
           }
-          if (exact) {
-            lines.push("    space = false;");
-          }
-          lines.push(`    last_chord_length = ${length};`);
-          lines.push(`    next_chord_cycle = ${toIdx};`);
           lines.push("  break;");
         }
       );
