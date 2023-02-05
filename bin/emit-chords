@@ -20,6 +20,7 @@ const tidyReadmeCombo = {
 
 const tidyReadmeOutput = {
   "\b": "⌫",
+  "*": "\\*",
 };
 
 const outputForKey = {
@@ -1287,6 +1288,7 @@ const zmkPress = {
   ":": "&kp COLON",
   ";": "&kp SEMI",
   "@": "&kp AT",
+  "*": "&kp ASTERISK",
   "\b": "&kp BSPC",
   "<SKLS>": "&sk LSHFT",
   "?": "&kp QMARK",

@@ -29,7 +29,7 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 ![keyboard layout](images/keymap.svg)
 
-## 446 chords
+## 447 chords
 
 ### Suffixes
 
@@ -473,8 +473,6 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 - `n` + `i` + `l` → nil → nils
 - `a` + `r` + `y` → array → arrays
 - `s` + `r` + `t` → sort → sorts → sorted → will sort
-- `h` + `t` + `p` → http:// → https://
-- `h` + `t` + `p` + `s` → https:// → http://
 
 ### Common pairs of words
 
@@ -494,3 +492,6 @@ For modifiers, I choose to not use homerow mods since they wouldn't work well wi
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog (shifted: The quick brown fox jumps over the lazy dog.)
 - `e` + `l` + `b` + `h` → Elbereth
+- `h` + `t` + `p` → http:// → https://
+- `h` + `t` + `p` + `s` → https:// → http://
+- `s` + `t` + `f` + `r` → select \* from (shifted: SELECT \* FROM)
