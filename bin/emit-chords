@@ -1073,7 +1073,9 @@ const qmkDupActionCase = (action, conditional) => {
           if (globalLengths === null && allLength === null) {
             lines.push(`    last_chord_length = ${length};`);
           }
-          lines.push(`    next_chord_cycle = ${toIdx};`);
+          if (toIdx !== fromIdx + 1) {
+            lines.push(`    next_chord_cycle = ${toIdx};`);
+          }
           if (append.length) {
             lines.push(`    append = "${append}";`);
           }
@@ -1105,7 +1107,7 @@ const qmkDupActionCase = (action, conditional) => {
 const qmkDupFunction = (chords, personalFile) => {
   const personalCases = "PERSONAL_DUP_CASES";
   const intro = `uint8_t process_chord_dup(uint16_t last_chord, uint8_t last_chord_cycle) {
-  uint8_t next_chord_cycle = 0;
+  uint8_t next_chord_cycle = last_chord_cycle + 1;
   uint8_t backspaces = 0;
   char *append = NULL;
   bool space = true;
