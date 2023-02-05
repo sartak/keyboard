@@ -638,17 +638,17 @@ const qmkOutputActionCase = (action, conditional) => {
     return lines;
   });
 
-  if (!shifted) {
-    return normal;
-  }
-
   const lines = [];
 
-  lines.push(`if (${conditional}) {`);
-  lines.push(...shifted.map((line) => `  ${line}`));
-  lines.push("} else {");
-  lines.push(...normal.map((line) => `  ${line}`));
-  lines.push("}");
+  if (shifted && normal.join("\n") !== shifted.join("\n")) {
+    lines.push(`if (${conditional}) {`);
+    lines.push(...shifted.map((line) => `  ${line}`));
+    lines.push("} else {");
+    lines.push(...normal.map((line) => `  ${line}`));
+    lines.push("}");
+  } else {
+    lines.push(...normal);
+  }
 
   return lines;
 };
@@ -1027,17 +1027,17 @@ const qmkDupActionCase = (action, conditional) => {
     return lines;
   });
 
-  if (!shifted) {
-    return normal;
-  }
-
   const lines = [];
 
-  lines.push(`if (${conditional}) {`);
-  lines.push(...shifted.map((line) => `  ${line}`));
-  lines.push("} else {");
-  lines.push(...normal.map((line) => `  ${line}`));
-  lines.push("}");
+  if (shifted && normal.join("\n") !== shifted.join("\n")) {
+    lines.push(`if (${conditional}) {`);
+    lines.push(...shifted.map((line) => `  ${line}`));
+    lines.push("} else {");
+    lines.push(...normal.map((line) => `  ${line}`));
+    lines.push("}");
+  } else {
+    lines.push(...normal);
+  }
 
   return lines;
 };
@@ -1068,35 +1068,28 @@ const qmkDupFunction = (chords, personalFile) => {
         cases.push(`    case CHORD_S_${identifier}:`);
       }
 
-      const actions = [[false, tap]];
+      const actions = [tap];
       if (hold) {
-        actions.push([true, hold]);
+        actions.push(hold);
       }
 
-      actions.forEach(([forHold, action]) => {
-        let indent = "      ";
+      const [tapBranch, holdBranch] = actions.map((action) =>
+        qmkDupActionCase(
+          action,
+          `chord_shifted || last_chord == CHORD_S_${identifier}`
+        ).map((line) => `      ${line}`)
+      );
 
-        if (hold) {
-          if (!forHold) {
-            cases.push(`${indent}if (releasedWithinTapThreshold) {`);
-          } else {
-            cases.push(`${indent}} else {`);
-          }
+      if (!hold || tapBranch.join("\n") === holdBranch.join("\n")) {
+        cases.push(...tapBranch);
+      } else {
+        cases.push("      if (releasedWithinTapThreshold) {");
+        cases.push(...tapBranch.map((line) => `  ${line}`));
+        cases.push("      } else {");
+        cases.push(...holdBranch.map((line) => `  ${line}`));
+        cases.push("      }");
+      }
 
-          indent += "  ";
-        }
-
-        cases.push(
-          ...qmkDupActionCase(
-            action,
-            `chord_shifted || last_chord == CHORD_S_${identifier}`
-          ).map((line) => `${indent}${line}`)
-        );
-
-        if (hold && forHold) {
-          cases.push("      }");
-        }
-      });
       cases.push("      break;");
     });
 
