@@ -848,6 +848,10 @@ const qmkReleaseFunction = (chords, personalFile) => {
 };
 
 const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
+  const firstShiftedChord = chords.find(
+    (chord) => "shift" in chord.tap || (chord.hold && "shift" in chord.hold)
+  );
+
   const personalCases = holdFunc ? "PERSONAL_HOLD_CASES" : "PERSONAL_TAP_CASES";
 
   const returnStatement = holdFunc ? "return 0" : "return";
@@ -869,10 +873,13 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   bool scheduleTimer = false;
 
   const uint8_t mods = get_mods();
-  chord_shifted = (mods | get_weak_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT;
+  bool mod_shifted = (mods | get_weak_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT;
   del_mods(MOD_MASK_SHIFT);
   del_weak_mods(MOD_MASK_SHIFT);
   del_oneshot_mods(MOD_MASK_SHIFT);
+
+  bool combo_shifted = combo_index >= CHORD_S_${firstShiftedChord.identifier};
+  chord_shifted = mod_shifted || combo_shifted;
 
   switch(combo_index) {`;
 
