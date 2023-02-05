@@ -17,7 +17,8 @@ const VIRT_WARN = 0;
 const VIRT_HEARTBEAT = 1;
 const VIRT_KEYS_START = VIRT_HEARTBEAT + 1;
 const VIRT_KEYS_END = VIRT_KEYS_START + VIRT_KEYS * VIRT_KEYMULT_LAST;
-const VIRT_CHORD_STARTED = VIRT_KEYS_END + 1;
+const VIRT_COMBO_SHIFTED = VIRT_KEYS_END + 1;
+const VIRT_CHORD_STARTED = VIRT_COMBO_SHIFTED + 1;
 const VIRT_CHORD_ENDED_INDETERMINATE = VIRT_CHORD_STARTED + 1;
 const VIRT_CHORD_ENDED_TAP = VIRT_CHORD_ENDED_INDETERMINATE + 1;
 const VIRT_CHORD_ENDED_HOLD = VIRT_CHORD_ENDED_TAP + 1;
@@ -57,6 +58,7 @@ config.chords.forEach((chord) => {
 
 let listeners = [];
 let currentCombo;
+let currentComboShifted;
 let currentLayer = config.layout.layers[0];
 let currentMods = {
   shift: false,
@@ -230,8 +232,11 @@ serial.on("data", (data) => {
           console.warn(`Unhandled key byte: ${byte}`);
         }
       }
+    } else if (byte === VIRT_COMBO_SHIFTED) {
+      currentComboShifted = true;
     } else if (byte === VIRT_CHORD_STARTED) {
       currentCombo = [];
+      currentComboShifted = false;
     } else if (
       byte === VIRT_CHORD_ENDED_INDETERMINATE ||
       byte === VIRT_CHORD_ENDED_TAP ||
@@ -243,6 +248,7 @@ serial.on("data", (data) => {
       if (!chord) {
         console.warn(`No chord for combo '${key}'`);
         currentCombo = undefined;
+        currentComboShifted = undefined;
         return;
       }
 
@@ -328,6 +334,7 @@ serial.on("data", (data) => {
       }
 
       currentCombo = undefined;
+      currentComboShifted = undefined;
     } else if (byte >= VIRT_LAYER_ZERO && byte <= VIRT_LAYER_LAST) {
       const layer = config.layout.layers[byte - VIRT_LAYER_ZERO];
       emit("layer", { layer, from: currentLayer });
