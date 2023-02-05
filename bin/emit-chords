@@ -993,6 +993,36 @@ const qmkPressFunction = (holdFunc) => (chords, personalFile) => {
   }
 };
 
+const qmkDupActionCase = (action) => {
+  const lines = [];
+
+  if (action.alternates?.length) {
+    lines.push("switch(last_chord_cycle) {");
+    action.alternates.forEach(
+      ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
+        lines.push(`  case ${fromIdx}:`);
+        if (backspaces) {
+          lines.push(`    backspaces = ${backspaces};`);
+        }
+        if (append.length) {
+          lines.push(`    append = "${append}";`);
+        }
+        if (exact) {
+          lines.push("    space = false;");
+        }
+        lines.push(`    last_chord_length = ${length};`);
+        lines.push(`    next_chord_cycle = ${toIdx};`);
+        lines.push("  break;");
+      }
+    );
+    lines.push("}");
+  } else {
+    lines.push("space = false;");
+  }
+
+  return lines;
+};
+
 const qmkDupFunction = (chords, personalFile) => {
   const personalCases = "PERSONAL_DUP_CASES";
   const intro = `uint8_t process_chord_dup(uint16_t last_chord, uint8_t last_chord_cycle) {
@@ -1032,29 +1062,9 @@ const qmkDupFunction = (chords, personalFile) => {
           indent += "  ";
         }
 
-        if (action.alternates?.length) {
-          cases.push(`${indent}switch(last_chord_cycle) {`);
-          action.alternates.forEach(
-            ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
-              cases.push(`${indent}  case ${fromIdx}:`);
-              if (backspaces) {
-                cases.push(`${indent}    backspaces = ${backspaces};`);
-              }
-              if (append.length) {
-                cases.push(`${indent}    append = "${append}";`);
-              }
-              if (exact) {
-                cases.push(`${indent}    space = false;`);
-              }
-              cases.push(`${indent}    last_chord_length = ${length};`);
-              cases.push(`${indent}    next_chord_cycle = ${toIdx};`);
-              cases.push(`${indent}  break;`);
-            }
-          );
-          cases.push(`${indent}}`);
-        } else if (hold) {
-          cases.push(`${indent}space = false;`);
-        }
+        cases.push(
+          ...qmkDupActionCase(action).map((line) => `${indent}${line}`)
+        );
 
         if (hold && forHold) {
           cases.push("      }");
