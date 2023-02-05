@@ -206,7 +206,6 @@ const makeAlternates = ({ output, exact }) => {
 
   return alternates.map((alt) => {
     let [, , from, to] = alt;
-    const length = to.length;
 
     if (!exact) {
       from += " ";
@@ -237,7 +236,6 @@ const makeAlternates = ({ output, exact }) => {
       backspaces,
       append,
       exact,
-      length,
     };
   });
 };
@@ -1078,13 +1076,6 @@ const qmkDupActionCase = (action, conditional) => {
     actions.push(action.shift);
   }
 
-  const globalLengths = allEqualOr(
-    actions.flatMap(({ alternates }) =>
-      alternates?.map(({ length }) => length)
-    ),
-    null
-  );
-
   const [normal, shifted] = actions.map(({ alternates }) => {
     const lines = [];
     if (alternates?.length) {
@@ -1104,37 +1095,23 @@ const qmkDupActionCase = (action, conditional) => {
         lines.push("space = false;");
       }
 
-      const allLength = allEqualOr(
-        alternates.map(({ length }) => length),
-        null
-      );
-
-      if (globalLengths === null && allLength !== null) {
-        lines.push(`last_chord_length = ${allLength};`);
-      }
-
       lines.push("switch(last_chord_cycle) {");
-      alternates.forEach(
-        ({ fromIdx, toIdx, backspaces, append, exact, length }) => {
-          lines.push(`  case ${fromIdx}:`);
-          if (allBackspaces === null && backspaces) {
-            lines.push(`    backspaces = ${backspaces};`);
-          }
-          if (allExact === null && exact) {
-            lines.push("    space = false;");
-          }
-          if (globalLengths === null && allLength === null) {
-            lines.push(`    last_chord_length = ${length};`);
-          }
-          if (toIdx !== fromIdx + 1) {
-            lines.push(`    next_chord_cycle = ${toIdx};`);
-          }
-          if (append.length) {
-            lines.push(`    append = "${append}";`);
-          }
-          lines.push("  break;");
+      alternates.forEach(({ fromIdx, toIdx, backspaces, append, exact }) => {
+        lines.push(`  case ${fromIdx}:`);
+        if (allBackspaces === null && backspaces) {
+          lines.push(`    backspaces = ${backspaces};`);
         }
-      );
+        if (allExact === null && exact) {
+          lines.push("    space = false;");
+        }
+        if (toIdx !== fromIdx + 1) {
+          lines.push(`    next_chord_cycle = ${toIdx};`);
+        }
+        if (append.length) {
+          lines.push(`    append = "${append}";`);
+        }
+        lines.push("  break;");
+      });
       lines.push("}");
     } else {
       lines.push("space = false;");
@@ -1217,9 +1194,11 @@ const qmkDupFunction = (chords, personalFile) => {
   for (uint8_t i = 0; i < backspaces; i++) {
     tap_code(KC_BSPC);
   }
+  last_chord_length -= backspaces;
 
   if (append != NULL) {
     SEND_STRING(append);
+    last_chord_length += strlen(append);
   }
 
   if (space) {
