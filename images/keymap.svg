@@ -112,6 +112,22 @@
 <text x="379.5" y="239.0">␣</text>
 <rect rx="6" ry="6" x="411.0" y="214" width="55" height="50"/>
 <text x="438.5" y="239.0">⇥</text>
+<rect rx="6" ry="6" x="322.5" y="226.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="239.0" class="small">delete-word</text>
+<rect rx="6" ry="6" x="249.75" y="226.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="239.0" class="small">left-click</text>
+<rect rx="6" ry="6" x="395.25" y="226.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="239.0" class="small">right-click</text>
+<rect rx="6" ry="6" x="322.5" y="226.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="239.0" class="small">oneshot-Function</text>
+<rect rx="6" ry="6" x="483.75" y="145.5" width="27.5" height="25.0" class="combo"/>
+<text x="497.5" y="158.0" class="small">!</text>
+<rect rx="6" ry="6" x="542.75" y="145.5" width="27.5" height="25.0" class="combo"/>
+<text x="556.5" y="158.0" class="small">?</text>
+<rect rx="6" ry="6" x="601.75" y="145.5" width="27.5" height="25.0" class="combo"/>
+<text x="615.5" y="158.0" class="small">:</text>
+<rect rx="6" ry="6" x="601.75" y="91.5" width="27.5" height="25.0" class="combo"/>
+<text x="615.5" y="104.0" class="small">;</text>
 <text x="27.5" y="291.0" class="label">
 <tspan x="27.5" dy="-0.6em">Alpha</tspan><tspan x="27.5" dy="1.2em">(hold):</tspan>
 </text>
@@ -183,6 +199,10 @@
 <text x="379.5" y="505.0">Ctrl</text>
 <rect rx="6" ry="6" x="411.0" y="480" width="55" height="50"/>
 <text x="438.5" y="505.0">Num</text>
+<rect rx="6" ry="6" x="322.5" y="492.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="505.0" class="small">oneshot-Hyper</text>
+<rect rx="6" ry="6" x="249.75" y="492.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="505.0" class="small">Gui-left-click</text>
 <text x="27.5" y="557.0" class="label">Symbol:</text>
 <rect rx="6" ry="6" x="29.5" y="584" width="55" height="50"/>
 <text x="57.0" y="609.0">`</text>
@@ -252,6 +272,54 @@
 <text x="379.5" y="771.0">␣</text>
 <rect rx="6" ry="6" x="411.0" y="746" width="55" height="50"/>
 <text x="438.5" y="771.0">⇥</text>
+<rect rx="6" ry="6" x="322.5" y="758.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="771.0" class="small">delete-word</text>
+<rect rx="6" ry="6" x="249.75" y="758.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="771.0" class="small">left-click</text>
+<rect rx="6" ry="6" x="395.25" y="758.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="771.0" class="small">right-click</text>
+<rect rx="6" ry="6" x="322.5" y="758.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="771.0" class="small">oneshot-Function</text>
+<rect rx="6" ry="6" x="483.75" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="497.5" y="690.0" class="small">!</text>
+<rect rx="6" ry="6" x="542.75" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="556.5" y="690.0" class="small">?</text>
+<rect rx="6" ry="6" x="601.75" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="615.5" y="690.0" class="small">:</text>
+<rect rx="6" ry="6" x="601.75" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="615.5" y="636.0" class="small">;</text>
+<rect rx="6" ry="6" x="43.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="57.0" y="690.0" class="small">¢</text>
+<rect rx="6" ry="6" x="102.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="116.0" y="690.0" class="small">£</text>
+<rect rx="6" ry="6" x="161.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="175.0" y="690.0" class="small">¥</text>
+<rect rx="6" ry="6" x="220.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="234.0" y="690.0" class="small">€</text>
+<rect rx="6" ry="6" x="279.25" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="293.0" y="690.0" class="small">⋯</text>
+<rect rx="6" ry="6" x="220.25" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="234.0" y="636.0" class="small">•</text>
+<rect rx="6" ry="6" x="161.25" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="175.0" y="636.0" class="small">°</text>
+<rect rx="6" ry="6" x="43.25" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="57.0" y="636.0" class="small">∞</text>
+<rect rx="6" ry="6" x="102.25" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="116.0" y="636.0" class="small">λ</text>
+<rect rx="6" ry="6" x="279.25" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="293.0" y="636.0" class="small">‽</text>
+<rect rx="6" ry="6" x="365.75" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="379.5" y="690.0" class="small">✗</text>
+<rect rx="6" ry="6" x="424.75" y="677.5" width="27.5" height="25.0" class="combo"/>
+<text x="438.5" y="690.0" class="small">✔</text>
+<rect rx="6" ry="6" x="365.75" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="379.5" y="636.0" class="small">←</text>
+<rect rx="6" ry="6" x="424.75" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="438.5" y="636.0" class="small">↓</text>
+<rect rx="6" ry="6" x="483.75" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="497.5" y="636.0" class="small">↑</text>
+<rect rx="6" ry="6" x="542.75" y="623.5" width="27.5" height="25.0" class="combo"/>
+<text x="556.5" y="636.0" class="small">→</text>
 <text x="27.5" y="823.0" class="label">
 <tspan x="27.5" dy="-0.6em">Symbol</tspan><tspan x="27.5" dy="1.2em">(hold):</tspan>
 </text>
@@ -323,6 +391,10 @@
 <text x="379.5" y="1037.0">Ctrl</text>
 <rect rx="6" ry="6" x="411.0" y="1012" width="55" height="50"/>
 <text x="438.5" y="1037.0">Num</text>
+<rect rx="6" ry="6" x="322.5" y="1024.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="1037.0" class="small">oneshot-Hyper</text>
+<rect rx="6" ry="6" x="249.75" y="1024.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="1037.0" class="small">Gui-left-click</text>
 <text x="27.5" y="1089.0" class="label">Number:</text>
 <rect rx="6" ry="6" x="29.5" y="1116" width="55" height="50"/>
 <text x="57.0" y="1141.0">BrUp</text>
@@ -392,6 +464,22 @@
 <text x="379.5" y="1303.0">␣</text>
 <rect rx="6" ry="6" x="411.0" y="1278" width="55" height="50"/>
 <text x="438.5" y="1303.0">Num</text>
+<rect rx="6" ry="6" x="322.5" y="1290.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="1303.0" class="small">delete-word</text>
+<rect rx="6" ry="6" x="249.75" y="1290.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="1303.0" class="small">left-click</text>
+<rect rx="6" ry="6" x="395.25" y="1290.5" width="27.5" height="25.0" class="combo"/>
+<text x="409.0" y="1303.0" class="small">right-click</text>
+<rect rx="6" ry="6" x="322.5" y="1290.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="1303.0" class="small">oneshot-Function</text>
+<rect rx="6" ry="6" x="483.75" y="1209.5" width="27.5" height="25.0" class="combo"/>
+<text x="497.5" y="1222.0" class="small">!</text>
+<rect rx="6" ry="6" x="542.75" y="1209.5" width="27.5" height="25.0" class="combo"/>
+<text x="556.5" y="1222.0" class="small">?</text>
+<rect rx="6" ry="6" x="601.75" y="1209.5" width="27.5" height="25.0" class="combo"/>
+<text x="615.5" y="1222.0" class="small">:</text>
+<rect rx="6" ry="6" x="601.75" y="1155.5" width="27.5" height="25.0" class="combo"/>
+<text x="615.5" y="1168.0" class="small">;</text>
 <text x="27.5" y="1355.0" class="label">
 <tspan x="27.5" dy="-0.6em">Number</tspan><tspan x="27.5" dy="1.2em">(hold):</tspan>
 </text>
@@ -451,6 +539,10 @@
 <text x="379.5" y="1569.0">Ctrl</text>
 <rect rx="6" ry="6" x="411.0" y="1544" width="55" height="50"/>
 <text x="438.5" y="1569.0">Num</text>
+<rect rx="6" ry="6" x="322.5" y="1556.5" width="27.5" height="25.0" class="combo"/>
+<text x="336.25" y="1569.0" class="small">oneshot-Hyper</text>
+<rect rx="6" ry="6" x="249.75" y="1556.5" width="27.5" height="25.0" class="combo"/>
+<text x="263.5" y="1569.0" class="small">Gui-left-click</text>
 <text x="27.5" y="1621.0" class="label">Function:</text>
 <rect rx="6" ry="6" x="29.5" y="1648" width="55" height="50"/>
 <text x="57.0" y="1673.0">BtlL</text>

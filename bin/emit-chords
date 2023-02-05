@@ -1727,14 +1727,14 @@ const zmkSettings = (chordsAndCategories, original) => {
   return lines;
 };
 
-const generateKeymap = (layout) => {
+const generateKeymap = ({ layout, chords }) => {
   const layers = {};
 
   layout.layers.forEach((layer) => {
     [
-      [layer, layer, false, ["Alpha"]],
-      [`${layer}-Hold`, `${layer} (hold)`, true, [layer, "Alpha"]],
-    ].forEach(([layer, layerLabel, isHold, inheritLayers]) => {
+      [layer, layer, layer, false, ["Alpha"]],
+      [`${layer}-Hold`, layer, `${layer} (hold)`, true, [layer, "Alpha"]],
+    ].forEach(([layer, baseLayer, layerLabel, isHold, inheritLayers]) => {
       if (layer === "Function-Hold") {
         return;
       }
@@ -1779,6 +1779,40 @@ const generateKeymap = (layout) => {
             label = null;
           }
           target.push(label);
+        });
+      });
+
+      chords.forEach((chord) => {
+        if (isHold && !chord.hold) {
+          return;
+        }
+
+        const action = isHold ? chord.hold : chord.tap;
+
+        if (chord.combo.length > 2) {
+          return;
+        }
+
+        if (chord.layers) {
+          if (!chord.layers.includes(baseLayer)) {
+            return;
+          }
+        }
+
+        if ("output" in action && action.output.match(/^[a-z]+$/i)) {
+          return;
+        }
+
+        const label = action.output ?? action.behavior;
+        const positions = chord.combo.map((key) => zmkKey[key]);
+
+        if (positions.filter((p) => layout.keys[p][layer] === "").length) {
+          return;
+        }
+
+        combos.push({
+          key: label,
+          positions,
         });
       });
 
@@ -1844,4 +1878,12 @@ fs.writeFileSync(
     chords: chordsAndCategories.filter((chord) => typeof chord === "object"),
   })
 );
-fs.writeFileSync(keymapFile, JSON.stringify(generateKeymap(layout)));
+fs.writeFileSync(
+  keymapFile,
+  JSON.stringify(
+    generateKeymap({
+      layout,
+      chords: chordsAndCategories.filter((chord) => typeof chord === "object"),
+    })
+  )
+);
