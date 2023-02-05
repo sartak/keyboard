@@ -130,7 +130,7 @@ const parseLayout = (config) => {
           qmkKeyTidy[alpha] || `${prefix}_${alpha.toUpperCase()}`;
 
         if (!shiftBase && key === "Shft") {
-          shiftBase = alpha;
+          shiftBase = [alpha, i];
         }
 
         keys[i++][layer] = key;
@@ -488,7 +488,8 @@ const qmkCombo = ({ combo, layers }, shift) => {
 
   const keys = [...combo];
   if (shift) {
-    keys.push(shiftBase);
+    const [key] = shiftBase;
+    keys.push(key);
   }
 
   return keys.map((key) => qmkKey[layer][key]).join(", ");
