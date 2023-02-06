@@ -708,7 +708,9 @@ const qmkOutputActionCase = (action, conditional) => {
   }
 
   const allExact = allEqualOr(
-    actions.map(([{ exact }]) => exact),
+    actions.map(([{ exact, sentenceShift }]) =>
+      sentenceShift === null ? exact : null
+    ),
     null
   );
 
@@ -717,22 +719,37 @@ const qmkOutputActionCase = (action, conditional) => {
     null
   );
 
-  const [normal, shifted] = actions.map(([{ exact }, output]) => {
-    const lines = [];
-    if (allExact === null && exact) {
-      lines.push("space = false;");
-    }
-    if (Array.isArray(output)) {
-      const [calls, length] = output;
-      if (allLength === null) {
-        lines.push(`last_chord_length = ${length};`);
+  const [normal, shifted] = actions.map(
+    ([{ exact, sentenceShift }, output]) => {
+      const lines = [];
+      if (sentenceShift !== undefined) {
+        lines.push("if (prev_chord_length) {");
+        lines.push("  if (prev_chord_space) {");
+        lines.push("    tap_code16(KC_BSPC);");
+        lines.push("  }");
+        lines.push("  space = prev_chord_space;");
+        if (sentenceShift) {
+          lines.push("  oneshot_mods = MOD_MASK_SHIFT;");
+        }
+        lines.push("} else {");
+        lines.push(`  space = ${exact ? "false" : "true"};`);
+        lines.push("}");
+      } else if (allExact === null && exact) {
+        lines.push("space = false;");
       }
-      lines.push(...calls);
-    } else {
-      lines.push(`append = "${output}";`);
+
+      if (Array.isArray(output) || sentenceShift !== undefined) {
+        const [calls, length] = output;
+        if (allLength === null) {
+          lines.push(`last_chord_length = ${length};`);
+        }
+        lines.push(...calls);
+      } else {
+        lines.push(`append = "${output}";`);
+      }
+      return lines;
     }
-    return lines;
-  });
+  );
 
   const lines = [];
 
