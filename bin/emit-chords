@@ -649,6 +649,7 @@ const qmkBehaviorAction = ({ behavior }, pressed) => {
 else {
   tap_code16(LALT(KC_BSPC));
 }
+prev_chord_skipsentence = false;
 prev_chord_space = false;`;
         }
         break;
@@ -719,11 +720,21 @@ const qmkOutputActionCase = (action, conditional) => {
     null
   );
 
+  const allSkipSentence = allEqualOr(
+    actions.map(([{ skipSentence }]) => skipSentence),
+    null
+  );
+
   const [normal, shifted] = actions.map(
-    ([{ exact, sentenceShift }, output]) => {
+    ([{ exact, sentenceShift, skipSentence }, output]) => {
       const lines = [];
+
+      if (allSkipSentence === null && skipSentence) {
+        lines.push("prev_chord_skipsentence = true;");
+      }
+
       if (sentenceShift !== undefined) {
-        lines.push("if (prev_chord_length) {");
+        lines.push("if (prev_chord_length && !prev_chord_skipsentence) {");
         lines.push("  if (prev_chord_space) {");
         lines.push("    tap_code16(KC_BSPC);");
         lines.push("  }");
@@ -758,6 +769,9 @@ const qmkOutputActionCase = (action, conditional) => {
   }
   if (allLength !== null) {
     lines.push(`last_chord_length = ${allLength};`);
+  }
+  if (allSkipSentence) {
+    lines.push("prev_chord_skipsentence = true;");
   }
 
   if (shifted && normal.join("\n") !== shifted.join("\n")) {
@@ -863,6 +877,7 @@ const qmkGlobals = [
   "deferred_token chord_token = INVALID_DEFERRED_TOKEN;",
   "uint16_t prev_chord_length;",
   "bool prev_chord_space = false;",
+  "bool prev_chord_skipsentence = false;",
   "bool chord_shifted;",
 ];
 
@@ -1004,6 +1019,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
 
   releasedWithinTapThreshold = true;
   prev_chord_length = last_chord_length;
+  prev_chord_skipsentence = false;
 
   last_chord_length = 0;
   last_chord = combo_index;
