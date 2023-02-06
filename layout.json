@@ -18,9 +18,9 @@
     [                  null, null,   "Ctrl", null]
   ],
   "Alpha-Hold": [
-    [null, null, null, null, null,   null, null, null,  null,   "Esc"],
-    [null, null, null, null, null,   null, null, null,  null,   null],
-    [null, null, null, null, null,   null, null, "Tab", "Alfr", null],
+    [null, null, null, null, null,   null, null, null, null,   "Esc"],
+    [null, null, null, null, null,   null, null, null, null,   null],
+    [null, null, null, null, null,   null, null, "",   "Alfr", null],
     [               "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Symbol": [
@@ -42,9 +42,9 @@
     [                  null, null,   "Ctrl", null]
   ],
   "Symbol-Hold": [
-    [null, null, null, null, null,   null, null, null,  null,   "Esc"],
-    [null, null, null, null, null,   null, null, null,  null,   null],
-    [null, null, null, null, null,   null, null, "Tab", "Alfr", null],
+    [null, null, null, null, null,   null, null, null, null,   "Esc"],
+    [null, null, null, null, null,   null, null, null, null,   null],
+    [null, null, null, null, null,   null, null, "",   "Alfr", null],
     [               "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Number": [
@@ -66,9 +66,9 @@
     [                null,   null,   "Ctrl", null]
   ],
   "Number-Hold": [
-    ["", null, null, null, "",     "", "",   "",    "",     "Esc"],
-    ["", null, null, null, null,   "", null, null,  null,   null],
-    ["", null, null, null, "",     "", "",   "Tab", "Alfr", null],
+    ["", null, null, null, "",     "", "",   "",   "",     "Esc"],
+    ["", null, null, null, null,   "", null, null, null,   null],
+    ["", null, null, null, "",     "", "",   "",   "Alfr", null],
     [               "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Function": [
