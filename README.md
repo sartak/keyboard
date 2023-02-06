@@ -49,7 +49,7 @@ Building off the feature for ⌘-modified character characters, each chord can h
 
 ![keyboard layout](images/keymap.svg)
 
-## 446 chords
+## 452 chords
 
 ### Suffixes
 
@@ -514,3 +514,9 @@ Building off the feature for ⌘-modified character characters, each chord can h
 - `e` + `l` + `b` + `h` → Elbereth
 - `h` + `t` + `p` → https:// → http://
 - `s` + `t` + `f` + `r` → select \* from (shifted: SELECT \* FROM)
+- `p` + `o` + `m` + `n` → pokemon (shifted: Pokémon)
+- `g` + `a` + `h` + `l` → graphql (shifted: GraphQL)
+- `k` + `e` + `n` + `s` → kubernetes
+- `c` + `o` + `d` + `e` → \`\`\`↵↵\`\`\`\<Up\>
+- `t` + `s` + `o` + `e` → \`\`\`typescript↵↵\`\`\`\<Up\>
+- `g` + `l` + `o` + `e` → \`\`\`go↵↵\`\`\`\<Up\>

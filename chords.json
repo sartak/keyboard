@@ -1230,6 +1230,12 @@
     { "combo": ["b","q","x","'"], "output": "the quick brown fox jumps over the lazy dog", "shift": "The quick brown fox jumps over the lazy dog.", "exact": true },
     { "combo": ["e","l","b","h"], "output": "Elbereth", "exact": true, "skipSentence": true },
     { "combo": ["h","t","p"], "output": ["https://","http://"], "shift": null, "exact": true, "skipSentence": true },
-    { "combo": ["s", "t", "f", "r"], "output": "select * from", "shift": "SELECT * FROM", "skipSentence": true }
+    { "combo": ["s","t","f","r"], "output": "select * from", "shift": "SELECT * FROM", "skipSentence": true },
+    { "combo": ["p","o","m","n"], "output": "pokemon", "shift": "Pokémon" },
+    { "combo": ["g","a","h","l"], "output": "graphql", "shift": "GraphQL" },
+    { "combo": ["k","e","n","s"], "output": "kubernetes" },
+    { "combo": ["c","o","d","e"], "output": "```\n\n```<Up>", "exact": true },
+    { "combo": ["t","s","o","e"], "output": "```typescript\n\n```<Up>", "exact": true },
+    { "combo": ["g","l","o","e"], "output": "```go\n\n```<Up>", "exact": true }
   ]
 }

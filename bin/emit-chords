@@ -60,7 +60,11 @@ const tidyKeymap = {
 
 const tidyReadmeOutput = {
   "\b": "⌫",
+  "\n": "↵",
   "*": "\\*",
+  "`": "\\`",
+  "<": "\\<",
+  ">": "\\>",
 };
 
 const outputForKey = {
@@ -574,6 +578,33 @@ const qmkOutput = (output, forbidSimple) => {
   };
 
   while (rest.length) {
+    const match = rest.match(/^<(\w+)>(.*)/);
+    if (match) {
+      emit();
+      simple = false;
+      const code = match[1];
+      rest = match[2];
+
+      switch (code) {
+        case "Up":
+          out.push("tap_code16(KC_UP);");
+          break;
+        case "DOWN":
+          out.push("tap_code16(KC_DOWN);");
+          break;
+        case "Left":
+          out.push("tap_code16(KC_LEFT);");
+          break;
+        case "Right":
+          out.push("tap_code16(KC_RIGHT);");
+          break;
+        default:
+          throw new Error(`Unable to handle qmk code '${code}'`);
+      }
+
+      continue;
+    }
+
     const head = rest.substring(0, 1);
     rest = rest.substring(1);
 
@@ -582,6 +613,12 @@ const qmkOutput = (output, forbidSimple) => {
       out.push("tap_code16(KC_BSPC);");
       simple = false;
       length--;
+      continue;
+    }
+
+    if (head === "\n") {
+      length++;
+      buf.push("\\n");
       continue;
     }
 
@@ -1414,7 +1451,14 @@ const zmkPress = {
   ";": "&kp SEMI",
   "@": "&kp AT",
   "*": "&kp ASTERISK",
+  "`": "&kp GRAVE",
+  "\\": "&kp BACKSLASH",
+  "\n": "&kp RETURN",
   "\b": "&kp BSPC",
+  "<Up>": "&kp UP",
+  "<Down>": "&kp DOWN",
+  "<Left>": "&kp LEFT",
+  "<Right>": "&kp RIGHT",
   "<SKLS>": "&sk LSHFT",
   "?": "&kp QMARK",
   "¢": "&kp LA(N4)",
@@ -1433,6 +1477,7 @@ const zmkPress = {
   "✔": "&kp QMARK",
   "✗": "&kp QMARK",
   "⌘": "&kp QMARK",
+  é: "&kp QMARK",
   λ: "&kp QMARK",
 };
 
