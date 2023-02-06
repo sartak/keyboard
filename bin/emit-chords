@@ -350,7 +350,6 @@ const parseChords = (files) => {
           let shifted = null;
           let alternates = null;
           let intuited = false;
-          let exact = action.exact;
 
           const originalOutput = action.originalOutput;
           delete action.originalOutput;
@@ -361,7 +360,10 @@ const parseChords = (files) => {
               return;
             }
 
-            alternates = makeAlternates({ output: action.shift, exact });
+            alternates = makeAlternates({
+              output: action.shift,
+              exact: action.exact,
+            });
             shifted = Array.isArray(action.shift)
               ? action.shift[0]
               : action.shift;
@@ -373,7 +375,10 @@ const parseChords = (files) => {
                 const shifted = intuitShifted(output);
                 return shifted === null ? output : shifted;
               });
-              alternates = makeAlternates({ output: shiftedOutput, exact });
+              alternates = makeAlternates({
+                output: shiftedOutput,
+                exact: action.exact,
+              });
             }
           }
 
@@ -383,13 +388,18 @@ const parseChords = (files) => {
 
           action.shift = {
             output: shifted,
-            exact,
             intuited,
           };
 
           if (alternates) {
             action.shift.alternates = alternates;
           }
+
+          ["exact", "sentenceShift", "skipSentence"].forEach((key) => {
+            if (key in action) {
+              action.shift[key] = action[key];
+            }
+          });
         });
 
         if (chord.label === undefined) {
