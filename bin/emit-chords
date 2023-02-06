@@ -648,7 +648,8 @@ const qmkBehaviorAction = ({ behavior }, pressed) => {
 }
 else {
   tap_code16(LALT(KC_BSPC));
-}`;
+}
+prev_chord_space = false;`;
         }
         break;
 
@@ -844,6 +845,7 @@ const qmkGlobals = [
   "bool releasedWithinTapThreshold = true;",
   "deferred_token chord_token = INVALID_DEFERRED_TOKEN;",
   "uint16_t prev_chord_length;",
+  "bool prev_chord_space = false;",
   "bool chord_shifted;",
 ];
 
@@ -882,6 +884,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
     last_chord_length += strlen(append);
   }
 
+  prev_chord_space = space;
   if (space) {
     tap_code(KC_SPC);
     last_chord_length++;
@@ -1037,6 +1040,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
     last_chord_length += strlen(append);
   }
 
+  prev_chord_space = space;
   if (space) {
     tap_code(KC_SPC);
     last_chord_length++;
@@ -1070,6 +1074,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
     last_chord_length += strlen(append);
   }
 
+  prev_chord_space = space;
   if (space) {
     tap_code(KC_SPC);
     last_chord_length++;
@@ -1277,6 +1282,7 @@ const qmkDupFunction = (chords, personalFile) => {
     last_chord_length += strlen(append);
   }
 
+  prev_chord_space = space;
   if (space) {
     tap_code(KC_SPC);
     last_chord_length++;
