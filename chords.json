@@ -9,6 +9,7 @@
     { "combo": ["i", ","], "output": "?", "exact": true, "quiet": true, "label": "qmark", "sentenceShift": true },
     { "combo": ["a", "Ret"], "output": ":", "exact": true, "quiet": true, "label": "colon", "sentenceShift": false },
     { "combo": ["a", "'"], "output": ";", "exact": true, "quiet": true, "label": "semi", "sentenceShift": false },
+    { "combo": ["e", ".", "i", "," ], "output": "‽", "label": "interrobang", "exact": true, "quiet": true, "sentenceShift": true },
 
     { "combo": ["c", "q"], "output": "¢", "label": "cent", "exact": true, "quiet": true, "layers": "Symbol" },
     { "combo": ["r", "j"], "output": "£", "label": "pound", "exact": true, "quiet": true, "layers": "Symbol" },
@@ -19,7 +20,7 @@
     { "combo": ["y", "s"], "output": "°", "label": "degrees", "exact": true, "quiet": true, "layers": "Symbol" },
     { "combo": ["w", "c"], "output": "∞", "label": "infinity", "exact": true, "quiet": true, "layers": "Symbol" },
     { "combo": ["l", "r"], "output": "λ", "label": "lambda", "shift": null, "exact": true, "quiet": true, "layers": "Symbol" },
-    { "combo": ["b", "g"], "output": "‽", "label": "interrobang", "exact": true, "quiet": true, "layers": "Symbol" },
+    { "combo": ["b", "g"], "output": "⌘", "label": "command", "exact": true, "quiet": true, "layers": "Symbol" },
     { "combo": ["m", "x"], "output": "✗", "label": "ballot x", "exact": true, "quiet": true, "layers": "Symbol" },
     { "combo": ["n", "h"], "output": "✔", "label": "checkmark", "exact": true, "quiet": true, "layers": "Symbol" },
     { "combo": ["z", "m"], "output": "←", "label": "left arrow", "exact": true, "quiet": true, "layers": "Symbol" },

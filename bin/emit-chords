@@ -1427,6 +1427,7 @@ const zmkPress = {
   "⋯": "&kp QMARK",
   "✔": "&kp QMARK",
   "✗": "&kp QMARK",
+  "⌘": "&kp QMARK",
   λ: "&kp QMARK",
 };
 
