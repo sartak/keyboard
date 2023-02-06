@@ -620,7 +620,7 @@ const qmkBehaviorAction = ({ behavior }, pressed) => {
         }
       } else if (rest in qmkModifier) {
         if (pressed) {
-          return `add_oneshot_mods(${qmkModifier[rest]});`;
+          return `oneshot_mods = ${qmkModifier[rest]};`;
         } else {
           return null;
         }
@@ -847,7 +847,9 @@ const qmkReleaseFunction = (chords, personalFile) => {
   prev_chord_length = last_chord_length;
   last_chord_length = 0;
 
-  const uint8_t mods = get_mods();
+  uint8_t mods = get_mods();
+  uint8_t oneshot_mods = get_oneshot_mods();
+
   del_mods(MOD_MASK_SHIFT);
   del_weak_mods(MOD_MASK_SHIFT);
   del_oneshot_mods(MOD_MASK_SHIFT);
@@ -857,6 +859,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
   const outro = `    ${personalCases}
     default:
       set_mods(mods);
+      set_oneshot_mods(oneshot_mods);
       last_chord_length = prev_chord_length;
       return;
   }
@@ -879,6 +882,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
   }
 
   set_mods(mods);
+  set_oneshot_mods(oneshot_mods);
 }`;
 
   const cases = [];
@@ -979,7 +983,8 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
   bool space = true;
   bool scheduleTimer = false;
 
-  const uint8_t mods = get_mods();
+  uint8_t mods = get_mods();
+  uint8_t oneshot_mods = 0;
   bool mod_shifted = (mods | get_weak_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT;
   del_mods(MOD_MASK_SHIFT);
   del_weak_mods(MOD_MASK_SHIFT);
@@ -999,7 +1004,8 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
   bool space = true;
   last_chord_length = 0;
 
-  const uint8_t mods = get_mods();
+  uint8_t mods = get_mods();
+  uint8_t oneshot_mods = 0;
   del_mods(MOD_MASK_SHIFT);
   del_weak_mods(MOD_MASK_SHIFT);
   del_oneshot_mods(MOD_MASK_SHIFT);
@@ -1033,6 +1039,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
   emit_virt_combo(last_chord, chord_shifted, scheduleTimer ? VIRT_CHORD_ENDED_INDETERMINATE : VIRT_CHORD_ENDED_TAP);
 
   set_mods(mods);
+  set_oneshot_mods(oneshot_mods);
 
   ${returnStatement};
 }`;
@@ -1040,6 +1047,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
   const holdOutro = `    ${personalCases}
     default:
       set_mods(mods);
+      set_oneshot_mods(oneshot_mods);
       last_chord_length = prev_chord_length;
       ${returnStatement};
   }
@@ -1059,6 +1067,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
 
   emit_virt_combo(last_chord, chord_shifted, VIRT_CHORD_ENDED_HOLD);
   set_mods(mods);
+  set_oneshot_mods(oneshot_mods);
   ${returnStatement};
 }`;
 
@@ -1198,7 +1207,8 @@ const qmkDupFunction = (chords, personalFile) => {
   char *append = NULL;
   bool space = true;
 
-  const uint8_t mods = get_mods();
+  uint8_t mods = get_mods();
+  uint8_t oneshot_mods = 0;
   del_mods(MOD_MASK_SHIFT);
   del_weak_mods(MOD_MASK_SHIFT);
   del_oneshot_mods(MOD_MASK_SHIFT);
@@ -1263,6 +1273,7 @@ const qmkDupFunction = (chords, personalFile) => {
   }
 
   set_mods(mods);
+  set_oneshot_mods(oneshot_mods);
 
   return next_chord_cycle;
 }`;
