@@ -392,7 +392,7 @@
 <text x="27.5" y="1089.0" class="label">Number:</text>
 <rect rx="6" ry="6" x="29.5" y="1116" width="55" height="50"/>
 <text x="57.0" y="1141.0">
-<tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Up</tspan>
+<tspan x="57.0" dy="-0.6em">Screen</tspan><tspan x="57.0" dy="1.2em">Shot</tspan>
 </text>
 <rect rx="6" ry="6" x="88.5" y="1116" width="55" height="50"/>
 <text x="116.0" y="1141.0">6</text>
@@ -402,7 +402,7 @@
 <text x="234.0" y="1141.0">4</text>
 <rect rx="6" ry="6" x="265.5" y="1116" width="55" height="50"/>
 <text x="293.0" y="1141.0">
-<tspan x="293.0" dy="-0.6em">Screen</tspan><tspan x="293.0" dy="1.2em">Shot</tspan>
+<tspan x="293.0" dy="-0.6em">Bright</tspan><tspan x="293.0" dy="1.2em">Up</tspan>
 </text>
 <rect rx="6" ry="6" x="29.5" y="1170" width="55" height="50"/>
 <text x="57.0" y="1195.0">
@@ -418,7 +418,7 @@
 <text x="293.0" y="1195.0">0</text>
 <rect rx="6" ry="6" x="29.5" y="1224" width="55" height="50"/>
 <text x="57.0" y="1249.0">
-<tspan x="57.0" dy="-0.6em">Bright</tspan><tspan x="57.0" dy="1.2em">Down</tspan>
+<tspan x="57.0" dy="-0.6em">Lock</tspan><tspan x="57.0" dy="1.2em">Screen</tspan>
 </text>
 <rect rx="6" ry="6" x="88.5" y="1224" width="55" height="50"/>
 <text x="116.0" y="1249.0">9</text>
@@ -428,7 +428,7 @@
 <text x="234.0" y="1249.0">7</text>
 <rect rx="6" ry="6" x="265.5" y="1224" width="55" height="50"/>
 <text x="293.0" y="1249.0">
-<tspan x="293.0" dy="-0.6em">Lock</tspan><tspan x="293.0" dy="1.2em">Screen</tspan>
+<tspan x="293.0" dy="-0.6em">Bright</tspan><tspan x="293.0" dy="1.2em">Down</tspan>
 </text>
 <rect rx="6" ry="6" x="352.0" y="1116" width="55" height="50"/>
 <text x="379.5" y="1141.0">Mute</text>

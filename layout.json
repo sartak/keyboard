@@ -48,9 +48,9 @@
     [               "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Number": [
-    ["BrUp", "6", "5", "4", "ScSh",   "Mute", "Prev", "PlPs", "Next", null],
+    ["ScSh", "6", "5", "4", "BrUp",   "Mute", "Prev", "PlPs", "Next", null],
     ["Lang", "3", "2", "1", "0",      "VlUp", "Left", "Down", "Up",   "Rght"],
-    ["BrDn", "9", "8", "7", "Lock",   "VlDn", "ZmIn", null,   null,   null],
+    ["Lock", "9", "8", "7", "BrDn",   "VlDn", "ZmIn", null,   null,   null],
     [                   null, null,   null, "Num"]
   ],
   "Number-Shift": [
