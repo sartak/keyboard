@@ -743,7 +743,12 @@ const qmkOutputActionCase = (action, conditional) => {
           lines.push("  oneshot_mods = MOD_MASK_SHIFT;");
         }
         lines.push("} else {");
-        lines.push(`  space = ${exact ? "false" : "true"};`);
+        if (exact) {
+          lines.push("  space = false;");
+          lines.push("  prev_chord_skipsentence = true;");
+        } else {
+          lines.push("  space = true;");
+        }
         lines.push("}");
       } else if (allExact === null && exact) {
         lines.push("space = false;");
