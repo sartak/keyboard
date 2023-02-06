@@ -49,7 +49,7 @@ Building off the feature for ⌘-modified character characters, each chord can h
 
 ![keyboard layout](images/keymap.svg)
 
-## 447 chords
+## 446 chords
 
 ### Suffixes
 
@@ -512,6 +512,5 @@ Building off the feature for ⌘-modified character characters, each chord can h
 
 - `b` + `q` + `x` + `'` → the quick brown fox jumps over the lazy dog (shifted: The quick brown fox jumps over the lazy dog.)
 - `e` + `l` + `b` + `h` → Elbereth
-- `h` + `t` + `p` → http:// → https://
-- `h` + `t` + `p` + `s` → https:// → http://
+- `h` + `t` + `p` → https:// → http://
 - `s` + `t` + `f` + `r` → select \* from (shifted: SELECT \* FROM)
