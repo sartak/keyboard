@@ -686,7 +686,7 @@ const qmkBehaviorAction = ({ behavior }, pressed) => {
 else {
   tap_code16(LALT(KC_BSPC));
 }
-prev_chord_skipsentence = false;
+sentence_mode = false;
 prev_chord_space = false;`;
         }
         break;
@@ -767,11 +767,11 @@ const qmkOutputActionCase = (action, conditional) => {
       const lines = [];
 
       if (allSkipSentence === null && skipSentence) {
-        lines.push("prev_chord_skipsentence = true;");
+        lines.push("sentence_mode = false;");
       }
 
       if (sentenceShift !== undefined) {
-        lines.push("if (prev_chord_length && !prev_chord_skipsentence) {");
+        lines.push("if (prev_sentence_mode) {");
         lines.push("  if (prev_chord_space) {");
         lines.push("    tap_code16(KC_BSPC);");
         lines.push("  }");
@@ -782,7 +782,7 @@ const qmkOutputActionCase = (action, conditional) => {
         lines.push("} else {");
         if (exact) {
           lines.push("  space = false;");
-          lines.push("  prev_chord_skipsentence = true;");
+          lines.push("  sentence_mode = false;");
         } else {
           lines.push("  space = true;");
         }
@@ -813,7 +813,7 @@ const qmkOutputActionCase = (action, conditional) => {
     lines.push(`last_chord_length = ${allLength};`);
   }
   if (allSkipSentence) {
-    lines.push("prev_chord_skipsentence = true;");
+    lines.push("sentence_mode = false;");
   }
 
   if (shifted && normal.join("\n") !== shifted.join("\n")) {
@@ -919,8 +919,8 @@ const qmkGlobals = [
   "deferred_token chord_token = INVALID_DEFERRED_TOKEN;",
   "uint16_t prev_chord_length;",
   "bool prev_chord_space = false;",
-  "bool prev_chord_skipsentence = false;",
   "bool chord_shifted;",
+  "bool sentence_mode = false;",
 ];
 
 const qmkReleaseFunction = (chords, personalFile) => {
@@ -932,6 +932,9 @@ const qmkReleaseFunction = (chords, personalFile) => {
   char *append = NULL;
   prev_chord_length = last_chord_length;
   last_chord_length = 0;
+
+  bool prev_sentence_mode = sentence_mode;
+  sentence_mode = true;
 
   uint8_t mods = get_mods();
   uint8_t oneshot_mods = get_oneshot_mods();
@@ -947,6 +950,7 @@ const qmkReleaseFunction = (chords, personalFile) => {
       set_mods(mods);
       set_oneshot_mods(oneshot_mods);
       last_chord_length = prev_chord_length;
+      sentence_mode = prev_sentence_mode;
       return;
   }
 
@@ -1061,7 +1065,6 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
 
   releasedWithinTapThreshold = true;
   prev_chord_length = last_chord_length;
-  prev_chord_skipsentence = false;
 
   last_chord_length = 0;
   last_chord = combo_index;
@@ -1070,6 +1073,9 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
   char *append = NULL;
   bool space = true;
   bool scheduleTimer = false;
+
+  bool prev_sentence_mode = sentence_mode;
+  sentence_mode = true;
 
   uint8_t mods = get_mods();
   uint8_t oneshot_mods = 0;
@@ -1092,6 +1098,9 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
   bool space = true;
   last_chord_length = 0;
 
+  bool prev_sentence_mode = sentence_mode;
+  sentence_mode = true;
+
   uint8_t mods = get_mods();
   uint8_t oneshot_mods = 0;
   del_mods(MOD_MASK_SHIFT);
@@ -1104,6 +1113,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
     default:
       space = false;
       last_chord_length = prev_chord_length;
+      sentence_mode = prev_sentence_mode;
       break;
   }
 
@@ -1138,6 +1148,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
       set_mods(mods);
       set_oneshot_mods(oneshot_mods);
       last_chord_length = prev_chord_length;
+      sentence_mode = prev_sentence_mode;
       ${returnStatement};
   }
 
