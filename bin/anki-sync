@@ -14,6 +14,17 @@ if (!fs.existsSync(ankiDatabase)) {
   throw new Error(`anki sqlite database '${ankiDatabase}' does not exist`);
 }
 
+const tidyChar = {
+  "\b": "⌫",
+  "\n": "↵",
+};
+
+const tidy = (s) =>
+  s
+    .split("")
+    .map((c) => (c in tidyChar ? tidyChar[c] : c))
+    .join("");
+
 const getCards = () => {
   const cards = [];
 
@@ -140,7 +151,9 @@ Object.values(chordForCombo).forEach((chord) => {
     const combo = chord.combo.join("+");
     let context = `${forHold ? "hold" : "tap"}${
       forShift ? " shift" : ""
-    } ${combo} => ${action.output || action.behavior}`;
+    } ${combo} => ${
+      "output" in action ? tidy(action.output) : action.behavior
+    }`;
 
     if (!card) {
       if (!action.intuited) {
@@ -166,11 +179,10 @@ Object.values(chordForCombo).forEach((chord) => {
         console.warn(`Chord: ${action.behavior}`);
       }
     } else {
-      let expected = action.output;
+      let expected = tidy(action.output);
       if (expected.length === 1 && expected.match(/[a-zA-Z]/)) {
         expected += " (word)";
       }
-      expected = expected.replaceAll(/\x08/g, "⌫");
 
       if (card.output !== expected) {
         ok = false;
