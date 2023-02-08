@@ -15,7 +15,7 @@ I do a lot of programming in vim. For gaming, I… use other devices, so I'm hap
 
 ## Chording
 
-I use chords heavily to type entire words (see below!), inspired by steno and [CharaChorder](https://www.charachorder.com). For example, combo'ing `c+n+d` together types the word `consider`, along with a trailing space.
+I use chords heavily to type entire words (see below!), inspired by [Plover steno](https://www.openstenoproject.org/plover/) and [CharaChorder](https://www.charachorder.com). For example, combo'ing `c+n+d` together types the word `consider`, along with a trailing space.
 
 Either holding shift, or adding shift to the combo, will output the chord with the first letter capitalized. That's the default; each chord can customize whether to take that default, disable shifting entirely (e.g. the chord that outputs `https://` _never_ emits `Https://`, yuck), or provide some completely different behavior (e.g. if I were living in Paris, maybe a chord for `champs-elysees` gets shifted to `Champs-Élysées`).
 
