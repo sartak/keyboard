@@ -25,6 +25,9 @@ const tidy = (s) =>
     .map((c) => (c in tidyChar ? tidyChar[c] : c))
     .join("");
 
+const unescape = (html) =>
+  html.replaceAll(/&lt;/g, "<").replaceAll(/&gt;/g, ">");
+
 const getCards = () => {
   const cards = [];
 
@@ -49,7 +52,8 @@ const getCards = () => {
 `);
   for (const { id, flds, tags: tagString, queue } of stmt.iterate(mid)) {
     const tags = tagString.split(" ").filter((t) => t.length);
-    const [output, inputString] = flds.split("\x1F");
+    const [outputHtml, inputString] = flds.split("\x1F");
+    const output = unescape(outputHtml);
     const input = inputString.split(" ");
 
     let suspended;
