@@ -19,7 +19,7 @@ I use chords heavily to type entire words (see below!), inspired by steno and [C
 
 Either holding shift, or adding shift to the combo, will output the chord with the first letter capitalized. That's the default; each chord can customize whether to take that default, disable shifting entirely (e.g. the chord that outputs `https://` _never_ emits `Https://`, yuck), or provide some completely different behavior (e.g. if I were living in Paris, maybe a chord for `champs-elysees` gets shifted to `Champs-Élysées`).
 
-Chording a word also makes the following punctuation smarter. For example typing a `.` will delete the chord's trailing space, add the period then a new trailing space, and turn on sticky shift for the next letter (or the aforementioned shifting for chords). Typing `,` is similar but doesn't enable the shifting behavior. In ZMK, I achieve this with a "sentence" layer that most chords enable and most other characters disable.
+Chording a word also makes the following punctuation smarter. For example typing a `.` will delete the chord's trailing space, add the period then a new trailing space, and turn on sticky shift for the next letter (or the aforementioned shifting for chords). Typing `,` is similar but doesn't enable the shifting behavior.
 
 Instead of outputting words with trailing spaces, chords can define arbitrary behavior as well. They can turn on oneshot mods or oneshot layers, click with left or right mouse button, etc.
 
