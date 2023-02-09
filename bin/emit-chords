@@ -21,8 +21,19 @@ const tidyReadmeCombo = {
   Caps: "⇪",
 };
 
+const tidyReadmeOutput = {
+  "\b": "⌫",
+  "\n": "↵",
+  "*": "\\*",
+  "`": "\\`",
+  "<": "\\<",
+  ">": "\\>",
+};
+
 const tidyKeymap = {
   ...tidyReadmeCombo,
+  "\b": "⌫",
+  "\n": "↵",
   "left-click": "LClk",
   "Gui-left-click": "⌘LC",
   "right-click": "RClk",
@@ -56,15 +67,6 @@ const tidyKeymap = {
   Down: "↓",
   Up: "↑",
   Rght: "→",
-};
-
-const tidyReadmeOutput = {
-  "\b": "⌫",
-  "\n": "↵",
-  "*": "\\*",
-  "`": "\\`",
-  "<": "\\<",
-  ">": "\\>",
 };
 
 const outputForKey = {
@@ -1955,7 +1957,13 @@ const generateKeymap = ({ layout, chords }) => {
         let label = action.output ?? action.behavior;
         if (label in tidyKeymap) {
           label = tidyKeymap[label];
+        } else if (label !== null) {
+          label = label
+            .split("")
+            .map((c) => (c in tidyKeymap ? tidyKeymap[c] : c))
+            .join("");
         }
+
         if (label === null) {
           return;
         }
