@@ -1890,6 +1890,7 @@ const zmkSettings = (chordsAndCategories, original) => {
 
 const generateKeymap = ({ layout, chords }) => {
   const layers = {};
+  const combos = [];
 
   layout.layers.forEach((layer) => {
     [
@@ -1900,27 +1901,9 @@ const generateKeymap = ({ layout, chords }) => {
         return;
       }
 
-      const combos = [];
-      const left = [];
-      const right = [];
-      const left_thumbs = [];
-      const right_thumbs = [];
-      const thumbrow = layout.keymap.length - 1;
-
-      layout.keymap.forEach((row, r) => {
-        if (r < thumbrow) {
-          left.push([]);
-          right.push([]);
-        }
-
-        row.forEach((key, c) => {
-          let target;
-          if (r === thumbrow) {
-            target = c < 2 ? left_thumbs : right_thumbs;
-          } else {
-            target = c < 5 ? left[r] : right[r];
-          }
-
+      const keys = [];
+      layout.keymap.forEach((row) => {
+        row.forEach((key) => {
           const k = [layer, ...inheritLayers]
             .map((l) => key[l])
             .find((k) => k !== null);
@@ -1939,7 +1922,7 @@ const generateKeymap = ({ layout, chords }) => {
           if (label === "") {
             label = null;
           }
-          target.push(label);
+          keys.push(label);
         });
       });
 
@@ -1978,29 +1961,19 @@ const generateKeymap = ({ layout, chords }) => {
         }
 
         combos.push({
-          key: label,
-          positions,
+          k: label,
+          p: positions,
+          l: [layerLabel],
         });
       });
 
-      layers[layerLabel] = {
-        left,
-        right,
-        left_thumbs,
-        right_thumbs,
-        combos,
-      };
+      layers[layerLabel] = keys;
     });
   });
 
   return {
-    layout: {
-      split: true,
-      rows: layers.Alpha.left.length,
-      columns: layers.Alpha.left[0].length,
-      thumbs: layers.Alpha.left_thumbs.length,
-    },
     layers,
+    combos,
   };
 };
 
