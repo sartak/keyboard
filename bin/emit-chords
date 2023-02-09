@@ -562,7 +562,7 @@ const qmkOutput = (output, forbidSimple) => {
   const out = [];
   let rest = output;
   let buf = [];
-  let ascii = null;
+  let ascii = true;
   let length = 0;
   let simple = !forbidSimple;
 
@@ -576,7 +576,7 @@ const qmkOutput = (output, forbidSimple) => {
       }
     }
     buf = [];
-    ascii = null;
+    ascii = true;
   };
 
   while (rest.length) {
@@ -625,15 +625,7 @@ const qmkOutput = (output, forbidSimple) => {
     }
 
     if (head.charCodeAt(0) > 127) {
-      if (ascii == true) {
-        emit();
-      }
       ascii = false;
-    } else {
-      if (ascii == false) {
-        emit();
-      }
-      ascii = true;
     }
 
     length++;
