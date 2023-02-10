@@ -1887,21 +1887,25 @@ const generateKeymap = ({ layout, chords }) => {
   const combos = [];
 
   layout.layers.forEach((layer) => {
-    [
-      [layer, layer, layer, false, ["Alpha"]],
-      [`${layer}-Hold`, layer, `${layer} (hold)`, true, [layer, "Alpha"]],
-    ].forEach(([layer, baseLayer, layerLabel, isHold, inheritLayers]) => {
-      if (layer === "Function-Hold") {
-        return;
-      }
+    const keys = [];
+    layout.keymap.forEach((row) => {
+      row.forEach((key) => {
+        const entry = {};
 
-      const keys = [];
-      layout.keymap.forEach((row) => {
-        row.forEach((key) => {
-          const k = [layer, ...inheritLayers]
-            .map((l) => key[l])
-            .find((k) => k !== null);
-          const inherited = key[layer] === null;
+        [
+          ["tap", false],
+          ["hold", true],
+        ].forEach(([action, isHold]) => {
+          const inheritLayers = isHold
+            ? [`${layer}-Hold`, layer, "Alpha"]
+            : [layer, "Alpha"];
+
+          const k = inheritLayers.map((l) => key[l]).find((k) => k !== null);
+          const inherited = key[inheritLayers[0]] === null;
+
+          if (k === undefined) {
+            return;
+          }
 
           let label = k;
           if (label in tidyKeymap) {
@@ -1916,33 +1920,41 @@ const generateKeymap = ({ layout, chords }) => {
           if (label === "") {
             label = null;
           }
-          keys.push(label);
-        });
-      });
 
-      chords.forEach((chord) => {
-        if (isHold && !chord.hold) {
-          return;
-        }
-
-        const action = isHold ? chord.hold : chord.tap;
-
-        if (chord.combo.length > 2) {
-          return;
-        }
-
-        if (chord.layers) {
-          if (!chord.layers.includes(baseLayer)) {
-            return;
+          if (label !== null) {
+            entry[action] = label;
           }
+        });
+        keys.push(entry);
+      });
+    });
+
+    chords.forEach((chord) => {
+      if (chord.combo.length > 2) {
+        return;
+      }
+
+      if (chord.layers) {
+        if (!chord.layers.includes(layer)) {
+          return;
+        }
+      }
+
+      const positions = chord.combo.map((key) => zmkKey[key]);
+      if (positions.filter((p) => layout.keys[p][layer] === "").length) {
+        return;
+      }
+
+      const entry = {};
+      [
+        ["tap", chord.tap],
+        ["hold", chord.hold],
+      ].forEach(([key, action]) => {
+        if (!action) {
+          return;
         }
 
         if ("output" in action && action.output.match(/^[a-z]+$/i)) {
-          return;
-        }
-
-        const positions = chord.combo.map((key) => zmkKey[key]);
-        if (positions.filter((p) => layout.keys[p][layer] === "").length) {
           return;
         }
 
@@ -1956,19 +1968,21 @@ const generateKeymap = ({ layout, chords }) => {
             .join("");
         }
 
-        if (label === null) {
-          return;
+        if (label !== null) {
+          entry[key] = label;
         }
-
-        combos.push({
-          k: label,
-          p: positions,
-          l: [layerLabel],
-        });
       });
 
-      layers[layerLabel] = keys;
+      if (Object.keys(entry).length) {
+        combos.push({
+          k: entry,
+          p: positions,
+          l: [layer],
+        });
+      }
     });
+
+    layers[layer] = keys;
   });
 
   return {
