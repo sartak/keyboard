@@ -2,6 +2,7 @@
 const fs = require("fs");
 const { SerialPort } = require("serialport");
 const express = require("express");
+const cors = require("cors");
 const processedChords = "processed-anki.json";
 
 const config = JSON.parse(fs.readFileSync(processedChords));
@@ -473,7 +474,7 @@ app.get("/events", (req, res) => {
   });
 });
 
-app.get("/config", (_, res) => {
+app.get("/config", cors({ origin: "https://monkeytype.com" }), (_, res) => {
   res.json(config);
 });
 
