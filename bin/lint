@@ -147,7 +147,10 @@ layoutFiles.forEach((file) => {
     });
   });
 
-  Object.values(layers).forEach((rows) => {
+  Object.entries(layers).forEach(([layer, rows]) => {
+    if (layer.startsWith("_")) {
+      return;
+    }
     rows.forEach((row, r) => {
       row.forEach((key, c) => {
         if (!shiftBase && key == "Shft") {

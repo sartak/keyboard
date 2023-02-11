@@ -159,6 +159,9 @@ const parseLayout = (config) => {
   });
 
   Object.entries(config).forEach(([layer, rows]) => {
+    if (layer.startsWith("_")) {
+      return;
+    }
     qmkKey[layer] = {};
     const prefix = layer.substring(0, 1);
 
@@ -199,6 +202,7 @@ const parseLayout = (config) => {
 
   const layers = Object.keys(config).filter(
     (l) =>
+      !l.startsWith("_") &&
       !l.endsWith("-Shift") &&
       !l.endsWith("-Ctrl") &&
       !l.endsWith("-Alt") &&
