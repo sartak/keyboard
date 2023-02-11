@@ -56,6 +56,7 @@ type Chord = ChordInput & ChordResult & ChordDefaults & {
   label?: string;
   builtin?: boolean | "zmk" | "qmk";
   layers?: Layer | Array<Layer>;
+  set?: string;
 };
 
 type ChordHeader = string;
