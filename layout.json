@@ -1,4 +1,25 @@
 {
+  "_board": {
+    "split-width": 30,
+    "pinky-left": 19.58,
+    "pinky-top": 38.58,
+    "pinky-right": 34.58,
+    "pinky-bottom": 53.58,
+    "pinky-next-top": 55.58,
+    "ring-top": 26.58,
+    "ring-left": 37.58,
+    "middle-top": 19.58,
+    "index-top": 25.09,
+    "center-top": 27.58,
+    "outer-top": 79.53,
+    "outer-left": 83.3,
+    "outer-theta": 165,
+    "inner-top": 87.28,
+    "inner-bottom": 104.99,
+    "inner-left": 101.85,
+    "inner-right": 119.59,
+    "inner-theta": 150
+  },
   "Alpha": [
     ["w", "l", "y", "p", "b",   "z", "f", "o", "u", "'"],
     ["c", "r", "s", "t", "g",   "m", "n", "e", "i", "a"],

@@ -137,6 +137,52 @@ const intuitShifted = (output) => {
   return shifted + output.substr(1);
 };
 
+const parseBoard = (config) => {
+  if (!config._board) {
+    return;
+  }
+  const board = { ...config._board };
+  const columns = 10;
+
+  board.top = board["middle-top"];
+  board.left = board["pinky-left"];
+  board.bottom = board["inner-bottom"];
+  board.right = board["inner-right"];
+
+  board["key-height"] = board["pinky-bottom"] - board["pinky-top"];
+  board["key-width"] = board["pinky-right"] - board["pinky-left"];
+  board.ygap = board["pinky-next-top"] - board["pinky-bottom"];
+  board.xgap = board["ring-left"] - board["pinky-right"];
+  board["key-y"] = board["key-height"] + board.ygap;
+  board["key-x"] = board["key-width"] + board.xgap;
+
+  board["total-height"] = board.bottom - board.top;
+  board["half-width"] = board.right - board.left;
+  board["total-width"] =
+    board["key-width"] * columns +
+    board["xgap"] * (columns - 1) +
+    board["split-width"];
+
+  board["pinky-stagger"] = board["pinky-top"] - board["middle-top"];
+  board["ring-stagger"] = board["ring-top"] - board["middle-top"];
+  board["middle-stagger"] = 0;
+  board["index-stagger"] = board["index-top"] - board["middle-top"];
+  board["center-stagger"] = board["center-top"] - board["middle-top"];
+
+  board["outer-y"] = board["outer-top"] - board["top"];
+  board["inner-y"] = board["inner-top"] - board["top"];
+  board["outer-left-x"] = board["outer-left"] - board["left"];
+  board["inner-left-x"] = board["inner-left"] - board["left"];
+  board["outer-right-x"] =
+    board["total-width"] -
+    (board["outer-left"] - board["left"] + board["key-width"]);
+  board["inner-right-x"] =
+    board["total-width"] -
+    (board["inner-left"] - board["left"] + board["key-width"]);
+
+  return board;
+};
+
 const parseLayout = (config) => {
   const validKey = {};
   const qmkKey = {};
@@ -221,6 +267,7 @@ const parseLayout = (config) => {
     layers,
     keys,
     keymap,
+    board: parseBoard(config),
     validKey,
     layerIndex,
     shiftBase,
@@ -237,6 +284,7 @@ const layout = {
   layers: parsedLayout.layers,
   keys: parsedLayout.keys,
   keymap: parsedLayout.keymap,
+  board: parsedLayout.board,
   outputForKey,
   shiftBase,
 };
