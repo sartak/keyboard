@@ -473,6 +473,10 @@ app.get("/events", (req, res) => {
   });
 });
 
+app.get("/config", (_, res) => {
+  res.json(config);
+});
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
 });
