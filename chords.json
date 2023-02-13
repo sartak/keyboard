@@ -136,7 +136,7 @@
     { "combo": ["s","o","u"], "output": "should", "set": "17" },
     { "combo": ["w","e","l"], "output": ["well","wells"], "set": "20" },
     { "combo": ["p","e","l"], "output": ["people","peoples","person"], "set": "7" },
-    { "combo": ["d","w","n"], "output": "down", "set": "10" },
+    { "combo": ["Dup","d","n"], "output": "down", "set": "10" },
     { "combo": ["o","w","f"], "output": ["own","owned","owning"], "set": "11" },
     { "combo": ["u","s","t"], "output": "just", "set": "14" },
     { "combo": ["b","e","a"], "output": "because", "set": "1" },
