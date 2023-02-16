@@ -54,7 +54,15 @@ const getCards = () => {
     const tags = tagString.split(" ").filter((t) => t.length);
     const [outputHtml, inputString] = flds.split("\x1F");
     const output = unescape(outputHtml);
-    const input = inputString.split(" ");
+    const inputs = inputString.split("\n");
+    let input = inputs.map((i) => i.split(" "));
+    if (input.length === 1) {
+      input = input[0];
+    }
+
+    if (inputString.match(/<\s*br\s*\/?\s*>/i)) {
+      console.warn(`Found <br> tag in input of nid:${id}`);
+    }
 
     let suspended;
     switch (queue) {
@@ -92,13 +100,24 @@ const cardForInput = {};
 const chordForCombo = {};
 let studyingChords = 0;
 let studyingOther = 0;
-let chordsCount = config.chords.length;
 
 cards.forEach((card) => {
-  const key = card.input
-    .map((c) => c.toUpperCase())
-    .sort()
-    .join("+");
+  let key;
+  if (Array.isArray(card.input[0])) {
+    key = card.input
+      .map((i) =>
+        i
+          .map((c) => c.toUpperCase())
+          .sort()
+          .join("+")
+      )
+      .join(", ");
+  } else {
+    key = card.input
+      .map((c) => c.toUpperCase())
+      .sort()
+      .join("+");
+  }
   cardForInput[key] = card;
 });
 
@@ -123,89 +142,104 @@ Object.values(chordForCombo).forEach((chord) => {
       return;
     }
 
-    let ok = true;
-
-    const keyParts = [[...chord.combo]];
-    if (chord.layers?.length) {
-      keyParts.push([...chord.layers, ...chord.combo]);
-    }
-
-    if (forHold) {
-      keyParts.forEach((keyPart) => {
-        keyPart.push("Hold");
-      });
-    }
-
-    if (forShift) {
-      keyParts.forEach((keyPart) => {
-        keyPart.push("Shift");
-      });
-    }
-
-    const keys = keyParts.map((keyPart) =>
-      keyPart
-        .map((c) => c.toUpperCase())
-        .sort()
-        .join("+")
-    );
-
-    const key = keys.find((key) => cardForInput[key]);
-    const card = cardForInput[key];
-
-    const combo = chord.combo.join("+");
-    let context = `${forHold ? "hold" : "tap"}${
-      forShift ? " shift" : ""
-    } ${combo} => ${
-      "output" in action ? tidy(action.output) : action.behavior
-    }`;
-
-    if (!card) {
-      if (!action.intuited) {
-        ok = false;
-        console.warn(`No Anki card for chord: ${context}`);
-      }
-      return;
-    }
-
-    context = `card nid:${card.id} for ${context}`;
-    if (!card.tags.includes("chord")) {
-      ok = false;
-      console.warn(`Missing tag 'chord' for ${context}`);
-    }
-
-    if (action.behavior) {
-      if (card.output !== action.behavior) {
-        ok = false;
-        console.warn(
-          `Card nid:${card.id} for combo ${combo} does not match expected behavior`
-        );
-        console.warn(` Card: ${card.output}`);
-        console.warn(`Chord: ${action.behavior}`);
-      }
+    const alternates = [];
+    if ("output" in action) {
+      alternates.push([action.output, 0, false]);
     } else {
-      let expected = tidy(action.output);
-      if (expected.length === 1 && expected.match(/[a-zA-Z]/)) {
-        expected += " (word)";
+      alternates.push([action.behavior, 0, true]);
+    }
+
+    action.alternates?.forEach((alternate, i) => {
+      if (alternate.toIdx === 0) {
+        return;
+      }
+      alternates.push([alternate.to, i + 1, false]);
+    });
+
+    alternates.forEach(([result, dupCount, isBehavior]) => {
+      let ok = true;
+      const dups = dupCount ? ", Dup".repeat(dupCount) : "";
+
+      const keyParts = [[...chord.combo]];
+      if (chord.layers?.length) {
+        keyParts.push([...chord.layers, ...chord.combo]);
       }
 
-      if (card.output !== expected) {
+      if (forHold) {
+        keyParts.forEach((keyPart) => {
+          keyPart.push("Hold");
+        });
+      }
+
+      if (forShift) {
+        keyParts.forEach((keyPart) => {
+          keyPart.push("Shift");
+        });
+      }
+
+      const keys = keyParts.map(
+        (keyPart) =>
+          keyPart
+            .map((c) => c.toUpperCase())
+            .sort()
+            .join("+") + dups.toUpperCase()
+      );
+
+      const key = keys.find((key) => cardForInput[key]);
+      const card = cardForInput[key];
+
+      const combo = chord.combo.join("+") + dups;
+      let context = `${forHold ? "hold" : "tap"}${
+        forShift ? " shift" : ""
+      } ${combo} => ${isBehavior ? result : tidy(result)}`;
+
+      if (!card) {
+        if (!action.intuited) {
+          ok = false;
+          console.warn(`No Anki card for chord: ${context}`);
+        }
+        return;
+      }
+
+      context = `card nid:${card.id} for ${context}`;
+      if (!card.tags.includes("chord")) {
         ok = false;
-        console.warn(
-          `Card nid:${card.id} for combo ${combo} does not match expected output`
-        );
-        console.warn(` Card: ${card.output}`);
-        console.warn(`Chord: ${expected}`);
+        console.warn(`Missing tag 'chord' for ${context}`);
       }
-    }
 
-    delete cardForInput[key];
+      if (isBehavior) {
+        if (card.output !== result) {
+          ok = false;
+          console.warn(
+            `Card nid:${card.id} for combo ${combo} does not match expected behavior`
+          );
+          console.warn(` Card: ${card.output}`);
+          console.warn(`Chord: ${result}`);
+        }
+      } else {
+        let expected = tidy(result);
+        if (expected.length === 1 && expected.match(/[a-zA-Z]/)) {
+          expected += " (word)";
+        }
 
-    if (ok) {
-      action.anki = card;
-      if (card.suspended === false) {
-        studyingChords++;
+        if (card.output !== expected) {
+          ok = false;
+          console.warn(
+            `Card nid:${card.id} for combo ${combo} does not match expected output`
+          );
+          console.warn(` Card: ${card.output}`);
+          console.warn(`Chord: ${expected}`);
+        }
       }
-    }
+
+      delete cardForInput[key];
+
+      if (ok) {
+        if (card.suspended === false) {
+          studyingChords++;
+        }
+      }
+    });
   });
 });
 
