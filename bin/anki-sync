@@ -60,8 +60,13 @@ const fillTemplate = (template, partials = {}) => {
   });
 };
 
+const defaultPartials = {
+  layout: JSON.stringify(config.layout),
+};
+
 const generateTemplates = () => {
   const partials = {
+    ...defaultPartials,
     FrontSide: "{{FrontSide}}",
     Output: "{{Output}}",
     Input: "{{Input}}",
@@ -76,6 +81,7 @@ const generateTemplates = () => {
 
 const generateShell = (input, output) => {
   const partials = {
+    ...defaultPartials,
     Output: output,
     Input: input,
   };
