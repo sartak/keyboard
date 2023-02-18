@@ -28,6 +28,7 @@ if (ankiDatabase !== null && !fs.existsSync(ankiDatabase)) {
 }
 
 const config = JSON.parse(fs.readFileSync(inputFile));
+const { layout } = config;
 
 const tidyChar = {
   "\b": "⌫",
@@ -61,7 +62,7 @@ const fillTemplate = (template, partials = {}) => {
 };
 
 const defaultPartials = {
-  layout: JSON.stringify(config.layout),
+  layout: JSON.stringify(layout),
 };
 
 const generateTemplates = () => {
@@ -286,7 +287,10 @@ Object.values(chordForCombo).forEach((chord) => {
 
       const keyParts = [[...chord.combo]];
       if (chord.layers?.length) {
-        keyParts.push([...chord.layers, ...chord.combo]);
+        keyParts.push([
+          ...chord.layers.map((layer) => layout.keyForLayer[layer]),
+          ...chord.combo,
+        ]);
       }
 
       if (forHold) {

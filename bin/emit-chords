@@ -122,6 +122,13 @@ const layerKeys = {
   Fun: "Function",
 };
 
+const keyForLayer = {
+  Alpha: "Alph",
+  Symbol: "Sym",
+  Number: "Num",
+  Function: "Fun",
+};
+
 const intuitLabel = ({ output, behavior }) =>
   (behavior || output)
     .split("")
@@ -309,6 +316,7 @@ const layout = {
   outputForKey,
   modKeys,
   layerKeys,
+  keyForLayer,
 };
 
 const validateCombo = ({ combo }) => {
