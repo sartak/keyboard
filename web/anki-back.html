@@ -17,6 +17,9 @@
 
 <script>
   const layout = {{layout}};
+
+  const input = document.querySelector('.input-field').innerText.split(' ');
+
   const layer = 'Alpha';
   const shift = false;
   const ctrl = false;
@@ -26,4 +29,8 @@
   {{keymap.js}}
 
   drawKeymap({ layer, shift, ctrl, alt, gui });
+
+  input.forEach((key) => {
+    highlightKey(key, 'chord-tap');
+  });
 </script>

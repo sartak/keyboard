@@ -33,6 +33,25 @@
   white-space: pre;
 }
 
+.keymap .row .key.chord-tap {
+  color: var(--bg-color);
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.keymap .row .key.down {
+  color: var(--bg-color);
+  background-color: var(--sub-color);
+  border-color: var(--sub-color);
+}
+
+.keymap .row .key.hold,
+.keymap .row .key.chord-hold {
+  color: var(--bg-color);
+  background-color: var(--error-color);
+  border-color: var(--error-color);
+}
+
 .keymap .row:nth-child(1) .key {
   top: calc(0 * var(--key-y) * var(--conv));
 }

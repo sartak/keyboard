@@ -48,3 +48,12 @@ const drawKeymap = ({ layer, shift, ctrl, alt, gui }) => {
     el.querySelector(".letter").innerHTML = label;
   });
 };
+
+const highlightKey = (key, type) => {
+  const el = document.querySelector(`.keymap .key[data-Alpha="${key}"]`);
+  if (el) {
+    el.classList.add(type);
+  } else {
+    alert(`Unable to highlightKey ${key}`);
+  }
+};
