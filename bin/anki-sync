@@ -34,10 +34,33 @@ const tidy = (s) =>
 const unescape = (html) =>
   html.replaceAll(/&lt;/g, "<").replaceAll(/&gt;/g, ">");
 
+const fillTemplate = (template, partials = {}) => {
+  return template.replaceAll(/{{\s*(.*?)\s*}}/g, (_, name) => {
+    if (name in partials) {
+      return partials[name];
+    }
+
+    const file = `${templateDirectory}/${name}`;
+    if (fs.existsSync(file)) {
+      const content = fillTemplate(String(fs.readFileSync(file)), partials);
+      partials[name] = content;
+      return content;
+    }
+
+    throw new Error(`Partial ${name} cannot be found`);
+  });
+};
+
 const generateTemplates = () => {
-  const front = String(fs.readFileSync(ankiFrontFile));
-  const back = String(fs.readFileSync(ankiBackFile));
-  const style = String(fs.readFileSync(ankiStyleFile));
+  const partials = {
+    FrontSide: "{{FrontSide}}",
+    Output: "{{Output}}",
+    Input: "{{Input}}",
+  };
+
+  const front = fillTemplate(String(fs.readFileSync(ankiFrontFile)), partials);
+  const back = fillTemplate(String(fs.readFileSync(ankiBackFile)), partials);
+  const style = fillTemplate(String(fs.readFileSync(ankiStyleFile)), partials);
 
   return [front, back, style];
 };
