@@ -374,17 +374,155 @@ Object.values(chordForCombo).forEach((chord) => {
   });
 });
 
-Object.values(cardForInput).forEach((card) => {
-  if (!card.tags.includes("chord")) {
-    if (card.suspended === false) {
-      studyingOther++;
-    }
+const seen = {};
+seen.Alph = true; // hack: ignore this since in a way it's no inputs
+
+const missing = [];
+
+Object.keys(config.layout.keys[0])
+  .sort((a, b) => a.includes("-" ? 1 : 0) - (b.includes("-") ? 1 : 0))
+  .forEach((layer) => {
+    config.layout.keys.forEach((key) => {
+      let ok = true;
+
+      const alpha = key.Alpha;
+      const rawEffect = key[layer];
+
+      if (rawEffect === "") {
+        return;
+      }
+
+      const [baseLayer, mod] = layer.split("-");
+      if (rawEffect === null && mod !== "Hold") {
+        return;
+      }
+
+      const baseLayerKey = key[baseLayer];
+      if (baseLayerKey === null) {
+        return;
+      }
+
+      const implicitHold = rawEffect === null && mod === "Hold";
+      const prefix = implicitHold ? "⌘" : "";
+      const canonicalEffect = implicitHold
+        ? `${prefix}${
+            baseLayerKey.length === 1
+              ? baseLayerKey.toUpperCase()
+              : prefix && baseLayerKey.includes(" ")
+              ? ` ${baseLayerKey}`
+              : baseLayerKey
+          }`
+        : rawEffect;
+
+      const inputs = [alpha];
+      if (baseLayer !== "Alpha") {
+        inputs.push(layout.keyForLayer[baseLayer]);
+      }
+      if (mod) {
+        inputs.push(mod);
+      }
+
+      let input = inputs
+        .map((c) => c.toUpperCase())
+        .sort()
+        .join("+");
+
+      let context = `${canonicalEffect} via ${layer} ${alpha} (${input})`;
+      let card = cardForInput[input];
+      if (!card) {
+        if (layout.modKeys[rawEffect]) {
+          input = [rawEffect, ...(layout.labels[rawEffect] || [])]
+            .map((i) => i.toUpperCase())
+            .find((input) => cardForInput[input]);
+          card = cardForInput[input];
+        }
+        if (!card) {
+          ok = false;
+          missing.push([canonicalEffect, `No Anki card for key: ${context}`]);
+          return;
+        }
+      }
+
+      seen[canonicalEffect] = true;
+
+      context = `card nid:${card.id} for ${context}`;
+      if (card.tags.includes("chord")) {
+        ok = false;
+        console.warn(`Spurious tag 'chord' for ${context}`);
+      }
+
+      let found = false;
+      const effects = [canonicalEffect];
+      if (implicitHold) {
+        if (baseLayerKey in layout.labels) {
+          effects.push(
+            ...layout.labels[baseLayerKey].map(
+              (label) =>
+                `${prefix}${
+                  label.length === 1
+                    ? label.toUpperCase()
+                    : prefix && label.includes(" ")
+                    ? ` ${label}`
+                    : label
+                }`
+            )
+          );
+        }
+      } else {
+        if (rawEffect in layout.labels) {
+          effects.push(
+            ...layout.labels[rawEffect].map(
+              (label) =>
+                `${prefix}${
+                  prefix && label.includes(" ") ? ` ${label}` : label
+                }`
+            )
+          );
+        }
+      }
+
+      effects.forEach((effect) => {
+        if (card.output === effect || card.output.startsWith(`${effect} (`)) {
+          found = true;
+        }
+      });
+
+      if (!found) {
+        ok = false;
+        console.warn(`Key does not match expected effect: ${context}`);
+        console.warn(`Card: ${card.output}`);
+        [...new Set(effects)]
+          .sort((a, b) => a.length - b.length)
+          .forEach((effect) => {
+            console.warn(` Key: ${effect}`);
+          });
+      }
+
+      if (ok && card.suspended === false) {
+        studyingOther++;
+      }
+
+      ok = false;
+      delete cardForInput[input];
+    });
+  });
+
+missing.forEach(([effect, message]) => {
+  if (seen[effect]) {
     return;
   }
+  seen[effect] = true;
+  console.warn(message);
+});
+
+Object.entries(cardForInput).forEach(([input, card]) => {
+  if (!card.tags.includes("chord") && card.suspended === false) {
+    studyingOther++;
+  }
   console.warn(
-    `No chord found for Anki card nid:${card.id} ${card.input.join(" ")} => ${
+    `Loose Anki card nid:${card.id} ${card.input.join(" ")} => ${
       card.output
-    }`
+    } (${input})`
   );
 });
 
