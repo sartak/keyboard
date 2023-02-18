@@ -45,7 +45,9 @@ const drawKeymap = ({ layer, shift, ctrl, alt, gui }) => {
       label = " ";
     }
 
-    el.querySelector(".letter").innerHTML = label;
+    const letter = el.querySelector(".letter");
+    letter.innerHTML = label;
+    letter.setAttribute("data-length", label.length);
   });
 };
 

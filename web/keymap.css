@@ -227,3 +227,10 @@
   content: "-";
   font-size: var(--key-font-size);
 }
+
+.keymap .key .letter[data-length="3"] {
+  font-size: calc(0.75 * var(--key-font-size));
+}
+.keymap .key .letter[data-length="4"] {
+  font-size: calc(0.5 * var(--key-font-size));
+}
