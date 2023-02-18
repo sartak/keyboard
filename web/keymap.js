@@ -71,3 +71,12 @@ const clearHighlights = () => {
     el.removeAttribute("data-highlight");
   });
 };
+
+const setKeymapStatic = (static = true) => {
+  const keymap = document.querySelector(".keymap");
+  if (static) {
+    keymap.classList.add("static");
+  } else {
+    keymap.classList.remove("static");
+  }
+};

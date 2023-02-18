@@ -25,12 +25,25 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: transparent;
+  background-color: var(--bg-color);
   border: 0.05rem solid;
   border-color: var(--sub-color);
   border-radius: 8px;
   color: var(--sub-color);
   white-space: pre;
+
+  transition: background-color 500ms cubic-bezier(0.95, 0.05, 0.795, 0.035),
+    color 500ms cubic-bezier(0.95, 0.05, 0.795, 0.035),
+    border-color 500ms cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.keymap .row .key .letter::after {
+  transition: border-color 500ms cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.keymap.static .row .key,
+.keymap.static .row .key .letter::after {
+  transition: none;
 }
 
 .keymap .row .key[data-highlight="chord-tap"] {
@@ -50,6 +63,10 @@
   color: var(--bg-color);
   background-color: var(--error-color);
   border-color: var(--error-color);
+}
+
+.keymap .row .key[data-highlight] .letter::after {
+  border-color: var(--bg-color) !important;
 }
 
 .keymap .row:nth-child(1) .key {
@@ -193,10 +210,6 @@
   width: calc(0.375 * var(--key-width) * var(--conv));
   height: var(--homing-height);
   border-bottom: 0.05rem solid var(--sub-color);
-}
-
-.keymap .row .key[data-highlight] .letter::after {
-  border-color: var(--bg-color) !important;
 }
 
 .keymap .key[data-Alpha="Bksp"],
