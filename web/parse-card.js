@@ -33,7 +33,12 @@ const parseInput = (layout, input) => {
         break;
       default:
         if (layout.layerKeys[key]) {
-          holdKeys.push(layout.modKeys[key]);
+          const k = layout.modKeys[key];
+          if (Array.isArray(k)) {
+            holdKeys.push(...k);
+          } else {
+            holdKeys.push(k);
+          }
           layer = layout.layerKeys[key];
         } else {
           if (downKeys.length) {

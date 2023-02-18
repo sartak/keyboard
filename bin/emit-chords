@@ -2121,6 +2121,17 @@ const [chordsAndCategories, topAppend] = parseChords(
   chordFiles.map((file) => JSON.parse(fs.readFileSync(file)))
 );
 
+// hack: inject oneshot-Function into modkeys
+chordsAndCategories.forEach((chord) => {
+  if (typeof chord === "string") {
+    return;
+  }
+
+  if (chord.tap.behavior === "oneshot-Function") {
+    modKeys.Fun = chord.combo;
+  }
+});
+
 fs.writeFileSync(
   readmeFile,
   readmeContent(
