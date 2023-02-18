@@ -1,0 +1,102 @@
+.card {
+ font-family: Helvetica;
+ font-size: 20px;
+ text-align: center;
+ color: black;
+ background-color: white;
+}
+
+.output-field {
+  font-family: Menlo;
+  font-size: 32px;
+}
+
+.ferris-sweep.hidden {
+  visibility: hidden;
+}
+
+.ferris-sweep .container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5vw;
+  font-size: 3vw;
+  font-family: Menlo, monospace;
+}
+
+.ferris-sweep .center {
+  margin-top: 4vw;
+}
+.ferris-sweep .index {
+  margin-top: 3vw;
+}
+.ferris-sweep .ring {
+  margin-top: 4.5vw;
+}
+.ferris-sweep .pinky {
+  margin-top: 10vw;
+}
+
+.ferris-sweep .thumb {
+  margin-top: -5vw;
+}
+
+.ferris-sweep .left.thumb .in {
+  transform: translateY(4vw) rotate(20deg);
+}
+
+.ferris-sweep .left.thumb .out {
+  transform: translateY(2vw) rotate(15deg);
+}
+
+.ferris-sweep .right.thumb .in {
+  transform: translateY(4vw) rotate(-20deg);
+}
+
+.ferris-sweep .right.thumb .out {
+  transform: translateY(2vw) rotate(-15deg);
+}
+
+.ferris-sweep .thumbs.container > div > div {
+  margin-top: -2vw;
+  display: inline-flex;
+}
+
+.ferris-sweep .left.center {
+  margin-right: 4vw;
+}
+
+.ferris-sweep .right.center {
+  margin-left: 4vw;
+}
+
+.ferris-sweep .left.thumb {
+  margin-right: 1vw;
+}
+
+.ferris-sweep .right.thumb {
+  margin-left: 1vw;
+}
+
+.ferris-sweep .container > div > div {
+  background: white;
+  color: black;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 8vw;
+  height: 8vw;
+  margin-bottom: 0.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ferris-sweep .container > div > div.highlight {
+  border: 1px solid green;
+  background-color: rgb(118, 223, 126);
+}
+
+.ferris-sweep .container > div > div.held {
+  border: 1px solid blue;
+  background-color: rgb(118, 126, 223);
+}

@@ -3,6 +3,10 @@ const fs = require("fs");
 const sqlite3 = require("better-sqlite3");
 const inputFile = "processed.json";
 const outputFile = "processed-anki.json";
+const templateDirectory = "web";
+const ankiFrontFile = `${templateDirectory}/anki-front.html`;
+const ankiBackFile = `${templateDirectory}/anki-back.html`;
+const ankiStyleFile = `${templateDirectory}/anki-style.css`;
 
 const [nodeArg, scriptArg, ankiDatabase, noteType] = process.argv;
 if (process.argv.length !== 4) {
@@ -13,6 +17,8 @@ if (process.argv.length !== 4) {
 if (!fs.existsSync(ankiDatabase)) {
   throw new Error(`anki sqlite database '${ankiDatabase}' does not exist`);
 }
+
+const config = JSON.parse(fs.readFileSync(inputFile));
 
 const tidyChar = {
   "\b": "⌫",
@@ -28,6 +34,54 @@ const tidy = (s) =>
 const unescape = (html) =>
   html.replaceAll(/&lt;/g, "<").replaceAll(/&gt;/g, ">");
 
+const generateTemplates = () => {
+  const front = String(fs.readFileSync(ankiFrontFile));
+  const back = String(fs.readFileSync(ankiBackFile));
+  const style = String(fs.readFileSync(ankiStyleFile));
+
+  return [front, back, style];
+};
+
+const checkTemplates = (anki, mid, noteConfig) => {
+  let [ankiStyle] = String(noteConfig).split("*" + String.fromCharCode(0xfffd));
+  ankiStyle = ankiStyle.substring(3);
+
+  const templateStmt = anki.prepare(`
+  SELECT config
+  FROM templates
+  WHERE ntid = ?
+`);
+  let i = 0;
+  let ankiFront, ankiBack;
+  for (const { config: templateConfig } of templateStmt.iterate(mid)) {
+    [, ankiFront, , ankiBack] = String(templateConfig)
+      .split(String.fromCharCode(0xfffd))
+      .map((s) => s.substring(1));
+
+    ankiFront = ankiFront.substring(0, ankiFront.length - 1);
+
+    if (i++) {
+      throw new Error("Multiple templates detected");
+    }
+  }
+
+  const [expectedFront, expectedBack, expectedStyle] = generateTemplates();
+
+  [
+    ["front", expectedFront, ankiFront],
+    ["back", expectedBack, ankiBack],
+    ["style", expectedStyle, ankiStyle],
+  ].forEach(([label, expected, got]) => {
+    if (expected.trimEnd() !== got.trimEnd()) {
+      console.warn(`Card template ${label} is stale, replace with`);
+      console.warn("-".repeat(40));
+      console.warn(expected);
+      console.warn("-".repeat(40));
+      console.warn("");
+    }
+  });
+};
+
 const getCards = () => {
   const cards = [];
 
@@ -35,14 +89,15 @@ const getCards = () => {
   anki.pragma("journal_mode = WAL");
 
   const res = anki
-    .prepare("SELECT id FROM notetypes WHERE name = ? COLLATE nocase")
+    .prepare("SELECT id, config FROM notetypes WHERE name = ? COLLATE nocase")
     .get(noteType);
 
   if (!res) {
     throw new Error(`Note type '${noteType}' does not exist in Anki database`);
   }
 
-  const mid = res.id;
+  const { id: mid, config } = res;
+  checkTemplates(anki, mid, config);
 
   const stmt = anki.prepare(`
   SELECT notes.id, notes.flds, notes.tags, cards.queue
@@ -94,7 +149,6 @@ const getCards = () => {
   return cards;
 };
 
-const config = JSON.parse(fs.readFileSync(inputFile));
 const cards = getCards();
 const cardForInput = {};
 const chordForCombo = {};
