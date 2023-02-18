@@ -15,29 +15,29 @@
 {{keymap.html}}
 
 <script>
+  {{keymap.js}}
+  {{parse-card.js}}
+
   const jq = window.jQuery || ((cb) => cb());
   jq(() => {
     const layout = {{layout}};
-
-    {{keymap.js}}
-    {{parse-card.js}}
 
     const input = document.querySelector('.input-field').innerText;
 
     const segments = parseInput(layout, input);
 
-  initializeKeymap(layout);
+    initializeKeymap(layout);
 
     const draw = ({ layer, shift, ctrl, alt, gui, downKeys, holdKeys, isChord }, clear) => {
-  drawKeymap(layout, { layer, shift, ctrl, alt, gui });
+      drawKeymap(layout, { layer, shift, ctrl, alt, gui });
 
-    downKeys.forEach((key) => {
-      highlightKey(key, isChord ? 'chord-tap' : 'down');
-    });
+      downKeys.forEach((key) => {
+        highlightKey(key, isChord ? 'chord-tap' : 'down');
+      });
 
-    holdKeys.forEach((key) => {
-      highlightKey(key, isChord ? 'chord-hold' : 'hold');
-    });
+      holdKeys.forEach((key) => {
+        highlightKey(key, isChord ? 'chord-hold' : 'hold');
+      });
 
       if (clear) {
         setTimeout(() => {
