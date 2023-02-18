@@ -16,21 +16,55 @@
 {{keymap.html}}
 
 <script>
-  const layout = {{layout}};
+    const layout = {{layout}};
 
-  const input = document.querySelector('.input-field').innerText.split(' ');
+    const input = document.querySelector('.input-field').innerText.split(' ');
 
-  const layer = 'Alpha';
-  const shift = false;
-  const ctrl = false;
-  const alt = false;
-  const gui = false;
+    let layer = 'Alpha';
+    let shift = false;
+    let ctrl = false;
+    let alt = false;
+    let gui = false;
+    let isChord = false;
+    let hold = false;
 
-  {{keymap.js}}
+    const downKeys = [];
+    const holdKeys = [];
+    input.forEach((key) => {
+      switch (key) {
+        case 'Shift':
+          shift = true;
+          holdKeys.push(layout.modKeys.Shft);
+          break;
+        case 'Ctrl':
+          ctrl = true;
+          holdKeys.push(layout.modKeys.Ctrl);
+          break;
+        case 'Alt':
+          alt = true;
+          holdKeys.push(layout.modKeys.Alt);
+          break;
+        case 'Gui':
+          gui = true;
+          holdKeys.push(layout.modKeys.Gui);
+          break;
+        case 'Hold':
+          hold = true;
+          break;
+        default:
+          downKeys.push(key);
+      }
+    });
+
+    {{keymap.js}}
 
   drawKeymap({ layer, shift, ctrl, alt, gui });
 
-  input.forEach((key) => {
-    highlightKey(key, 'chord-tap');
-  });
+    downKeys.forEach((key) => {
+      highlightKey(key, isChord ? 'chord-tap' : 'down');
+    });
+
+    holdKeys.forEach((key) => {
+      highlightKey(key, isChord ? 'chord-hold' : 'hold');
+    });
 </script>
