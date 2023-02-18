@@ -186,7 +186,7 @@ const parseBoard = (config) => {
 const parseLayout = (config) => {
   const validKey = {};
   const qmkKey = {};
-  const zmkKey = {};
+  const keyPosition = {};
   const keys = [];
   const keymap = [];
   let shiftBase;
@@ -196,7 +196,7 @@ const parseLayout = (config) => {
     const keymapRow = [];
     row.forEach((key) => {
       validKey[key] = true;
-      zmkKey[key] = z++;
+      keyPosition[key] = z++;
       const k = {};
       keys.push(k);
       keymapRow.push(k);
@@ -271,15 +271,15 @@ const parseLayout = (config) => {
     labels: config._labels,
     validKey,
     layerIndex,
-    shiftBase,
+    keyPosition,
+    modKeys,
     qmkKey,
-    zmkKey,
     zmkLayers,
   };
 };
 
 const parsedLayout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
-const { validKey, layerIndex, shiftBase, qmkKey, zmkKey, zmkLayers } =
+const { validKey, layerIndex, shiftBase, keyPosition, qmkKey, zmkLayers } =
   parsedLayout;
 const layout = {
   layers: parsedLayout.layers,
@@ -287,6 +287,7 @@ const layout = {
   keymap: parsedLayout.keymap,
   board: parsedLayout.board,
   labels: parsedLayout.labels,
+  keyPosition,
   outputForKey,
   shiftBase,
 };
@@ -1691,7 +1692,8 @@ const zmkBehavior = (behavior) => {
   }
 };
 
-const zmkCombo = (chord) => chord.combo.map((key) => zmkKey[key]).join(" ");
+const zmkCombo = (chord) =>
+  chord.combo.map((key) => keyPosition[key]).join(" ");
 
 const zmkPreamble = (chords, personalFile) => {
   if (personalFile) {
@@ -2061,7 +2063,7 @@ const generateKeymap = ({ layout, chords }) => {
           return;
         }
 
-        const positions = chord.combo.map((key) => zmkKey[key]);
+        const positions = chord.combo.map((key) => keyPosition[key]);
         if (positions.filter((p) => layout.keys[p][layer] === "").length) {
           return;
         }
