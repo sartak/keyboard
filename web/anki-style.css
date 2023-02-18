@@ -1,9 +1,12 @@
+body {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
 .card {
- font-family: Helvetica;
- font-size: 20px;
- text-align: center;
- color: black;
- background-color: white;
+  font-family: Helvetica;
+  font-size: 20px;
+  text-align: center;
 }
 
 .output-field {
