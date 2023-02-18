@@ -136,7 +136,19 @@ chordFiles.forEach((file) => {
   });
 });
 
-let shiftBase;
+const modKeys = {};
+
+const isModKey = {
+  Shft: true,
+  Ctrl: true,
+  Alt: true,
+  Gui: true,
+  Sym: true,
+  Num: true,
+  Alph: true,
+  Fun: true,
+};
+
 const position = {};
 layoutFiles.forEach((file) => {
   const json = fs.readFileSync(file);
@@ -156,14 +168,14 @@ layoutFiles.forEach((file) => {
     }
     rows.forEach((row, r) => {
       row.forEach((key, c) => {
-        if (!shiftBase && key == "Shft") {
-          shiftBase = layers.Alpha[r][c];
+        if (isModKey[key] && !modKeys[key]) {
+          modKeys[key] = layers.Alpha[r][c];
         }
       });
     });
   });
 
-  if (!shiftBase) {
+  if (!modKeys.Shft) {
     throw new Error("Cannot find Shft in layout");
   }
 });
@@ -184,8 +196,8 @@ const combos = {};
 chords.forEach((chord) => {
   const { combo } = chord;
   if (combo.length) {
-    const idParts = [[chord.combo], [...chord.combo, shiftBase]];
-    if (chord.combo.includes(shiftBase)) {
+    const idParts = [[chord.combo], [...chord.combo, modKeys.Shft]];
+    if (chord.combo.includes(modKeys.Shft)) {
       if (chord.shift || chord.hold?.shift) {
         ok = false;
         console.warn(

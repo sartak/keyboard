@@ -248,7 +248,8 @@ serial.on("data", (data) => {
       let chord = chordForCombo[key];
 
       if (currentComboShifted && !chord) {
-        const shiftKeyIndex = config.layout.shiftBase[1];
+        const shiftKeyAlpha = config.layout.modKeys.Shft;
+        const shiftKeyIndex = config.layout.keyPosition[shiftKeyAlpha];
         const indexes = currentCombo.filter((i) => i !== shiftKeyIndex).sort();
         const key = indexes.join("+");
         chord = chordForCombo[key];

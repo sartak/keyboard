@@ -189,7 +189,18 @@ const parseLayout = (config) => {
   const keyPosition = {};
   const keys = [];
   const keymap = [];
-  let shiftBase;
+  const modKeys = {};
+
+  const isModKey = {
+    Shft: true,
+    Ctrl: true,
+    Alt: true,
+    Gui: true,
+    Sym: true,
+    Num: true,
+    Alph: true,
+    Fun: true,
+  };
 
   let z = 0;
   config.Alpha.forEach((row) => {
@@ -229,8 +240,8 @@ const parseLayout = (config) => {
         qmkKey[layer][alpha] =
           qmkKeyTidy[alpha] || `${prefix}_${alpha.toUpperCase()}`;
 
-        if (!shiftBase && key === "Shft") {
-          shiftBase = [alpha, i];
+        if (isModKey[key] && !modKeys[key]) {
+          modKeys[key] = alpha;
         }
 
         keys[i++][layer] = key;
@@ -279,7 +290,7 @@ const parseLayout = (config) => {
 };
 
 const parsedLayout = parseLayout(JSON.parse(fs.readFileSync(layoutFile)));
-const { validKey, layerIndex, shiftBase, keyPosition, qmkKey, zmkLayers } =
+const { validKey, layerIndex, modKeys, keyPosition, qmkKey, zmkLayers } =
   parsedLayout;
 const layout = {
   layers: parsedLayout.layers,
@@ -289,7 +300,7 @@ const layout = {
   labels: parsedLayout.labels,
   keyPosition,
   outputForKey,
-  shiftBase,
+  modKeys,
 };
 
 const validateCombo = ({ combo }) => {
@@ -620,8 +631,7 @@ const qmkCombo = ({ combo, layers }, shift) => {
 
   const keys = [...combo];
   if (shift) {
-    const [key] = shiftBase;
-    keys.push(key);
+    keys.push(modKeys.Shft);
   }
 
   return keys.map((key) => qmkKey[layer][key]).join(", ");
@@ -1897,7 +1907,7 @@ const zmkChords = (chordsAndCategories) => {
           if (skip) {
             return;
           }
-          combo.push(shiftBase[0]);
+          combo.push(modKeys.Shft);
           identifier = "S_" + identifier;
         }
 
