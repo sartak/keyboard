@@ -42,7 +42,10 @@ const tidy = (s) =>
     .join("");
 
 const unescape = (html) =>
-  html.replaceAll(/&lt;/g, "<").replaceAll(/&gt;/g, ">");
+  html
+    .replaceAll(/&lt;/g, "<")
+    .replaceAll(/&gt;/g, ">")
+    .replaceAll(/&amp;/g, "&");
 
 const fillTemplate = (template, partials = {}) => {
   return template.replaceAll(/{{\s*(.*?)\s*}}/g, (_, name) => {
@@ -172,7 +175,7 @@ const getCards = () => {
     const tags = tagString.split(" ").filter((t) => t.length);
     const [outputHtml, inputString] = flds.split("\x1F");
     const output = unescape(outputHtml);
-    const inputs = inputString.split(" - ");
+    const inputs = unescape(inputString).split(" - ");
     let input = inputs.map((i) => i.split(" "));
     if (input.length === 1) {
       input = input[0];
