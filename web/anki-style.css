@@ -3,6 +3,11 @@ body {
   color: var(--text-color) !important;
 }
 
+hr {
+  border-color: var(--sub-color);
+  border-width: 0 0 0.5px 0;
+}
+
 .card {
   font-family: Helvetica;
   font-size: 20px;
