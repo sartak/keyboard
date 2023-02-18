@@ -268,6 +268,7 @@ const parseLayout = (config) => {
     keys,
     keymap,
     board: parseBoard(config),
+    labels: config._labels,
     validKey,
     layerIndex,
     shiftBase,
@@ -285,6 +286,7 @@ const layout = {
   keys: parsedLayout.keys,
   keymap: parsedLayout.keymap,
   board: parsedLayout.board,
+  labels: parsedLayout.labels,
   outputForKey,
   shiftBase,
 };

@@ -87,6 +87,7 @@ type LayerConfig = [
 type LayoutConfig = {
   Alpha: LayerConfig;
   _board?: { [key: string]: number };
+  _labels?: { [key: string]: string };
 } & {
   [L in LayerWithModifier]?: LayerConfig;
 };
