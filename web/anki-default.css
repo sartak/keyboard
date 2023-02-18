@@ -1,0 +1,79 @@
+div {
+  overflow-wrap: break-word;
+}
+body {
+  text-align: center;
+  font-size: 1em;
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  font: -apple-system-body;
+  margin: 15px; /* Needs to be large enough that content doesn't underflow the bottom buttons when scrolling to the answer. */
+  margin-bottom: 100px;
+  margin-left: max(15px, env(safe-area-inset-left));
+  margin-right: max(15px, env(safe-area-inset-right));
+}
+img {
+  max-width: 95%;
+}
+.drawing {
+  zoom: 50%;
+}
+.nightMode img.drawing {
+  filter: invert() hue-rotate(180deg);
+}
+.nightMode .latex {
+  filter: invert() hue-rotate(180deg);
+}
+#typeans {
+  width: 95%;
+  margin-top: 5px;
+}
+.invis {
+  visibility: hidden;
+}
+.playImage {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.soundLink {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+a.soundLink:active {
+  -webkit-tap-highlight-color: #00000000;
+}
+.soundLink {
+  text-decoration: none;
+}
+.replay-button svg {
+  width: 64px;
+  height: 64px;
+}
+.replay-button svg circle {
+  fill: #fff;
+  stroke: #414141;
+}
+.replay-button svg path {
+  fill: #414141;
+}
+.typeGood {
+  background: #afa;
+  color: black;
+}
+.typeBad {
+  color: black;
+  background: #faa;
+}
+.typeMissed {
+  color: black;
+  background: #ccc;
+}
+body.nightMode {
+  background-color: black;
+  color: white;
+}
+.nightMode a {
+  color: #77ccff;
+}

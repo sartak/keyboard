@@ -7,14 +7,23 @@ const templateDirectory = "web";
 const ankiFrontFile = `${templateDirectory}/anki-front.html`;
 const ankiBackFile = `${templateDirectory}/anki-back.html`;
 const ankiStyleFile = `${templateDirectory}/anki-style.css`;
+const ankiShellFile = `${templateDirectory}/anki-shell.html`;
+const shellOutput = "anki-test.html";
 
-const [nodeArg, scriptArg, ankiDatabase, noteType] = process.argv;
-if (process.argv.length !== 4) {
-  console.error(`usage: ${nodeArg} ${scriptArg} collection.anki2 note-type`);
+const [nodeArg, scriptArg] = process.argv;
+if (process.argv.length !== 3 && process.argv.length !== 4) {
+  console.error(
+    `usage: ${nodeArg} ${scriptArg} collection.anki2 note-type\n` +
+      `   or: ${nodeArg} ${scriptArg} shell-combo`
+  );
   process.exit(1);
 }
 
-if (!fs.existsSync(ankiDatabase)) {
+const shellCombo = process.argv.length === 3 ? process.argv[2] : null;
+const ankiDatabase = process.argv.length === 4 ? process.argv[2] : null;
+const noteType = process.argv.length === 4 ? process.argv[3] : null;
+
+if (ankiDatabase !== null && !fs.existsSync(ankiDatabase)) {
   throw new Error(`anki sqlite database '${ankiDatabase}' does not exist`);
 }
 
@@ -63,6 +72,30 @@ const generateTemplates = () => {
   const style = fillTemplate(String(fs.readFileSync(ankiStyleFile)), partials);
 
   return [front, back, style];
+};
+
+const generateShell = (input, output) => {
+  const partials = {
+    Output: output,
+    Input: input,
+  };
+
+  partials.FrontSide = fillTemplate(
+    String(fs.readFileSync(ankiFrontFile)),
+    partials
+  );
+
+  partials.style = fillTemplate(
+    String(fs.readFileSync(ankiStyleFile)),
+    partials
+  );
+
+  partials.content = fillTemplate(
+    String(fs.readFileSync(ankiBackFile)),
+    partials
+  );
+
+  return fillTemplate(String(fs.readFileSync(ankiShellFile)), partials);
 };
 
 const checkTemplates = (anki, mid, noteConfig) => {
@@ -171,6 +204,11 @@ const getCards = () => {
 
   return cards;
 };
+
+if (shellCombo) {
+  fs.writeFileSync(shellOutput, generateShell(shellCombo, ""));
+  process.exit(0);
+}
 
 const cards = getCards();
 const cardForInput = {};
