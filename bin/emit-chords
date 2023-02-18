@@ -348,6 +348,7 @@ const makeAlternates = ({ output, exact }) => {
 const parseChords = (files) => {
   const result = [];
   let seenIdentifier = {};
+  const topAppend = {};
 
   files.forEach(({ chords, defaults }) => {
     chords.forEach((input) => {
@@ -398,6 +399,9 @@ const parseChords = (files) => {
           const alternates = makeAlternates(action);
           if (alternates) {
             action.alternates = alternates;
+            alternates.forEach(({ append }) => {
+              topAppend[append] = (topAppend[append] || 0) + 1;
+            });
           }
           if (Array.isArray(action.output)) {
             action.output = action.output[0];
@@ -439,6 +443,10 @@ const parseChords = (files) => {
               });
             }
           }
+
+          alternates?.forEach(({ append }) => {
+            topAppend[append] = (topAppend[append] || 0) + 1;
+          });
 
           if (shifted === null) {
             return;
@@ -495,7 +503,13 @@ const parseChords = (files) => {
     });
   });
 
-  return result;
+  const top = Object.keys(topAppend)
+    .filter((a) => a.match(/^\w+$/))
+    .sort((a, b) => topAppend[b] - topAppend[a])
+    .slice(0, 10)
+    .sort((a, b) => b.length - a.length);
+
+  return [result, top];
 };
 
 const dropAfter = (xs, re) => {
@@ -1282,7 +1296,7 @@ const qmkPressFunction = (chords, personalFile, holdFunc) => {
   }
 };
 
-const qmkDupActionCase = (action, conditional) => {
+const qmkDupActionCase = (action, conditional, topAppend) => {
   const actions = [action];
   if ("shift" in action && conditional) {
     actions.push(action.shift);
@@ -1319,8 +1333,17 @@ const qmkDupActionCase = (action, conditional) => {
         if (toIdx !== fromIdx + 1) {
           lines.push(`    next_chord_cycle = ${toIdx};`);
         }
-        if (append.length) {
-          lines.push(`    append = "${append}";`);
+
+        let a = append;
+        topAppend.forEach((top) => {
+          if (a.startsWith(top)) {
+            lines.push(`    append_${top} = true;`);
+            a = a.substring(top.length);
+          }
+        });
+
+        if (a.length) {
+          lines.push(`    append = "${a}";`);
         }
         lines.push("  break;");
       });
@@ -1346,12 +1369,18 @@ const qmkDupActionCase = (action, conditional) => {
   return lines;
 };
 
-const qmkDupFunction = (chords, personalFile) => {
+const qmkDupFunction = (chords, personalFile, topAppend) => {
   const personalCases = "PERSONAL_DUP_CASES";
+
+  const defineAppends = topAppend
+    .map((append) => `bool append_${append} = false;`)
+    .join("\n  ");
+
   const intro = `uint8_t process_chord_dup(uint16_t last_chord, uint8_t last_chord_cycle) {
   uint8_t next_chord_cycle = last_chord_cycle + 1;
   uint8_t backspaces = 0;
   char *append = NULL;
+  ${defineAppends}
   bool space = true;
 
   uint8_t mods = get_mods();
@@ -1381,7 +1410,8 @@ const qmkDupFunction = (chords, personalFile) => {
       const [tapBranch, holdBranch] = actions.map((action) =>
         qmkDupActionCase(
           action,
-          `chord_shifted || last_chord == CHORD_S_${identifier}`
+          `chord_shifted || last_chord == CHORD_S_${identifier}`,
+          topAppend
         ).map((line) => `      ${line}`)
       );
 
@@ -1398,6 +1428,15 @@ const qmkDupFunction = (chords, personalFile) => {
       cases.push("      break;");
     });
 
+  const implementAppends = topAppend
+    .map(
+      (append) => `  if (append_${append}) {
+    SEND_STRING("${append}");
+    last_chord_length += ${append.length};
+  }`
+    )
+    .join("\n\n");
+
   const outro = `    ${personalCases}
     default:
       space = false;
@@ -1408,6 +1447,8 @@ const qmkDupFunction = (chords, personalFile) => {
     tap_code(KC_BSPC);
   }
   last_chord_length -= backspaces;
+
+${implementAppends}
 
   if (append != NULL) {
     SEND_STRING(append);
@@ -1433,7 +1474,7 @@ const qmkDupFunction = (chords, personalFile) => {
   }
 };
 
-const qmkFunctions = (chords, personalFile) => {
+const qmkFunctions = (chords, personalFile, topAppend) => {
   if (personalFile) {
     return [
       ...qmkReleaseFunction(chords, personalFile),
@@ -1442,7 +1483,7 @@ const qmkFunctions = (chords, personalFile) => {
       "",
       ...qmkPressFunction(chords, personalFile, false),
       "",
-      ...qmkDupFunction(chords, personalFile),
+      ...qmkDupFunction(chords, personalFile, topAppend),
     ];
   } else {
     return [
@@ -1464,7 +1505,11 @@ const qmkFunctions = (chords, personalFile) => {
         qmkPressFunction(chords, personalFile, false)
       ),
       "",
-      macro("CHORD_FUNC_DUP", null, qmkDupFunction(chords, personalFile)),
+      macro(
+        "CHORD_FUNC_DUP",
+        null,
+        qmkDupFunction(chords, personalFile, topAppend)
+      ),
       "",
       macro("CHORD_FUNCS", null, [
         "CHORD_FUNC_RELEASE",
@@ -1476,7 +1521,7 @@ const qmkFunctions = (chords, personalFile) => {
   }
 };
 
-const qmkConfig = (chordsAndCategories, personalFile) => {
+const qmkConfig = (chordsAndCategories, personalFile, topAppend) => {
   const lines = [];
   const chords = chordsAndCategories.filter(
     (chord) =>
@@ -1492,7 +1537,7 @@ const qmkConfig = (chordsAndCategories, personalFile) => {
   if (!personalFile) {
     lines.push(...qmkGlobals, "");
   }
-  lines.push(...qmkFunctions(chords, personalFile), "");
+  lines.push(...qmkFunctions(chords, personalFile, topAppend), "");
 
   return lines;
 };
@@ -2029,7 +2074,7 @@ const generateKeymap = ({ layout, chords }) => {
   };
 };
 
-const chordsAndCategories = parseChords(
+const [chordsAndCategories, topAppend] = parseChords(
   chordFiles.map((file) => JSON.parse(fs.readFileSync(file)))
 );
 
@@ -2042,11 +2087,11 @@ fs.writeFileSync(
 );
 fs.writeFileSync(
   qmkChordFile,
-  qmkConfig(chordsAndCategories, false).join("\n")
+  qmkConfig(chordsAndCategories, false, topAppend).join("\n")
 );
 fs.writeFileSync(
   qmkPersonalFile,
-  qmkConfig(chordsAndCategories, true).join("\n")
+  qmkConfig(chordsAndCategories, true, topAppend).join("\n")
 );
 fs.writeFileSync(
   zmkChordFile,
