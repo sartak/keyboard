@@ -59,8 +59,15 @@ const drawKeymap = (layout, { layer, shift, ctrl, alt, gui }) => {
 const highlightKey = (key, type) => {
   const el = document.querySelector(`.keymap .key[data-Alpha="${key}"]`);
   if (el) {
-    el.classList.add(type);
+    el.setAttribute("data-highlight", type);
   } else {
     alert(`Unable to highlightKey ${key}`);
   }
+};
+
+const clearHighlights = () => {
+  const keymap = document.querySelector(".keymap");
+  keymap.querySelectorAll(".key[data-highlight]").forEach((el) => {
+    el.removeAttribute("data-highlight");
+  });
 };

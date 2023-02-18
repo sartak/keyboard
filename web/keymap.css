@@ -33,20 +33,20 @@
   white-space: pre;
 }
 
-.keymap .row .key.chord-tap {
+.keymap .row .key[data-highlight="chord-tap"] {
   color: var(--bg-color);
   background-color: var(--main-color);
   border-color: var(--main-color);
 }
 
-.keymap .row .key.down {
+.keymap .row .key[data-highlight="down"] {
   color: var(--bg-color);
   background-color: var(--sub-color);
   border-color: var(--sub-color);
 }
 
-.keymap .row .key.hold,
-.keymap .row .key.chord-hold {
+.keymap .row .key[data-highlight="hold"],
+.keymap .row .key[data-highlight="chord-hold"] {
   color: var(--bg-color);
   background-color: var(--error-color);
   border-color: var(--error-color);
@@ -195,10 +195,7 @@
   border-bottom: 0.05rem solid var(--sub-color);
 }
 
-.keymap .row .key.down .letter::after,
-.keymap .row .key.chord-tap .letter::after,
-.keymap .row .key.hold .letter::after,
-.keymap .row .key.chord-hold .letter::after {
+.keymap .row .key[data-highlight] .letter::after {
   border-color: var(--bg-color) !important;
 }
 
