@@ -21,12 +21,13 @@
     {{keymap.js}}
     {{parse-card.js}}
 
-    const input = document.querySelector('.input-field').innerText.split(' ');
+    const input = document.querySelector('.input-field').innerText;
 
-    const { layer, shift, ctrl, alt, gui, downKeys, holdKeys, isChord } = parseInput(layout, input);
+    const segments = parseInput(layout, input);
 
   initializeKeymap(layout);
 
+    const draw = ({ layer, shift, ctrl, alt, gui, downKeys, holdKeys, isChord }, clear) => {
   drawKeymap(layout, { layer, shift, ctrl, alt, gui });
 
     downKeys.forEach((key) => {
@@ -36,4 +37,27 @@
     holdKeys.forEach((key) => {
       highlightKey(key, isChord ? 'chord-hold' : 'hold');
     });
+
+      if (clear) {
+        setTimeout(() => {
+          drawKeymap(layout, { layer: "Alpha", shift: false, ctrl: false, alt: false, gui: false });
+          clearHighlights();
+        }, clear);
+      }
+    }
+
+    if (segments.length === 1) {
+      draw(segments[0]);
+    } else {
+      draw(segments[0], 500);
+      let i = 0;
+      setInterval(() => {
+        i++;
+        if (i === segments.length) {
+          i = -1;
+          return;
+        }
+        draw(segments[i], 500);
+      }, 1000);
+    }
 </script>
