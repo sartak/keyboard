@@ -18,45 +18,12 @@
 <script>
     const layout = {{layout}};
 
+    {{keymap.js}}
+    {{parse-card.js}}
+
     const input = document.querySelector('.input-field').innerText.split(' ');
 
-    let layer = 'Alpha';
-    let shift = false;
-    let ctrl = false;
-    let alt = false;
-    let gui = false;
-    let isChord = false;
-    let hold = false;
-
-    const downKeys = [];
-    const holdKeys = [];
-    input.forEach((key) => {
-      switch (key) {
-        case 'Shift':
-          shift = true;
-          holdKeys.push(layout.modKeys.Shft);
-          break;
-        case 'Ctrl':
-          ctrl = true;
-          holdKeys.push(layout.modKeys.Ctrl);
-          break;
-        case 'Alt':
-          alt = true;
-          holdKeys.push(layout.modKeys.Alt);
-          break;
-        case 'Gui':
-          gui = true;
-          holdKeys.push(layout.modKeys.Gui);
-          break;
-        case 'Hold':
-          hold = true;
-          break;
-        default:
-          downKeys.push(key);
-      }
-    });
-
-    {{keymap.js}}
+    const { layer, shift, ctrl, alt, gui, downKeys, holdKeys, isChord } = parseInput(layout, input);
 
   drawKeymap({ layer, shift, ctrl, alt, gui });
 
