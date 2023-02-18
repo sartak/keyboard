@@ -43,7 +43,7 @@ const drawKeymap = (layout, { layer, shift, ctrl, alt, gui }) => {
     });
 
     if (label in layout.labels) {
-      label = layout.labels[label];
+      label = layout.labels[label][0];
     }
 
     if (label === "") {

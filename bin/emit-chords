@@ -288,12 +288,17 @@ const parseLayout = (config) => {
 
   const zmkLayers = layers.filter((l) => l !== "Function");
 
+  const labels = {};
+  Object.entries(config._labels).forEach(([key, label]) => {
+    labels[key] = Array.isArray(label) ? label : [label];
+  });
+
   return {
     layers,
     keys,
     keymap,
     board: parseBoard(config),
-    labels: config._labels,
+    labels,
     validKey,
     layerIndex,
     keyPosition,
