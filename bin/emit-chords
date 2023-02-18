@@ -115,6 +115,13 @@ const outputForKey = {
   BTTg: "",
 };
 
+const layerKeys = {
+  Alph: "Alpha",
+  Sym: "Symbol",
+  Num: "Number",
+  Fun: "Function",
+};
+
 const intuitLabel = ({ output, behavior }) =>
   (behavior || output)
     .split("")
@@ -301,6 +308,7 @@ const layout = {
   keyPosition,
   outputForKey,
   modKeys,
+  layerKeys,
 };
 
 const validateCombo = ({ combo }) => {
