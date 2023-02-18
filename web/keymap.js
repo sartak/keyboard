@@ -1,9 +1,19 @@
-const drawKeymap = ({ layer, shift, ctrl, alt, gui }) => {
+const initializeKeymap = (layout) => {
   const rootStyle = document.querySelector(":root").style;
   Object.entries(layout.board).forEach(([key, value]) => {
     rootStyle.setProperty(`--${key}`, value);
   });
 
+  const keymap = document.querySelector(".keymap");
+  keymap.querySelectorAll(".key").forEach((el, i) => {
+    let key = layout.keys[i];
+    Object.entries(key).forEach(([layer, value]) => {
+      el.setAttribute(`data-${layer}`, value);
+    });
+  });
+};
+
+const drawKeymap = (layout, { layer, shift, ctrl, alt, gui }) => {
   const keymap = document.querySelector(".keymap");
   keymap.setAttribute("data-layer", layer);
   keymap.setAttribute("data-shift", shift ? "true" : "false");
@@ -25,11 +35,6 @@ const drawKeymap = ({ layer, shift, ctrl, alt, gui }) => {
   layers.push("Alpha");
 
   keymap.querySelectorAll(".key").forEach((el, i) => {
-    let key = layout.keys[i];
-    Object.entries(key).forEach(([layer, value]) => {
-      el.setAttribute(`data-${layer}`, value);
-    });
-
     let label = null;
     layers.forEach((layer) => {
       if (label === null && layer in layout.keys[i]) {
