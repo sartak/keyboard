@@ -1,0 +1,203 @@
+:root {
+  --keymap-ratio: 0.4126;
+  --conv: calc(var(--desired-width) / var(--total-width));
+
+  --key-font-size: calc(0.5 * var(--key-width) * var(--conv));
+  --homing-height: calc(0.1 * var(--key-height) * var(--conv));
+}
+
+.keymap {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: calc(var(--total-width) * var(--conv));
+  height: calc(var(--total-height) * var(--conv));
+  font-family: Menlo;
+}
+
+.keymap .row .key {
+  position: absolute;
+  display: flex;
+  box-sizing: border-box;
+  height: calc(var(--key-height) * var(--conv));
+  width: calc(var(--key-width) * var(--conv));
+  font-size: var(--key-font-size);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: transparent;
+  border: 0.05rem solid;
+  border-color: var(--sub-color);
+  border-radius: 8px;
+  color: var(--sub-color);
+  white-space: pre;
+}
+
+.keymap .row:nth-child(1) .key {
+  top: calc(0 * var(--key-y) * var(--conv));
+}
+
+.keymap .row:nth-child(2) .key {
+  top: calc(1 * var(--key-y) * var(--conv));
+}
+
+.keymap .row:nth-child(3) .key {
+  top: calc(2 * var(--key-y) * var(--conv));
+}
+
+.keymap .row:nth-child(4) .key {
+  top: calc(3 * var(--key-y) * var(--conv));
+}
+
+.keymap .row .key:nth-child(1) {
+  left: calc(0 * var(--key-x) * var(--conv));
+}
+
+.keymap .row .key:nth-child(2) {
+  left: calc(1 * var(--key-x) * var(--conv));
+}
+
+.keymap .row .key:nth-child(3) {
+  left: calc(2 * var(--key-x) * var(--conv));
+}
+
+.keymap .row .key:nth-child(4),
+.keymap .row:nth-child(4) .key:nth-child(1) {
+  left: calc(3 * var(--key-x) * var(--conv));
+}
+
+.keymap .row .key:nth-child(5) {
+  left: calc(4 * var(--key-x) * var(--conv));
+}
+
+.keymap .row .key:nth-child(6) {
+  left: calc((5 * var(--key-x) + var(--split-width)) * var(--conv));
+}
+
+.keymap .row .key:nth-child(7) {
+  left: calc((6 * var(--key-x) + var(--split-width)) * var(--conv));
+}
+
+.keymap .row .key:nth-child(8) {
+  left: calc((7 * var(--key-x) + var(--split-width)) * var(--conv));
+}
+
+.keymap .row .key:nth-child(9) {
+  left: calc((8 * var(--key-x) + var(--split-width)) * var(--conv));
+}
+
+.keymap .row .key:nth-child(10) {
+  left: calc((9 * var(--key-x) + var(--split-width)) * var(--conv));
+}
+
+.keymap .row .key:nth-child(1),
+.keymap .row .key:nth-child(10) {
+  margin-top: calc(var(--pinky-stagger) * var(--conv));
+}
+
+.keymap .row .key:nth-child(2),
+.keymap .row .key:nth-child(9) {
+  margin-top: calc(var(--ring-stagger) * var(--conv));
+}
+
+.keymap .row .key:nth-child(3),
+.keymap .row .key:nth-child(8) {
+  margin-top: calc(var(--middle-stagger) * var(--conv));
+}
+
+.keymap .row .key:nth-child(4),
+.keymap .row .key:nth-child(7) {
+  margin-top: calc(var(--index-stagger) * var(--conv));
+}
+
+.keymap .row .key:nth-child(5),
+.keymap .row .key:nth-child(6) {
+  margin-top: calc(var(--center-stagger) * var(--conv));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(1),
+.keymap .row:nth-child(4) .key:nth-child(4) {
+  top: calc(var(--outer-y) * var(--conv));
+  margin-top: 0;
+}
+
+.keymap .row:nth-child(4) .key:nth-child(2),
+.keymap .row:nth-child(4) .key:nth-child(3) {
+  top: calc(var(--inner-y) * var(--conv));
+  margin-top: 0;
+}
+
+.keymap .row:nth-child(4) .key:nth-child(1) {
+  left: calc(var(--outer-left-x) * var(--conv));
+  rotate: calc(1deg * (180 - var(--outer-theta)));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(1) .letter {
+  rotate: calc(-1deg * (180 - var(--outer-theta)));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(2) {
+  left: calc(var(--inner-left-x) * var(--conv));
+  rotate: calc(1deg * (180 - var(--inner-theta)));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(2) .letter {
+  rotate: calc(-1deg * (180 - var(--inner-theta)));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(3) {
+  left: calc(var(--inner-right-x) * var(--conv));
+  rotate: calc(-1deg * (180 - var(--inner-theta)));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(3) .letter {
+  rotate: calc(1deg * (180 - var(--inner-theta)));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(4) {
+  left: calc(var(--outer-right-x) * var(--conv));
+  rotate: calc(-1deg * (180 - var(--outer-theta)));
+}
+
+.keymap .row:nth-child(4) .key:nth-child(4) .letter {
+  rotate: calc(1deg * (180 - var(--outer-theta)));
+}
+
+.keymap .row:nth-child(2) .key:nth-child(4) .letter,
+.keymap .row:nth-child(2) .key:nth-child(7) .letter {
+  margin-top: var(--homing-height);
+}
+.keymap .row:nth-child(2) .key:nth-child(4) .letter::after,
+.keymap .row:nth-child(2) .key:nth-child(7) .letter::after {
+  content: " ";
+  display: block;
+  width: calc(0.375 * var(--key-width) * var(--conv));
+  height: var(--homing-height);
+  border-bottom: 0.05rem solid var(--sub-color);
+}
+
+.keymap .key[data-Alpha="Bksp"],
+.keymap .key[data-Alpha="Spc"],
+.keymap .key[data-Alpha="Tab"] {
+  font-family: Helvetica;
+}
+
+.keymap[data-layer="Number"] .key[data-Number="Num"],
+.keymap[data-layer="Symbol"] .key[data-Symbol="Sym"],
+.keymap[data-layer="Number"] .key[data-Number="ZmIn"] {
+  font-family: inherit;
+}
+
+.keymap[data-layer="Number"] .key[data-Number="ZmIn"] {
+  font-size: calc(1.5 * var(--key-font-size));
+}
+.keymap[data-layer="Number"][data-shift="false"]
+  .key[data-Number="ZmIn"]::after {
+  content: "+";
+  font-size: var(--key-font-size);
+}
+.keymap[data-layer="Number"][data-shift="true"]
+  .key[data-Number="ZmIn"]::after {
+  content: "-";
+  font-size: var(--key-font-size);
+}
