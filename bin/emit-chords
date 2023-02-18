@@ -1391,17 +1391,13 @@ const qmkDupFunction = (chords, personalFile, topAppend) => {
 
   switch(last_chord) {`;
 
+  const chordToImplementation = {};
+  const implementationToCases = {};
+
   const cases = [];
   chords
     .filter((chord) => chord.tap?.alternates || chord.hold?.alternates)
     .forEach(({ tap, hold, identifier }) => {
-      const hasShift = "shift" in tap || (hold && "shift" in hold);
-
-      cases.push(`    case CHORD_${identifier}:`);
-      if (hasShift) {
-        cases.push(`    case CHORD_S_${identifier}:`);
-      }
-
       const actions = [tap];
       if (hold) {
         actions.push(hold);
@@ -1415,18 +1411,43 @@ const qmkDupFunction = (chords, personalFile, topAppend) => {
         ).map((line) => `      ${line}`)
       );
 
+      const branch = [];
       if (!hold || tapBranch.join("\n") === holdBranch.join("\n")) {
-        cases.push(...tapBranch);
+        branch.push(...tapBranch);
       } else {
-        cases.push("      if (releasedWithinTapThreshold) {");
-        cases.push(...tapBranch.map((line) => `  ${line}`));
-        cases.push("      } else {");
-        cases.push(...holdBranch.map((line) => `  ${line}`));
-        cases.push("      }");
+        branch.push("      if (releasedWithinTapThreshold) {");
+        branch.push(...tapBranch.map((line) => `  ${line}`));
+        branch.push("      } else {");
+        branch.push(...holdBranch.map((line) => `  ${line}`));
+        branch.push("      }");
       }
 
-      cases.push("      break;");
+      branch.push("      break;");
+
+      const key = branch.join("\n");
+      chordToImplementation[identifier] = [branch, key];
+
+      if (!implementationToCases[key]) {
+        implementationToCases[key] = [];
+      }
+
+      implementationToCases[key].push(`    case CHORD_${identifier}:`);
+
+      const hasShift = "shift" in tap || (hold && "shift" in hold);
+      if (hasShift) {
+        implementationToCases[key].push(`    case CHORD_S_${identifier}:`);
+      }
     });
+
+  Object.values(chordToImplementation).forEach(([branch, key]) => {
+    if (!implementationToCases[key]) {
+      return;
+    }
+
+    cases.push(...implementationToCases[key], ...branch);
+
+    delete implementationToCases[key];
+  });
 
   const implementAppends = topAppend
     .map(
