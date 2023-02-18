@@ -32,9 +32,21 @@ const parseInput = (layout, input) => {
         hold = true;
         break;
       default:
-        downKeys.push(key);
+        if (layout.layerKeys[key]) {
+          holdKeys.push(layout.modKeys[key]);
+          layer = layout.layerKeys[key];
+        } else {
+          if (downKeys.length) {
+            isChord = true;
+          }
+          downKeys.push(key);
+        }
     }
   });
+
+  if (hold) {
+    holdKeys.push(...downKeys.splice(0, downKeys.length));
+  }
 
   return { layer, shift, ctrl, alt, gui, downKeys, holdKeys, isChord };
 };

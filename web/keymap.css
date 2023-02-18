@@ -195,6 +195,13 @@
   border-bottom: 0.05rem solid var(--sub-color);
 }
 
+.keymap .row .key.down .letter::after,
+.keymap .row .key.chord-tap .letter::after,
+.keymap .row .key.hold .letter::after,
+.keymap .row .key.chord-hold .letter::after {
+  border-color: var(--bg-color) !important;
+}
+
 .keymap .key[data-Alpha="Bksp"],
 .keymap .key[data-Alpha="Spc"],
 .keymap .key[data-Alpha="Tab"] {
