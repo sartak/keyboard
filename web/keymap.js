@@ -7,6 +7,7 @@ const initializeKeymap = (layout) => {
   const keymap = document.querySelector(".keymap");
   keymap.querySelectorAll(".key").forEach((el, i) => {
     let key = layout.keys[i];
+    el.setAttribute("data-index", i);
     Object.entries(key).forEach(([layer, value]) => {
       el.setAttribute(`data-${layer}`, value);
     });
@@ -56,8 +57,8 @@ const drawKeymap = (layout, { layer, shift, ctrl, alt, gui }) => {
   });
 };
 
-const highlightKey = (key, type) => {
-  const el = document.querySelector(`.keymap .key[data-Alpha="${key}"]`);
+const highlightKey = (index, type) => {
+  const el = document.querySelector(`.keymap .key[data-index="${index}"]`);
   if (el) {
     if (type === null) {
       el.removeAttribute("data-highlight");
@@ -65,7 +66,7 @@ const highlightKey = (key, type) => {
       el.setAttribute("data-highlight", type);
     }
   } else {
-    alert(`Unable to highlightKey ${key}`);
+    alert(`Unable to highlightKey ${index}`);
   }
 };
 

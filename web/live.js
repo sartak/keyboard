@@ -31,10 +31,10 @@ const connect = () => {
             break;
           case "down":
           case "hold":
-            highlightKey(event.key.Alpha, event.type);
+            highlightKey(event.index, event.type);
             break;
           case "up":
-            highlightKey(event.key.Alpha, null);
+            highlightKey(event.index, null);
             break;
           case "mod":
             state[event.mod] = event.down;

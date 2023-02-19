@@ -18,19 +18,19 @@ const parseInput = (layout, inputs) => {
         switch (key) {
           case "Shift":
             shift = true;
-            holdKeys.push(layout.modKeys.Shft);
+            holdKeys.push(layout.keyPosition[layout.modKeys.Shft]);
             break;
           case "Ctrl":
             ctrl = true;
-            holdKeys.push(layout.modKeys.Ctrl);
+            holdKeys.push(layout.keyPosition[layout.modKeys.Ctrl]);
             break;
           case "Alt":
             alt = true;
-            holdKeys.push(layout.modKeys.Alt);
+            holdKeys.push(layout.keyPosition[layout.modKeys.Alt]);
             break;
           case "Gui":
             gui = true;
-            holdKeys.push(layout.modKeys.Gui);
+            holdKeys.push(layout.keyPosition[layout.modKeys.Gui]);
             break;
           case "Hold":
             hold = true;
@@ -39,16 +39,16 @@ const parseInput = (layout, inputs) => {
             if (layout.layerKeys[key]) {
               const k = layout.modKeys[key];
               if (Array.isArray(k)) {
-                holdKeys.push(...k);
+                holdKeys.push(...k.map((k) => layout.keyPosition[k]));
               } else {
-                holdKeys.push(k);
+                holdKeys.push(layout.keyPosition[k]);
               }
               layer = layout.layerKeys[key];
             } else {
               if (downKeys.length) {
                 isChord = true;
               }
-              downKeys.push(key);
+              downKeys.push(layout.keyPosition[key]);
             }
         }
       });
