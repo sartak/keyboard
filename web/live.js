@@ -10,6 +10,8 @@ const connect = () => {
     drawKeymap(config.layout, { layer: "Alpha" });
   }
 
+  const redrawKeymap = () => drawKeymap(config.layout, state);
+
   longPoll("/events", (events, connected) => {
     if (connected === true) {
       keymap.classList.remove("isolated");
@@ -33,6 +35,14 @@ const connect = () => {
             break;
           case "up":
             highlightKey(event.key.Alpha, null);
+            break;
+          case "mod":
+            state[event.mod] = event.down;
+            redrawKeymap();
+            break;
+          case "layer":
+            state.layer = event.layer;
+            redrawKeymap();
             break;
           case "close":
             keymap.classList.add("disconnected");
