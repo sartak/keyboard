@@ -27,6 +27,13 @@ const connect = () => {
             drawKeymap(config.layout, state);
             localStorage.setItem("config", JSON.stringify(config));
             break;
+          case "down":
+          case "hold":
+            highlightKey(event.key.Alpha, event.type);
+            break;
+          case "up":
+            highlightKey(event.key.Alpha, null);
+            break;
           case "close":
             keymap.classList.add("disconnected");
             break;
