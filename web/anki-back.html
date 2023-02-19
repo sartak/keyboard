@@ -9,18 +9,34 @@
     --desired-width: min(95vw, calc(90vh / var(--keymap-ratio)));
   }
 
+  .reveal {
+    display: none;
+  }
+
   {{keymap.css}}
 </style>
 
-{{keymap.html}}
+<div class="reveal">{{keymap.html}}</div>
 
 <script>
   {{keymap.js}}
   {{parse-card.js}}
 
-  const jq = window.jQuery || ((cb) => cb());
+  const jq = (cb) => {
+    if ("jQuery" in window) {
+      jQuery(() => {
+        setTimeout(cb, 200);
+      });
+    }
+    else {
+      cb();
+    }
+  };
+
   jq(() => {
     const layout = {{layout}};
+
+    document.querySelector('.reveal').classList.remove('reveal');
 
     const input = document.querySelector('.input-field').innerText;
 
