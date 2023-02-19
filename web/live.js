@@ -1,4 +1,5 @@
 const connect = () => {
+  const keymap = document.querySelector(".keymap");
   let config;
   let state;
 
@@ -11,9 +12,9 @@ const connect = () => {
 
   longPoll("/events", (events, connected) => {
     if (connected === true) {
-      console.log("Connected");
+      keymap.classList.remove("isolated");
     } else if (connected === false) {
-      console.log("Disconnected");
+      keymap.classList.add("isolated");
     }
 
     events.forEach((event) => {
@@ -25,6 +26,12 @@ const connect = () => {
             initializeKeymap(config.layout);
             drawKeymap(config.layout, state);
             localStorage.setItem("config", JSON.stringify(config));
+            break;
+          case "close":
+            keymap.classList.add("disconnected");
+            break;
+          case "connected":
+            keymap.classList.remove("disconnected");
             break;
           default:
             console.log(event);

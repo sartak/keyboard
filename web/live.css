@@ -6,3 +6,12 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+
+.keymap {
+  transition: opacity 250ms linear;
+}
+
+.keymap.isolated,
+.keymap.disconnected {
+  opacity: 0.5;
+}
