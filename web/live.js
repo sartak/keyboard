@@ -36,6 +36,16 @@ const connect = () => {
           case "up":
             highlightKey(event.index, null);
             break;
+          case "chord":
+            event.indexes.forEach((index) => {
+              highlightKey(index, `chord-${event.action}`);
+            });
+            break;
+          case "indeterminate-chord":
+            event.indexes.forEach((index) => {
+              highlightKey(index, "chord-tap");
+            });
+            break;
           case "mod":
             state[event.mod] = event.down;
             redrawKeymap();
