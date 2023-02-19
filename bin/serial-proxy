@@ -92,6 +92,7 @@ let currentDupAction;
 let currentChordAction;
 let dupMods = { ...currentMods };
 let oneshotMods;
+let keyTimers = {};
 
 const serial = new SerialPort({
   path: serialPath,
@@ -162,9 +163,25 @@ serial.on("data", (data) => {
         const key = config.layout.keys[index];
 
         if (type == VIRT_KEYMULT_DOWN) {
+          if (keyTimers[index]) {
+            keyTimers[index]();
+          }
           emit("down", { key, index });
         } else if (type == VIRT_KEYMULT_UP) {
-          emit("up", { key, index });
+          if (keyTimers[index]) {
+            keyTimers[index]();
+          }
+          let timer;
+          const cb = () => {
+            if (timer) {
+              emit("up", { key, index });
+              delete keyTimers[index];
+              clearInterval(timer);
+              timer = null;
+            }
+          };
+          timer = setTimeout(() => cb(), 50);
+          keyTimers[index] = cb;
         } else if (type == VIRT_KEYMULT_TAP) {
           let output = null;
 
