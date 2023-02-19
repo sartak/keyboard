@@ -1,0 +1,8 @@
+:root {
+  --desired-width: 442px;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

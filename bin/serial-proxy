@@ -4,6 +4,8 @@ const { SerialPort } = require("serialport");
 const express = require("express");
 const cors = require("cors");
 const processedChords = "processed-anki.json";
+const templateDirectory = "web";
+const indexPage = `${templateDirectory}/live.html`;
 
 const config = JSON.parse(fs.readFileSync(processedChords));
 
@@ -56,6 +58,23 @@ config.chords.forEach((chord) => {
     .join("+");
   chordForCombo[key] = chord;
 });
+
+const fillTemplate = (template, partials = {}) => {
+  return template.replaceAll(/{{\s*(.*?)\s*}}/g, (_, name) => {
+    if (name in partials) {
+      return partials[name];
+    }
+
+    const file = `${templateDirectory}/${name}`;
+    if (fs.existsSync(file)) {
+      const content = fillTemplate(String(fs.readFileSync(file)), partials);
+      partials[name] = content;
+      return content;
+    }
+
+    throw new Error(`Partial ${name} cannot be found`);
+  });
+};
 
 let listeners = [];
 let currentCombo;
@@ -460,8 +479,10 @@ app.get("/events", (req, res) => {
   let e = JSON.stringify({
     type: "initialize",
     config,
-    currentLayer,
-    currentMods,
+    state: {
+      ...currentMods,
+      layer: currentLayer,
+    },
   });
   e += "\n";
   res.write(e);
@@ -477,6 +498,10 @@ app.get("/events", (req, res) => {
 
 app.get("/config", cors({ origin: "https://monkeytype.com" }), (_, res) => {
   res.json(config);
+});
+
+app.get("/", (_, res) => {
+  res.send(fillTemplate(String(fs.readFileSync(indexPage)), {}));
 });
 
 app.listen(port, () => {
