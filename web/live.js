@@ -2,6 +2,13 @@ const connect = () => {
   let config;
   let state;
 
+  const configJson = localStorage.getItem("config");
+  if (configJson) {
+    config = JSON.parse(configJson);
+    initializeKeymap(config.layout);
+    drawKeymap(config.layout, { layer: "Alpha" });
+  }
+
   longPoll("/events", (events, connected) => {
     if (connected === true) {
       console.log("Connected");
@@ -17,6 +24,7 @@ const connect = () => {
             state = event.state;
             initializeKeymap(config.layout);
             drawKeymap(config.layout, state);
+            localStorage.setItem("config", JSON.stringify(config));
             break;
           default:
             console.log(event);
