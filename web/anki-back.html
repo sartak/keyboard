@@ -23,10 +23,15 @@
   {{parse-card.js}}
 
   const jq = (cb) => {
+    // real anki
     if ("jQuery" in window) {
-      jQuery(() => {
-        setTimeout(cb, 200);
-      });
+      // desktop app
+      if ("pycmd" in window) {
+        const rootStyle = document.querySelector(":root").style;
+        rootStyle.setProperty('--desired-width', '422px');
+      }
+
+      jQuery(cb);
     }
     else {
       cb();
