@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const sqlite3 = require("better-sqlite3");
+const protobuf = require("protobufjs");
 const inputFile = "processed.json";
 const outputFile = "processed-anki.json";
 const templateDirectory = "web";
@@ -9,6 +10,7 @@ const ankiBackFile = `${templateDirectory}/anki-back.html`;
 const ankiStyleFile = `${templateDirectory}/anki-style.css`;
 const ankiShellFile = `${templateDirectory}/anki-shell.html`;
 const shellOutput = "anki-test.html";
+const ankiSrc = "../anki";
 
 const [nodeArg, scriptArg] = process.argv;
 if (process.argv.length !== 3 && process.argv.length !== 4) {
@@ -109,12 +111,19 @@ const generateShell = (input, output) => {
 };
 
 const checkTemplates = (anki, mid, noteConfig) => {
-  let [ankiStyle] = String(noteConfig).split("*" + String.fromCharCode(0xfffd));
+  const protoDir = `${ankiSrc}/proto/anki`;
+  const protoFiles = fs
+    .readdirSync(protoDir)
+    .filter((f) => f.endsWith(".proto"))
+    .map((f) => `${protoDir}/${f}`);
+  const root = protobuf.loadSync(protoFiles);
+  const NoteConfig = root.lookupType("Notetype.Config");
+
+  const { css: ankiStyle } = NoteConfig.decode(noteConfig);
+
   if (!ankiStyle) {
     throw new Error("Cannot load anki style");
   }
-
-  ankiStyle = ankiStyle.substring(3);
 
   const templateStmt = anki.prepare(`
   SELECT config
