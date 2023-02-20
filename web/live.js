@@ -12,7 +12,9 @@ const connect = () => {
 
   const redrawKeymap = () => drawKeymap(config.layout, state);
   const resetKeymap = () => {
-    drawKeymap(config.layout, { layer: "Alpha" });
+    if (config) {
+      drawKeymap(config.layout, { layer: "Alpha" });
+    }
     clearHighlights();
   };
 
