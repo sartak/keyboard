@@ -1,6 +1,7 @@
 body {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
+  margin: 15px 0;
 }
 
 hr {
