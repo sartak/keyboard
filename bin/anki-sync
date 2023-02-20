@@ -117,6 +117,7 @@ const checkTemplates = (anki, mid, noteConfig) => {
     .filter((f) => f.endsWith(".proto"))
     .map((f) => `${protoDir}/${f}`);
   const root = protobuf.loadSync(protoFiles);
+  const Template = root.lookupType("Notetype.Template.Config");
   const NoteConfig = root.lookupType("Notetype.Config");
 
   const { css: ankiStyle } = NoteConfig.decode(noteConfig);
@@ -133,11 +134,9 @@ const checkTemplates = (anki, mid, noteConfig) => {
   let i = 0;
   let ankiFront, ankiBack;
   for (const { config: templateConfig } of templateStmt.iterate(mid)) {
-    [, ankiFront, , ankiBack] = String(templateConfig)
-      .split(String.fromCharCode(0xfffd))
-      .map((s) => s.substring(1));
-
-    ankiFront = ankiFront.substring(0, ankiFront.length - 1);
+    const msg = Template.decode(templateConfig);
+    ankiFront = msg.qFormat;
+    ankiBack = msg.aFormat;
 
     if (i++) {
       throw new Error("Multiple templates detected");
