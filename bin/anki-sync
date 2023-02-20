@@ -110,6 +110,10 @@ const generateShell = (input, output) => {
 
 const checkTemplates = (anki, mid, noteConfig) => {
   let [ankiStyle] = String(noteConfig).split("*" + String.fromCharCode(0xfffd));
+  if (!ankiStyle) {
+    throw new Error("Cannot load anki style");
+  }
+
   ankiStyle = ankiStyle.substring(3);
 
   const templateStmt = anki.prepare(`
@@ -129,6 +133,10 @@ const checkTemplates = (anki, mid, noteConfig) => {
     if (i++) {
       throw new Error("Multiple templates detected");
     }
+  }
+
+  if (!ankiFront || !ankiBack) {
+    throw new Error("Cannot load anki templates");
   }
 
   const [expectedFront, expectedBack, expectedStyle] = generateTemplates();
