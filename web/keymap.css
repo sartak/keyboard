@@ -209,6 +209,8 @@
   width: calc(0.375 * var(--key-width) * var(--conv));
   height: var(--homing-height);
   border-bottom: 1px solid var(--sub-color);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .keymap .key[data-Alpha="Bksp"],
