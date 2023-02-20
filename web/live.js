@@ -43,6 +43,9 @@ const connect = () => {
           case "up":
             highlightKey(event.index, null);
             break;
+          case "all-up":
+            clearHighlights();
+            break;
           case "chord":
             event.indexes.forEach((index) => {
               highlightKey(index, `chord-${event.action}`);
