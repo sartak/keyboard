@@ -138,6 +138,9 @@ const intuitLabel = ({ output, behavior }) =>
 const intuitIdentifierStem = ({ label }) => {
   let identifier = label.toLowerCase();
   identifier = identifier.replaceAll(/[^a-z_0-9]+/g, "_");
+  if (identifier.match(/^[0-9]/)) {
+    identifier = "_" + identifier;
+  }
   return identifier.substring(0, 7);
 };
 
