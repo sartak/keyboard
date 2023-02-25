@@ -101,7 +101,7 @@ const serial = new SerialPort({
 });
 
 const emit = (type, event = {}) => {
-  let e = JSON.stringify({ ...event, type });
+  let e = JSON.stringify({ ...event, type, time: Date.now() });
   e += "\n";
   listeners.forEach((l) => {
     l.write(e);
