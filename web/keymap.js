@@ -85,3 +85,8 @@ const setKeymapStatic = (static = true) => {
     keymap.classList.remove("static");
   }
 };
+
+const resetKeymap = (layout) => {
+  drawKeymap(layout, { layer: "Alpha" });
+  clearHighlights();
+};
