@@ -100,9 +100,23 @@ const serial = new SerialPort({
   baudRate: 115200,
 });
 
+const events = [];
+setInterval(() => {
+  const t = Date.now() - 1000 * 60 * 10;
+  while (true) {
+    const e = events[0];
+    if (!e || e.time > t) {
+      return;
+    }
+    events.shift();
+  }
+}, 1000 * 60);
+
 const emit = (type, event = {}) => {
-  let e = JSON.stringify({ ...event, type, time: Date.now() });
-  e += "\n";
+  const payload = { ...event, type, time: Date.now() };
+  events.push(payload);
+
+  const e = `${JSON.stringify(payload)}\n`;
   listeners.forEach((l) => {
     l.write(e);
   });
