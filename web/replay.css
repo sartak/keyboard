@@ -56,6 +56,10 @@ body {
   height: 3rem;
 }
 
+.letter {
+  cursor: pointer;
+}
+
 .word.committed.incorrect {
   text-decoration: underline;
   text-decoration-color: var(--error-color);

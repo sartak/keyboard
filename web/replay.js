@@ -227,7 +227,8 @@ const dropIrrelevantEvents = (events) => {
   );
 };
 
-events = dropIrrelevantEvents(events);
+const modifiedEvents = dropIrrelevantEvents(events);
+events = [...modifiedEvents];
 
 let lastTime = events[0].time;
 const committed = [];
@@ -237,6 +238,7 @@ let caretWords = [];
 let caretWord = 0;
 let caretLetter = 0;
 const caret = document.querySelector("#caret");
+let timeout;
 
 const commitWord = (idx) => {
   const wordNode = wordsListNode.querySelector(`.word[data-index="${idx}"]`);
@@ -291,6 +293,37 @@ const positionCaret = (wordIdx = caretWord, letterIdx = caretLetter) => {
 };
 
 positionCaret();
+
+const reset = () => {
+  resetKeymap(config.layout);
+  caret.classList.add("pulse");
+
+  clearTimeout(timeout);
+  events = [...modifiedEvents];
+  lastTime = events[0].time;
+  committed.splice(0, committed.length);
+  current.splice(0, current.length);
+  caretCommitted = 0;
+  caretWords = [];
+  caretWord = 0;
+  caretLetter = 0;
+  positionCaret();
+
+  wordsListNode.querySelectorAll(".typo, .extra").forEach((node) => {
+    node.parentNode.removeChild(node);
+  });
+  wordsListNode.querySelectorAll(".letter").forEach((node) => {
+    node.classList.remove(
+      "correct",
+      "incorrect",
+      "was-incorrect",
+      "was-correct"
+    );
+  });
+  wordsListNode.querySelectorAll(".word").forEach((node) => {
+    node.classList.remove("committed", "incorrect", "was-incorrect", "perfect");
+  });
+};
 
 const drawEvent = (event) => {
   handleEvent(event);
@@ -404,24 +437,55 @@ const finishDrawing = () => {
   });
   resetKeymap(config.layout);
   caret.classList.add("pulse");
+
+  timeout = setTimeout(() => {
+    reset();
+    timeout = setTimeout(() => {
+      beginDrawing();
+    }, 5000);
+  }, 1000);
 };
 
 const replayEvent = () => {
   if (!events.length) {
-    setTimeout(() => finishDrawing(), 200);
+    timeout = setTimeout(() => finishDrawing(), 200);
     return;
   }
 
   const event = events.shift();
 
-  setTimeout(() => {
+  timeout = setTimeout(() => {
     lastTime = event.time;
     drawEvent(event);
     replayEvent();
   }, event.time - lastTime);
 };
 
-setTimeout(() => {
+const beginDrawing = () => {
   caret.classList.remove("pulse");
   replayEvent();
-}, 1000);
+};
+
+timeout = setTimeout(beginDrawing, 1000);
+
+wordsListNode.querySelectorAll(".word").forEach((node, i) => {
+  node.querySelectorAll(".letter").forEach((node) => {
+    node.onclick = () => {
+      reset();
+
+      if (i) {
+        while (caretWords.length <= i) {
+          const event = events.shift();
+          lastTime = event.time;
+          drawEvent(event);
+        }
+
+        resetKeymap(config.layout);
+      }
+
+      timeout = setTimeout(() => {
+        beginDrawing();
+      }, 500);
+    };
+  });
+});
