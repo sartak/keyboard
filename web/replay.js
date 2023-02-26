@@ -100,6 +100,10 @@ const outputForEvent = (event, committed, current) => {
       current.pop();
     } else {
       if (char === " ") {
+        if (!current.length || current[current.length - 1] === " ") {
+          continue;
+        }
+
         const words = current
           .join("")
           .split(" ")
