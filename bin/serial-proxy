@@ -493,9 +493,11 @@ serial.on("close", (error) => {
 
 serial.on("open", () => {
   emit("connected");
+  currentLayer = config.layout.layers[0];
   emit("layer", { layer: currentLayer, from: null });
-  Object.entries(currentMods).forEach(([mod, down]) => {
-    emit("mod", { mod, down });
+  Object.keys(currentMods).forEach((mod) => {
+    currentMods[mod] = false;
+    emit("mod", { mod, down: false });
   });
   downKeys.splice(0, downKeys.length);
   serial.write(String.fromCharCode(VIRT_HEARTBEAT));
