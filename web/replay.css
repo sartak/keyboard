@@ -1,0 +1,86 @@
+:root {
+  --desired-width: 442px;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+#wordsContainer {
+  position: relative;
+  font-family: Menlo;
+  font-size: 1.5rem;
+  max-width: 1250px;
+  margin: 1em auto;
+}
+
+#wordsContainer .row {
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+}
+
+#caret {
+  position: absolute;
+  transform-origin: top left;
+  height: 1.2em;
+  width: 0.1em;
+  background: var(--caret-color);
+  border-radius: 8px;
+  transition: left 100ms linear;
+  z-index: 1;
+}
+
+#caret.pulse {
+  animation: caretFlashSmooth 1s infinite;
+}
+
+#caret.instant {
+  transition: none;
+}
+
+@keyframes caretFlashSmooth {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.word {
+  display: inline-block;
+  height: 3rem;
+}
+
+.word.committed.incorrect {
+  text-decoration: underline;
+  text-decoration-color: var(--error-color);
+}
+
+.letter {
+  position: relative;
+}
+
+.letter.correct {
+  color: var(--main-color);
+}
+
+.letter.incorrect {
+  color: var(--error-color);
+}
+
+.letter.was-incorrect {
+  color: var(--error-extra-color);
+}
+
+.typo {
+  position: absolute;
+  left: 0;
+  top: 1.3rem;
+  color: var(--error-color);
+  font-size: 1.1rem;
+}

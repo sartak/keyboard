@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <style>
+      {{monkeytype-sonokai.css}}
+      {{keymap.css}}
+      {{replay.css}}
+    </style>
+  </head>
+  <body>
+    <div id="wordsContainer">
+      <div id="caret" class="pulse"></div>
+      <div id="wordsList"></div>
+    </div>
+    {{keymap.html}}
+  </body>
+  <script>
+    {{keymap.js}}
+    const config = {{config}};
+    const test = {{test}};
+    {{events.js}}
+    {{replay.js}}
+  </script>
+</html>
