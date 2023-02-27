@@ -5,6 +5,7 @@ const protobuf = require("protobufjs");
 const inputFile = "processed.json";
 const outputFile = "processed-anki.json";
 const templateDirectory = "web";
+const fallbackDirectories = [];
 const ankiFrontFile = `${templateDirectory}/anki-front.html`;
 const ankiBackFile = `${templateDirectory}/anki-back.html`;
 const ankiStyleFile = `${templateDirectory}/anki-style.css`;
@@ -55,11 +56,13 @@ const fillTemplate = (template, partials = {}) => {
       return partials[name];
     }
 
-    const file = `${templateDirectory}/${name}`;
-    if (fs.existsSync(file)) {
-      const content = fillTemplate(String(fs.readFileSync(file)), partials);
-      partials[name] = content;
-      return content;
+    for (const dir of [templateDirectory, ...fallbackDirectories]) {
+      const file = `${dir}/${name}`;
+      if (fs.existsSync(file)) {
+        const content = fillTemplate(String(fs.readFileSync(file)), partials);
+        partials[name] = content;
+        return content;
+      }
     }
 
     throw new Error(`Partial ${name} cannot be found`);

@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const processedChords = "processed-anki.json";
 const templateDirectory = "web";
+const fallbackDirectories = [];
 const indexPage = `${templateDirectory}/live.html`;
 
 const config = JSON.parse(fs.readFileSync(processedChords));
@@ -65,11 +66,13 @@ const fillTemplate = (template, partials = {}) => {
       return partials[name];
     }
 
-    const file = `${templateDirectory}/${name}`;
-    if (fs.existsSync(file)) {
-      const content = fillTemplate(String(fs.readFileSync(file)), partials);
-      partials[name] = content;
-      return content;
+    for (const dir of [templateDirectory, ...fallbackDirectories]) {
+      const file = `${dir}/${name}`;
+      if (fs.existsSync(file)) {
+        const content = fillTemplate(String(fs.readFileSync(file)), partials);
+        partials[name] = content;
+        return content;
+      }
     }
 
     throw new Error(`Partial ${name} cannot be found`);
