@@ -6,8 +6,6 @@ const cors = require("cors");
 const processedChords = "processed-anki.json";
 const templateDirectory = "web";
 const indexPage = `${templateDirectory}/live.html`;
-const replayPage = `${templateDirectory}/replay.html`;
-const resultsDir = "data/results/";
 
 const config = JSON.parse(fs.readFileSync(processedChords));
 
@@ -546,38 +544,6 @@ app.get("/events/:since", (req, res) => {
 
 app.get("/config", cors({ origin: "https://monkeytype.com" }), (_, res) => {
   res.json(config);
-});
-
-app.get("/replay/:id", (req, res) => {
-  const { id } = req.params;
-  if (!id.match(/^[0-9]+$/)) {
-    res.sendStatus(404);
-    return;
-  }
-
-  const dir = `${resultsDir}/${id}`;
-  if (!fs.existsSync(dir)) {
-    res.sendStatus(404);
-    return;
-  }
-
-  const payload = { id };
-  fs.readdirSync(dir).forEach((file) => {
-    const [fileType, format] = file.split(".");
-    const value = fs.readFileSync(`${dir}/${file}`);
-    if (format === "json") {
-      payload[fileType] = JSON.parse(value);
-    } else {
-      payload[fileType] = String(value);
-    }
-  });
-
-  res.send(
-    fillTemplate(String(fs.readFileSync(replayPage)), {
-      config: JSON.stringify(config),
-      test: JSON.stringify(payload),
-    })
-  );
 });
 
 app.get("/", (_, res) => {
