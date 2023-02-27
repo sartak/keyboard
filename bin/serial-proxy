@@ -538,6 +538,12 @@ app.get("/events", (req, res) => {
   });
 });
 
+app.get("/events/:since", (req, res) => {
+  const { since } = req.params;
+  const filteredEvents = events.filter(({ time }) => time >= since);
+  res.json(filteredEvents);
+});
+
 app.get("/config", cors({ origin: "https://monkeytype.com" }), (_, res) => {
   res.json(config);
 });
