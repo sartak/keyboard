@@ -96,7 +96,7 @@ let currentChordAction;
 let dupMods = { ...currentMods };
 let oneshotMods;
 let keyTimers = {};
-const downKeys = [];
+const downKeys = {};
 
 const serial = new SerialPort({
   path: serialPath,
@@ -185,17 +185,18 @@ serial.on("data", (data) => {
             keyTimers[index]();
           }
           emit("down", { key, index });
-          downKeys.push(index);
+          downKeys[index] = Date.now();
         } else if (type == VIRT_KEYMULT_UP) {
           if (keyTimers[index]) {
             keyTimers[index]();
           }
           let timer;
+          const duration = Date.now() - downKeys[index];
           const cb = () => {
             if (timer) {
-              emit("up", { key, index });
-              downKeys.splice(downKeys.indexOf(index), 1);
-              if (downKeys.length === 0) {
+              emit("up", { key, index, duration });
+              delete downKeys[index];
+              if (Object.keys(downKeys).length === 0) {
                 emit("all-up");
               }
               delete keyTimers[index];
@@ -502,7 +503,9 @@ serial.on("open", () => {
     currentMods[mod] = false;
     emit("mod", { mod, down: false });
   });
-  downKeys.splice(0, downKeys.length);
+  for (const key in downKeys) {
+    delete downKeys[key];
+  }
   serial.write(String.fromCharCode(VIRT_HEARTBEAT));
 });
 
