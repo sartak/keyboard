@@ -1225,6 +1225,7 @@
     { "combo": [], "output": "I love" },
     { "combo": [], "output": "try to" },
     { "combo": [], "output": "what is" },
+    { "combo": ["o", "f", "c"], "output": "of course" },
 
     "Misc phrases",
     { "combo": ["b","q","x","'"], "output": "the quick brown fox jumps over the lazy dog", "shift": "The quick brown fox jumps over the lazy dog.", "exact": true },
