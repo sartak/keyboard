@@ -32,12 +32,21 @@
   color: var(--sub-color);
   white-space: pre;
 
-  transition: background-color 100ms ease-out, color 100ms ease-out,
-    border-color 100ms ease-out;
+  transition: background-color 300ms ease-out, color 300ms ease-out,
+    border-color 300ms ease-out;
 }
 
 .keymap .row .key .letter::after {
-  transition: border-color 100ms ease-out;
+  transition: border-color 300ms ease-out;
+}
+
+.keymap .row .key[data-highlight] {
+  transition: background-color 50ms ease-out, color 50ms ease-out,
+    border-color 50ms ease-out;
+}
+
+.keymap .row .key[data-highlight] .letter::after {
+  transition: border-color 50ms ease-out;
 }
 
 .keymap.static .row .key,
