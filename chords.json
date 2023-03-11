@@ -78,7 +78,7 @@
     { "combo": ["m","a","k"], "output": ["make","made","making"], "set": "19" },
     { "combo": ["w","h","e"], "output": "when", "set": "20" },
     { "combo": ["c","a","n"], "output": "can", "set": "5" },
-    { "combo": ["m","r","e"], "output": ["more","most","many"], "set": "14" },
+    { "combo": ["m","o","r"], "output": ["more","most","many"], "set": "14" },
     { "combo": ["i","f","Dup"], "output": "if", "set": "1" },
     { "combo": ["n","e","Dup"], "output": "no", "set": "9" },
     { "combo": ["m","a","n"], "output": ["man","men"], "set": "19" },
