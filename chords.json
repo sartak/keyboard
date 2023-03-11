@@ -118,7 +118,7 @@
     { "combo": ["h","i","k"], "output": ["think","thought","thinking"], "set": "5" },
     { "combo": ["m","o","t"], "output": ["most","many","more"], "set": "7" },
     { "combo": ["e","v","n"], "output": "even", "set": "11" },
-    { "combo": ["f","i","d"], "output": ["find","found","finding"], "set": "14" },
+    { "combo": ["Dup","f","n"], "output": ["find","found","finding"], "set": "14" },
     { "combo": ["a","y","Dup"], "output": ["day","days"], "set": "1" },
     { "combo": ["a","l","o"], "output": "also", "set": "8" },
     { "combo": ["f","t","r"], "output": "after", "set": "6" },
