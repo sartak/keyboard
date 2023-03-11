@@ -198,7 +198,7 @@
     { "combo": ["a","g","n"], "output": "against", "set": "10" },
     { "combo": ["a","s","k"], "output": ["ask","asked","asking"], "set": "19" },
     { "combo": ["l","a","t"], "output": ["late","later","latest"], "set": "11" },
-    { "combo": ["g","m","e"], "output": ["home","homes","homed","homing"], "set": "14" },
+    { "combo": ["Dup","o","e"], "output": ["home","homes","homed","homing"], "set": "14" },
     { "combo": ["i","n","r"], "output": ["interest","interests","interested","interesting"], "set": "1" },
     { "combo": ["a","r","g"], "output": ["large","larger","largest"], "set": "6" },
     { "combo": ["p","s","n"], "output": ["person","people"], "set": "2" },
