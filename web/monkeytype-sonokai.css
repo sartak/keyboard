@@ -9,4 +9,7 @@
   --error-extra-color: #ecac6a;
   --colorful-error-color: #fc5d7c;
   --colorful-error-extra-color: #ecac6a;
+
+  --main-color-light: rgb(192, 217, 171);
+  --error-color-light: rgb(239, 160, 176);
 }
