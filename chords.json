@@ -1061,6 +1061,7 @@
     { "combo": ["n","i","l"], "output": ["nil","nils"] },
     { "combo": ["a","r","y"], "output": ["array","arrays"] },
     { "combo": ["s","r","t"], "output": ["sort","sorts","sorted","will sort"] },
+    { "combo": ["c","e","a"], "output": ["schema","schemas","schemata"] },
 
     "Common pairs of words",
     { "combo": ["i","n","t","e"], "output": "in the" },
