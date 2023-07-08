@@ -32,6 +32,7 @@ if (ankiDatabase !== null && !fs.existsSync(ankiDatabase)) {
 
 const config = JSON.parse(fs.readFileSync(inputFile));
 const { layout } = config;
+let allOk = true;
 
 const tidyChar = {
   "\b": "⌫",
@@ -163,6 +164,7 @@ const checkTemplates = (anki, mid, noteConfig) => {
       console.warn(expected);
       console.warn("-".repeat(40));
       console.warn("");
+      allOk = false;
     }
   });
 };
@@ -202,9 +204,11 @@ const getCards = () => {
 
     if (inputString.match(/\n/)) {
       console.warn(`Found newline in input of nid:${id}`);
+      allOk = false;
     }
     if (inputString.match(/<\s*\/?\s*\w+/)) {
       console.warn(`Found HTML tag in input of nid:${id}`);
+      allOk = false;
     }
 
     let suspended;
@@ -228,6 +232,7 @@ const getCards = () => {
         console.warn(
           `Unable to determine suspended state for card nid:${id} for ${inputString} => ${output}`
         );
+        allOk = false;
         break;
     }
 
@@ -247,6 +252,7 @@ const cardForInput = {};
 const chordForCombo = {};
 let studyingChords = 0;
 let studyingOther = 0;
+const missingDups = [];
 
 cards.forEach((card) => {
   let key;
@@ -346,7 +352,12 @@ Object.values(chordForCombo).forEach((chord) => {
       if (!card) {
         if (!action.intuited) {
           ok = false;
-          console.warn(`No Anki card for chord: ${context}`);
+          if (dups) {
+            missingDups.push(`No Anki card for chord: ${context}`);
+          } else {
+            allOk = false;
+            console.warn(`No Anki card for chord: ${context}`);
+          }
         }
         return;
       }
@@ -354,12 +365,14 @@ Object.values(chordForCombo).forEach((chord) => {
       context = `card nid:${card.id} for ${context}`;
       if (!card.tags.includes("chord")) {
         ok = false;
+        allOk = false;
         console.warn(`Missing tag 'chord' for ${context}`);
       }
 
       if (isBehavior) {
         if (card.output !== result) {
           ok = false;
+          allOk = false;
           console.warn(
             `Card nid:${card.id} for combo ${combo} does not match expected behavior`
           );
@@ -374,6 +387,7 @@ Object.values(chordForCombo).forEach((chord) => {
 
         if (card.output !== expected) {
           ok = false;
+          allOk = false;
           console.warn(
             `Card nid:${card.id} for combo ${combo} does not match expected output`
           );
@@ -467,6 +481,7 @@ Object.keys(config.layout.keys[0])
       context = `card nid:${card.id} for ${context}`;
       if (card.tags.includes("chord")) {
         ok = false;
+        allOk = false;
         console.warn(`Spurious tag 'chord' for ${context}`);
       }
 
@@ -508,6 +523,7 @@ Object.keys(config.layout.keys[0])
 
       if (!found) {
         ok = false;
+        allOk = false;
         console.warn(`Key does not match expected effect: ${context}`);
         console.warn(`Card: ${card.output}`);
         [...new Set(effects)]
@@ -531,6 +547,7 @@ missing.forEach(([effect, message]) => {
     return;
   }
   seen[effect] = true;
+  allOk = false;
   console.warn(message);
 });
 
@@ -538,6 +555,7 @@ Object.entries(cardForInput).forEach(([input, card]) => {
   if (!card.tags.includes("chord") && card.suspended === false) {
     studyingOther++;
   }
+  allOk = false;
   console.warn(
     `Loose Anki card nid:${card.id} ${card.input.join(" ")} => ${
       card.output
@@ -546,6 +564,20 @@ Object.entries(cardForInput).forEach(([input, card]) => {
 });
 
 fs.writeFileSync(outputFile, JSON.stringify(config));
+
+if (missingDups.length) {
+  if (allOk) {
+    for (const missing of missingDups) {
+      console.warn(missing);
+    }
+  } else {
+    console.warn(
+      `Suppressed ${missingDups.length} low-severity ${
+        missingDups.length === 1 ? "warning" : "warnings"
+      } due to other errors`
+    );
+  }
+}
 
 console.log(
   `Studying ${studyingChords} of ${config.chords.length} chords, plus ${studyingOther} others`
