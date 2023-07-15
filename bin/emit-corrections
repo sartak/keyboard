@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+const fs = require("fs");
+const inputFile = "processed-anki.json";
+const publicFile = "../qmk-config/corrections.c";
+const personalFile = "../qmk-config/corrections_personal.c";
+
+const config = JSON.parse(fs.readFileSync(inputFile));
+const { chords } = config;
+
+const corrections = [];
+
+chords.forEach((chord) => {
+  const actions = [chord.tap, chord.tap?.shift, chord.hold, chord.hold?.shift];
+
+  actions.filter(Boolean).forEach((action) => {
+    const alternates = [];
+    if ("output" in action) {
+      alternates.push([action, action.output]);
+    }
+
+    action.alternates?.forEach((alternate) => {
+      if (alternate.toIdx === 0) {
+        return;
+      }
+      alternates.push([alternate, alternate.to]);
+    });
+
+    alternates.forEach(([action, out]) => {
+      if (!action.reviewing) {
+        return;
+      }
+      if (!out.match(/^[a-zA-Z]+$/)) {
+        return;
+      }
+      corrections.push([action.exact ? out : `${out} `, chord.personal]);
+    });
+  });
+});
+
+const preamble = (actions, personalFile) => {
+  if (personalFile) {
+    return [];
+  }
+
+  return ['#include "corrections_personal.c"'];
+};
+
+const makeAction = (out) => {
+  return `  if (strcmp(buffer, "${out}") == 0) return true;`;
+};
+
+const fn = (actions, personalFile) => {
+  const name = personalFile
+    ? "should_correct_chord_personal"
+    : "should_correct_chord";
+  const intro = `bool ${name}(char* buffer) {`.split("\n");
+
+  const outro = (
+    personalFile
+      ? `  return false;
+}`
+      : `  return should_correct_chord_personal(buffer);
+}`
+  ).split("\n");
+
+  return [...intro, ...actions.map(([out]) => makeAction(out)), ...outro];
+};
+
+const correctionsConfig = (allActions, personalFile) => {
+  const lines = [];
+  const actions = allActions.filter(
+    ([, personal]) => !!personal === personalFile
+  );
+
+  lines.push(...preamble(actions, personalFile), "");
+  lines.push(...fn(actions, personalFile), "");
+
+  return lines;
+};
+
+fs.writeFileSync(publicFile, correctionsConfig(corrections, false).join("\n"));
+fs.writeFileSync(personalFile, correctionsConfig(corrections, true).join("\n"));
