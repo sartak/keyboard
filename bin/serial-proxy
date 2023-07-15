@@ -39,6 +39,7 @@ const VIRT_GUI_DOWN = VIRT_ALT_UP + 1;
 const VIRT_GUI_UP = VIRT_GUI_DOWN + 1;
 const VIRT_MOD_LAST = VIRT_GUI_UP;
 const VIRT_SETTINGS = VIRT_MOD_LAST + 1;
+const VIRT_SUPPRESSED_KEY = VIRT_SETTINGS + 1;
 const VIRT_TIMEOUT = 1000;
 
 const VIRT_SETTING_DUP_FORCE = 0;
@@ -508,6 +509,8 @@ serial.on("data", (data) => {
           emit("setting", { key, value, from });
         };
       };
+    } else if (byte == VIRT_SUPPRESSED_KEY) {
+      console.warn(`Previous key was suppressed`);
     } else {
       console.warn(`Unhandled input ${byte}`);
     }
