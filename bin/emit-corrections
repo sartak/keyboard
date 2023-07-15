@@ -82,13 +82,13 @@ const makeActions = (outs) => {
       const rest = collect(os);
       if (rest.length === 0) {
         return [
-          `return buffer[${i}] == 0; /*${prefix}*/ // ${inputFor[prefix]}`,
+          `if (buffer[${i}] == 0) /*${prefix}*/ return "${inputFor[prefix]}";`,
         ];
       } else {
         return [
-          `return strcmp(buffer+${i}, /*${prefix}*/"${rest}") == 0; // ${
+          `if (strcmp(buffer+${i}, /*${prefix}*/"${rest}") == 0) return "${
             inputFor[prefix + rest]
-          }`,
+          }";`,
         ];
       }
     }
@@ -116,18 +116,16 @@ const makeActions = (outs) => {
 };
 
 const fn = (actions, personalFile) => {
-  const name = personalFile
-    ? "should_correct_chord_personal"
-    : "should_correct_chord";
-  const intro = `bool ${name}(char* buffer) {`.split("\n");
+  const name = personalFile ? "correct_chord_personal" : "correct_chord";
+  const intro = `char* ${name}(char* buffer) {`.split("\n");
 
   const outro = (
     personalFile
       ? `
-  return false;
+  return NULL;
 }`
       : `
-  return should_correct_chord_personal(buffer);
+  return correct_chord_personal(buffer);
 }`
   ).split("\n");
 
