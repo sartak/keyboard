@@ -38,7 +38,22 @@ const VIRT_ALT_UP = VIRT_ALT_DOWN + 1;
 const VIRT_GUI_DOWN = VIRT_ALT_UP + 1;
 const VIRT_GUI_UP = VIRT_GUI_DOWN + 1;
 const VIRT_MOD_LAST = VIRT_GUI_UP;
+const VIRT_SETTINGS = VIRT_MOD_LAST + 1;
 const VIRT_TIMEOUT = 1000;
+
+const VIRT_SETTING_DUP_FORCE = 0;
+const VIRT_SETTING_VIRT_SERIAL = 1;
+const VIRT_SETTING_CHORD_MODE = 2;
+const settingsMap = {
+  [VIRT_SETTING_DUP_FORCE]: "dupForce",
+  [VIRT_SETTING_VIRT_SERIAL]: "virtSerial",
+  [VIRT_SETTING_CHORD_MODE]: "chordMode",
+};
+let currentSettings = {
+  dupForce: 0,
+  virtSerial: 0,
+  chordMode: 0,
+};
 
 const [nodePath, scriptPath, serialPath, port] = process.argv;
 if (process.argv.length !== 4) {
@@ -163,9 +178,20 @@ const typed = (output, mods, mode) => {
   });
 };
 
+let followupHandler;
+
 serial.on("data", (data) => {
   for (let i = 0; i < data.length; i++) {
     const byte = data[i];
+
+    if (followupHandler) {
+      let f = followupHandler;
+      followupHandler = undefined;
+
+      f(byte);
+
+      continue;
+    }
 
     if (byte === VIRT_WARN) {
       console.log("Got warning from keyboard");
@@ -469,6 +495,18 @@ serial.on("data", (data) => {
 
       currentMods[mod] = down;
       emit("mod", { mod, down });
+    } else if (byte == VIRT_SETTINGS) {
+      followupHandler = (option) => {
+        const key = settingsMap[option];
+        if (!key) {
+          console.warn(`Unhandled setting ${option}`);
+        }
+        followupHandler = (value) => {
+          const from = currentSettings[key];
+          currentSettings[key] = value;
+          emit("setting", { key, value, from });
+        };
+      };
     } else {
       console.warn(`Unhandled input ${byte}`);
     }
@@ -503,6 +541,7 @@ serial.on("open", () => {
     currentMods[mod] = false;
     emit("mod", { mod, down: false });
   });
+  emit("settings", { settings: currentSettings });
   for (const key in downKeys) {
     delete downKeys[key];
   }
@@ -528,6 +567,7 @@ app.get("/events", (req, res) => {
     state: {
       ...currentMods,
       layer: currentLayer,
+      settings: currentSettings,
     },
   });
   e += "\n";
