@@ -84,10 +84,21 @@ type LayerConfig = [
   ThumbRowConfig,
 ];
 
+type SettingConfig = {
+  type: "bool",
+  default?: boolean;
+  label?: string;
+} | {
+  type: "enum",
+  default?: number;
+  labels?: Array<string>;
+};
+
 type LayoutConfig = {
   Alpha: LayerConfig;
   _board?: { [key: string]: number };
   _labels?: { [key: string]: string | Array<string> };
+  _settings?: { [key: string]: SettingConfig };
 } & {
   [L in LayerWithModifier]?: LayerConfig;
 };

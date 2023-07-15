@@ -308,6 +308,7 @@ const parseLayout = (config) => {
     modKeys,
     qmkKey,
     zmkLayers,
+    settings: config._settings,
   };
 };
 
@@ -320,6 +321,7 @@ const layout = {
   keymap: parsedLayout.keymap,
   board: parsedLayout.board,
   labels: parsedLayout.labels,
+  settings: parsedLayout.settings,
   keyPosition,
   outputForKey,
   modKeys,

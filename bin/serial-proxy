@@ -49,11 +49,6 @@ const settingsMap = {
   [VIRT_SETTING_VIRT_SERIAL]: "virtSerial",
   [VIRT_SETTING_CHORD_MODE]: "chordMode",
 };
-let currentSettings = {
-  dupForce: 0,
-  virtSerial: 0,
-  chordMode: 0,
-};
 
 const [nodePath, scriptPath, serialPath, port] = process.argv;
 if (process.argv.length !== 4) {
@@ -73,6 +68,11 @@ config.chords.forEach((chord) => {
     .sort()
     .join("+");
   chordForCombo[key] = chord;
+});
+
+const currentSettings = {};
+Object.entries(config.layout.settings).forEach(([key, config]) => {
+  currentSettings[key] = config.default;
 });
 
 const fillTemplate = (template, partials = {}) => {
@@ -501,7 +501,8 @@ serial.on("data", (data) => {
         if (!key) {
           console.warn(`Unhandled setting ${option}`);
         }
-        followupHandler = (value) => {
+        followupHandler = (v) => {
+          const value = config.layout.settings[key].type === "bool" ? !!v : v;
           const from = currentSettings[key];
           currentSettings[key] = value;
           emit("setting", { key, value, from });

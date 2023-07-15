@@ -71,6 +71,12 @@
     "BT6": ["BT6", "Bluetooth 6"]
   },
 
+  "_settings": {
+    "dupForce": { "default": false, "type": "bool", "label": "D" },
+    "virtSerial": { "default": false, "type": "bool", "label": "V" },
+    "chordMode": { "default": 0, "type": "enum", "labels": ["O", "E", "C"] }
+  },
+
   "Alpha": [
     ["w", "l", "y", "p", "b",   "z", "f", "o", "u", "'"],
     ["c", "r", "s", "t", "g",   "m", "n", "e", "i", "a"],
