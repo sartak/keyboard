@@ -77,7 +77,7 @@
   "_settings": {
     "dupForce": { "default": false, "type": "bool", "label": "⨧" },
     "virtSerial": { "default": false, "type": "bool", "label": "☍" },
-    "chordMode": { "default": 0, "type": "enum", "labels": ["♺", "♳", "♴"] }
+    "chordMode": { "default": 0, "type": "enum", "labels": ["♺", "♳", "♴", "☣"] }
   },
 
   "Alpha": [
