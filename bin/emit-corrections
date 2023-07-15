@@ -11,28 +11,31 @@ const corrections = [];
 
 chords.forEach((chord) => {
   const actions = [chord.tap, chord.tap?.shift, chord.hold, chord.hold?.shift];
+  const combo = chord.combo.join("+");
 
   actions.filter(Boolean).forEach((action) => {
     const alternates = [];
     if ("output" in action) {
-      alternates.push([action, action.output]);
+      alternates.push([action, action.output, 0]);
     }
 
-    action.alternates?.forEach((alternate) => {
+    action.alternates?.forEach((alternate, i) => {
       if (alternate.toIdx === 0) {
         return;
       }
-      alternates.push([alternate, alternate.to]);
+      alternates.push([alternate, alternate.to, i + 1]);
     });
 
-    alternates.forEach(([action, out]) => {
+    alternates.forEach(([action, out, dupCount]) => {
       if (!action.reviewing) {
         return;
       }
       if (!out.match(/^[a-zA-Z]+$/)) {
         return;
       }
-      corrections.push([action.exact ? out : `${out} `, chord.personal]);
+      const dups = dupCount ? ", Dup".repeat(dupCount) : "";
+      const input = `${combo}${dups}`;
+      corrections.push([action.exact ? out : `${out} `, input, chord.personal]);
     });
   });
 });
@@ -45,8 +48,71 @@ const preamble = (actions, personalFile) => {
   return ['#include "corrections_personal.c"'];
 };
 
-const makeAction = (out) => {
-  return `  if (strcmp(buffer, "${out}") == 0) return true;`;
+const makeActions = (outs) => {
+  const trie = {};
+  const inputFor = {};
+  outs.forEach(([out, input]) => {
+    inputFor[out] = input;
+
+    let os = trie;
+    out.split("").forEach((c) => {
+      if (!(c in os)) {
+        os[c] = {};
+      }
+      os = os[c];
+    });
+    os[""] = true;
+  });
+
+  const lines = [];
+
+  const collect = (os) => {
+    const key = Object.keys(os)[0];
+    if (key === "") {
+      return "";
+    }
+    const value = os[key];
+    return key + collect(value);
+  };
+
+  const recurse = (os, prefix, i) => {
+    const keys = Object.keys(os).sort((a, b) => a.localeCompare(b));
+
+    if (keys.length === 1) {
+      const rest = collect(os);
+      if (rest.length === 0) {
+        return [
+          `return buffer[${i}] == 0; /*${prefix}*/ // ${inputFor[prefix]}`,
+        ];
+      } else {
+        return [
+          `return strcmp(buffer+${i}, /*${prefix}*/"${rest}") == 0; // ${
+            inputFor[prefix + rest]
+          }`,
+        ];
+      }
+    }
+
+    const lines = [];
+    lines.push(`switch (buffer[${i}]) {`);
+    keys.forEach((c) => {
+      if (c === "") {
+        return;
+      }
+      const next = os[c];
+      lines.push(`  case '${c}':`);
+      const inner = recurse(next, prefix + c, i + 1).map((l) => `    ${l}`);
+      lines.push(...inner);
+      if (inner.length > 1) {
+        lines.push(`    break;`);
+      }
+    });
+    lines.push(`}`);
+
+    return lines;
+  };
+
+  return recurse(trie, "", 0).map((l) => `  ${l}`);
 };
 
 const fn = (actions, personalFile) => {
@@ -57,19 +123,21 @@ const fn = (actions, personalFile) => {
 
   const outro = (
     personalFile
-      ? `  return false;
+      ? `
+  return false;
 }`
-      : `  return should_correct_chord_personal(buffer);
+      : `
+  return should_correct_chord_personal(buffer);
 }`
   ).split("\n");
 
-  return [...intro, ...actions.map(([out]) => makeAction(out)), ...outro];
+  return [...intro, ...makeActions(actions), ...outro];
 };
 
 const correctionsConfig = (allActions, personalFile) => {
   const lines = [];
   const actions = allActions.filter(
-    ([, personal]) => !!personal === personalFile
+    ([, , personal]) => !!personal === personalFile
   );
 
   lines.push(...preamble(actions, personalFile), "");
