@@ -147,12 +147,12 @@
     ["", null, null, null, "",     "", "",   "",   "",     "Esc"],
     ["", null, null, null, null,   "", null, null, null,   null],
     ["", null, null, null, "",     "", "",   "",   "Alfr", null],
-    [               "Sym", "Shft",   "Ctrl", "Num"]
+    [             "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Function": [
-    ["BtlL", "",    "",    "",    "RstL",   "RstR", "", "", "", "BtlR"],
-    ["",     "BT4", "BT5", "BT6", "BTCl",   "",     "", "", "", ""],
-    ["",     "BT1", "BT2", "BT3", "BTTg",   "",     "", "", "", ""],
-    [                         "Alph", "",   "", ""]
+    ["BtlL", "", "", "", "RstL",   "RstR", "", "", "", "BtlR"],
+    ["",     "", "", "", "",       "",     "", "", "", ""],
+    ["",     "", "", "", "",       "",     "", "", "", ""],
+    [                "Alph", "",   "", ""]
   ]
 }

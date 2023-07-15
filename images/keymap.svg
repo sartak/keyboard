@@ -630,14 +630,9 @@ path.combo {
 <tspan x="674.0" dy="-0.6em">Boot</tspan><tspan x="674.0" dy="1.2em">Load</tspan></text>
 <rect rx="6.0" ry="6.0" x="32.0" y="2182.08" width="52.0" height="52.0" class="key"/>
 <rect rx="6.0" ry="6.0" x="88.0" y="2147.36" width="52.0" height="52.0" class="key"/>
-<text x="114.0" y="2173.36" class="tap">BT4</text>
 <rect rx="6.0" ry="6.0" x="144.0" y="2130.0" width="52.0" height="52.0" class="key"/>
-<text x="170.0" y="2156.0" class="tap">BT5</text>
 <rect rx="6.0" ry="6.0" x="200.0" y="2145.68" width="52.0" height="52.0" class="key"/>
-<text x="226.0" y="2171.68" class="tap">BT6</text>
 <rect rx="6.0" ry="6.0" x="256.0" y="2153.52" width="52.0" height="52.0" class="key"/>
-<text x="282.0" y="2179.52" class="tap">
-<tspan x="282.0" dy="-0.6em">BT</tspan><tspan x="282.0" dy="1.2em">Clear</tspan></text>
 <rect rx="6.0" ry="6.0" x="424.0" y="2153.52" width="52.0" height="52.0" class="key"/>
 <rect rx="6.0" ry="6.0" x="480.0" y="2145.68" width="52.0" height="52.0" class="key"/>
 <rect rx="6.0" ry="6.0" x="536.0" y="2130.0" width="52.0" height="52.0" class="key"/>
@@ -645,14 +640,9 @@ path.combo {
 <rect rx="6.0" ry="6.0" x="648.0" y="2182.08" width="52.0" height="52.0" class="key"/>
 <rect rx="6.0" ry="6.0" x="32.0" y="2238.08" width="52.0" height="52.0" class="key"/>
 <rect rx="6.0" ry="6.0" x="88.0" y="2203.36" width="52.0" height="52.0" class="key"/>
-<text x="114.0" y="2229.36" class="tap">BT1</text>
 <rect rx="6.0" ry="6.0" x="144.0" y="2186.0" width="52.0" height="52.0" class="key"/>
-<text x="170.0" y="2212.0" class="tap">BT2</text>
 <rect rx="6.0" ry="6.0" x="200.0" y="2201.68" width="52.0" height="52.0" class="key"/>
-<text x="226.0" y="2227.68" class="tap">BT3</text>
 <rect rx="6.0" ry="6.0" x="256.0" y="2209.52" width="52.0" height="52.0" class="key"/>
-<text x="282.0" y="2235.52" class="tap">
-<tspan x="282.0" dy="-0.6em">BT</tspan><tspan x="282.0" dy="1.2em">Toggl</tspan></text>
 <rect rx="6.0" ry="6.0" x="424.0" y="2209.52" width="52.0" height="52.0" class="key"/>
 <rect rx="6.0" ry="6.0" x="480.0" y="2201.68" width="52.0" height="52.0" class="key"/>
 <rect rx="6.0" ry="6.0" x="536.0" y="2186.0" width="52.0" height="52.0" class="key"/>
