@@ -547,6 +547,7 @@ serial.on("open", () => {
     delete downKeys[key];
   }
   serial.write(String.fromCharCode(VIRT_HEARTBEAT));
+  serial.write(String.fromCharCode(VIRT_SETTINGS));
 });
 
 setInterval(() => {
