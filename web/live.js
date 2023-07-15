@@ -7,7 +7,7 @@ const connect = () => {
   if (configJson) {
     config = JSON.parse(configJson);
     initializeKeymap(config.layout);
-    drawKeymap(config.layout, { layer: "Alpha" });
+    drawKeymap(config.layout, state);
   }
 
   longPoll("/events", (events, connected) => {

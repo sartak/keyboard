@@ -12,6 +12,31 @@ const initializeKeymap = (layout) => {
       el.setAttribute(`data-${layer}`, value);
     });
   });
+
+  const settings = keymap.querySelector(".settings");
+  settings.innerHTML = "";
+  Object.entries(layout.settings).forEach(([key, config]) => {
+    const parent = document.createElement("div");
+    parent.classList.add("setting", config.type);
+    parent.setAttribute("data-setting", key);
+
+    const labels = config.labels || [config.label];
+    labels.forEach((label, i) => {
+      const child = document.createElement("span");
+      child.classList.add("value");
+
+      if (config.type === "enum") {
+        child.setAttribute("data-value", i);
+      } else if (config.type === "bool") {
+        child.setAttribute("data-value", "true");
+      }
+
+      child.innerText = label;
+      parent.appendChild(child);
+    });
+
+    settings.appendChild(parent);
+  });
 };
 
 const drawKeymap = (layout, { layer, shift, ctrl, alt, gui, settings }) => {
@@ -23,7 +48,16 @@ const drawKeymap = (layout, { layer, shift, ctrl, alt, gui, settings }) => {
   keymap.setAttribute("data-gui", gui ? "true" : "false");
 
   Object.entries(settings).forEach(([key, value]) => {
-    keymap.setAttribute(`data-setting-${key}`, value);
+    const setting = keymap.querySelector(
+      `.settings .setting[data-setting="${key}"]`
+    );
+    setting.querySelectorAll(".value").forEach((label) => {
+      label.classList.remove("enabled");
+    });
+    const label = setting.querySelector(`.value[data-value="${value}"]`);
+    if (label) {
+      label.classList.add("enabled");
+    }
   });
 
   let layers = [layer];
@@ -91,6 +125,6 @@ const setKeymapStatic = (static = true) => {
 };
 
 const resetKeymap = (layout) => {
-  drawKeymap(layout, { layer: "Alpha" });
+  drawKeymap(layout, { layer: "Alpha", settings: {} });
   clearHighlights();
 };

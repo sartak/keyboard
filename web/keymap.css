@@ -4,6 +4,10 @@
 
   --key-font-size: calc(0.5 * var(--key-width) * var(--conv));
   --homing-height: calc(0.1 * var(--key-height) * var(--conv));
+
+  --setting-font-size: calc(0.4 * var(--key-width) * var(--conv));
+  --setting-width: calc(0.66 * var(--key-width) * var(--conv));
+  --setting-height: calc(0.66 * var(--key-height) * var(--conv));
 }
 
 .keymap {
@@ -253,4 +257,58 @@
 }
 .keymap .key .letter[data-length="4"] {
   font-size: calc(0.5 * var(--key-font-size));
+}
+
+.keymap .settings {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc((var(--key-y) - var(--key-height)) * 0.66 * var(--conv));
+  width: calc(
+    (var(--split-width) - (var(--key-width) - var(--key-x))) * var(--conv)
+  );
+  height: calc((var(--key-y) * 3 + var(--center-stagger)) * var(--conv));
+  left: calc((7 * var(--key-width) - var(--key-x)) * var(--conv));
+  top: 0;
+}
+
+.keymap .settings .setting {
+  font-size: var(--setting-font-size);
+  position: relative;
+  width: var(--setting-width);
+  height: var(--setting-height);
+  height: calc(0.75 * var(--key-height) * var(--conv));
+}
+
+.keymap .settings .setting.enum .value {
+  visibility: hidden;
+}
+
+.keymap .settings .setting .value {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: inline-flex;
+  width: var(--setting-width);
+  height: var(--setting-height);
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+
+  color: var(--sub-alt-color);
+  border: 1px solid var(--sub-alt-color);
+}
+
+.keymap .settings .setting .value.enabled {
+  visibility: visible;
+  color: var(--text-color);
+  border-color: var(--text-color);
+}
+
+.keymap .settings .setting.enum .value[data-value="0"].enabled {
+  color: var(--sub-alt-color) !important;
+  border: 1px solid var(--sub-alt-color) !important;
 }
