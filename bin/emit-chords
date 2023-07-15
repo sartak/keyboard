@@ -67,6 +67,9 @@ const tidyKeymap = {
   Down: "↓",
   Up: "↑",
   Rght: "→",
+  S_DF: "Dup\nForce",
+  S_VS: "Virt\nSerial",
+  S_CM: "Chord\nMode",
 };
 
 const outputForKey = {
@@ -113,6 +116,10 @@ const outputForKey = {
   BT6: "",
   BTCl: "",
   BTTg: "",
+
+  S_DF: "",
+  S_VS: "",
+  S_CM: "",
 };
 
 const layerKeys = {

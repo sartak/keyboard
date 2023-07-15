@@ -68,13 +68,16 @@
     "BT3": ["BT3", "Bluetooth 3"],
     "BT4": ["BT4", "Bluetooth 4"],
     "BT5": ["BT5", "Bluetooth 5"],
-    "BT6": ["BT6", "Bluetooth 6"]
+    "BT6": ["BT6", "Bluetooth 6"],
+    "S_DF": ["⚙⨧", "Dup Force"],
+    "S_VS": ["⚙☍", "Virtual Serial"],
+    "S_CM": ["⚙♺", "Chord Mode"]
   },
 
   "_settings": {
-    "dupForce": { "default": false, "type": "bool", "label": "D" },
-    "virtSerial": { "default": false, "type": "bool", "label": "V" },
-    "chordMode": { "default": 0, "type": "enum", "labels": ["O", "E", "C"] }
+    "dupForce": { "default": false, "type": "bool", "label": "⨧" },
+    "virtSerial": { "default": false, "type": "bool", "label": "☍" },
+    "chordMode": { "default": 0, "type": "enum", "labels": ["♺", "♳", "♴"] }
   },
 
   "Alpha": [
@@ -150,9 +153,9 @@
     [             "Sym", "Shft",   "Ctrl", "Num"]
   ],
   "Function": [
-    ["BtlL", "", "", "", "RstL",   "RstR", "", "", "", "BtlR"],
-    ["",     "", "", "", "",       "",     "", "", "", ""],
-    ["",     "", "", "", "",       "",     "", "", "", ""],
-    [                "Alph", "",   "", ""]
+    ["BtlL", "", "",     "",     "RstL",   "RstR", "", "", "", "BtlR"],
+    ["S_CM", "", "",     "",     "",       "",     "", "", "", ""],
+    ["",     "", "S_VS", "S_DF", "",       "",     "", "", "", ""],
+    [                        "Alph", "",   "", ""]
   ]
 }

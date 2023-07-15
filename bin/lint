@@ -22,7 +22,8 @@ type LayerKey = "Alph" | "Sym" | "Num";
 type MediaKey = "Alfr" | "VlUp" | "VlDn" | "Mute" | "Prev" | "PlPs" | "Next" | "BrUp" | "BrDn" | "ZmIn" | "ZmOt" | "Lang" | "ScSh" | "Lock";
 type BluetoothKey = "BTTg" | "BTCl" | "BT1" | "BT2" | "BT3" | "BT4" | "BT5" | "BT6";
 type KeyboardKey = "BtlL" | "BtlR" | "RstL" | "RstR";
-type Key = AlphaKey | NumberKey | SymbolKey | NavigationKey | ModifierKey | LayerKey | MediaKey | BluetoothKey | KeyboardKey;
+type SettingKey = "S_DF" | "S_VS" | "S_CM";
+type Key = AlphaKey | NumberKey | SymbolKey | NavigationKey | ModifierKey | LayerKey | MediaKey | BluetoothKey | KeyboardKey | SettingKey;
 
 type Behavior = "delete-word" | "left-click" | "right-click" | "Gui-left-click" | ${"`oneshot-${Layer}`"} | ${"`oneshot-${ModifierSet}`"};
 

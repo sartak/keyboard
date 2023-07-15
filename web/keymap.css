@@ -308,7 +308,14 @@
   border-color: var(--text-color);
 }
 
-.keymap .settings .setting.enum .value[data-value="0"].enabled {
+.keymap .settings .setting.enum .value[data-value="0"] {
   color: var(--sub-alt-color) !important;
   border: 1px solid var(--sub-alt-color) !important;
+}
+
+.keymap
+  .settings
+  .setting.enum:not(:has(.value.enabled))
+  .value[data-value="0"] {
+  visibility: visible;
 }

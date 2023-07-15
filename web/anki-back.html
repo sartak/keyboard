@@ -49,8 +49,8 @@
 
     initializeKeymap(layout);
 
-    const draw = ({ layer, shift, ctrl, alt, gui, downKeys, holdKeys, isChord }, clear) => {
-      drawKeymap(layout, { layer, shift, ctrl, alt, gui });
+    const draw = ({ layer, shift, ctrl, alt, gui, settings = {}, downKeys, holdKeys, isChord }, clear) => {
+      drawKeymap(layout, { layer, shift, ctrl, alt, gui, settings });
 
       downKeys.forEach((key) => {
         highlightKey(key, isChord ? 'chord-tap' : 'down');
@@ -62,7 +62,7 @@
 
       if (clear) {
         setTimeout(() => {
-          drawKeymap(layout, { layer: "Alpha", shift: false, ctrl: false, alt: false, gui: false });
+          drawKeymap(layout, { layer: "Alpha", shift: false, ctrl: false, alt: false, gui: false, settings });
           clearHighlights();
         }, clear);
       }
