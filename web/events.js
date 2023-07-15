@@ -1,4 +1,4 @@
-let state = { layer: "Alpha" };
+let state = { layer: "Alpha", settings: {} };
 
 const redrawKeymap = () => drawKeymap(config.layout, state);
 
@@ -31,6 +31,14 @@ const handleEvent = (event) => {
         break;
       case "layer":
         state.layer = event.layer;
+        redrawKeymap();
+        break;
+      case "settings":
+        state.settings = event.settings;
+        redrawKeymap();
+        break;
+      case "setting":
+        state.settings[event.key] = event.value;
         redrawKeymap();
         break;
     }

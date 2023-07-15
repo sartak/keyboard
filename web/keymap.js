@@ -14,13 +14,17 @@ const initializeKeymap = (layout) => {
   });
 };
 
-const drawKeymap = (layout, { layer, shift, ctrl, alt, gui }) => {
+const drawKeymap = (layout, { layer, shift, ctrl, alt, gui, settings }) => {
   const keymap = document.querySelector(".keymap");
   keymap.setAttribute("data-layer", layer);
   keymap.setAttribute("data-shift", shift ? "true" : "false");
   keymap.setAttribute("data-ctrl", ctrl ? "true" : "false");
   keymap.setAttribute("data-alt", alt ? "true" : "false");
   keymap.setAttribute("data-gui", gui ? "true" : "false");
+
+  Object.entries(settings).forEach(([key, value]) => {
+    keymap.setAttribute(`data-setting-${key}`, value);
+  });
 
   let layers = [layer];
   [
