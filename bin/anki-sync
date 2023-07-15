@@ -297,19 +297,19 @@ Object.values(chordForCombo).forEach((chord) => {
 
     const alternates = [];
     if ("output" in action) {
-      alternates.push([action.output, 0, false]);
+      alternates.push([action, action.output, 0, false]);
     } else {
-      alternates.push([action.behavior, 0, true]);
+      alternates.push([action, action.behavior, 0, true]);
     }
 
     action.alternates?.forEach((alternate, i) => {
       if (alternate.toIdx === 0) {
         return;
       }
-      alternates.push([alternate.to, i + 1, false]);
+      alternates.push([alternate, alternate.to, i + 1, false]);
     });
 
-    alternates.forEach(([result, dupCount, isBehavior]) => {
+    alternates.forEach(([action, result, dupCount, isBehavior]) => {
       let ok = true;
       const dups = dupCount ? ", Dup".repeat(dupCount) : "";
 
@@ -400,6 +400,7 @@ Object.values(chordForCombo).forEach((chord) => {
 
       if (ok) {
         if (card.suspended === false) {
+          action.reviewing = true;
           studyingChords++;
         }
       }
