@@ -7,6 +7,16 @@ body {
   color: var(--text-color);
 }
 
+.live {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.live > .keymap {
+  margin: 0;
+}
+
 .keymap {
   transition: opacity 250ms linear;
 }

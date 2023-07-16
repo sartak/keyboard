@@ -1,0 +1,24 @@
+.tape {
+  width: calc(0.6 * var(--total-width) * var(--conv));
+  height: calc(var(--total-height) * var(--conv));
+  overflow-y: scroll;
+  box-sizing: border-box;
+
+  background-color: var(--sub-alt-color);
+  border: 0.5px solid var(--sub-color);
+  border-radius: 8px;
+
+  font-family: Menlo;
+  font-size: calc(0.8 * var(--key-font-size));
+}
+
+.tape .lines {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 4px;
+}
+
+.tape::-webkit-scrollbar {
+  display: none;
+}

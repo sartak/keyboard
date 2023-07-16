@@ -3,14 +3,19 @@
     <style>
       {{monkeytype-sonokai.css}}
       {{keymap.css}}
+      {{tape.css}}
       {{live.css}}
     </style>
   </head>
   <body>
-    {{keymap.html}}
+    <div class="live">
+      {{keymap.html}}
+      {{tape.html}}
+    </div>
   </body>
   <script>
     {{keymap.js}}
+    {{tape.js}}
     {{pubsub.js}}
     {{events.js}}
     {{live.js}}

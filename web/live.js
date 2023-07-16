@@ -7,6 +7,7 @@ const connect = () => {
   if (configJson) {
     config = JSON.parse(configJson);
     initializeKeymap(config.layout);
+    initializeTape(config.layout);
     drawKeymap(config.layout, state);
   }
 
@@ -26,6 +27,7 @@ const connect = () => {
           config = event.config;
           state = event.state;
           initializeKeymap(config.layout);
+          initializeTape(config.layout);
           drawKeymap(config.layout, state);
           localStorage.setItem("config", JSON.stringify(config));
           break;
@@ -40,6 +42,7 @@ const connect = () => {
           handleEvent(event);
           break;
       }
+      tapeHandleEvent(event);
     });
   });
 };
