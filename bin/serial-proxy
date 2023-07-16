@@ -597,6 +597,15 @@ app.get("/config", cors({ origin: "https://monkeytype.com" }), (_, res) => {
   res.json(config);
 });
 
+app.post(
+  "/prepare-test",
+  cors({ origin: "https://monkeytype.com" }),
+  (_, res) => {
+    console.log("Preparing for new test");
+    res.json({ success: true });
+  }
+);
+
 app.get("/", (_, res) => {
   res.send(fillTemplate(String(fs.readFileSync(indexPage)), {}));
 });

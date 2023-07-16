@@ -1,11 +1,21 @@
 let tape;
 let tapeLines;
 let tapeEnd;
+let tapeClearer;
 
 const initializeTape = (layout) => {
   tape = document.querySelector(".tape");
   tapeLines = tape.querySelector(".lines");
   tapeEnd = tape.querySelector(".end");
+
+  window.removeEventListener("message", tapeMessage);
+  window.addEventListener("message", tapeMessage);
+};
+
+const tapeMessage = (event) => {
+  if (event.data === "prepare-test") {
+    clearTape();
+  }
 };
 
 const clearTape = () => {
