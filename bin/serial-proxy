@@ -119,21 +119,13 @@ const serial = new SerialPort({
   baudRate: 115200,
 });
 
-const events = [];
-setInterval(() => {
-  const t = Date.now() - 1000 * 60 * 10;
-  while (true) {
-    const e = events[0];
-    if (!e || e.time > t) {
-      return;
-    }
-    events.shift();
-  }
-}, 1000 * 60);
+let events;
 
 const emit = (type, event = {}) => {
   const payload = { ...event, type, time: Date.now() };
-  events.push(payload);
+  if (events) {
+    events.push(payload);
+  }
 
   const e = `${JSON.stringify(payload)}\n`;
   listeners.forEach((l) => {
@@ -587,13 +579,14 @@ app.get("/events", (req, res) => {
   });
 });
 
-app.get("/events/:since", (req, res) => {
-  const { since } = req.params;
-  const filteredEvents = events.filter(({ time }) => time >= since);
-  res.json(filteredEvents);
+app.get("/events/recorded", (_, res) => {
+  emit("test-end");
+  res.json(events);
+  events = undefined;
 });
 
 app.get("/config", cors({ origin: "https://monkeytype.com" }), (_, res) => {
+  events = [];
   res.json(config);
 });
 
@@ -601,7 +594,8 @@ app.post(
   "/prepare-test",
   cors({ origin: "https://monkeytype.com" }),
   (_, res) => {
-    console.log("Preparing for new test");
+    events = [];
+    emit("prepare-test");
     res.json({ success: true });
   }
 );
