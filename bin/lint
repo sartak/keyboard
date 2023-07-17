@@ -274,7 +274,7 @@ chords.forEach((chord) => {
       const rowDist = maxRow - minRow;
       const colDist = maxCol - minCol;
 
-      if (rowDist > 1 || colDist > 1 || (rowDist && colDist)) {
+      if (rowDist > 1 || colDist > 1) {
         ok = false;
         console.warn(`Combo has ${finger} doing too much work:`);
         console.warn(`  ${JSON.stringify(chord)}`);
