@@ -70,6 +70,7 @@ const tidyKeymap = {
   S_DF: "Dup\nForce",
   S_VS: "Virt\nSerial",
   S_CM: "Chord\nMode",
+  S_QU: "Show\nSettings",
 };
 
 const outputForKey = {
@@ -120,6 +121,7 @@ const outputForKey = {
   S_DF: "",
   S_VS: "",
   S_CM: "",
+  S_QU: "",
 };
 
 const layerKeys = {

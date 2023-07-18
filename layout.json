@@ -71,7 +71,8 @@
     "BT6": ["BT6", "Bluetooth 6"],
     "S_DF": ["⚙⨧", "Dup Force"],
     "S_VS": ["⚙☍", "Virtual Serial"],
-    "S_CM": ["⚙♺", "Chord Mode"]
+    "S_CM": ["⚙♺", "Chord Mode"],
+    "S_QU": ["⚙?", "Show Settings"]
   },
 
   "_settings": {
@@ -155,7 +156,7 @@
   "Function": [
     ["BtlL", "", "",     "",     "RstL",   "RstR", "", "", "", "BtlR"],
     ["S_CM", "", "",     "",     "",       "",     "", "", "", ""],
-    ["",     "", "S_VS", "S_DF", "",       "",     "", "", "", ""],
+    ["S_QU", "", "S_VS", "S_DF", "",       "",     "", "", "", ""],
     [                        "Alph", "",   "", ""]
   ]
 }
