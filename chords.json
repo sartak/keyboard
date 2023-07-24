@@ -145,7 +145,7 @@
     { "combo": ["t","o","s"], "output": ["those","that"], "set": "6" },
     { "combo": ["f","e","l"], "output": ["feel","felt","feeling"], "set": "18" },
     { "combo": ["s","e","m"], "output": ["seem","seemed","seeming"], "set": "17" },
-    { "combo": ["h","o","u"], "output": "how", "set": "19" },
+    { "combo": ["h","n","Dup"], "output": "how", "set": "19" },
     { "combo": ["h","i","g"], "output": ["high","higher","highest"], "set": "3" },
     { "combo": ["t","o","f"], "output": "too", "set": "4" },
     { "combo": ["p","c","e"], "output": ["place","places"], "set": "7" },
