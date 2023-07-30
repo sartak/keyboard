@@ -91,7 +91,7 @@
     { "combo": ["g","o","Dup"], "output": ["go","went","going"], "set": "11" },
     { "combo": ["Dup","u","t"], "output": "about", "set": "15" },
     { "combo": ["t","a","n"], "output": "than", "set": "18" },
-    { "combo": ["i","n","o"], "output": "into", "set": "20" },
+    { "combo": ["i","u","Dup"], "output": "into", "set": "20" },
     { "combo": ["c","o","u"], "output": "could", "set": "2" },
     { "combo": ["s","t","a"], "output": ["state","states","stated","stating"], "set": "6" },
     { "combo": ["o","l","y"], "output": "only", "set": "10" },
