@@ -1364,7 +1364,7 @@
     { "combo": [], "output": "unsafe" },
     { "combo": [], "output": ["user","users"] },
     { "combo": [], "output": ["update","updates","updated","will update"] },
-    { "combo": [], "output": ["var","variable","variables"] },
+    { "combo": ["v","a","r"], "output": ["var","variable","variables"] },
     { "combo": [], "output": ["variable","variables"] },
     { "combo": [], "output": "virtual" },
     { "combo": [], "output": "void" },
