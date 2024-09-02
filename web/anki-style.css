@@ -4,6 +4,18 @@ body {
   margin: 15px 0;
 }
 
+.cloze {
+  font-weight: 600;
+  background-image: linear-gradient(110deg, hsl(257, 100%, 31%), hsl(203, 100%, 31%));
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.nightMode .cloze {
+  background-image: linear-gradient(110deg, hsla(257, 92%, 62%, .9), hsla(212, 92%, 62%, .9));
+}
+
 hr {
   border-color: var(--sub-color);
   border-width: 0 0 0.5px 0;
